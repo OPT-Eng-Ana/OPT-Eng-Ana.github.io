@@ -3,8 +3,11 @@ layout: distill
 title: Be Careful When Claiming Theoretical Outperformance of Your Optimization Algorithms
 description: Review of SOTA Convergence Rates of Optimization Algorithms, and Beyond
 tags: optimization
+giscus_comments: true
 date: 2025-04-28
 featured: true
+
+# Take care the difference compared to the actual template of ICLR Blog
 
 # anonymize when submitting 
 authors:
@@ -38,8 +41,8 @@ toc:
   - name: Summary of Results
   - name: To Have a Better Bound
   # you can additionally add subentries like so
-    subsections:
-    - name: Beyond oracle model
+    # subsections:
+    # - name: Beyond oracle model
   - name: Conclusion
 ---
 
@@ -64,11 +67,6 @@ content
 ---
 
 ## To Have a Better Bound
-content
-
----
-
-### Beyond oracle model
 content
 
 ---
