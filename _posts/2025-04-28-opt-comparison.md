@@ -2,9 +2,9 @@
 layout: distill
 title: Be Careful When Claiming Theoretical Outperformance of Your Optimization Algorithms
 description: Review of SOTA Convergence Rates of Optimization Algorithms, and Beyond
+tags: optimization
 date: 2025-04-28
-future: true
-htmlwidgets: true
+featured: true
 
 # anonymize when submitting 
 authors:
@@ -26,7 +26,7 @@ authors:
 #       name: IAS, Princeton 
 
 # must be the exact same name as your blogpost
-bibliography: 2025-04-28-opt-summary.bib  
+bibliography: 2025-04-28-opt-summary.bib
 
 # Add a table of contents to your post.
 #   - make sure that TOC names match the actual section names
