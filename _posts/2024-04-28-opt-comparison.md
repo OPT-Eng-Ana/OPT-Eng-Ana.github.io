@@ -4,7 +4,7 @@ title: 2025 a distill-style blog post
 description: 2025 an example of a distill-style blog post and main elements
 tags: distill optimization
 giscus_comments: true
-date: 2025-04-28
+date: 2024-04-28
 featured: true
 
 authors:
@@ -21,7 +21,7 @@ authors:
     affiliations:
       name: IAS, Princeton
 
-bibliography: 2025-04-28-opt-summary.bib
+bibliography: 2024-04-28-opt-summary.bib
 
 # Optionally, you can add a table of contents to your post.
 # NOTES:
