@@ -35,12 +35,9 @@ bibliography: 2024-04-28-opt-summary.bib
 toc:
   - name: Introduction
   - name: Notations and Terminology
-  - name: [Framework: Oracle Model]
+  - name: Framework Oracle Model
   - name: Summary of Results
   - name: To Have a Better Bound
-  # you can additionally add subentries like so
-    # subsections:
-    # - name: Beyond oracle model
   - name: Conclusion
 
 # # Optionally, you can add a table of contents to your post.
@@ -82,6 +79,7 @@ toc:
 ---
 
 ## Introduction
+
 content
 
 The citation is presented inline like this: <d-cite key="gregor2015draw"></d-cite> (a number that displays more information on hover).
@@ -91,26 +89,31 @@ Here is another one: <d-cite key="zhang2021complexity"></d-cite>
 ---
 
 ## Notations and Terminology
+
 content
 
 ---
 
-## Framework: Oracle Model
+## Framework Oracle Model
+
 content
 
 ---
 
 ## Summary of Results
+
 content
 
 ---
 
 ## To Have a Better Bound
+
 content
 
 ---
 
 ## Conclusion
+
 content
 
 
