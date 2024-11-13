@@ -98,6 +98,12 @@ content
 
 content
 
+```markdown
+{% raw %}{% include figure.html path="assets/img/2025-04-28-distill-example/iclr.png" class="img-fluid" %}{% endraw %}
+```
+
+{% include figure.liquid path="assets/img/2024-04-28-opt-summary/complexity_analysis.jpg" title="Oracle Complexity Framework" class="img-fluid" %}
+
 ---
 
 ## Summary of Results
