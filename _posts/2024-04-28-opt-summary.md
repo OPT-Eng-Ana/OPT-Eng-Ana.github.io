@@ -106,7 +106,7 @@ content
 
 content
 
-{% include figure.html path="assets/img/2024-04-28-opt-summary/upper_lower.jpg" class="img-fluid" %}
+{% include figure.html path="assets/img/2024-04-28-opt-summary/upper_lower.png" class="img-fluid" %}
 
 ---
 
