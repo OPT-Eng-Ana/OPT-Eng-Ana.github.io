@@ -1,9 +1,11 @@
 ---
 layout: distill
-title: Blog Sample Blog Post
+title: ICLR Sample Blog Post
 description: Your blog post's abstract.
   Please add your abstract or summary here and not in the main body of your text. 
   Do not include math/latex or hyperlinks.
+tags: distill formatting
+giscus_comments: true
 date: 2024-10-28
 featured: false
 
@@ -26,7 +28,7 @@ authors:
       name: IAS, Princeton
 
 # must be the exact same name as your blogpost
-bibliography: 2025-04-28-distill-example.bib  
+bibliography: 2024-10-28-distill-example.bib  
 
 # Add a table of contents to your post.
 #   - make sure that TOC names match the actual section names
