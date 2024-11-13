@@ -6,7 +6,7 @@ description: Your blog post's abstract.
   Do not include math/latex or hyperlinks.
 tags: distill formatting
 giscus_comments: true
-date: 2024-10-28
+date: 2025-10-28
 featured: true
 
 # Anonymize when submitting
@@ -28,7 +28,7 @@ authors:
       name: IAS, Princeton
 
 # must be the exact same name as your blogpost
-bibliography: 2024-10-28-distill-example.bib  
+bibliography: 2025-10-28-distill-example.bib  
 
 # Add a table of contents to your post.
 #   - make sure that TOC names match the actual section names
