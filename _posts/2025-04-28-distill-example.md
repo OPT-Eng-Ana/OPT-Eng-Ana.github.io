@@ -47,24 +47,24 @@ toc:
   - name: Layouts
   - name: Other Typography?
 
-# Below is an example of injecting additional post-specific styles.
-# This is used in the 'Layouts' section of this post.
-# If you use this post as a template, delete this _styles block.
-_styles: >
-  .fake-img {
-    background: #bbb;
-    border: 1px solid rgba(0, 0, 0, 0.1);
-    box-shadow: 0 0px 4px rgba(0, 0, 0, 0.1);
-    margin-bottom: 12px;
-  }
-  .fake-img p {
-    font-family: monospace;
-    color: white;
-    text-align: left;
-    margin: 12px 0;
-    text-align: center;
-    font-size: 16px;
-  }
+# # Below is an example of injecting additional post-specific styles.
+# # This is used in the 'Layouts' section of this post.
+# # If you use this post as a template, delete this _styles block.
+# _styles: >
+#   .fake-img {
+#     background: #bbb;
+#     border: 1px solid rgba(0, 0, 0, 0.1);
+#     box-shadow: 0 0px 4px rgba(0, 0, 0, 0.1);
+#     margin-bottom: 12px;
+#   }
+#   .fake-img p {
+#     font-family: monospace;
+#     color: white;
+#     text-align: left;
+#     margin: 12px 0;
+#     text-align: center;
+#     font-size: 16px;
+#   }
 ---
 
 Note: please use the table of contents as defined in the front matter rather than the traditional markdown styling.
@@ -97,7 +97,7 @@ To include images in your submission in this way, you must do something like the
 {% raw %}{% include figure.html path="assets/img/2025-04-28-distill-example/iclr.png" class="img-fluid" %}{% endraw %}
 ```
 
-which results in the following image:
+<!-- which results in the following image:
 
 {% include figure.html path="assets/img/2025-04-28-distill-example/iclr.png" class="img-fluid" %}
 
@@ -138,7 +138,7 @@ Some more complex ways to load images (note the different styles of the shapes/s
     <div class="col-sm mt-3 mt-md-0">
         {% include figure.html path="assets/img/2025-04-28-distill-example/7.jpg" class="img-fluid" %}
     </div>
-</div>
+</div> -->
 
 ### Interactive Figures
 
@@ -153,7 +153,7 @@ To embed it into any page, simply insert the following code anywhere into your p
 {% raw %}{% include [FIGURE_NAME].html %}{% endraw %} 
 ```
 
-For example, the following code can be used to generate the figure underneath it.
+<!-- For example, the following code can be used to generate the figure underneath it.
 
 ```python
 import pandas as pd
@@ -181,7 +181,7 @@ Voila!
 
 <div class="l-page">
   <iframe src="{{ 'assets/html/2025-04-28-distill-example/plotly_demo_1.html' | relative_url }}" frameborder='0' scrolling='no' height="600px" width="100%"></iframe>
-</div>
+</div> -->
 
 ## Citations
 
