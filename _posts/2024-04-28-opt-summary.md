@@ -4,7 +4,7 @@ title: Be Careful When Claiming Theoretical Outperformance of Your Optimization 
 description: Review of SOTA Convergence Guarantee Results, and Beyond
 tags: optimization
 giscus_comments: true
-date: 2024-10-01
+date: 2024-04-28
 featured: true
 
 # Take care the difference compared to the actual template of ICLR Blog
