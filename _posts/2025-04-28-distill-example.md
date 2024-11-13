@@ -151,36 +151,6 @@ To embed it into any page, simply insert the following code anywhere into your p
 {% raw %}{% include [FIGURE_NAME].html %}{% endraw %} 
 ```
 
-<!-- For example, the following code can be used to generate the figure underneath it.
-
-```python
-import pandas as pd
-import plotly.express as px
-
-df = pd.read_csv('https://raw.githubusercontent.com/plotly/datasets/master/earthquakes-23k.csv')
-
-fig = px.density_mapbox(
-    df, lat='Latitude', lon='Longitude', z='Magnitude', radius=10,
-    center=dict(lat=0, lon=180), zoom=0, mapbox_style="stamen-terrain")
-fig.show()
-
-fig.write_html('./assets/html/2025-04-28-distill-example/plotly_demo_1.html')
-```
-
-And then include it with the following:
-
-```html
-{% raw %}<div class="l-page">
-  <iframe src="{{ 'assets/html/2025-04-28-distill-example/plotly_demo_1.html' | relative_url }}" frameborder='0' scrolling='no' height="600px" width="100%"></iframe>
-</div>{% endraw %}
-```
-
-Voila!
-
-<div class="l-page">
-  <iframe src="{{ 'assets/html/2025-04-28-distill-example/plotly_demo_1.html' | relative_url }}" frameborder='0' scrolling='no' height="600px" width="100%"></iframe>
-</div> -->
-
 ## Citations
 
 Citations are then used in the article body with the `<d-cite>` tag.
