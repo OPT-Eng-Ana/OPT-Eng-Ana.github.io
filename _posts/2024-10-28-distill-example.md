@@ -6,7 +6,7 @@ description: Your blog post's abstract.
   Do not include math/latex or hyperlinks.
 tags: distill formatting
 giscus_comments: true
-date: 2025-10-28
+date: 2024-10-28
 featured: true
 
 # Anonymize when submitting

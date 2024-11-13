@@ -1,10 +1,10 @@
 ---
 layout: distill
-title: 2025 a distill-style blog post
-description: 2025 an example of a distill-style blog post and main elements
-tags: distill optimization
+title: Be Careful When Claiming Theoretical Outperformance of Your Optimization Algorithms
+description: Review of SOTA Convergence Guarantee Results, and Beyond
+tags: optimization
 giscus_comments: true
-date: 2024-04-28
+date: 2024-10-01
 featured: true
 
 # Take care the difference compared to the actual template of ICLR Blog
@@ -98,11 +98,15 @@ content
 
 content
 
+{% include figure.html path="assets/img/2024-04-28-opt-summary/complexity_analysis.jpg" class="img-fluid" %}
+
 ---
 
 ## Summary of Results
 
 content
+
+{% include figure.html path="assets/img/2024-04-28-opt-summary/upper_lower.jpg" class="img-fluid" %}
 
 ---
 
