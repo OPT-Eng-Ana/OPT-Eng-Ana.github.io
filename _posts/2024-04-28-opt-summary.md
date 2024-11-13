@@ -102,7 +102,11 @@ content
 {% raw %}{% include figure.html path="assets/img/2025-04-28-distill-example/iclr.png" class="img-fluid" %}{% endraw %}
 ```
 
-{% include figure.liquid path="assets/img/2024-04-28-opt-summary/complexity_analysis.jpg" title="Oracle Complexity Framework" class="img-fluid" %}
+{% include figure.liquid path="assets/img/2024-04-28-opt-summary/complexity_analysis.jpg" class="img-fluid" %}
+
+<div class="caption">
+    Oracle Complexity Framework
+</div>
 
 ---
 
@@ -110,7 +114,11 @@ content
 
 content
 
-{% include figure.html path="assets/img/2024-04-28-opt-summary/upper_lower.png" class="img-fluid" %}
+{% include figure.liquid path="assets/img/2024-04-28-opt-summary/upper_lower.png" class="img-fluid" %}
+
+<div class="caption">
+    A simple, elegant caption looks good between image rows, after each row, or doesn't have to be there at all.
+</div>
 
 ---
 
