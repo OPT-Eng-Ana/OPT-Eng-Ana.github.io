@@ -98,15 +98,11 @@ content
 
 content
 
-<!-- {% include figure.html path="assets/img/2024-04-28-opt-summary/complexity_analysis.jpg" class="img-fluid" %} -->
-
 ---
 
 ## Summary of Results
 
 content
-
-<!-- {% include figure.html path="assets/img/2024-04-28-opt-summary/upper_lower.png" class="img-fluid" %} -->
 
 ---
 
