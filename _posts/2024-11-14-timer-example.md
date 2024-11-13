@@ -28,7 +28,7 @@ authors:
       name: IAS, Princeton
 
 # must be the exact same name as your blogpost
-bibliography: 2024-11-14-distill-example.bib  
+bibliography: 2024-11-14-timer-example.bib  
 
 # Add a table of contents to your post.
 #   - make sure that TOC names match the actual section names
