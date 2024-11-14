@@ -61,11 +61,15 @@ Here is another one: <d-cite key="zhang2021complexity"></d-cite>
 
 content
 
-> **Definition (Deterministic Algorithm)**
+> **Definition (Deterministic Optimization)**
 
-> **Definition (Finite-Sum Algorithm)** 
+> **Definition (Finite-Sum / Stochastic Optimization)** 
 
-> **Definition (Stochastic Algorithm)**
+> **Definition (Convexity, Strong Convexity, Weak Convexity)**
+
+> **Definition (Lipschitz Continuity)** 
+
+> **Definition (Lipschitz Smoothness)**
 
 ---
 
@@ -94,13 +98,14 @@ content
 We categorize the discussion based on the problem formulation, stochasticity and convergence measurement, for convenience of presentation, we divide the tables into the following cases:
 
 **Minimization Problems**
-1. Deterministic optimization algorithms
-2. Finite-sum and stochastic optimization algorithms
+1. Deterministic optimization
+2. Finite-sum and stochastic optimization
 
 **Minimax Problems**
-1. SC-SC/SC-C/C-C deterministic minimax optimization
+1. SC-SC/SC-C/C-C deterministic minimax
 2. SC-SC/SC-C/C-C finite-sum and stochastic minimax optimization
-3. NC-SC/NC-C deterministic minimax
+3. NC-SC/NC-C deterministic minimax optimization
+4. NC-SC/NC-C finite-sum and stochastic minimax optimization
 
 {% include figure.liquid path="assets/img/2024-04-28-opt-summary/upper_lower.png" class="img-fluid" %}
 
@@ -108,25 +113,47 @@ We categorize the discussion based on the problem formulation, stochasticity and
     A simple, elegant caption looks good between image rows, after each row, or doesn't have to be there at all.
 </div>
 
-| Problem Type               | Measure                   | LB                     | UB          | Reference<d-footnote>Note that here possibly we may not choose the most original work which proposed the results, rather we may select the literature which we are more familiar with, also with a clearer presentation. Readers are encouraged to check the reference therein for the original works.</d-footnote>                                |
+### Case 1-1: Deterministic Minimization
+
+| Problem Type               | Measure                   | Lower Bound            | Upper Bound      | Reference (LB-UB)<d-footnote>Note that here possibly we may not choose the most original work which proposed the results, rather we may select the literature which we are more familiar with, also with a clearer presentation. Readers are encouraged to check the reference therein for the original works.</d-footnote>                                |
 |----------------------------|---------------------------|------------------------|-------------|--------------------------------|
-| $L$-Smooth Convex          | $f(x^K) - f^*$           | $\Omega \left( \sqrt{L \epsilon^{-1}} \right)$                | $\checkmark$ | [<d-cite key="nesterov2018lectures"></d-cite>, Theorem 2.1.7; Theorem 2.2.2]       |
-| $L$-Smooth $\mu$-SC        | $f(x^K) - f^*$           | $\Omega \left( \sqrt{\kappa} \log \frac{1}{\epsilon} \right)$ | $\checkmark$ | [<d-cite key="nesterov2018lectures"></d-cite>, Theorem 2.1.13]                     |
-| NS $L$-Lip Ct Convex       | $f(x^K) - f^*$           | $\Omega (L^2 \epsilon^{-2})$                                  | $\checkmark$ | [<d-cite key="bubeck2015convex"></d-cite>, Theorem 3.8]                        |
-| NS $L$-Lip Ct $\mu$-SC     | $f(x^K) - f^*$           | $\Omega (L^2 (\mu \epsilon)^{-1})$                            | $\checkmark$ | [<d-cite key="bubeck2015convex"></d-cite>, Theorem 3.8]                        |
+| $L$-Smooth Convex          | $f(x^K) - f^\star$           | $\Omega \left( \sqrt{L \epsilon^{-1}} \right)$                | $\checkmark$ | [<d-cite key="nesterov2018lectures"></d-cite>, Theorem 2.1.7; Theorem 2.2.2]       |
+| $L$-Smooth $\mu$-SC        | $f(x^K) - f^\star$           | $\Omega \left( \sqrt{\kappa} \log \frac{1}{\epsilon} \right)$ | $\checkmark$ | [<d-cite key="nesterov2018lectures"></d-cite>, Theorem 2.1.13]                     |
+| NS $L$-Lip Ct Convex       | $f(x^K) - f^\star$           | $\Omega (L^2 \epsilon^{-2})$                                  | $\checkmark$ | <d-cite key="bubeck2015convex"></d-cite>, Theorem 3.8                        |
+| NS $L$-Lip Ct $\mu$-SC     | $f(x^K) - f^\star$           | $\Omega (L^2 (\mu \epsilon)^{-1})$                            | $\checkmark$ | [<d-cite key="bubeck2015convex"></d-cite>, Theorem 3.8]                        |
 | $L$-Smooth Convex          | $\|\| \nabla f(x^K) \|\|$    | $\Omega \left( \sqrt{\Delta L \epsilon^{-1}} \right)$     | $\checkmark$ | [<d-cite key="carmon2021lower"></d-cite>, Theorem 1 & Appendix A.1]              |
-| $L$-Smooth NC              | $\| \nabla f(x^K) \|$    | $\Omega (\Delta L \epsilon^{-2})$                             | $\checkmark$ | [<d-cite key="carmon2020lower"></d-cite>, Theorem 1]      |
+| $L$-Smooth NC              | $\|\| \nabla f(x^K) \|\|$    | $\Omega (\Delta L \epsilon^{-2})$                             | $\checkmark$ | [<d-cite key="carmon2020lower"></d-cite>, Theorem 1]      |
 | NS $L$-Lip Ct $\rho$-WC    | Near-stationarity        | Unknown                                                       | $\mathcal{O}(\epsilon^{-4})$      | [<d-cite key="davis2018stochastic"></d-cite>, Theorem 2.1 implied]                  |
 
-<div class="caption">
-    **Case 1:** Summary of lower bounds (LB) and upper bounds (UB) for different problem types and measures, with references to key theorems.
-</div>
+### Case 1-2: Finite-sum and Stochastic Optimization (double check)
 
-| Problem Type        |      Measure      |  Lower Bound | Upper Bound | Reference |
-| ------------- | :-----------: | ----: | -----| -----|
-| $L$-Smooth Convex      | $f(x^K) - f^*$ | $\Omega \left( \sqrt{L \epsilon^{-1}} \right)$ | $\checkmark$ | [<d-cite key="nesterov2018lectures"></d-cite>, Theorem 2.1.7; Theorem 2.2.2] |
-| col 2 is      |   centered $\times$    |   $12 | | |
-| zebra stripes |   are neat $\checkmark$   |    $1 | | |
+| Problem Type            | Measure | Lower Bound                                                | Upper Bound                               | Reference (LB-UB)                                       |
+|-------------------------|---------|---------------------------------------------------|----------------------------------|-----------------------------------------------------------|
+| FS $L$-IS $\mu$-SC      | Optimality gap        | $\Omega \left( n + \sqrt{\kappa n} \log \frac{1}{\epsilon} \right)$ | $\checkmark$ ($\times$)          | [Def16, Cor 6], [AZ17, Cor 2.1]                          |
+| FS $L$-IS C             | Optimality gap        | $\Omega \left( n + D \sqrt{n L \epsilon^{-1}} \right)$         | $\checkmark$ ($\times$)          | [AZ17, Cor 3.7] ($n \log \frac{1}{\epsilon} + D \sqrt{n L \epsilon^{-1}}$), [WS16, Thm 7] |
+| FS $L$-AS $\mu$-SC      | Optimality gap        | $\Omega \left( n + n^{\frac{3}{4}} \sqrt{\kappa} \log \frac{\Delta}{\epsilon} \right)$ | $\checkmark$                     | [AZ18, KatyushaX, Sec 5]                                 |
+| FS $L$-AS C             | Optimality gap        | $\Omega \left( n + n^{\frac{3}{4}} D \sqrt{L \epsilon^{-1}} \right)$ | $\checkmark$                     | [AZ18, KatyushaX, Sec 5]                                 |
+| FS $L$-IS NC            | Stationarity        | $\Omega \left( \Delta L \epsilon^{-2} \right)$               | $\times$                          | [WJZ+19, Thm 1] $\mathcal{O} \left( \sqrt{n \Delta L \epsilon^{-2}} \right)$ |
+| FS $L$-AS NC            | Stationarity       | $\Omega \left( \sqrt{n \Delta L \epsilon^{-2}} \right)$       | $\checkmark$                     | [FLLZ18, Thm 2, 3], [ZG19, Thm 4.5]                      |
+|                         |         |                                                     |                                  |                                                           |
+| Stoc $L$-$S$ $\mu$-SC   | Stationarity        | $\Omega (\epsilon^{-1})$                            | $\checkmark$                     | [GL12, Prop 9], [RSS12, Thm 2] (?)                        |
+| Stoc $L$-$S$ C          | Stationarity        | $\Omega (\epsilon^{-2})$                            | $\checkmark$                     | [Lan12, Thm 1], Modified SA, [WWS*18, Thm 1] (?)          |
+| Stoc NS $\mu$-SC        | Stationarity        | $\Omega (\epsilon^{-2})$                            | $\checkmark$                     | [HK14, Thm 5], [NJLS09, Sec 2.1]                          |
+| Stoc NS C               | Stationarity        | $\Omega (\epsilon^{-2})$                            | $\checkmark$                     | [NJLS09, Sec 2.2], [AWBR09, Thm 1]                        |
+| Stoc $L$-$S$ $\mu$-SC   | Stationarity        | $\Omega (\epsilon^{-2})$ (implied)                  | $\checkmark$                     | AC-SA2: $\mathcal{O} \left( \sqrt{\frac{LD}{\epsilon}} \log k + \frac{\sigma_x^2}{\epsilon^2} \log^3 k \right)$ |
+| Stoc $L$-$S$ C   | Stationarity        | $\Omega \left( \frac{LD}{\epsilon} + \frac{\sigma_x^2}{\epsilon^2} \log \frac{LD}{\epsilon} \right)$ | $\checkmark$       | AC-SA2: $\mathcal{O} \left( \sqrt{\frac{LD}{\epsilon}} \log k + \frac{\sigma_x^2}{\epsilon^2} \log^3 k \right)$ |
+| Stoc L-SS NC   | Stationarity        | $\Omega \left( \Delta \sigma_x \epsilon^{-4} \right)$         | $\checkmark$                     | [GL13, Cor 2.2]                                           |
+| Stoc L-AS NC            | Stationarity        | $\Omega \left( \Delta \sigma_x^2 + 3 \sigma_x \epsilon^{-2} \right)$ | $\checkmark$                     | [FLLZ18, Thm 3], [ACD+19, Thm 1]                          |
+| NS $L$-Lip $\rho$-WC    | Near-stationarity        | Unknown     | Unknown | [<d-cite key="davis2018stochastic"></d-cite>, Thm 2.1] $\mathcal{O} (\epsilon^{-4})$             |
+
+
+### Case 2-1: SC-SC/SC-C/C-C Deterministic Minimax Optimization
+
+### Case 2-2: SC-SC/SC-C/C-C Finite-sum and Stochastic Minimax Optimization
+
+### Case 2-3: NC-SC/NC-C Deterministic Minimax Optimization
+
+### Case 2-4: NC-SC/NC-C Finite-sum and Stochastic Minimax Optimization
 
 ---
 
