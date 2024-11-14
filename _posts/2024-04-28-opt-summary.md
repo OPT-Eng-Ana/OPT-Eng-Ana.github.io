@@ -198,6 +198,22 @@ We categorize the discussion based on the problem formulation, stochasticity and
 
 ### Case 2-3: NC-SC/NC-C Deterministic Minimax Optimization
 
+| Type               | Measure | LB                                          | UB                               | Reference-LB      | Reference-UB                                   |
+|--------------------|---------|---------------------------------------------|----------------------------------|-------------------|------------------------------------------------|
+| NC-SC, Deter       | Primal Stationarity | $\Omega(\Delta \mathcal{L} \epsilon^{-2})$  | $\checkmark$ ($\times$) |         | [LJJ+20, Thm 6.1] $\mathcal{O}(\Delta \sqrt{\kappa_y} L \epsilon^{-2} \log^2 \frac{1}{\epsilon})$ (NC S min) |
+| NC-SC, Deter       | Primal Stationarity | $\Omega(\Delta \mathcal{L} \epsilon^{-2})$  | $\checkmark$ ($\times$) |         | [YZKH20] $\mathcal{O}(\Delta \sqrt{\kappa_y} L \epsilon^{-2} \log \frac{1}{\epsilon})$ (NC S min) |
+| NC-SC, Deter       | Primal Stationarity | ↑                                           | $\checkmark$ ($\times$) |         | [LJJ19, Thm 4.4] [BB20, Thm 4.5] $\mathcal{O}(\Delta L \kappa_y^2 \epsilon^{-2})$ (single loop) |
+| NC-C, Deter        | Primal Stationarity | $\Omega(\Delta \mathcal{L} \epsilon^{-2})$  | $\times$                |         | [TJNO19, YZKH20, LJJ+20, Cor A.8] $\mathcal{O}(\Delta L^2 \epsilon^{-3} \log^2 \frac{1}{\epsilon})$ (NC S min) |
+| NC-C, Deter        | Primal Stationarity | ↑                                           | $\times$                |         | [LJJ19, Thm 4.8] [BB20, Thm 3.7] $\mathcal{O}(\epsilon^{-6})$ (single loop) |
+| NC-C, Deter, Lin   | Primal Stationarity | $\Omega(\Delta \mathcal{L} \epsilon^{-2})$  | $\checkmark$ (?)        |         | [ZXSL20, Thm 3.8] $\mathcal{O}(\epsilon^{-2})$ (unclear dependence) |
+| WC-C, Deter        | Primal Stationarity | ?                                           | ?                       |         | [BB20, Thm 3.7] $\mathcal{O}(\epsilon^{-6})$ (single loop)        |
+| NC-SC, Deter       | FNE | $\Omega(\sqrt{\kappa \Delta \mathcal{L} \epsilon^{-2}})$ | $\times$                   |         | [XZXZL20, Thm 3.1] $\mathcal{O}(\epsilon^{-2})$ (NC S min)         |
+| NC-SC, Deter       | FNE | ↑                                           | $\times$                                |         | [LJJ+20, Cor 6.1] $\mathcal{O}(\sqrt{\kappa \Delta \mathcal{L} \epsilon^{-2} \log^2 \frac{1}{\epsilon}})$ NC S min |
+| NC-C, Deter        | FNE | $\Omega(\Delta \mathcal{L} \epsilon^{-2})$  | $\times$                       |                   | [LJJ+20, Cor 6.2] $\mathcal{O}(\sqrt{D \Delta \mathcal{L}^{1.5} \epsilon^{-2.5} \log^2 \frac{1}{\epsilon}})$ (NC S min) |
+| SC-NC, Deter       | FNE | $\Omega(\sqrt{\kappa} \log \frac{1}{\epsilon})$ | $\times$                   |                   | [XZXZL20, Cor 4.1] $\mathcal{O}(\epsilon^{-2})$ (single loop, SC S min) |
+| C-NC, Deter        | FNE | $\Omega(\sqrt{L/\epsilon})$                 | $\times$                       |                   | [XZXZL20, Cor 4.2] $\mathcal{O}(\epsilon^{-4})$ (single loop, C S min) |
+
+
 **Remark:**
 
 1. content
@@ -218,6 +234,14 @@ We categorize the discussion based on the problem formulation, stochasticity and
 - Markovian noise
 - DRO
 - Application-driven: Mix the gap between practice and theory
+{% include figure.liquid path="assets/img/2024-04-28-opt-summary/practice_gap.png" class="img-fluid" %}
+
+<div class="caption">
+    Gap Between General Worst-Case Complexity and Instance-Level Complexity Analysis (adapted from [<d-cite key="zhang2022beyond"></d-cite>, Cor 2.1] )
+</div>
+
+(Random matrix)
+
 - Interpolation condition in over-parametrized NN
 - Beyond oracle model
 
