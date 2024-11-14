@@ -126,6 +126,10 @@ We categorize the discussion based on the problem formulation, stochasticity and
 | $L$-Smooth NC              | $\|\| \nabla f(x^K) \|\|$    | $\Omega (\Delta L \epsilon^{-2})$                             | $\checkmark$ | [<d-cite key="carmon2020lower"></d-cite>, Theorem 1]      |
 | NS $L$-Lip Ct $\rho$-WC    | Near-stationarity        | Unknown                                                       | $\mathcal{O}(\epsilon^{-4})$      | [<d-cite key="davis2018stochastic"></d-cite>, Theorem 2.1 implied]                  |
 
+**Remark:**
+
+1. content
+
 ### Case 1-2: Finite-sum and Stochastic Optimization (double check)
 
 | Problem Type            | Measure | Lower Bound                                                | Upper Bound                               | Reference (LB-UB)                                       |
@@ -148,6 +152,10 @@ We categorize the discussion based on the problem formulation, stochasticity and
 | Stoc L-AS IC            | Stationarity        | Unknown | Unknown                     | [<d-cite key="wang2019spiderboost"></d-cite>, Theorem 5]                          |
 | NS $L$-Lip $\rho$-WC    | Near-stationarity        | Unknown     | $\mathcal{O} (\epsilon^{-4})$ | [<d-cite key="davis2018stochastic"></d-cite>, Thm 2.1]              |
 
+**Remark:**
+
+1. content
+
 ### Case 2-1: SC-SC/SC-C/C-C Deterministic Minimax Optimization
 
 | Problem Type          | Measure | Lower Bound                                             | Upper Bound                           | Reference (LB-UB)                                      |
@@ -164,12 +172,41 @@ We categorize the discussion based on the problem formulation, stochasticity and
 |                       |         |                                                 |                              |                                                          |
 | **Note**              |         | LB SC-SC bilinear: [<d-cite key="ibrahim2020linear"></d-cite>, Cor 4] and extension to SCLI framework<d-cite key="arjevani2016lower"></d-cite> |
 
+**Remark:**
+
+1. content
 
 ### Case 2-2: SC-SC/SC-C/C-C Finite-sum and Stochastic Minimax Optimization
 
+| Problem Type         | Measure | LB                                         | UB                            | Reference-LB      | Reference-UB                                   |
+|----------------------|---------|---------------------------------------------|-------------------------------|-------------------|------------------------------------------|
+| C-C, Fin-Sum         | Duality Gap | $\Omega(n + L / \epsilon)$                 | $\times$                      | [<d-cite key="xie2020lower"></d-cite>, Theorem 3, PIFO]     | [<d-cite key="yazdandoost2023stochastic"></d-cite>, Cor 2.1]  $\mathcal{O}(\sqrt{n}/\epsilon)$      |
+| C-C, Stoc, SS        | Duality Gap | $\Omega(\epsilon^{-2})$                    | $\checkmark$                  | (Stoc C SS min)                                             | [<d-cite key="juditsky2011solving"></d-cite>, Cor 1]      |
+| C-C, Stoc, NS        | Duality Gap | $\Omega(\epsilon^{-2})$                    | $\checkmark$                  | (Stoc C NS min)                                             | [<d-cite key="nemirovski2009robust"></d-cite>, Lemma 3.1]      |
+| SC-C, Fin-Sum        | Duality Gap | $\Omega\left(n + \sqrt{n L / \epsilon}\right)$ | $\checkmark$ ($\times$)   | (FS C min)                                                  | [<d-cite key="yang2020catalyst"></d-cite>, Sec 3.2] $\tilde{\mathcal{O}}(\sqrt{n L / \epsilon})$      |
+| C-SC, FS bilinear    | Duality Gap | ?                                          | ?                             | ?                                                           | [<d-cite key="du2019linear"></d-cite>, Thm 4.1] $\mathcal{O}(n \log \frac{1}{\epsilon})$      |
+| C-SC, FS general     | Duality Gap | $\Omega(n + L / \sqrt{\mu_y \epsilon})$    | ?                             | [<d-cite key="xie2020lower"></d-cite>, Thm 2]               | (implies from SC-C?) |
+| SC-SC, Fin-Sum       | Duality Gap | $\Omega\left((n + \kappa) \log \frac{1}{\epsilon}\right)$ | $\checkmark$ ($\times$) | [<d-cite key="xie2020lower"></d-cite>, Thm 1]      | [<d-cite key="palaniappan2016stochastic"></d-cite>, Thm 1] $\mathcal{O}((n + \kappa) \log \frac{1}{\epsilon})$      |
+| SC-SC, Stoc, SS      | Duality Gap | $\Omega(\epsilon^{-1})$                    | $\checkmark$                  | (Stoc SC SS min)                                            | [<d-cite key="hsieh2019convergence"></d-cite>, Thm 5, pt. dist.] $\mathcal{O}(\epsilon^{-1})$       |
+| SC-SC, Stoc, NS      | Duality Gap | $\Omega(\epsilon^{-1})$                    | $\checkmark$                  | (Stoc SC NS min)                                            | [<d-cite key="yan2020optimal"></d-cite>, Thm 1, in prob.] $\mathcal{O}(\epsilon^{-1})$       |
+|                      |         |                                             |                               |                                                             |
+| **Note**             |         | UB SC-SC general: [<d-cite key="luo2019stochastic"></d-cite>], [<d-cite key="chavdarova2019reducing"></d-cite>, (cocoercive?)] | |
+
+**Remark:**
+
+1. content
+
 ### Case 2-3: NC-SC/NC-C Deterministic Minimax Optimization
 
+**Remark:**
+
+1. content
+
 ### Case 2-4: NC-SC/NC-C Finite-sum and Stochastic Minimax Optimization
+
+**Remark:**
+
+1. content
 
 ---
 
