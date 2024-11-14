@@ -149,6 +149,21 @@ We categorize the discussion based on the problem formulation, stochasticity and
 
 ### Case 2-1: SC-SC/SC-C/C-C Deterministic Minimax Optimization
 
+| Problem Type          | Measure | Lower Bound                                             | Upper Bound                           | Reference (LB-UB)                                      |
+|-----------------------|---------|-------------------------------------------------|------------------------------|----------------------------------------------------------|
+| C-C, bilinear, NS     | Duality Gap        | $\Omega(L / \epsilon)$                          | $\checkmark$                 | [<d-cite key="ouyang2021lower"></d-cite>, Thm 9], [<d-cite key="chambolle2011first"></d-cite>, Thm 1]                                            |
+| C-C, general          | Duality Gap        | $\Omega(L D_X D_Y / \epsilon)$                  | $\checkmark$                 | [<d-cite key="xie2020lower"></d-cite>, Thm 3], [<d-cite key="nemirovski2004prox"></d-cite>, Thm 4.1]  |
+| SC-C, bilinear, NS    | Duality Gap        | $\Omega(\sqrt{\kappa_x} / \epsilon)$            | $\checkmark$ ($\times$)      | [<d-cite key="ouyang2021lower"></d-cite>, Thm 10], [<d-cite key="chambolle2011first"></d-cite>, Thm 2] $\mathcal{O}(\kappa_x^2 / \sqrt{\epsilon})$ |
+| SC-C, general         | Duality Gap        | $\Omega(D_Y \sqrt{L \kappa_x} / \epsilon)$      | $\checkmark$ ($\times$)      | [<d-cite key="xie2020lower"></d-cite>, Thm 2 imply], [<d-cite key="yang2020catalyst"></d-cite>, Sec 3.2] $\tilde{\mathcal{O}}(D \sqrt{L \kappa_x} / \epsilon)$  |
+| C-SC, bilinear        | Duality Gap        | ?                                               | $\mathcal{O}(\log \frac{1}{\epsilon})$ | (UB $\neq$ SC-C ?)?, [<d-cite key="du2019linear"></d-cite>, Thm 3.1] |
+| C-SC, general         | Duality Gap        | $\Omega(L D_X / \sqrt{\mu_y \epsilon})$         | ?                            | [<d-cite key="xie2020lower"></d-cite>, Thm 2 imply]   |
+| SC-SC, bilinear       | Duality Gap        | $\Omega(\sqrt{\kappa_x \kappa_y} \log \frac{1}{\epsilon})$ | $\checkmark$               | [<d-cite key="zhang2022lower"></d-cite>, Thm 3.5], [<d-cite key="chambolle2016ergodic"></d-cite>, Thm 5, PIFO]                                      |
+| SC-SC, general        | Duality Gap        | $\Omega(\sqrt{\kappa_x \kappa_y} \log \frac{1}{\epsilon})$ | $\checkmark$ ($\times$)    | [<d-cite key="zhang2022lower"></d-cite>, Thm 4.5], [<d-cite key="wang2020improved"></d-cite>, Thm 3]                                            |
+| SC-SC, general        | Duality Gap        | same                                            | $\checkmark$ ($\times$) | [<d-cite key="liang2019interaction"></d-cite>, Thm 1, (last iterate)] $\mathcal{O}(\sqrt{\kappa} \log \frac{1}{\epsilon})$ |
+|                       |         |                                                 |                              |                                                          |
+| **Note**              |         | LB SC-SC bilinear: [<d-cite key="ibrahim2020linear"></d-cite>, Cor 4] and extension to SCLI framework<d-cite key="arjevani2016lower"></d-cite> |
+
+
 ### Case 2-2: SC-SC/SC-C/C-C Finite-sum and Stochastic Minimax Optimization
 
 ### Case 2-3: NC-SC/NC-C Deterministic Minimax Optimization
