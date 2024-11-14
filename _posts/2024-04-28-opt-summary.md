@@ -169,6 +169,7 @@ We categorize the discussion based on the problem formulation, stochasticity and
 | SC-SC, bilinear       | Duality Gap        | $\Omega(\sqrt{\kappa_x \kappa_y} \log \frac{1}{\epsilon})$ | $\checkmark$               | [<d-cite key="zhang2022lower"></d-cite>, Thm 3.5], [<d-cite key="chambolle2016ergodic"></d-cite>, Thm 5, PIFO]                                      |
 | SC-SC, general        | Duality Gap        | $\Omega(\sqrt{\kappa_x \kappa_y} \log \frac{1}{\epsilon})$ | $\checkmark$ ($\times$)    | [<d-cite key="zhang2022lower"></d-cite>, Thm 4.5], [<d-cite key="wang2020improved"></d-cite>, Thm 3]                                            |
 | SC-SC, general        | Duality Gap        | same                                            | $\checkmark$ ($\times$) | [<d-cite key="liang2019interaction"></d-cite>, Thm 1, (last iterate)] $\mathcal{O}(\sqrt{\kappa} \log \frac{1}{\epsilon})$ |
+| PL-PL                 | Duality Gap        | same                                            | $\checkmark$ ($\times$) | [<d-cite key="liang2019interaction"></d-cite>, Thm 1, (last iterate)] $\mathcal{O}(\sqrt{\kappa} \log \frac{1}{\epsilon})$ |
 |                       |         |                                                 |                              |                                                          |
 | **Note**              |         | LB SC-SC bilinear: [<d-cite key="ibrahim2020linear"></d-cite>, Cor 4] and extension to SCLI framework<d-cite key="arjevani2016lower"></d-cite> |
 
@@ -200,23 +201,20 @@ We categorize the discussion based on the problem formulation, stochasticity and
 
 | Type               | Measure | LB                                          | UB                               | Reference-LB      | Reference-UB                                   |
 |--------------------|---------|---------------------------------------------|----------------------------------|-------------------|------------------------------------------------|
-| NC-SC, Deter       | Primal Stationarity | $\Omega(\Delta \mathcal{L} \epsilon^{-2})$  | $\checkmark$ ($\times$) |         | [LJJ+20, Thm 6.1] $\mathcal{O}(\Delta \sqrt{\kappa_y} L \epsilon^{-2} \log^2 \frac{1}{\epsilon})$ (NC S min) |
-| NC-SC, Deter       | Primal Stationarity | $\Omega(\Delta \mathcal{L} \epsilon^{-2})$  | $\checkmark$ ($\times$) |         | [YZKH20] $\mathcal{O}(\Delta \sqrt{\kappa_y} L \epsilon^{-2} \log \frac{1}{\epsilon})$ (NC S min) |
-| NC-SC, Deter       | Primal Stationarity | ↑                                           | $\checkmark$ ($\times$) |         | [LJJ19, Thm 4.4] [BB20, Thm 4.5] $\mathcal{O}(\Delta L \kappa_y^2 \epsilon^{-2})$ (single loop) |
-| NC-C, Deter        | Primal Stationarity | $\Omega(\Delta \mathcal{L} \epsilon^{-2})$  | $\times$                |         | [TJNO19, YZKH20, LJJ+20, Cor A.8] $\mathcal{O}(\Delta L^2 \epsilon^{-3} \log^2 \frac{1}{\epsilon})$ (NC S min) |
-| NC-C, Deter        | Primal Stationarity | ↑                                           | $\times$                |         | [LJJ19, Thm 4.8] [BB20, Thm 3.7] $\mathcal{O}(\epsilon^{-6})$ (single loop) |
-| NC-C, Deter, Lin   | Primal Stationarity | $\Omega(\Delta \mathcal{L} \epsilon^{-2})$  | $\checkmark$ (?)        |         | [ZXSL20, Thm 3.8] $\mathcal{O}(\epsilon^{-2})$ (unclear dependence) |
-| WC-C, Deter        | Primal Stationarity | ?                                           | ?                       |         | [BB20, Thm 3.7] $\mathcal{O}(\epsilon^{-6})$ (single loop)        |
-| NC-SC, Deter       | FNE | $\Omega(\sqrt{\kappa \Delta \mathcal{L} \epsilon^{-2}})$ | $\times$                   |         | [XZXZL20, Thm 3.1] $\mathcal{O}(\epsilon^{-2})$ (NC S min)         |
-| NC-SC, Deter       | FNE | ↑                                           | $\times$                                |         | [LJJ+20, Cor 6.1] $\mathcal{O}(\sqrt{\kappa \Delta \mathcal{L} \epsilon^{-2} \log^2 \frac{1}{\epsilon}})$ NC S min |
-| NC-C, Deter        | FNE | $\Omega(\Delta \mathcal{L} \epsilon^{-2})$  | $\times$                       |                   | [LJJ+20, Cor 6.2] $\mathcal{O}(\sqrt{D \Delta \mathcal{L}^{1.5} \epsilon^{-2.5} \log^2 \frac{1}{\epsilon}})$ (NC S min) |
-| SC-NC, Deter       | FNE | $\Omega(\sqrt{\kappa} \log \frac{1}{\epsilon})$ | $\times$                   |                   | [XZXZL20, Cor 4.1] $\mathcal{O}(\epsilon^{-2})$ (single loop, SC S min) |
-| C-NC, Deter        | FNE | $\Omega(\sqrt{L/\epsilon})$                 | $\times$                       |                   | [XZXZL20, Cor 4.2] $\mathcal{O}(\epsilon^{-4})$ (single loop, C S min) |
+| NC-SC, Deter       | Primal Stationarity | $\Omega(\Delta \mathcal{L} \epsilon^{-2})$  | $\checkmark$ ($\times$) | [<d-cite key="zhang2021complexity"></d-cite>, Theorem 3.1] | [<d-cite key="zhang2021complexity"></d-cite>, Theorem 4.1] |
+| NC-C, Deter        | Primal Stationarity | $\Omega(\Delta \mathcal{L} \epsilon^{-2})$  | $\times$                |         | [<d-cite key="lin2020near"></d-cite>, Cor A.8] $\mathcal{O}(\Delta L^2 \epsilon^{-3} \log^2 \frac{1}{\epsilon})$ |
+| WC-C, Deter        | Primal Stationarity | ?                                           | ?                       |         | [<d-cite key="boct2023alternating"></d-cite>, Thm 3.7] $\mathcal{O}(\epsilon^{-6})$ (single loop)        |
+| NC-PL, Deter       | Primal Stationarity | $\Omega(\sqrt{\kappa \Delta \mathcal{L} \epsilon^{-2}})$ | $\times$                   |         | [<d-cite key="yang2022faster"></d-cite>, Thm 3.1]         |
+| NC-SC, Deter       | FNE | $\Omega(\sqrt{\kappa \Delta \mathcal{L} \epsilon^{-2}})$ | $\times$                   |         | [<d-cite key="lin2020near"></d-cite><d-cite key="xu2023unified"></d-cite>, Thm 3.1] $\mathcal{O}(\epsilon^{-2})$       |
+| NC-C, Deter        | FNE | $\Omega(\Delta \mathcal{L} \epsilon^{-2})$  | $\times$                       |                   | [<d-cite key="lin2020near"></d-cite>, Cor 6.2] $\mathcal{O}(\sqrt{D \Delta \mathcal{L}^{1.5} \epsilon^{-2.5} \log^2 \frac{1}{\epsilon}})$ (NC S min) |
+| SC-NC, Deter       | FNE | $\Omega(\sqrt{\kappa} \log \frac{1}{\epsilon})$ | $\times$                   |                   | [<d-cite key="xu2023unified"></d-cite>, Cor 4.1] $\mathcal{O}(\epsilon^{-2})$ |
+| C-NC, Deter        | FNE | $\Omega(\sqrt{L/\epsilon})$                 | $\times$                       |                   | [<d-cite key="xu2023unified"></d-cite>, Cor 4.2] $\mathcal{O}(\epsilon^{-4})$ |
 
 
 **Remark:**
 
 1. content
+2. [ZXSL20, Thm 3.8] $\mathcal{O}(\epsilon^{-2})$ (unclear dependence)
 
 ### Case 2-4: NC-SC/NC-C Finite-sum and Stochastic Minimax Optimization
 
