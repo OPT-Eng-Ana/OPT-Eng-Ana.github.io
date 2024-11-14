@@ -51,8 +51,10 @@ $$
 \min_{x\in\mathcal{X}}\ f(x)
 $$
 
+test citation <d-cite key="ruder2016overview"></d-cite>, <d-cite key="arjevani2016lower"></d-cite>
+
 ### Existing survey literature
-content
+content, papers, blogs, 
 
 ---
 
