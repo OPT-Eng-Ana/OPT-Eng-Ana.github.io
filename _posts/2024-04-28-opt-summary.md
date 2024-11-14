@@ -171,11 +171,11 @@ We categorize the discussion based on the problem formulation, stochasticity and
 | SC-SC, general        | Duality Gap        | same                                            | $\checkmark$ ($\times$) | [<d-cite key="liang2019interaction"></d-cite>, Thm 1, (last iterate)] $\mathcal{O}(\sqrt{\kappa} \log \frac{1}{\epsilon})$ |
 | PL-PL                 | Duality Gap        | same                                            | $\checkmark$ ($\times$) | [<d-cite key="liang2019interaction"></d-cite>, Thm 1, (last iterate)] $\mathcal{O}(\sqrt{\kappa} \log \frac{1}{\epsilon})$ |
 |                       |         |                                                 |                              |                                                          |
-| **Note**              |         | LB SC-SC bilinear: [<d-cite key="ibrahim2020linear"></d-cite>, Cor 4] and extension to SCLI framework<d-cite key="arjevani2016lower"></d-cite> |
 
 **Remark:**
 
 1. content
+2. LB SC-SC bilinear: [<d-cite key="ibrahim2020linear"></d-cite>, Cor 4] and extension to SCLI framework<d-cite key="arjevani2016lower"></d-cite>
 
 ### Case 2-2: SC-SC/SC-C/C-C Finite-sum and Stochastic Minimax Optimization
 
@@ -191,11 +191,11 @@ We categorize the discussion based on the problem formulation, stochasticity and
 | SC-SC, Stoc, SS      | Duality Gap | $\Omega(\epsilon^{-1})$                    | $\checkmark$                  | (Stoc SC SS min)                                            | [<d-cite key="hsieh2019convergence"></d-cite>, Thm 5, pt. dist.] $\mathcal{O}(\epsilon^{-1})$       |
 | SC-SC, Stoc, NS      | Duality Gap | $\Omega(\epsilon^{-1})$                    | $\checkmark$                  | (Stoc SC NS min)                                            | [<d-cite key="yan2020optimal"></d-cite>, Thm 1, in prob.] $\mathcal{O}(\epsilon^{-1})$       |
 |                      |         |                                             |                               |                                                             |
-| **Note**             |         | UB SC-SC general: [<d-cite key="luo2019stochastic"></d-cite>], [<d-cite key="chavdarova2019reducing"></d-cite>, (cocoercive?)] | |
 
 **Remark:**
 
 1. content
+2. UB SC-SC general: [<d-cite key="luo2019stochastic"></d-cite>], [<d-cite key="chavdarova2019reducing"></d-cite>, (cocoercive?)]
 
 ### Case 2-3: NC-SC/NC-C Deterministic Minimax Optimization
 
@@ -210,13 +210,25 @@ We categorize the discussion based on the problem formulation, stochasticity and
 | SC-NC, Deter       | FNE | $\Omega(\sqrt{\kappa} \log \frac{1}{\epsilon})$ | $\times$                   |                   | [<d-cite key="xu2023unified"></d-cite>, Cor 4.1] $\mathcal{O}(\epsilon^{-2})$ |
 | C-NC, Deter        | FNE | $\Omega(\sqrt{L/\epsilon})$                 | $\times$                       |                   | [<d-cite key="xu2023unified"></d-cite>, Cor 4.2] $\mathcal{O}(\epsilon^{-4})$ |
 
-
 **Remark:**
 
 1. content
 2. [ZXSL20, Thm 3.8] $\mathcal{O}(\epsilon^{-2})$ (unclear dependence)
 
 ### Case 2-4: NC-SC/NC-C Finite-sum and Stochastic Minimax Optimization
+
+| Type             | Measure | LB                                      | UB                                      | Reference (UB & LB)                                                                 |
+|------------------|---------|-----------------------------------------|-----------------------------------------|------------------------------------------------------------------------------------|
+| NC-SC, FS, AS    |         | $\Omega\left(\frac{\sqrt{n\kappa}\Delta L}{\epsilon^2}\right)$ | ✔(x)                                    | [XWLP20, Cor 1] $O\left(\sqrt{n}\kappa^2 L\Delta\epsilon^{-2}\right)$ [ZYG+21, Thm 3.2] [ZYG+21, Sec 4.2] $O\left(n^{3/4}\sqrt{\kappa}L\Delta\epsilon^{-2}\right)$ |
+| NC-SC, FS, IS    |         | $\Omega\left(\frac{\sqrt{n}\Delta L}{\epsilon^2}\right)$ | ✔(x)                                    | [XWLP20, Cor 1] $O\left(\sqrt{n}\kappa_{ky}L\Delta\epsilon^{-2}\right)$ (NC IS FS min)                                      |
+| NC-C, FS, IS     |         | $\Omega\left(\frac{\sqrt{n}\Delta L}{\epsilon^2}\right)$ | ✔(x)                                    | [DH19, Thm 2] $O\left(n\epsilon^{-2} + \epsilon^{-6}\right)$ (NC AS FS) (IS?)                                       |
+| NC-C, FS, IS     |         | $\Omega\left(\frac{\sqrt{n}\Delta L}{\epsilon^2}\right)$ | ✘(x)                                    | [YZKH20, Sec 4.2]: $O\left(n^{3/4}L^2D_y\Delta\epsilon^{-3}\right)$ (NC AS FS) (IS?)                                |
+| NC-SC, Stoc, SS  |         | $\Omega\left(\frac{\Delta L\sigma^2}{\epsilon^4}\right)$ | ✘                                     | [YOLH21, Cor 4.1] (NC SS Stoc min)                                                 |
+| NC-SC, Stoc, AS  |         | $\Omega\left(\frac{\Delta L\sigma^2 + \sigma^2}{\epsilon^3}\right)$ | ✔(x)                                    | [XWLP20, Thm 1] $O\left(\Delta L\sigma^2\kappa_{ky}^3\epsilon^{-3}\right)$ (NC AS Stoc min)                                     |
+| NC-C, Stoc, SS   |         | $\Omega\left(\frac{\Delta L\sigma + \sigma^2}{\epsilon^3}\right)$ | ✘                                     | [LJJ19, Thm 4.9] [BB20, Thm 3.13] $O\left(\epsilon^{-8}\right)$ (SL, Lip-C) (NC AS Stoc) (IS?)            |
+| WC-SC, Stoc      |         | ?                                       | ?                                       | [YXL+20, Thm 2] $O\left(c^{-4}\right)$                                                             |
+| WC-C, Stoc       |         | ?                                       | ?                                       | [RLLY18, Thm 1] $O\left(\epsilon^{-6}\right)$ (error?)                                                    |
+| WC-C, Stoc       |         | ?                                       | ?                                       | [BB20, Thm 3.13] $O\left(\epsilon^{-8}\right)$ (single loop)                                              |
 
 **Remark:**
 
