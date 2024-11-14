@@ -51,9 +51,8 @@ $$
 \min_{x\in\mathcal{X}}\ f(x)
 $$
 
-The citation is presented inline like this: <d-cite key="gregor2015draw"></d-cite> (a number that displays more information on hover).
-
-Here is another one: <d-cite key="zhang2021complexity"></d-cite>
+### Existing survey literature
+content
 
 ---
 
@@ -174,42 +173,17 @@ We categorize the discussion based on the problem formulation, stochasticity and
 
 ## To Have a Better Bound
 
-content
+- bilevel and other special structure
+- Last-iterate?
+- large stepsize
+- Markovian noise
+- DRO
+- Application-driven: Mix the gap between practice and theory
+- Interpolation condition in over-parametrized NN
+- Beyond oracle model
 
 ---
 
 ## Conclusion
 
 content
-
-
-Colons can be used to align columns.
-
-| Tables        |      Are      |  Cool |
-| ------------- | :-----------: | ----: |
-| col 3 is      | right-aligned | $1600 |
-| col 2 is      |   centered $\times$    |   $12 |
-| zebra stripes |   are neat $\checkmark$   |    $1 |
-
-There must be at least 3 dashes separating each header cell.
-The outer pipes (|) are optional, and you don't need to make the
-raw Markdown line up prettily. You can also use inline Markdown.
-
-| Markdown | Less      | Pretty     |
-| -------- | --------- | ---------- |
-| _Still_  | `renders` | **nicely** |
-| 1        | 2         | 3          |
-
-> Blockquotes are very handy in email to emulate reply text.
-> This line is part of the same quote.
-
-Quote break.
-
-> This is a very long line that will still be quoted properly when it wraps. Oh boy let's keep writing to make sure this is long enough to actually wrap for everyone. Oh, you can _put_ **Markdown** into a blockquote.
-
-Here's a line for us to start with.
-
-This line is separated from the one above by two newlines, so it will be a _separate paragraph_.
-
-This line is also a separate paragraph, but...
-This line is only separated by a single newline, so it's a separate line in the _same paragraph_.
