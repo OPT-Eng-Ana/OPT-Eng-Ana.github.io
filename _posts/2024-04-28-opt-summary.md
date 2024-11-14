@@ -109,7 +109,7 @@ We categorize the discussion based on the problem formulation, stochasticity and
 </div>
 
 | Problem Type               | Measure                   | LB                     | UB          | Reference<d-footnote>Note that here possibly we may not choose the most original work which proposed the results, rather we may select the literature which we are more familiar with, also with a clearer presentation. Readers are encouraged to check the reference therein for the original works.</d-footnote>                                |
-|----------------------------|---------------------------|------------------------|-------------|------------------------------------------|
+|----------------------------|---------------------------|------------------------|-------------|--------------------------------|
 | $L$-Smooth Convex          | $f(x^K) - f^*$           | $\Omega \left( \sqrt{L \epsilon^{-1}} \right)$                | $\checkmark$ | [<d-cite key="nesterov2018lectures"></d-cite>, Theorem 2.1.7; Theorem 2.2.2]       |
 | $L$-Smooth $\mu$-SC        | $f(x^K) - f^*$           | $\Omega \left( \sqrt{\kappa} \log \frac{1}{\epsilon} \right)$ | $\checkmark$ | [<d-cite key="nesterov2018lectures"></d-cite>, Theorem 2.1.13]                     |
 | NS $L$-Lip Ct Convex       | $f(x^K) - f^*$           | $\Omega (L^2 \epsilon^{-2})$                                  | $\checkmark$ | [<d-cite key="bubeck2015convex"></d-cite>, Theorem 3.8]                        |
@@ -117,10 +117,16 @@ We categorize the discussion based on the problem formulation, stochasticity and
 | $L$-Smooth Convex          | $\|\| \nabla f(x^K) \|\|$    | $\Omega \left( \sqrt{\Delta L \epsilon^{-1}} \right)$     | $\checkmark$ | [<d-cite key="carmon2021lower"></d-cite>, Theorem 1 & Appendix A.1]              |
 | $L$-Smooth NC              | $\| \nabla f(x^K) \|$    | $\Omega (\Delta L \epsilon^{-2})$                             | $\checkmark$ | [<d-cite key="carmon2020lower"></d-cite>, Theorem 1]      |
 | NS $L$-Lip Ct $\rho$-WC    | Near-stationarity        | Unknown                                                       | $\mathcal{O}(\epsilon^{-4})$      | [<d-cite key="davis2018stochastic"></d-cite>, Theorem 2.1 implied]                  |
+
 <div class="caption">
     **Case 1:** Summary of lower bounds (LB) and upper bounds (UB) for different problem types and measures, with references to key theorems.
 </div>
 
+| Problem Type        |      Measure      |  Lower Bound | Upper Bound | Reference |
+| ------------- | :-----------: | ----: | -----| -----|
+| $L$-Smooth Convex      | $f(x^K) - f^*$ | $\Omega \left( \sqrt{L \epsilon^{-1}} \right)$ | $\checkmark$ | [<d-cite key="nesterov2018lectures"></d-cite>, Theorem 2.1.7; Theorem 2.2.2] |
+| col 2 is      |   centered $\times$    |   $12 | | |
+| zebra stripes |   are neat $\checkmark$   |    $1 | | |
 
 ---
 
