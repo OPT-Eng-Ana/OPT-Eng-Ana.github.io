@@ -89,7 +89,7 @@ content
 {% include figure.liquid path="assets/img/2024-04-28-opt-summary/complexity_analysis.jpg" class="img-fluid" %}
 
 <div class="caption">
-    Oracle Complexity Framework
+    Oracle Complexity Framework (adapted from Prof.~Yangyang Xu's Slides<d-cite key="xu2019lbslides"></d-cite>)
 </div>
 
 ---
@@ -236,7 +236,7 @@ We categorize the discussion based on the problem formulation, stochasticity and
 
 ---
 
-## To Have a Better Bound
+## To Have a Better Bound (New Trends)
 
 - bilevel and other special structure
 - Last-iterate?
