@@ -89,7 +89,7 @@ content
 {% include figure.liquid path="assets/img/2024-04-28-opt-summary/complexity_analysis.jpg" class="img-fluid" %}
 
 <div class="caption">
-    Oracle Complexity Framework (adapted from Prof.~Yangyang Xu's Slides<d-cite key="xu2019lbslides"></d-cite>)
+    Oracle Complexity Framework (adapted from Prof. Yangyang Xu's Slides<d-cite key="xu2019slides"></d-cite>)
 </div>
 
 ---
@@ -253,7 +253,9 @@ We categorize the discussion based on the problem formulation, stochasticity and
 (Random matrix)
 
 - Interpolation condition in over-parametrized NN
-- Beyond oracle model
+* Beyond oracle model
+ * Time complexity
+ * Finite-time convergence 
 
 ---
 
