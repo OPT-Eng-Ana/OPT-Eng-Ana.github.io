@@ -106,13 +106,13 @@ content
 
 ## Summary of Results
 
-We categorize the discussion based on the problem formulation, stochasticity and convergence measurement, for convenience of presentation, we divide the tables into the following cases:
+We categorize the discussion based on the problem formulation, convexity, stochasticity and convergence measurement, for convenience of presentation, we divide the tables into the following cases:
 
 **Minimization Problems**
 1. Deterministic optimization
 2. Finite-sum and stochastic optimization
 
-**Minimax Problems**
+Also for **Minimax Problems**, based on the convexity combination of each component, we consider the following cases:
 1. SC-SC/SC-C/C-C deterministic minimax
 2. SC-SC/SC-C/C-C finite-sum and stochastic minimax optimization
 3. NC-SC/NC-C deterministic minimax optimization
@@ -121,7 +121,7 @@ We categorize the discussion based on the problem formulation, stochasticity and
 {% include figure.liquid path="assets/img/2024-04-28-opt-summary/upper_lower.png" class="img-fluid" %}
 
 <div class="caption">
-    A simple, elegant caption looks good between image rows, after each row, or doesn't have to be there at all.
+    Illustration of Upper and Lower Complexity Bounds
 </div>
 
 ### Case 1-1: Deterministic Minimization
