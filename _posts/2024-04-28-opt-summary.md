@@ -106,7 +106,7 @@ $$
 x^{t+1}\in\mathrm{Span}\left\{x^0,\cdots,x^t;\mathbb{O}(f,x^0),\cdots,\mathbb{O}(f,x^t)\right\}.
 $$
 
-- *Complexity measure* $\mathcal{M}$, e.g., optimality gap $f(x)-f(x^*)$ where $x^*$ is the global minimum, function stationarity $\|\nabla f(x)\|$. 
+- *Complexity measure* $\mathcal{M}$, e.g., optimality gap $f(x)-f(x^\star)$ where $x^\star$ is the global minimum, function stationarity $\|\nabla f(x)\|$. 
 
 {% include figure.liquid path="assets/img/2024-04-28-opt-summary/complexity_analysis.jpg" class="img-fluid" %}
 
@@ -148,11 +148,11 @@ $$
 </div>
 
 As the figure below suggests, the optimization community keep facilitating the understanding of algorithm complexity from both upper and lower complexity directions.
-An ultimate goal in optimization algorithm complexity study is to find the *optimal algorithm* $\mathtt{A}^*$ in a given setting, which means its upper bound matches with the lower bound of the algorithm class under the function setting, 
+An ultimate goal in optimization algorithm complexity study is to find the *optimal algorithm* $\mathtt{A}^\star$ in a given setting, which means its upper bound matches with the lower bound of the algorithm class under the function setting, 
 i.e.,
 
 $$
-\mathrm{UB}_\epsilon(\mathcal{F};\mathtt{A}^*)\asymp\mathrm{LB}_\epsilon(\mathcal{F},\mathcal{A},\mathbb{O}).
+\mathrm{UB}_\epsilon(\mathcal{F};\mathtt{A}^\star)\asymp\mathrm{LB}_\epsilon(\mathcal{F},\mathcal{A},\mathbb{O}).
 $$
 
 ---
