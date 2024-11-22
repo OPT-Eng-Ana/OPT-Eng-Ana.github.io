@@ -207,7 +207,7 @@ Also for **Minimax Problems**, based on the convexity combination of each compon
 | $L$-Smooth Convex          | Stationarity    | $\Omega \left( \sqrt{\Delta L \epsilon^{-1}} \right)$     | $\checkmark$ | [<d-cite key="carmon2021lower"></d-cite>, Theorem 1 & Appendix A.1]              |
 | $L$-Smooth NC              | Stationarity    | $\Omega (\Delta L \epsilon^{-2})$                             | $\checkmark$ | [<d-cite key="carmon2020lower"></d-cite>, Theorem 1]      |
 | NS $L$-Lip Cont. $\rho$-WC    | Near-stationarity        | Unknown                                                       | $\mathcal{O}(\epsilon^{-4})$      | [<d-cite key="davis2018stochastic"></d-cite>, Theorem 2.1 implied]                  |
-| $\mu$-PL     | Near-stationarity        | Unknown                                                       | $\mathcal{O}(\epsilon^{-4})$      | [<d-cite key="davis2018stochastic"></d-cite>, Theorem 2.1 implied]                  |
+| $\mu$-PL     | Optimality gap        |                                                        | $\mathcal{O}(\epsilon^{-4})$      | [<d-cite key="davis2018stochastic"></d-cite>, Theorem 2.1 implied]                  |
 
 **Remark:**
 
@@ -338,7 +338,6 @@ Also for **Minimax Problems**, based on the convexity combination of each compon
 - Interpolation condition in over-parametrized NN
 * Beyond oracle model
  * Time complexity
- * Finite-time convergence 
 
 ---
 
