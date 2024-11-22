@@ -83,13 +83,8 @@ so generally the classical SVRG algorithm<d-cite key="johnson2013accelerating"><
 Following the **function structure** of the objective, we will divide the discussion into various cases, including strongly-convex, convex and nonconvex cases;
 also for minimax problems, the discussion will be more complicated based on the convexity of each component, we will specify the settings later.
 
-### Existing survey literature
+### Literature
 content, papers, blogs, 
-
-### Notations
-Besides the structure above, optimization algorithm convergence literature often require some other regularity conditions like 
-Lipschitz smooth, Lipschitz continuity, and unbiased gradient estimator with bounded variance. Here we assume readers are already familiar with such conditions,
-interested readers may refer to a nice handbook<d-cite key="garrigos2023handbook"></d-cite> for detailed definitions.
 
 ---
 
@@ -106,7 +101,7 @@ $$
 x^{t+1}\in\mathrm{Span}\left\{x^0,\cdots,x^t;\mathbb{O}(f,x^0),\cdots,\mathbb{O}(f,x^t)\right\}.
 $$
 
-- *Complexity measure* $\mathcal{M}$, e.g., optimality gap $f(x)-f(x^\star)$ where $x^\star$ is the global minimum, function stationarity $\|\nabla f(x)\|$. 
+- *Complexity measure* $\mathcal{M}$, e.g., optimality gap $f(x)-f(x^\star)$ where $x^\star$ is the global minimum, function stationarity $\|\|\nabla f(x)\|\|$. 
 
 {% include figure.liquid path="assets/img/2024-04-28-opt-summary/complexity_analysis.jpg" class="img-fluid" %}
 
@@ -155,13 +150,37 @@ $$
 \mathrm{UB}_\epsilon(\mathcal{F};\mathtt{A}^\star)\asymp\mathrm{LB}_\epsilon(\mathcal{F},\mathcal{A},\mathbb{O}).
 $$
 
-In this notes, we will focus on **first-order algorithms** in various optimization problem settings, trying to summarize the state-of-the-art (SOTA) UB and LB results, aiming to identify the gaps in existing reseach, and developing new trends. 
+In this notes, we will focus on **first-order algorithms** in various optimization problem settings, trying to summarize the state-of-the-art (SOTA) UB and LB results, aiming to identify the gaps in existing reseach, and develop new trends. 
+
+---
+
+## Notations
+
+Besides the structure above, optimization algorithm convergence literature often require some other regularity conditions like 
+Lipschitz smoothness, Lipschitz continuity, unbiased gradient estimator, bounded variance. Here we assume readers are already familiar with such context,
+interested readers may refer to a nice handbook<d-cite key="garrigos2023handbook"></d-cite> for detailed definitions.
+
+Also for completeness, we introduce some important properties below.
+
+> **Definition** (Mean-Squared Smoothness)
+
+> **Definition** (Weak Convexity)
+
+> **Definition**
+
+For convenience, we summarize some of the notations commonly used in tables below.
+- SC / C / NC / WC: strongly convex, convex, nonconvex, weakly-convex.
+- FS: finite-sum.
+- $L$-S: $L$-Lipschitz smooth. $L$-IS / AS: $L$-Lipschitz individual / averaged smoothness.
+- Optimality gap: the function value gap $f(x) - f^\star$.
+- Stationarity: the function gradient norm $\|\| \nabla f(x) \|\|$.
+- Near-stationarity<d-cite key="davis2018stochastic"></d-cite>: the gradient norm $\|\| \nabla f_\lambda(x) \|\|$, where $f_\lambda$ is the Moreau envelope of the original function $f$.
 
 ---
 
 ## Summary of Results
 
-We categorize the discussion based on the problem formulation, convexity, stochasticity and convergence measurement, for convenience of presentation, we divide the tables into the following cases:
+As mentioned above, we categorize the discussion based on the problem, stochasticity and function structure, for convenience of presentation, we divide the presentation into the following cases:
 
 **Minimization Problems**
 1. Deterministic optimization
@@ -177,12 +196,12 @@ Also for **Minimax Problems**, based on the convexity combination of each compon
 
 | Problem Type               | Measure                   | Lower Bound            | Upper Bound      | Reference (LB-UB)<d-footnote>Note that here possibly we may not choose the most original work which proposed the results, rather we may select the literature which we are more familiar with, also with a clearer presentation. Readers are encouraged to check the reference therein for the original works.</d-footnote>                                |
 |----------------------------|---------------------------|------------------------|-------------|--------------------------------|
-| $L$-Smooth Convex          | $f(x^K) - f^\star$           | $\Omega \left( \sqrt{L \epsilon^{-1}} \right)$                | $\checkmark$ | [<d-cite key="nesterov2018lectures"></d-cite>, Theorem 2.1.7; Theorem 2.2.2]       |
-| $L$-Smooth $\mu$-SC        | $f(x^K) - f^\star$           | $\Omega \left( \sqrt{\kappa} \log \frac{1}{\epsilon} \right)$ | $\checkmark$ | [<d-cite key="nesterov2018lectures"></d-cite>, Theorem 2.1.13]                     |
-| NS $L$-Lip Ct Convex       | $f(x^K) - f^\star$           | $\Omega (L^2 \epsilon^{-2})$                                  | $\checkmark$ | <d-cite key="bubeck2015convex"></d-cite>, Theorem 3.8                        |
-| NS $L$-Lip Ct $\mu$-SC     | $f(x^K) - f^\star$           | $\Omega (L^2 (\mu \epsilon)^{-1})$                            | $\checkmark$ | [<d-cite key="bubeck2015convex"></d-cite>, Theorem 3.8]                        |
-| $L$-Smooth Convex          | $\|\| \nabla f(x^K) \|\|$    | $\Omega \left( \sqrt{\Delta L \epsilon^{-1}} \right)$     | $\checkmark$ | [<d-cite key="carmon2021lower"></d-cite>, Theorem 1 & Appendix A.1]              |
-| $L$-Smooth NC              | $\|\| \nabla f(x^K) \|\|$    | $\Omega (\Delta L \epsilon^{-2})$                             | $\checkmark$ | [<d-cite key="carmon2020lower"></d-cite>, Theorem 1]      |
+| $L$-Smooth Convex          | Optimality gap           | $\Omega \left( \sqrt{L \epsilon^{-1}} \right)$                | $\checkmark$ | [<d-cite key="nesterov2018lectures"></d-cite>, Theorem 2.1.7; Theorem 2.2.2]       |
+| $L$-Smooth $\mu$-SC        | Optimality gap           | $\Omega \left( \sqrt{\kappa} \log \frac{1}{\epsilon} \right)$ | $\checkmark$ | [<d-cite key="nesterov2018lectures"></d-cite>, Theorem 2.1.13]                     |
+| NS $L$-Lip Ct Convex       | Optimality gap           | $\Omega (L^2 \epsilon^{-2})$                                  | $\checkmark$ | <d-cite key="bubeck2015convex"></d-cite>, Theorem 3.8                        |
+| NS $L$-Lip Ct $\mu$-SC     | Optimality gap           | $\Omega (L^2 (\mu \epsilon)^{-1})$                            | $\checkmark$ | [<d-cite key="bubeck2015convex"></d-cite>, Theorem 3.8]                        |
+| $L$-Smooth Convex          | Stationarity    | $\Omega \left( \sqrt{\Delta L \epsilon^{-1}} \right)$     | $\checkmark$ | [<d-cite key="carmon2021lower"></d-cite>, Theorem 1 & Appendix A.1]              |
+| $L$-Smooth NC              | Stationarity    | $\Omega (\Delta L \epsilon^{-2})$                             | $\checkmark$ | [<d-cite key="carmon2020lower"></d-cite>, Theorem 1]      |
 | NS $L$-Lip Ct $\rho$-WC    | Near-stationarity        | Unknown                                                       | $\mathcal{O}(\epsilon^{-4})$      | [<d-cite key="davis2018stochastic"></d-cite>, Theorem 2.1 implied]                  |
 
 **Remark:**
