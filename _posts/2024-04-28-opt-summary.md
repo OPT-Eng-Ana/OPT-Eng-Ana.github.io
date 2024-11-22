@@ -1,7 +1,7 @@
 ---
 layout: distill
-title: Be Careful When Claiming Theoretical Outperformance of Your Optimization Algorithms - Review and Beyond
-description: In this blog, we revisit the convergence analysis of first-order algorithms in minimization and minimax optimization problems. Within the classical oracle model framework, we review the state-of-the-art upper and lower bound results in the literature, categorizing various settings based on convexity, smoothness, and stochasticity, aiming to identify gaps in existing research. Then regarding the rapid development of applications in areas like machine learning and operation research, we review some recent works that revised the classical settings of optimization algorithms study inspired from practices, e.g., smoothness, silver stepsize, and heavy-tailedness.
+title: Think Twice Before Claiming Your Optimization Algorithm Outperformance - Review and Beyond
+description: In this blog, we revisit the convergence analysis of first-order algorithms in minimization and minimax optimization problems. Within the classical oracle model framework, we review the state-of-the-art upper and lower bound results in various settings, aiming to identify gaps in existing research. With the rapid development of applications like machine learning and operation research, we further identify some recent works that revised the classical settings of optimization algorithms study.
 tags: optimization
 giscus_comments: true
 date: 2024-04-28
@@ -84,6 +84,8 @@ Following the **function structure** of the objective, we will divide the discus
 also for minimax problems, the discussion will be more complicated based on the convexity of each component, we will specify the settings later.
 
 ### Literature
+
+
 content, papers, blogs, 
 
 ---
