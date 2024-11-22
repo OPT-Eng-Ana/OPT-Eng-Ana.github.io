@@ -108,6 +108,12 @@ $$
 
 - *Complexity measure* $\mathcal{M}$, e.g., optimality gap $f(x)-f(x^*)$ where $x^*$ is the global minimum, function stationarity $\|\nabla f(x)\|$. 
 
+{% include figure.liquid path="assets/img/2024-04-28-opt-summary/complexity_analysis.jpg" class="img-fluid" %}
+
+<div class="caption">
+    Oracle Complexity Framework (adapted from Prof. Yangyang Xu's Slides<d-cite key="xu2019slides"></d-cite>)
+</div>
+
 
 The efficiency of algorithms is quantified by the *oracle complexity*: for an algorithm $\mathtt{A}\in\mathcal{A}(\mathbb{O})$ interacting with an oracle $\mathbb{O}$, an instance $f\in\mathcal{F}$, and the corresponding measurement $\mathcal{M}$, we define
 
@@ -115,27 +121,39 @@ $$
 T_{\epsilon}(f,\mathtt{A})\triangleq\inf\left\{T\in\mathbb{N}~|~\mathcal{M}(x^T)\leq\epsilon\right\}
 $$
 
-as the minimum number of oracle calls $\mathcal{A}$ makes to reach convergence.
-
-So given a first-order algorithm, which means it applies function information no finer than first-order oracle, we can define its upper complexity bound (UB) when solving optimization problems under certian settings (i.e., given the function class $\mathcal{F}$) as  follows:
+as the minimum number of oracle calls $\mathcal{A}$ makes to reach convergence. So given an algorithm $\mathtt{A}$, its upper complexity bound for solving one specific function class $\mathcal{F}$ is defined as
 
 $$
-
+\mathrm{UB}_\epsilon(\mathcal{F};\mathtt{A})
+  \triangleq  
+	\underset{f\in\mathcal{F}}{\sup}\ 
+	T_{\epsilon}(f,\mathtt{A}),
 $$
 
-> **Definition (Upper Bound)**
+One of the mainstreams of optimization study is trying to design algorithms with better upper complexity bounds, corresponding to decreasing $\mathrm{UB}_\epsilon(\mathcal{F};\cdot)$ with their own algorihms.
+On the other hand, another stream of study focuses on the performance limit in terms of the worst-case complexity, i.e., the lower complexity bound (LB) of a class of algorithm under certain settings, which can be written as:
 
-> **Definition (Lower Bound)**
+$$
+\mathrm{LB}_\epsilon(\mathcal{F},\mathcal{A},\mathbb{O})
+  \triangleq
+	\underset{\mathtt{A}\in{\mathcal{A}(\mathbb{O})}}{\inf}\   
+	\underset{f\in\mathcal{F}}{\sup}\ 
+	T_{\epsilon}(f,\mathtt{A}),
+$$
 
-```markdown
-{% raw %}{% include figure.html path="assets/img/2025-04-28-distill-example/iclr.png" class="img-fluid" %}{% endraw %}
-```
-
-{% include figure.liquid path="assets/img/2024-04-28-opt-summary/complexity_analysis.jpg" class="img-fluid" %}
+{% include figure.liquid path="assets/img/2024-04-28-opt-summary/upper_lower.png" class="img-fluid" %}
 
 <div class="caption">
-    Oracle Complexity Framework (adapted from Prof. Yangyang Xu's Slides<d-cite key="xu2019slides"></d-cite>)
+    Illustration of Upper and Lower Complexity Bounds
 </div>
+
+As the figure below suggests, the optimization community keep facilitating the understanding of algorithm complexity from both upper and lower complexity directions.
+An ultimate goal in optimization algorithm complexity study is to find the *optimal algorithm* $\mathtt{A}^*$ in a given setting, which means its upper bound matches with the lower bound of the algorithm class under the function setting, 
+i.e.,
+
+$$
+\mathrm{UB}_\epsilon(\mathcal{F};\mathtt{A}^*)\asymp\mathrm{LB}_\epsilon(\mathcal{F},\mathcal{A},\mathbb{O}).
+$$
 
 ---
 
@@ -152,12 +170,6 @@ Also for **Minimax Problems**, based on the convexity combination of each compon
 2. SC-SC/SC-C/C-C finite-sum and stochastic minimax optimization
 3. NC-SC/NC-C deterministic minimax optimization
 4. NC-SC/NC-C finite-sum and stochastic minimax optimization
-
-{% include figure.liquid path="assets/img/2024-04-28-opt-summary/upper_lower.png" class="img-fluid" %}
-
-<div class="caption">
-    Illustration of Upper and Lower Complexity Bounds
-</div>
 
 ### Case 1-1: Deterministic Minimization
 
