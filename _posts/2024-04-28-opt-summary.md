@@ -172,9 +172,13 @@ For convenience, we summarize some of the notations commonly used in tables belo
 - SC / C / NC / WC: strongly convex, convex, nonconvex, weakly-convex.
 - FS: finite-sum.
 - $L$-S: $L$-Lipschitz smooth. $L$-IS / AS: $L$-Lipschitz individual / averaged smoothness.
+- PL: Polyak-Łojasiewicz Condition
 - Optimality gap: the function value gap $f(x) - f^\star$.
 - Stationarity: the function gradient norm $\|\| \nabla f(x) \|\|$.
 - Near-stationarity<d-cite key="davis2018stochastic"></d-cite>: the gradient norm $\|\| \nabla f_\lambda(x) \|\|$, where $f_\lambda$ is the Moreau envelope of the original function $f$.
+- Duality Gap:
+- Primal Stationarity:
+- FNE:
 
 ---
 
@@ -198,11 +202,12 @@ Also for **Minimax Problems**, based on the convexity combination of each compon
 |----------------------------|---------------------------|------------------------|-------------|--------------------------------|
 | $L$-Smooth Convex          | Optimality gap           | $\Omega \left( \sqrt{L \epsilon^{-1}} \right)$                | $\checkmark$ | [<d-cite key="nesterov2018lectures"></d-cite>, Theorem 2.1.7; Theorem 2.2.2]       |
 | $L$-Smooth $\mu$-SC        | Optimality gap           | $\Omega \left( \sqrt{\kappa} \log \frac{1}{\epsilon} \right)$ | $\checkmark$ | [<d-cite key="nesterov2018lectures"></d-cite>, Theorem 2.1.13]                     |
-| NS $L$-Lip Ct Convex       | Optimality gap           | $\Omega (L^2 \epsilon^{-2})$                                  | $\checkmark$ | <d-cite key="bubeck2015convex"></d-cite>, Theorem 3.8                        |
-| NS $L$-Lip Ct $\mu$-SC     | Optimality gap           | $\Omega (L^2 (\mu \epsilon)^{-1})$                            | $\checkmark$ | [<d-cite key="bubeck2015convex"></d-cite>, Theorem 3.8]                        |
+| NS $L$-Lip Cont. Convex       | Optimality gap           | $\Omega (L^2 \epsilon^{-2})$                                  | $\checkmark$ | <d-cite key="bubeck2015convex"></d-cite>, Theorem 3.8                        |
+| NS $L$-Lip Cont. $\mu$-SC     | Optimality gap           | $\Omega (L^2 (\mu \epsilon)^{-1})$                            | $\checkmark$ | [<d-cite key="bubeck2015convex"></d-cite>, Theorem 3.8]                        |
 | $L$-Smooth Convex          | Stationarity    | $\Omega \left( \sqrt{\Delta L \epsilon^{-1}} \right)$     | $\checkmark$ | [<d-cite key="carmon2021lower"></d-cite>, Theorem 1 & Appendix A.1]              |
 | $L$-Smooth NC              | Stationarity    | $\Omega (\Delta L \epsilon^{-2})$                             | $\checkmark$ | [<d-cite key="carmon2020lower"></d-cite>, Theorem 1]      |
-| NS $L$-Lip Ct $\rho$-WC    | Near-stationarity        | Unknown                                                       | $\mathcal{O}(\epsilon^{-4})$      | [<d-cite key="davis2018stochastic"></d-cite>, Theorem 2.1 implied]                  |
+| NS $L$-Lip Cont. $\rho$-WC    | Near-stationarity        | Unknown                                                       | $\mathcal{O}(\epsilon^{-4})$      | [<d-cite key="davis2018stochastic"></d-cite>, Theorem 2.1 implied]                  |
+| $\mu$-PL     | Near-stationarity        | Unknown                                                       | $\mathcal{O}(\epsilon^{-4})$      | [<d-cite key="davis2018stochastic"></d-cite>, Theorem 2.1 implied]                  |
 
 **Remark:**
 
@@ -259,13 +264,13 @@ Also for **Minimax Problems**, based on the convexity combination of each compon
 
 | Problem Type         | Measure | LB                                         | UB                            | Reference-LB      | Reference-UB                                   |
 |----------------------|---------|---------------------------------------------|-------------------------------|-------------------|------------------------------------------|
-| C-C, Fin-Sum         | Duality Gap | $\Omega(n + L / \epsilon)$                 | $\times$                      | [<d-cite key="xie2020lower"></d-cite>, Theorem 3, PIFO]     | [<d-cite key="yazdandoost2023stochastic"></d-cite>, Cor 2.1]  $\mathcal{O}(\sqrt{n}/\epsilon)$      |
+| C-C, FS         | Duality Gap | $\Omega(n + L / \epsilon)$                 | $\times$                      | [<d-cite key="xie2020lower"></d-cite>, Theorem 3, PIFO]     | [<d-cite key="yazdandoost2023stochastic"></d-cite>, Cor 2.1]  $\mathcal{O}(\sqrt{n}/\epsilon)$      |
 | C-C, Stoc, SS        | Duality Gap | $\Omega(\epsilon^{-2})$                    | $\checkmark$                  | (Stoc C SS min)                                             | [<d-cite key="juditsky2011solving"></d-cite>, Cor 1]      |
 | C-C, Stoc, NS        | Duality Gap | $\Omega(\epsilon^{-2})$                    | $\checkmark$                  | (Stoc C NS min)                                             | [<d-cite key="nemirovski2009robust"></d-cite>, Lemma 3.1]      |
-| SC-C, Fin-Sum        | Duality Gap | $\Omega\left(n + \sqrt{n L / \epsilon}\right)$ | $\checkmark$ ($\times$)   | (FS C min)                                                  | [<d-cite key="yang2020catalyst"></d-cite>, Sec 3.2] $\tilde{\mathcal{O}}(\sqrt{n L / \epsilon})$      |
+| SC-C, FS        | Duality Gap | $\Omega\left(n + \sqrt{n L / \epsilon}\right)$ | $\checkmark$ ($\times$)   | (FS C min)                                                  | [<d-cite key="yang2020catalyst"></d-cite>, Sec 3.2] $\tilde{\mathcal{O}}(\sqrt{n L / \epsilon})$      |
 | C-SC, FS bilinear    | Duality Gap | ?                                          | ?                             | ?                                                           | [<d-cite key="du2019linear"></d-cite>, Thm 4.1] $\mathcal{O}(n \log \frac{1}{\epsilon})$      |
 | C-SC, FS general     | Duality Gap | $\Omega(n + L / \sqrt{\mu_y \epsilon})$    | ?                             | [<d-cite key="xie2020lower"></d-cite>, Thm 2]               | (implies from SC-C?) |
-| SC-SC, Fin-Sum       | Duality Gap | $\Omega\left((n + \kappa) \log \frac{1}{\epsilon}\right)$ | $\checkmark$ ($\times$) | [<d-cite key="xie2020lower"></d-cite>, Thm 1]      | [<d-cite key="palaniappan2016stochastic"></d-cite>, Thm 1] $\mathcal{O}((n + \kappa) \log \frac{1}{\epsilon})$      |
+| SC-SC, FS       | Duality Gap | $\Omega\left((n + \kappa) \log \frac{1}{\epsilon}\right)$ | $\checkmark$ ($\times$) | [<d-cite key="xie2020lower"></d-cite>, Thm 1]      | [<d-cite key="palaniappan2016stochastic"></d-cite>, Thm 1] $\mathcal{O}((n + \kappa) \log \frac{1}{\epsilon})$      |
 | SC-SC, Stoc, SS      | Duality Gap | $\Omega(\epsilon^{-1})$                    | $\checkmark$                  | (Stoc SC SS min)                                            | [<d-cite key="hsieh2019convergence"></d-cite>, Thm 5, pt. dist.] $\mathcal{O}(\epsilon^{-1})$       |
 | SC-SC, Stoc, NS      | Duality Gap | $\Omega(\epsilon^{-1})$                    | $\checkmark$                  | (Stoc SC NS min)                                            | [<d-cite key="yan2020optimal"></d-cite>, Thm 1, in prob.] $\mathcal{O}(\epsilon^{-1})$       |
 |                      |         |                                             |                               |                                                             |
