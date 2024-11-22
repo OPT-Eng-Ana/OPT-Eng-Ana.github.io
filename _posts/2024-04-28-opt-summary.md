@@ -85,7 +85,7 @@ also for minimax problems, the discussion will be more complicated based on the 
 
 ### Literature
 
-This notes aims to review SOTA first-order optimization algorithms convergence results. In fact there already appeared several great works for comprehensive review of optimization algorithm from different perspectives. Besides many well-known textbook and course materials like the one from Stephen Boyd<d-cite key="boyd2024text"></d-cite><d-cite key="boyd2024video"></d-cite>, maybe one of the most impressive works is the blog post by Ruder<d-cite key="ruder2016overview"></d-cite>, which received more than 10k citations according to Google Scholar, this post reviewed algorithm design of gradient descent (GD), stochastic gradient descent (SGD) and their variants, especially those commonly used in machine learning community like AdaGrad<d-cite key="duchi2011adaptive"></d-cite> and Adam<d-cite key="kingma2014adam"></d-cite>. There are also several monographs which reviewed optimization algorithm in various settings, e.g., <d-cite key="bubeck2015convex"></d-cite>, <d-cite key="dvurechensky2021first"></d-cite> and <d-cite key="garrigos2023handbook"></d-cite>; the page by Ju Sun<d-cite key="sun2021list"></d-cite> was a popular repository tracking research effort on nonconvex optimization. The review by Sun<d-cite key="sun2019optimization"></d-cite> further specified the survey of optimization algorithm study in the context of deep learning. A recent survey<d-cite key="danilova2022recent"></d-cite> revisited algorithm design and complexity analysis specifically in nonconvex optimization, which is the most close one matching the desire of our blog post.
+This notes aims to review SOTA first-order optimization algorithms convergence results. In fact there already appeared several great works for comprehensive review of optimization algorithm from different perspectives. Besides many well-known textbook and course materials like the one from Stephen Boyd<d-cite key="boyd2024text"></d-cite><d-cite key="boyd2024video"></d-cite>, maybe one of the most impressive works is the blog post by Ruder<d-cite key="ruder2016overview"></d-cite>, which received more than 10k citations according to Google Scholar, this post reviewed algorithm design of gradient descent (GD), stochastic gradient descent (SGD) and their variants, especially those commonly used in machine learning community like AdaGrad<d-cite key="duchi2011adaptive"></d-cite> and Adam<d-cite key="kingma2014adam"></d-cite>. There are also several monographs which reviewed optimization algorithm in various settings, e.g., <d-cite key="bubeck2015convex"></d-cite>,  <d-cite key="sun2019survey"></d-cite>, <d-cite key="dvurechensky2021first"></d-cite> and <d-cite key="garrigos2023handbook"></d-cite>; the page by Ju Sun<d-cite key="sun2021list"></d-cite> was a popular repository tracking research effort on nonconvex optimization<d-footnote>Which unfortunately discontinued the update since 2022.</d-footnote>. The review by Sun<d-cite key="sun2019optimization"></d-cite> further specified the survey of optimization algorithm study in the context of deep learning. A recent survey by Danilova et al.,<d-cite key="danilova2022recent"></d-cite> revisited algorithm design and complexity analysis specifically in nonconvex optimization, which to some extent is the most close one matching the desire of our blog post.
 
 ---
 
@@ -171,9 +171,8 @@ For convenience, we summarize some of the notations commonly used in tables belo
 - Optimality gap: the function value gap $f(x) - f^\star$.
 - Stationarity: the function gradient norm $\|\| \nabla f(x) \|\|$.
 - Near-stationarity<d-cite key="davis2018stochastic"></d-cite>: the gradient norm $\|\| \nabla f_\lambda(x) \|\|$, where $f_\lambda$ is the Moreau envelope of the original function $f$.
-- Duality Gap:
-- Primal Stationarity:
-- FNE:
+- Duality Gap (for minimax optimization): the primal-dual gap of a given point $(x', y')$, defined as $\text{gap}_f(x', y')\triangleq \max_{y\in\mathcal{Y}}f(x',y)-\min_{x\in\mathcal{X}}f(x,y')$.
+- Primal Stationarity (for minimax optimization): the primal function gradient norm $\|\| \nabla \Phi(x) \|\|$ where $\Phi(x)\triangleq\max_{y\in\mathcal{Y}}f(x,y)$ is the primal function. It is different from the function stationarity in terms of the original objective function $f$.
 
 ---
 
@@ -283,10 +282,10 @@ Also for **Minimax Problems**, based on the convexity combination of each compon
 | NC-C, Deter        | Primal Stationarity | $\Omega(\Delta \mathcal{L} \epsilon^{-2})$  | $\times$                |         | [<d-cite key="lin2020near"></d-cite>, Cor A.8] $\mathcal{O}(\Delta L^2 \epsilon^{-3} \log^2 \frac{1}{\epsilon})$ |
 | WC-C, Deter        | Primal Stationarity | ?                                           | ?                       |         | [<d-cite key="boct2023alternating"></d-cite>, Thm 3.7] $\mathcal{O}(\epsilon^{-6})$ (single loop)        |
 | NC-PL, Deter       | Primal Stationarity | $\Omega(\sqrt{\kappa \Delta \mathcal{L} \epsilon^{-2}})$ | $\times$                   |         | [<d-cite key="yang2022faster"></d-cite>, Thm 3.1]         |
-| NC-SC, Deter       | FNE | $\Omega(\sqrt{\kappa \Delta \mathcal{L} \epsilon^{-2}})$ | $\times$                   |         | [<d-cite key="lin2020near"></d-cite><d-cite key="xu2023unified"></d-cite>, Thm 3.1] $\mathcal{O}(\epsilon^{-2})$       |
-| NC-C, Deter        | FNE | $\Omega(\Delta \mathcal{L} \epsilon^{-2})$  | $\times$                       |                   | [<d-cite key="lin2020near"></d-cite>, Cor 6.2] $\mathcal{O}(\sqrt{D \Delta \mathcal{L}^{1.5} \epsilon^{-2.5} \log^2 \frac{1}{\epsilon}})$ (NC S min) |
-| SC-NC, Deter       | FNE | $\Omega(\sqrt{\kappa} \log \frac{1}{\epsilon})$ | $\times$                   |                   | [<d-cite key="xu2023unified"></d-cite>, Cor 4.1] $\mathcal{O}(\epsilon^{-2})$ |
-| C-NC, Deter        | FNE | $\Omega(\sqrt{L/\epsilon})$                 | $\times$                       |                   | [<d-cite key="xu2023unified"></d-cite>, Cor 4.2] $\mathcal{O}(\epsilon^{-4})$ |
+| NC-SC, Deter       | Stationarity | $\Omega(\sqrt{\kappa \Delta \mathcal{L} \epsilon^{-2}})$ | $\times$                   |         | [<d-cite key="lin2020near"></d-cite><d-cite key="xu2023unified"></d-cite>, Thm 3.1] $\mathcal{O}(\epsilon^{-2})$       |
+| NC-C, Deter        | Stationarity | $\Omega(\Delta \mathcal{L} \epsilon^{-2})$  | $\times$                       |                   | [<d-cite key="lin2020near"></d-cite>, Cor 6.2] $\mathcal{O}(\sqrt{D \Delta \mathcal{L}^{1.5} \epsilon^{-2.5} \log^2 \frac{1}{\epsilon}})$ (NC S min) |
+| SC-NC, Deter       | Stationarity | $\Omega(\sqrt{\kappa} \log \frac{1}{\epsilon})$ | $\times$                   |                   | [<d-cite key="xu2023unified"></d-cite>, Cor 4.1] $\mathcal{O}(\epsilon^{-2})$ |
+| C-NC, Deter        | Stationarity | $\Omega(\sqrt{L/\epsilon})$                 | $\times$                       |                   | [<d-cite key="xu2023unified"></d-cite>, Cor 4.2] $\mathcal{O}(\epsilon^{-4})$ |
 
 **Remark:**
 
