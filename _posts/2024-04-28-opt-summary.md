@@ -85,9 +85,7 @@ also for minimax problems, the discussion will be more complicated based on the 
 
 ### Literature
 
-This notes aims to review SOTA first-order optimization algorithms convergence results. In fact there already appeared several great works for a comprehensive review on optimization algorithm from different perspectives. Maybe one of the most prodominant ones is the review by Ruder<d-cite key="ruder2016overview"></d-cite>, which received more than 10k citations according to Google Scholar. This work reviewed algorithm design of gradient descent (GD), stochastic gradient descent (SGD) and their variants, especially those commonly used in machine learning community like AdaGrad<d-cite key="duchi2011adaptive"></d-cite> and Adam<d-cite key="kingma2014adam"></d-cite>. 
-
-content, papers, blogs, 
+This notes aims to review SOTA first-order optimization algorithms convergence results. In fact there already appeared several great works for comprehensive review of optimization algorithm from different perspectives. Besides many well-known textbook and course materials like the one from Stephen Boyd<d-cite key="boyd2024text"></d-cite><d-cite key="boyd2024video"></d-cite>, maybe one of the most impressive works is the blog post by Ruder<d-cite key="ruder2016overview"></d-cite>, which received more than 10k citations according to Google Scholar, this post reviewed algorithm design of gradient descent (GD), stochastic gradient descent (SGD) and their variants, especially those commonly used in machine learning community like AdaGrad<d-cite key="duchi2011adaptive"></d-cite> and Adam<d-cite key="kingma2014adam"></d-cite>. Another noteworthy review by Sun<d-cite key="sun2019optimization"></d-cite> further the survey in the context of deep learning. 
 
 ---
 
