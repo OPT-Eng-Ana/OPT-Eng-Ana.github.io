@@ -52,23 +52,31 @@ $$
 $$
 
 Regarding the **problem structure**, we specifically consider *minimization* problems above and *minimax* optimization problems:
+
 $$
 \min_{x\in\mathcal{X}}\ \left[f(x)\triangleq \max_{y\in\mathcal{Y}}\ g(x,y)\right].
 $$
 
 Also based on the **stochasticity structure**, we divide our discussion into three cases:
+
 - Deterministic Optimization,
+
 $$
 \min_{x\in\mathcal{X}}\ f(x),
 $$
+
 - Finite-Sum Optimization
+
 $$
 \min_{x\in\mathcal{X}}\ f(x)\triangleq\frac{1}{n}\sum_{i=1}^n f_i(x),
 $$
+
 - (Purely) Stochastic Optimization
+
 $$
 \min_{x\in\mathcal{X}}\ f(x)\triangleq\mathbb{E}_{\xi\sim\mathcal{D}}[f(x;\xi)].
 $$
+
 A subtle while important difference between finite-sum and stochastic optimization problems lies in the ability to access to the whole function $f(x)$, so generally the classical SVRG algorithm<d-cite key="johnson2013accelerating"></d-cite> is unable to be applied in the purely stochastic case.
 
 Following the **convexity structure** of the objective function, we will divide the discussion into various cases, including strongly-convex, convex and nonconvex cases;
@@ -80,17 +88,17 @@ content, papers, blogs,
 ### Notations
 Besides the structure above, optimization algorithm convergence literature often require some other regularity conditions like 
 Lipschitz smooth, Lipschitz continuity, and unbiased gradient estimator with bounded variance. Here we assume readers are familiar with such conditions,
-interested readers may refer to a nice handbook <d-cite key="garrigos2023handbook"></d-cite> for the detailed definition.
+interested readers may refer to a nice handbook<d-cite key="garrigos2023handbook"></d-cite> for the detailed definition.
 
 ---
 
 ## Framework Oracle Model
 
+Now we formally recall the definition of complexity. Here we stick to the **oracle complexity model**
+
 > **Definition (Upper Bound)**
 
 > **Definition (Lower Bound)**
-
-content
 
 ```markdown
 {% raw %}{% include figure.html path="assets/img/2025-04-28-distill-example/iclr.png" class="img-fluid" %}{% endraw %}
