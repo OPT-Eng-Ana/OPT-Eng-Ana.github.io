@@ -85,7 +85,7 @@ also for minimax problems, the discussion will be more complicated based on the 
 
 ### Literature
 
-This notes aims to review SOTA first-order optimization algorithms convergence results. In 
+This notes aims to review SOTA first-order optimization algorithms convergence results. In fact there already appeared several great works for a comprehensive review on optimization algorithm from different perspectives. Maybe one of the most prodominant ones is the review by Ruder<d-cite key="ruder2016overview"></d-cite>, which received more than 10k citations according to Google Scholar. This work reviewed algorithm design of gradient descent (GD), stochastic gradient descent (SGD) and their variants, especially those commonly used in machine learning community like AdaGrad<d-cite key="duchi2011adaptive"></d-cite> and Adam<d-cite key="kingma2014adam"></d-cite>. 
 
 content, papers, blogs, 
 
@@ -168,7 +168,7 @@ For convenience, we summarize some of the notations commonly used in tables belo
 - FS: finite-sum.
 - Stoc: stochastic
 - $L$-S: $L$-Lipschitz smooth. 
-- $L$-IS<d-footnote>For clarification, $L$-IS means in finite-sum problems, each component function $f_i$ itself is $L$-smooth.</d-footnote> / AS: $L$-Lipschitz individual / averaged smoothness.
+- $L$-IS / AS<d-footnote>For clarification, $L$-IS means in finite-sum problems, each component function $f_i$ itself is $L$-smooth, for the definition of $L$-AS, please refer to the definition of "mean-squared smoothness" in <d-cite key="arjevani2023lower"></d-cite>.</d-footnote>: $L$-Lipschitz individual / averaged smoothness.
 - PL: Polyak-Łojasiewicz Condition
 - Optimality gap: the function value gap $f(x) - f^\star$.
 - Stationarity: the function gradient norm $\|\| \nabla f(x) \|\|$.
