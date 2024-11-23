@@ -35,19 +35,18 @@ bibliography: 2024-04-28-opt-summary.bib
 #     for hyperlinks within the post to work correctly.
 toc:
   - name: Introduction
-  - name: Notations and Terminology
-  - name: Framework Oracle Model
+  - name: Framework
+  - name: Notations
   - name: Summary of Results
-  - name: To Have a Better Bound
+  - name: What's next?
   - name: Conclusion
-  - 
 ---
 
 ## Introduction
 
 In this blog, we review the convergence rate of (stochastic) first-order methods in optimization. 
 
-Regarding the **problem structure**, we specifically consider *minimization* problems above and *minimax* optimization problems of the following forms.
+Regarding the **problem structure**, we specifically consider *minimization* problems  and *minimax* optimization problems of the following forms.
 
 $$
 \min_{x\in\mathcal{X}}\ f(x).
@@ -174,7 +173,8 @@ For convenience, we summarize some of the notations commonly used in tables belo
 - Stationarity: the function gradient norm $\|\| \nabla f(x) \|\|$.
 - NWhat is next?e key="davis2018stochastic"></d-cite>: the gradient norm $\|\| \nabla f_\lambda(x) \|\|$, where $f_\lambda$ is the Moreau envelope of the original function $f$.
 - Duality Gap (for minimax optimization): the primal-dual gap of a given point $(x', y')$, defined as $\mathrm{gap}_f(x', y')\triangleq \max_{y\in\mathcal{Y}}f(x',y)-\min_{x\in\mathcal{X}}f(x,y')$.
-. In fact,.In addition, and trickythe practical s- Primal Stationarity (for minimax optimization): the primal function gradient norm $\|\| \nabla \Phi(x) \|\|$ where $\Phi(x)\triangleq\max_{y\in\mathcal{Y}}f(x,y)$ is the primal function. It is different from the function stationarity in terms of the original objective function $f$.
+
+- Primal Stationarity (for minimax optimization): the primal function gradient norm $\|\| \nabla \Phi(x) \|\|$, where $\Phi(x)\triangleq\max_{y\in\mathcal{Y}}f(x,y)$ is the primal function. It is different from the function stationarity in terms of the original objective function $f$.
 
 ---
 
@@ -331,6 +331,7 @@ $$
 $$
 \min_{x\in\mathcal{X}}\sup_{\mathcal{D}\in U_r(Q)} \triangleq\mathbb{E}_{\xi\sim \mathcal{D}}[f(x;\xi)],
 $$
+
 where $U_r(Q)$ refers to an uncertainty set that contains a family of distributions around a nominal distribution $Q$ measured by some distance between probability distribution of radious $r$.
 
 ### Landscape Analysis
@@ -345,11 +346,9 @@ where $U_r(Q)$ refers to an uncertainty set that contains a family of distributi
     Another noteworthy work is <d-cite key="zhang2020adaptive"></d-cite>, which verified the ubiquity of *heavy-tailed noise* in stochastic gradients in neural network training practices, such evidence drove them to revise SGD and incorporate strategies like clipping in the algorithm design, which also outperformed in numerical experiments. The above two works, along with their more practical assumptions, inspired many follow-up works, evidented by their high citations according to Google Scholar<d-cite key="zhang2019citation"></d-cite><d-cite key="zhang2020citation"></d-cite>.
 
 ### Unified Lower Bounds
-For lower bounds, we adapt the so-called optimization-based lower bounds proved via zero-chain techniques <d-cite key="nesterov2013introductory"></d-cite>. The narrative of such lower bounds admits the following form: For any given accuracy $\epsilon>0$, there exists a hard instance $f:\mathbb{R}^{d_\epsilon}\rightarrow\mathbb{R}$ in the function class $\mathcal{F}$, where the dimension $d_\epsilon$ depends on the accuracy $\epsilon>0$, such that it takes at least $\mathrm{poly}(\epsilon^{-1})$ number of oracles to find an $\epsilon$-optimal solution or $\epsilon$-stationary point. Note that the dimension $d_\epsilon$ depends on the accuracy, particularly $d_\epsilon$ increases as $\epsilon$ decreases. Note that such a lower bound does not hold for a function class with a given dimension $d$, which is independent of the accuracy. In other words, for a $d$-dimension function classes and a given accuracy $\epsilon>0$, the upper bounds on the complexity of first-order methods given in the tables still hold, yet the lower bounds do not, which could lead to a mismatch between upper and lower bounds. This leads to a fundamental question: how to prove lower bounds of first-order methods for any given $d$-dimensional function classes. 
+For lower bounds, we adapt the so-called optimization-based lower bounds proved via zero-chain techniques <d-cite key="nesterov2013introductory"></d-cite>. The narrative of such lower bounds admits the following form: For any given accuracy $\epsilon>0$, there exists a hard instance $f:\mathbb{R}^{d_\epsilon}\rightarrow\mathbb{R}$ in the function class $\mathcal{F}$, where the dimension $d_\epsilon$ depends on the accuracy $\epsilon>0$, such that it takes at least $\mathrm{poly}(\epsilon^{-1})$ number of oracles to find an $\epsilon$-optimal solution or $\epsilon$-stationary point. Note that the dimension $d_\epsilon$ depends on the accuracy, particularly $d_\epsilon$ increases as $\epsilon$ decreases. For a function class with a given dimension $d$, which is independent of the accuracy, the dependence on $\epsilon$ becomes loose especially when $d$ is small. In other words, for a $d$-dimension function classes and a given accuracy $\epsilon>0$, the upper bounds on the complexity of first-order methods given in the tables still hold, yet the lower bounds becomes loose, which could lead to a mismatch between upper and lower bounds. This leads to a fundamental question: how to prove lower bounds of first-order methods for any given $d$-dimensional function classes. 
 
-Such a question has been partially addressed for stochastic optimization using the statistical and information theoretic-based lower bounds. For instance, for stochastic convex optimization, \citep{agarwal2009information} shows that  for any given $d$-dimensional Lipschitz continuous convex function class and any $\epsilon>0$, it takes at least $\mathcal{O}(\sqrt{d} \epsilon^{-2})$ number of gradient oracles to find an $\epsilon$-optimal solution. Such information-theoretic lower bounds admits explicit dependence on the problem dimension. In addition, even ignoring dimension dependence, the dependence on the accuracy matches the upper bounds of stochastic gradient descent.  Thus such a lower bound addresses the aforementioned question for stochastic convex optimization. Yet, it raises another interesting observation, i.e., the obtained lower bounds  $\mathcal{O}(d\epsilon^{-2})$~\citep{agarwal2009information} is larger than the upper bounds $\mathcal{O}(\epsilon^{-2})$~\citep{nemirovski2009robust}. This is of course not a conflict as the two papers make different assumptions. Yet, it would be interesting to ask, if first-order methods such as mirror descent are really dimension independent or is it the case that existing optimization literature is treating some dimension dependent parameters as dimension independent ones. 
-
-To summarize, there needs a more precise characterization of lower bounds for given $d$-dimensional function classes and there requires a better understanding on the dimension dependence in the upper bounds of first-order methods. 
+Such a question has been partially addressed for stochastic optimization using information theoretic-based lower bounds <d-cite key="agarwal2009information"></d-cite> and for deterministic one-dimensional optimization <d-cite key="chewi2023complexity"></d-cite>. For stochastic convex optimization, <d-cite key="agarwal2009information"></d-cite> shows that  for any given $d$-dimensional Lipschitz continuous convex function class and any $\epsilon>0$, it takes at least $\mathcal{O}(\sqrt{d} \epsilon^{-2})$ number of gradient oracles to find an $\epsilon$-optimal solution. Such information-theoretic lower bounds admits explicit dependence on the problem dimension. In addition, even ignoring dimension dependence, the dependence on the accuracy matches the upper bounds of stochastic gradient descent.  Thus such a lower bound addresses the aforementioned question for stochastic convex optimization. Yet, it raises another interesting observation, i.e., the obtained lower bounds  $\mathcal{O}(d\epsilon^{-2})$ <d-cite key="agarwal2009information"></d-cite> is larger than the upper bounds $\mathcal{O}(\epsilon^{-2})$<d-cite key="nemirovski2009robust"></d-cite>. This is of course not a conflict as the two papers make different assumptions. Yet, it would be interesting to ask, if first-order methods such as mirror descent are really dimension independent or some parameters could be dimension dependent. 
   
 
 ### Beyond Classical Oracle Model
@@ -371,4 +370,4 @@ To summarize, there needs a more precise characterization of lower bounds for gi
 
 ## Conclusion
 
-In this post, we review the SOTA complexity upper and lower bounds of first-order algorithms in optimization tailored for minimization and minimax regimes with various settings, the summary identified gaps in existing research, which shed light on the open questions in regarding accelerated algorithm design and performance limit investigation. Also regarding the rapid development and interdisciplinary applications in areas like machine learning and operation research, we revisited several recent works which go beyond the classical research flow in optimization community, which advocates a paradigm shift in research: besides an elegant and unified theory trying to cover all cases, sometimes we should also try to avoid the "Maslow's hammer", focus on the detailed applications first, identify their unique structure, and correspondently design algorithms tailored for these problems, which in turn will benefit the practice. Although the scope may be narrower in general, we believe such instance-driven pattern may largely help us to devise theory fitting the practice better.
+In this post, we review the SOTA complexity upper and lower bounds of first-order algorithms in optimization tailored for minimization and minimax regimes with various settings, the summary identified gaps in existing research, which shed light on the open questions in regarding accelerated algorithm design and performance limit investigation. Regarding the rapid development and interdisciplinary applications in areas like machine learning and operation research, we revisited several recent works which go beyond the classical research flow in optimization community, which advocates a paradigm shift in research: besides an elegant and unified theory trying to cover all cases, sometimes we should also try to avoid the "Maslow's hammer", focus on the detailed applications first, identify their unique structure, and correspondently design algorithms tailored for these problems, which in turn will benefit the practice. Such instance-driven pattern may largely help us to devise theory that fits the practice better. Given the extensive body of literature in this field, there is a possibility that some relevant references may have been inadvertently overlooked. We welcome any comments or questions and are happy to discuss.
