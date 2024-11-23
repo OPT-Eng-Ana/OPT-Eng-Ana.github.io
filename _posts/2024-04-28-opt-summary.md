@@ -313,7 +313,7 @@ Also for **Minimax Problems**, based on the convexity combination of each compon
 
 ---
 
-## To Have a Better Bound (New Trends)
+## To Have a Better Bound
 The section above summarize the upper and lower bounds of the oracle complexity for finding an $\epsilon$-optimal solution or $\epsilon$-stationary points for minimization and minimax problems. Clearly this is not the end of the story, there are more and more optimization problems arising from various applications like machine learning and operation research<d-cite key="bottou2018optimization"></d-cite>, which come with more involved problem structure and complicated landscape characteristics; also sometimes we find it harder to explain algorithm behavior in practice using existing theory, e.g., <d-cite key="defazio2019ineffectiveness"></d-cite> shows that variance reduction may be ineffective on accelerating the training of deep learning models, which contrast the classical convergence theory. Here we discuss what could be potential interesting next steps. 
 
 ### Richer Problem Structure
@@ -337,7 +337,7 @@ Also there appeared several other optimization problems with different formulati
 * Compositional Stochastic Optimization<d-cite key="wang2017stochastic"></d-cite>
 
 $$
-\min_{x \in \mathcal{X}} F(x) = f(g(x)),
+\min_{x \in \mathcal{X}} F(x) =\mathbb{E}_{\xi}\left[f\left(\mathbb{E}_{\eta}\left[g(x;\eta)\right];\xi\right)\right],
 $$
 
 * Performative Prediction (or Decision-Dependent Stochastic Optimization)<d-cite key="perdomo2020performative"></d-cite><d-cite key="drusvyatskiy2023stochastic"></d-cite>
@@ -364,7 +364,7 @@ $$
   - Another stream considers *Polyak-Łojasiewicz* (PL) or *Kurdyka-Łojasiewicz* (KL) type of conditions [Reference]. Such conditions imply that the (generalized) gradient norm could upper bound the optimality gap, implying that any (generalized) stationary point are also global optimal. However, establishing hidden convexity, PL, or KL condition is usually done in a case-by-case manner and could be challenging. See [Reference] for some examples.
 
 ### Beyond oracle model
-  Also regarding the oracle complexity model, because it mainly focuses on hard instances in the function class which may be far from practical instances, possibly the derived complexities may be a bit too conservative and they may not match the practice well, as the figure below illustrated.
+  Also regarding the oracle complexity model, because it mainly focuses on hard instances in the function class which may be far from practical instances, possibly the derived complexities may be such conservative and vacuous that they may not match the practice well, as the figure below illustrated.
 
   {% include figure.liquid path="assets/img/2024-04-28-opt-summary/practice_gap.png" class="img-fluid" %}
 
@@ -372,13 +372,15 @@ $$
       Gap Between General Worst-Case Complexity and Instance-Level Complexity Analysis (adapted from <d-cite key="zhang2022beyond"></d-cite>)
   </div>
 
+  Here we introduce some recent efforts which go beyond the classical oracle model on evaluating the optimization algorithm efficiency.
+
   * Average complexity
   * Time complexity
-  * large stepsize
+  * Large stepsize
   * Communication complexity
 
 ---
 
 ## Conclusion
 
-content
+In this post, we review the SOTA complexity upper and lower bounds of first-order algorithms in optimization tailored for minimization and minimax regimes with various settings, the summary identified gaps in existing research, which shed light on the open questions in regarding accelerated algorithm design and performance limit investigation. Also regarding the rapid development and interdisciplinary applications in areas like machine learning and operation research, we revisited several recent works which go beyond the classical research flow in optimization community, which advocates a paradigm shift in research: besides an elegantly unified theory trying to cover all cases, we should also try to avoid the "Maslow's hammer", we need to focus on the detailed applications, identify their unique structure, and correspondently design algorithms tailored for these problems, such pattern may largely help us to devise theory fitting the practice better.
