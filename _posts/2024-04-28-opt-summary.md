@@ -353,26 +353,27 @@ In this notes, we only discussed minimization and minimax problems, while there 
 
 * Landscape Analysis
   
-  Since most deep learning problems are nonconvex, a vast amount of literature focus on finding a (generalized) stationary point of the original optimization problem, but the practice often showed that one could find global optimality for various structured nonconvex problems efficiently<d-cite key="sun2020global"></d-cite>. One possible reason may be the coarse assumptions we applied in the theoretical analysis which cannot effectively characterize the landscape of objectives; also regarding the oracle complexity model, because it mainly focuses on hard instances in the function class which may be far from practical instances, possibly the derived complexities may be a bit too conservative and they may not match the practice well, as the figure below illustrated.
+  Since most deep learning problems are nonconvex, a vast amount of literature focus on finding a (generalized) stationary point of the original optimization problem, but the practice often showed that one could find global optimality for various structured nonconvex problems efficiently<d-cite key="sun2020global"></d-cite>. One possible reason may be the coarse assumptions we applied in the theoretical analysis which cannot effectively characterize the landscape of objectives. Here we briefly summarize a few structures arising in recent works, which try to mix the gap between practice and theory:
+
+  1. With numerical experiments disclosing uncommon structure in functions, some works proposed new assumptions which drive the algorithm design and corresponding theoretical analysis, which in turn reveals acceleration in empirical findings. For example, <d-cite key="zhang2019gradient"></d-cite> introduced the *relaxed smoothness assumption* (or $(L_0, L_1)$-smoothness) inspired by empirical observations on deep neural networks, and proposed a clipping-based first-order algorithm which enjoys both theoretical and practical outperformance
+  2. Another noteworthy work is <d-cite key="zhang2020adaptive"></d-cite>, which found *heavy-tailed noise* in stochastic gradients in neural network training practices, such evidence drove them to revise SGD and incorporate strategies like clipping in the algorithm design, which also outperformed in numerical experiments. The above two works, along with their more practical assumptions, inspired many follow-up works, evidented by their high citations according to Google Scholar.
+  3. *Hidden convexity* says that the original nonconvex optimization problem might admit a convex reformulation via a variable change. It appears in operations research [Reference], reinforcement learning [reference], control [reference]. Despite that the concrete transformation function is unknown, one could still solve the problem to global optimality efficiently. 
+  4. The other stream considers *Polyak-Łojasiewicz* (PL) or *Kurdyka-Łojasiewicz* (KL) type of conditions [Reference]. Such conditions imply that the (generalized) gradient norm could upper bound the optimality gap, implying that any (generalized) stationary point are also global optimal. However, establishing hidden convexity, PL, or KL condition is usually done in a case-by-case manner and could be challenging. See [Reference] for some examples.
+  5. In overparameterized neural networks, 
+
+- large stepsize
+
+(Random matrix)
+
+* Beyond oracle model
+  also regarding the oracle complexity model, because it mainly focuses on hard instances in the function class which may be far from practical instances, possibly the derived complexities may be a bit too conservative and they may not match the practice well, as the figure below illustrated.
 
   {% include figure.liquid path="assets/img/2024-04-28-opt-summary/practice_gap.png" class="img-fluid" %}
 
   <div class="caption">
       Gap Between General Worst-Case Complexity and Instance-Level Complexity Analysis (adapted from <d-cite key="zhang2022beyond"></d-cite>)
   </div>
-  
-  Here we briefly summarize a few structures arising in recent works, which try to mix the gap between practice and theory:
-  1. With numerical experiments disclosing uncommon structure in functions, some works proposed new assumptions which drive the algorithm design and corresponding theoretical analysis, which in turn reveals acceleration in empirical findings. For example, <d-cite key="zhang2019gradient"></d-cite> introduced the *relaxed smoothness assumption* (or $(L_0, L_1)$-smoothness) inspired by empirical observations on deep neural networks, and proposed a clipping-based first-order algorithm which enjoys both theoretical and practical outperformance
-  2. Another noteworthy work is <d-cite key="zhang2020adaptive"></d-cite>, which found *heavy-tailed noise* in stochastic gradients in neural network training practices, such evidence drove them to revise SGD and incorporate strategies like clipping in the algorithm design, which also outperformed in numerical experiments. The above two works, along with their more practical assumptions, inspired many follow-up works, evidented by their high citations according to Google Scholar.
-  3. *Hidden convexity* says that the original nonconvex optimization problem might admit a convex reformulation via a variable change. It appears in operations research [Reference], reinforcement learning [reference], control [reference]. Despite that the concrete transformation function is unknown, one could still solve the problem to global optimality efficiently. 
-  4. The other stream considers *Polyak-Łojasiewicz* (PL) or *Kurdyka-Łojasiewicz* (KL) type of conditions [Reference]. Such conditions imply that the (generalized) gradient norm could upper bound the optimality gap, implying that any (generalized) stationary point are also global optimal. However, establishing hidden convexity, PL, or KL condition is usually done in a case-by-case manner and could be challenging. See [Reference] for some examples.
-
-- large stepsize
-
-(Random matrix)
-
-- Interpolation condition in over-parametrized NN
-* Beyond oracle model
+  * Average complexity
   * Time complexity
   * Communication complexity
 
