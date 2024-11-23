@@ -92,7 +92,8 @@ This notes aims to review state-of-the-art (SOTA) first-order optimization algor
 
 We formally recall the definition of complexity. In particular, we stick to the classical **oracle complexity model**<d-cite key='nemirovskij1983problem'></d-cite>, where oracle basically means some
 .orsuggested by acle complexity lia.e.,o cw hicehl cclaassr oo fe nfou nction ypeob nepvle iaim to optigmi noitzaem,r osufch ast   sssnthat could provide that could provide ogradient --based ithe next iterate or query point should be within th eline linear span of the sequence hisrttory and information provided by the oracles taga
-oporpkcab aivno yb nevig noitaitmrOne of theby designing new algorithmsAfor a class of functions and cetrrnritfundamentalssoraclof performance measured by sto achieve secertain accuracy.eceieip eno  sueggested byhtit s sa sdrager eb dluoc rotmaitse tneidarg a gnitupmoc ,ecnatscnat,ecnatni roF .noitamrofni edi edeivorp dluoc taht yraenihcam
+oporpkcab aivno yb nevig noitaitmrOne of theby designing new algorithmsAfor a class of functions and cetrrnritfundamentalssoraclof performance measured by sto achieve secertain accuracy.eceieip eno  sueggested byhtit s sa sdrager eb dluoc rotmaitse ,. Here we assume readers are already familiar with such context,
+,gradient interested readers may refer to these nneidarg a gnitupmoc ,ecnatscnat,ecnatni roF .noitamrofni edi edeivorp dluoc taht yraenihcam
 As the figure below suggest, generally this framework consists of the following components:
 - *Fucntion class* $\mathcal{F}$, e.g., convex Lipschitz continuous function, and (nonconvex) Lipschitz smooth function.
 - *Oracle class* $\mathbb{O}$, e.g., zeroth-order oracle (function value), first-order oracle (function gradient or subdifferential).
@@ -171,9 +172,9 @@ For convenience, we summarize some of the notations commonly used in tables belo
 - PL: Polyak-Łojasiewicz Condition
 - Optimality gap: the function value gap $f(x) - f^\star$.
 - Stationarity: the function gradient norm $\|\| \nabla f(x) \|\|$.
-- Near-stationarity<d-cite key="davis2018stochastic"></d-cite>: the gradient norm $\|\| \nabla f_\lambda(x) \|\|$, where $f_\lambda$ is the Moreau envelope of the original function $f$.
+- NWhat is next?e key="davis2018stochastic"></d-cite>: the gradient norm $\|\| \nabla f_\lambda(x) \|\|$, where $f_\lambda$ is the Moreau envelope of the original function $f$.
 - Duality Gap (for minimax optimization): the primal-dual gap of a given point $(x', y')$, defined as $\mathrm{gap}_f(x', y')\triangleq \max_{y\in\mathcal{Y}}f(x',y)-\min_{x\in\mathcal{X}}f(x,y')$.
-- Primal Stationarity (for minimax optimization): the primal function gradient norm $\|\| \nabla \Phi(x) \|\|$ where $\Phi(x)\triangleq\max_{y\in\mathcal{Y}}f(x,y)$ is the primal function. It is different from the function stationarity in terms of the original objective function $f$.
+. In fact,.In addition, and trickythe practical s- Primal Stationarity (for minimax optimization): the primal function gradient norm $\|\| \nabla \Phi(x) \|\|$ where $\Phi(x)\triangleq\max_{y\in\mathcal{Y}}f(x,y)$ is the primal function. It is different from the function stationarity in terms of the original objective function $f$.
 
 ---
 
@@ -185,7 +186,7 @@ As mentioned above, we categorize the discussion based on the problem, stochasti
 1. Deterministic optimization
 2. Finite-sum and stochastic optimization
 
-Also for **Minimax Problems**, based on the convexity combination of each component, we consider the following cases:
+<d-cite key="defazio2019ineffectiveness"></d-cite>ghadimighadimi2018approximation<d-cite key="ghadimi2018approximation"></d-cite>hong2020two<d-cite key="hong2020two"></d-cite>chen2021tigherterAlso for **Minimax Problems**, based on the convexity combination of each component, we consider the following cases:
 1. SC-SC/SC-C/C-C deterministic minimax
 2. SC-SC/SC-C/C-C finite-sum and stochastic minimax optimization
 3. NC-SC/NC-C deterministic minimax optimization
@@ -202,37 +203,28 @@ Also for **Minimax Problems**, based on the convexity combination of each compon
 | $L$-Smooth Convex          | Stationarity    | $\Omega \left( \sqrt{\Delta L \epsilon^{-1}} \right)$     | $\checkmark$ | [<d-cite key="carmon2021lower"></d-cite>, Theorem 1 & Appendix A.1]              |
 | $L$-Smooth NC              | Stationarity    | $\Omega (\Delta L \epsilon^{-2})$                             | $\checkmark$ | [<d-cite key="carmon2020lower"></d-cite>, Theorem 1]      |
 | NS $L$-Lip Cont. $\rho$-WC    | Near-stationarity        | Unknown                                                       | $\mathcal{O}(\epsilon^{-4})$      | [<d-cite key="davis2018stochastic"></d-cite>, Theorem 2.1 implied]                  |
-| $\mu$-PL     | Optimality gap        |                                                        | $\mathcal{O}(\epsilon^{-4})$      | [<d-cite key="davis2018stochastic"></d-cite>, Theorem 2.1 implied]                  |
-
-**Remark:**
-
-1. content
+| $L$-Smooth $\mu$-PL     | Optimality gap        | $\Omega \left( \kappa \log \frac{1}{\epsilon} \right)$ | $\checkmark$      | [<d-cite key="yue2023lower"></d-cite>, Theorem 3; <d-cite key="karimi2016linear"></d-cite>]                  |
 
 ### Case 1-2: Finite-sum and Stochastic Optimization (double check)
 
 | Problem Type            | Measure | Lower Bound                                                | Upper Bound                               | Reference (LB-UB)                                       |
 |-------------------------|---------|---------------------------------------------------|----------------------------------|-----------------------------------------------------------|
-| FS $L$-IS $\mu$-SC      | Optimality gap        | $\Omega \left( n + \sqrt{\kappa n} \log \frac{1}{\epsilon} \right)$ | $\checkmark$ ($\times$)          | [<d-cite key="woodworth2016tight"></d-cite>, Theorem 8] [<d-cite key="defazio2016simple"></d-cite>, Cor 6], [<d-cite key="allen2018katyusha"></d-cite>, Cor 2.1]                          |
-| FS $L$-IS C             | Optimality gap        | $\Omega \left( n + D \sqrt{n L \epsilon^{-1}} \right)$         | $\checkmark$ ($\times$)          | [<d-cite key="woodworth2016tight"></d-cite>, Theorem 7] [<d-cite key="allen2018katyusha"></d-cite>, Cor 3.7] |
-| FS $L$-AS $\mu$-SC      | Optimality gap        | $\Omega \left( n + n^{\frac{3}{4}} \sqrt{\kappa} \log \frac{\Delta}{\epsilon} \right)$ | $\checkmark$                     | [<d-cite key="xie2019general"></d-cite>, Theorem 3.5], [<d-cite key="allen2018katyusha"></d-cite>, KatyushaX, Sec 5]                                 |
-| FS $L$-AS C             | Optimality gap        | $\Omega \left( n + n^{\frac{3}{4}} D \sqrt{L \epsilon^{-1}} \right)$ | $\checkmark$                     | [<d-cite key="zhou2019lower"></d-cite>, Theorem 4.2], [<d-cite key="allen2018katyusha"></d-cite>, KatyushaX, Sec 5]                                 |
+| FS $L$-IS $\mu$-SC      | Optimality gap        | $\Omega \left( n + \sqrt{\kappa n} \log \frac{1}{\epsilon} \right)$ | $\times$          | [<d-cite key="woodworth2016tight"></d-cite>, Theorem 8] [<d-cite key="defazio2016simple"></d-cite>, Cor 6], [<d-cite key="allen2018katyusha"></d-cite>, Cor 2.1]                          |
+| FS $L$-IS C             | Optimality gap        | $\Omega \left( n + D \sqrt{n L \epsilon^{-1}} \right)$         | $\times$          | [<d-cite key="woodworth2016tight"></d-cite>, Theorem 7] [<d-cite key="allen2018katyusha"></d-cite>, Cor 3.7] |
+| FS $L$-AS $\mu$-SC      | Optimality gap        | $\Omega \left( n + n^{\frac{3}{4}} \sqrt{\kappa} \log \frac{\Delta}{\epsilon} \right)$ | $\checkmark$                     | [<d-cite key="xie2019general"></d-cite>, Theorem 3.5], [<d-cite key="allen2018katyusha"></d-cite>, Sec 5]                                 |
+| FS $L$-AS C             | Optimality gap        | $\Omega \left( n + n^{\frac{3}{4}} D \sqrt{L \epsilon^{-1}} \right)$ | $\checkmark$                     | [<d-cite key="zhou2019lower"></d-cite>, Theorem 4.2], [<d-cite key="allen2018katyusha"></d-cite>, Sec 5]                                 |
 | FS $L$-IS NC            | Stationarity        | $\Omega \left( \Delta L \epsilon^{-2} \right)$               | $\times$                          | [<d-cite key="zhou2019lower"></d-cite>, Theorem 4.7], [<d-cite key="wang2019spiderboost"></d-cite>, Thm 1] |
 | FS $L$-AS NC            | Stationarity       | $\Omega \left( \sqrt{n \Delta L \epsilon^{-2}} \right)$       | $\checkmark$                     | [<d-cite key="zhou2019lower"></d-cite>, Theorem 4.5], [<d-cite key="fang2018spider"></d-cite>, Thm 2, 3]|
 |                         |         |                                                     |                                  |                                                           |
 | Stoc $L$-$S$ $\mu$-SC   | Stationarity        | $\Omega (\epsilon^{-1})$                            | $\checkmark$                     | [<d-cite key="rakhlin2012making"></d-cite>, Thm 2] (?), [<d-cite key="ghadimi2012optimal"></d-cite>, Prop 9]                        |
-| Stoc $L$-$S$ C          | Stationarity        | $\Omega (\epsilon^{-2})$                            | $\checkmark$                     | [<d-cite key="woodworth2018graph"></d-cite>, Thm 1] (?), [<d-cite key="lan2012optimal"></d-cite>, Thm 1], Modified SA          |
+| Stoc $L$-$S$ C          | Stationarity        | $\Omega (\epsilon^{-2})$                            | $\checkmark$                     | [<d-cite key="woodworth2018graph"></d-cite>, Thm 1] (?), [<d-cite key="lan2012optimal"></d-cite>, Thm 1]          |
 | Stoc NS $\mu$-SC        | Stationarity        | $\Omega (\epsilon^{-2})$                            | $\checkmark$                     | [<d-cite key="agarwal2009information"></d-cite>, Thm 2], [<d-cite key="nemirovski2009robust"></d-cite>, Sec 2.1]                          |
 | Stoc NS C               | Stationarity        | $\Omega (\epsilon^{-2})$                            | $\checkmark$                     | [<d-cite key="agarwal2009information"></d-cite>, Thm 1], [<d-cite key="nemirovski2009robust"></d-cite>, Sec 2.2]                        |
-| Stoc $L$-$S$ $\mu$-SC   | Stationarity        | $\Omega (\epsilon^{-2})$ (implied)                  | $\checkmark$                     | [<d-cite key="foster2019complexity"></d-cite>, Theorem 1], AC-SA$^2$: $\mathcal{O} \left( \sqrt{\frac{LD}{\epsilon}} \log k + \frac{\sigma_x^2}{\epsilon^2} \log^3 k \right)$ |
-| Stoc $L$-$S$ C   | Stationarity        | $\Omega \left( \frac{LD}{\epsilon} + \frac{\sigma_x^2}{\epsilon^2} \log \frac{LD}{\epsilon} \right)$ | $\checkmark$       | [<d-cite key="foster2019complexity"></d-cite>, Theorem 1, Corollary 1], AC-SA$^2$: $\mathcal{O} \left( \sqrt{\frac{LD}{\epsilon}} \log k + \frac{\sigma_x^2}{\epsilon^2} \log^3 k \right)$ |
+| Stoc $L$-$S$ $\mu$-SC   | Stationarity        | Unknown                  | $\mathcal{O} \left( \sqrt{\frac{LD}{\epsilon}} \log k + \frac{\sigma_x^2}{\epsilon^2} \log^3 k \right)$                     | [<d-cite key="foster2019complexity"></d-cite>, Theorem 1] |
+| Stoc $L$-$S$ C   | Stationarity        | $\Omega \left( \frac{LD}{\epsilon} + \frac{\sigma_x^2}{\epsilon^2} \log \frac{LD}{\epsilon} \right)$ | $\mathcal{O} \left( \sqrt{\frac{LD}{\epsilon}} \log k + \frac{\sigma_x^2}{\epsilon^2} \log^3 k \right)$       | [<d-cite key="foster2019complexity"></d-cite>, Theorem 1, Corollary 1] |
 | Stoc L-SS NC   | Stationarity        | $\Omega \left( \Delta \sigma_x \epsilon^{-4} \right)$         | $\checkmark$                     | [<d-cite key="arjevani2023lower"></d-cite>, Theorem 1], [<d-cite key="ghadimi2013stochastic"></d-cite>, Cor 2.2]                                           |
 | Stoc L-AS NC            | Stationarity        | $\Omega \left( \Delta \sigma_x^2 + 3 \sigma_x \epsilon^{-2} \right)$ | $\checkmark$                     | [<d-cite key="arjevani2023lower"></d-cite>, Theorem 2], [<d-cite key="fang2018spider"></d-cite>, Theorem 1]                          |
-| Stoc L-AS IC            | Stationarity        | Unknown | Unknown                     | [<d-cite key="wang2019spiderboost"></d-cite>, Theorem 5]                          |
 | NS $L$-Lip $\rho$-WC    | Near-stationarity        | Unknown     | $\mathcal{O} (\epsilon^{-4})$ | [<d-cite key="davis2018stochastic"></d-cite>, Thm 2.1]              |
-
-**Remark:**
-
-1. Shuffling
 
 ### Case 2-1: SC-SC/SC-C/C-C Deterministic Minimax Optimization
 
@@ -240,81 +232,54 @@ Also for **Minimax Problems**, based on the convexity combination of each compon
 |-----------------------|---------|-------------------------------------------------|------------------------------|----------------------------------------------------------|
 | C-C, bilinear, NS     | Duality Gap        | $\Omega(L / \epsilon)$                          | $\checkmark$                 | [<d-cite key="ouyang2021lower"></d-cite>, Thm 9], [<d-cite key="chambolle2011first"></d-cite>, Thm 1]                                            |
 | C-C, general          | Duality Gap        | $\Omega(L D_X D_Y / \epsilon)$                  | $\checkmark$                 | [<d-cite key="xie2020lower"></d-cite>, Thm 3], [<d-cite key="nemirovski2004prox"></d-cite>, Thm 4.1]  |
-| SC-C, bilinear, NS    | Duality Gap        | $\Omega(\sqrt{\kappa_x} / \epsilon)$            | $\checkmark$ ($\times$)      | [<d-cite key="ouyang2021lower"></d-cite>, Thm 10], [<d-cite key="chambolle2011first"></d-cite>, Thm 2] $\mathcal{O}(\kappa_x^2 / \sqrt{\epsilon})$ |
-| SC-C, general         | Duality Gap        | $\Omega(D_Y \sqrt{L \kappa_x} / \epsilon)$      | $\checkmark$ ($\times$)      | [<d-cite key="xie2020lower"></d-cite>, Thm 2 imply], [<d-cite key="yang2020catalyst"></d-cite>, Sec 3.2] $\tilde{\mathcal{O}}(D \sqrt{L \kappa_x} / \epsilon)$  |
-| C-SC, bilinear        | Duality Gap        | ?                                               | $\mathcal{O}(\log \frac{1}{\epsilon})$ | (UB $\neq$ SC-C ?)?, [<d-cite key="du2019linear"></d-cite>, Thm 3.1] |
+| SC-C, bilinear, NS    | Duality Gap        | $\Omega(\sqrt{\kappa_x} / \epsilon)$            | $\mathcal{O}(\kappa_x^2 / \sqrt{\epsilon})$      | [<d-cite key="ouyang2021lower"></d-cite>, Thm 10], [<d-cite key="chambolle2011first"></d-cite>, Thm 2]  |
+| SC-C, general         | Duality Gap        | $\Omega(D_Y \sqrt{L \kappa_x} / \epsilon)$      | $\tilde{\mathcal{O}}(D \sqrt{L \kappa_x} / \epsilon)$      | [<d-cite key="xie2020lower"></d-cite>, Thm 2 imply], [<d-cite key="yang2020catalyst"></d-cite>, Sec 3.2]  |
+| C-SC, bilinear        | Duality Gap        | ?                                               | $\mathcal{O}(\log \frac{1}{\epsilon})$ | [<d-cite key="du2019linear"></d-cite>, Thm 3.1] |
 | C-SC, general         | Duality Gap        | $\Omega(L D_X / \sqrt{\mu_y \epsilon})$         | ?                            | [<d-cite key="xie2020lower"></d-cite>, Thm 2 imply]   |
-| SC-SC, bilinear       | Duality Gap        | $\Omega(\sqrt{\kappa_x \kappa_y} \log \frac{1}{\epsilon})$ | $\checkmark$               | [<d-cite key="zhang2022lower"></d-cite>, Thm 3.5], [<d-cite key="chambolle2016ergodic"></d-cite>, Thm 5, PIFO]                                      |
-| SC-SC, general        | Duality Gap        | $\Omega(\sqrt{\kappa_x \kappa_y} \log \frac{1}{\epsilon})$ | $\checkmark$ ($\times$)    | [<d-cite key="zhang2022lower"></d-cite>, Thm 4.5], [<d-cite key="wang2020improved"></d-cite>, Thm 3]                                            |
-| SC-SC, general        | Duality Gap        | same                                            | $\checkmark$ ($\times$) | [<d-cite key="liang2019interaction"></d-cite>, Thm 1, (last iterate)] $\mathcal{O}(\sqrt{\kappa} \log \frac{1}{\epsilon})$ |
-| PL-PL                 | Duality Gap        | same                                            | $\checkmark$ ($\times$) | [<d-cite key="liang2019interaction"></d-cite>, Thm 1, (last iterate)] $\mathcal{O}(\sqrt{\kappa} \log \frac{1}{\epsilon})$ |
+| SC-SC, bilinear       | Duality Gap        | $\Omega(\sqrt{\kappa_x \kappa_y} \log \frac{1}{\epsilon})$ | $\checkmark$               | [<d-cite key="zhang2022lower"></d-cite>, Thm 3.5], [<d-cite key="chambolle2016ergodic"></d-cite>, Thm 5]                                      |
+| SC-SC, general        | Duality Gap        | $\Omega(\sqrt{\kappa_x \kappa_y} \log \frac{1}{\epsilon})$ | $\times$    | [<d-cite key="zhang2022lower"></d-cite>, Thm 4.5], [<d-cite key="wang2020improved"></d-cite>, Thm 3]                                            |
+| PL-PL                 | Duality Gap        | Unknown                                            | $\mathcal{O}(\kappa^3\log \frac{1}{\epsilon})$ | [<d-cite key="yang2020global"></d-cite>] |
 |                       |         |                                                 |                              |                                                          |
-
-**Remark:**
-
-1. content
-2. LB SC-SC bilinear: [<d-cite key="ibrahim2020linear"></d-cite>, Cor 4] and extension to SCLI framework<d-cite key="arjevani2016lower"></d-cite>
 
 ### Case 2-2: SC-SC/SC-C/C-C Finite-sum and Stochastic Minimax Optimization
 
 | Problem Type         | Measure | LB                                         | UB                            | Reference-LB      | Reference-UB                                   |
 |----------------------|---------|---------------------------------------------|-------------------------------|-------------------|------------------------------------------|
-| C-C, FS         | Duality Gap | $\Omega(n + L / \epsilon)$                 | $\times$                      | [<d-cite key="xie2020lower"></d-cite>, Theorem 3, PIFO]     | [<d-cite key="yazdandoost2023stochastic"></d-cite>, Cor 2.1]  $\mathcal{O}(\sqrt{n}/\epsilon)$      |
+| C-C, FS         | Duality Gap | $\Omega(n + L / \epsilon)$                 | $\mathcal{O}(\sqrt{n}/\epsilon)$                      | [<d-cite key="xie2020lower"></d-cite>, Theorem 3]     | [<d-cite key="yazdandoost2023stochastic"></d-cite>, Cor 2.1]        |
 | C-C, Stoc, SS        | Duality Gap | $\Omega(\epsilon^{-2})$                    | $\checkmark$                  | (Stoc C SS min)                                             | [<d-cite key="juditsky2011solving"></d-cite>, Cor 1]      |
 | C-C, Stoc, NS        | Duality Gap | $\Omega(\epsilon^{-2})$                    | $\checkmark$                  | (Stoc C NS min)                                             | [<d-cite key="nemirovski2009robust"></d-cite>, Lemma 3.1]      |
-| SC-C, FS        | Duality Gap | $\Omega\left(n + \sqrt{n L / \epsilon}\right)$ | $\checkmark$ ($\times$)   | (FS C min)                                                  | [<d-cite key="yang2020catalyst"></d-cite>, Sec 3.2] $\tilde{\mathcal{O}}(\sqrt{n L / \epsilon})$      |
-| C-SC, FS bilinear    | Duality Gap | ?                                          | ?                             | ?                                                           | [<d-cite key="du2019linear"></d-cite>, Thm 4.1] $\mathcal{O}(n \log \frac{1}{\epsilon})$      |
-| C-SC, FS general     | Duality Gap | $\Omega(n + L / \sqrt{\mu_y \epsilon})$    | ?                             | [<d-cite key="xie2020lower"></d-cite>, Thm 2]               | (implies from SC-C?) |
-| SC-SC, FS       | Duality Gap | $\Omega\left((n + \kappa) \log \frac{1}{\epsilon}\right)$ | $\checkmark$ ($\times$) | [<d-cite key="xie2020lower"></d-cite>, Thm 1]      | [<d-cite key="palaniappan2016stochastic"></d-cite>, Thm 1] $\mathcal{O}((n + \kappa) \log \frac{1}{\epsilon})$      |
-| SC-SC, Stoc, SS      | Duality Gap | $\Omega(\epsilon^{-1})$                    | $\checkmark$                  | (Stoc SC SS min)                                            | [<d-cite key="hsieh2019convergence"></d-cite>, Thm 5, pt. dist.] $\mathcal{O}(\epsilon^{-1})$       |
-| SC-SC, Stoc, NS      | Duality Gap | $\Omega(\epsilon^{-1})$                    | $\checkmark$                  | (Stoc SC NS min)                                            | [<d-cite key="yan2020optimal"></d-cite>, Thm 1, in prob.] $\mathcal{O}(\epsilon^{-1})$       |
+| SC-C, FS        | Duality Gap | $\Omega\left(n + \sqrt{n L / \epsilon}\right)$ | $\tilde{\mathcal{O}}(\sqrt{n L / \epsilon})$   | (FS C min)                                                  | [<d-cite key="yang2020catalyst"></d-cite>, Sec 3.2]      |
+| SC-SC, FS       | Duality Gap | $\Omega\left((n + \kappa) \log \frac{1}{\epsilon}\right)$ | $\checkmark$ | [<d-cite key="xie2020lower"></d-cite>, Thm 1]      | [<d-cite key="palaniappan2016stochastic"></d-cite>, Thm 1]      |
+| SC-SC, Stoc, SS      | Duality Gap | $\Omega(\epsilon^{-1})$                    | $\checkmark$                  | (Stoc SC SS min)                                            | [<d-cite key="hsieh2019convergence"></d-cite>, Thm 5]       |
+| SC-SC, Stoc, NS      | Duality Gap | $\Omega(\epsilon^{-1})$                    | $\checkmark$                  | (Stoc SC NS min)                                            | [<d-cite key="yan2020optimal"></d-cite>]       |
+| PL-PL, Stoc      | Duality Gap | Unknown                    | $\mathcal{O}(\kappa^5\epsilon^{-1})$                  | (Stoc SC NS min)                                            | [<d-cite key="yang2020global"></d-cite>]       |
 |                      |         |                                             |                               |                                                             |
-
-**Remark:**
-
-1. content
-2. UB SC-SC general: [<d-cite key="luo2019stochastic"></d-cite>], [<d-cite key="chavdarova2019reducing"></d-cite>, (cocoercive?)]
 
 ### Case 2-3: NC-SC/NC-C Deterministic Minimax Optimization
 
 | Type               | Measure | LB                                          | UB                               | Reference-LB      | Reference-UB                                   |
 |--------------------|---------|---------------------------------------------|----------------------------------|-------------------|------------------------------------------------|
-| NC-SC, Deter       | Primal Stationarity | $\Omega(\Delta \mathcal{L} \epsilon^{-2})$  | $\checkmark$ ($\times$) | [<d-cite key="zhang2021complexity"></d-cite>, Theorem 3.1] | [<d-cite key="zhang2021complexity"></d-cite>, Theorem 4.1] |
-| NC-C, Deter        | Primal Stationarity | $\Omega(\Delta \mathcal{L} \epsilon^{-2})$  | $\times$                |         | [<d-cite key="lin2020near"></d-cite>, Cor A.8] $\mathcal{O}(\Delta L^2 \epsilon^{-3} \log^2 \frac{1}{\epsilon})$ |
-| WC-C, Deter        | Primal Stationarity | ?                                           | ?                       |         | [<d-cite key="boct2023alternating"></d-cite>, Thm 3.7] $\mathcal{O}(\epsilon^{-6})$ (single loop)        |
-| NC-PL, Deter       | Primal Stationarity | $\Omega(\sqrt{\kappa \Delta \mathcal{L} \epsilon^{-2}})$ | $\times$                   |         | [<d-cite key="yang2022faster"></d-cite>, Thm 3.1]         |
-| NC-SC, Deter       | Stationarity | $\Omega(\sqrt{\kappa \Delta \mathcal{L} \epsilon^{-2}})$ | $\times$                   |         | [<d-cite key="lin2020near"></d-cite><d-cite key="xu2023unified"></d-cite>, Thm 3.1] $\mathcal{O}(\epsilon^{-2})$       |
-| NC-C, Deter        | Stationarity | $\Omega(\Delta \mathcal{L} \epsilon^{-2})$  | $\times$                       |                   | [<d-cite key="lin2020near"></d-cite>, Cor 6.2] $\mathcal{O}(\sqrt{D \Delta \mathcal{L}^{1.5} \epsilon^{-2.5} \log^2 \frac{1}{\epsilon}})$ (NC S min) |
-| SC-NC, Deter       | Stationarity | $\Omega(\sqrt{\kappa} \log \frac{1}{\epsilon})$ | $\times$                   |                   | [<d-cite key="xu2023unified"></d-cite>, Cor 4.1] $\mathcal{O}(\epsilon^{-2})$ |
-| C-NC, Deter        | Stationarity | $\Omega(\sqrt{L/\epsilon})$                 | $\times$                       |                   | [<d-cite key="xu2023unified"></d-cite>, Cor 4.2] $\mathcal{O}(\epsilon^{-4})$ |
+| NC-SC, Deter       | Primal Stationarity | $\Omega(\sqrt{\kappa}\Delta \mathcal{L} \epsilon^{-2})$  | $\checkmark$ | [<d-cite key="zhang2021complexity"></d-cite>, Theorem 3.1] | [<d-cite key="zhang2021complexity"></d-cite>, Theorem 4.1] |
+| NC-C, Deter        | Near-Stationarity | Unknown  | $\mathcal{O}(\Delta L^2 \epsilon^{-3} \log^2 \frac{1}{\epsilon})$               |         | [<d-cite key="lin2020near"></d-cite>, Cor A.8] |
+| WC-C, Deter        | Near-Stationarity | Unknown | $\mathcal{O}(\epsilon^{-6})$                       |         | [<d-cite key="boct2023alternating"></d-cite>, Thm 3.7]         |
+| NC-PL, Deter       | Primal Stationarity | Unknown | $\Omega(\kappa^2\epsilon^{-4})$                   |         | [<d-cite key="yang2022faster"></d-cite>]         |
 
 **Remark:**
 
-1. content
-2. [ZXSL20, Thm 3.8] $\mathcal{O}(\epsilon^{-2})$ (unclear dependence)
+1. Some other works also studied the above problems in terms of the fucnction stationarity (i.e., the gradient norm of $f$, rather than it primal), e.g., <d-cite key="lin2020near"></d-cite><d-cite key="xu2023unified"></d-cite>. As discussed in <d-cite key="yang2022faster"></d-cite>, it has been shown that function stationarity and primal stationarity are transferable with a mild efforts, here we do not present the results specifically.
 
 ### Case 2-4: NC-SC/NC-C Finite-sum and Stochastic Minimax Optimization
 
 | Type             | Measure | LB                                      | UB                                      | Reference (UB & LB)                                                                 |
 |------------------|---------|-----------------------------------------|-----------------------------------------|------------------------------------------------------------------------------------|
-| NC-SC, FS, AS    |         | $\Omega\left(\frac{\sqrt{n\kappa}\Delta L}{\epsilon^2}\right)$ | ✔(x)             | [XWLP20, Cor 1] $O\left(\sqrt{n}\kappa^2 L\Delta\epsilon^{-2}\right)$ [ZYG+21, Thm 3.2] [ZYG+21, Sec 4.2] $O\left(n^{3/4}\sqrt{\kappa}L\Delta\epsilon^{-2}\right)$ |
-| NC-SC, FS, IS    |         | $\Omega\left(\frac{\sqrt{n}\Delta L}{\epsilon^2}\right)$ | ✔(x)                   | [XWLP20, Cor 1] $O\left(\sqrt{n}\kappa_{ky}L\Delta\epsilon^{-2}\right)$ (NC IS FS min)                                      |
-| NC-C, FS, IS     |         | $\Omega\left(\frac{\sqrt{n}\Delta L}{\epsilon^2}\right)$ | ✔(x)                    | [DH19, Thm 2] $O\left(n\epsilon^{-2} + \epsilon^{-6}\right)$ (NC AS FS) (IS?)                                       |
-| NC-C, FS, IS     |         | $\Omega\left(\frac{\sqrt{n}\Delta L}{\epsilon^2}\right)$ | ✘(x)                   | [YZKH20, Sec 4.2]: $O\left(n^{3/4}L^2D_y\Delta\epsilon^{-3}\right)$ (NC AS FS) (IS?)                                |
-| NC-SC, Stoc, SS  |         | $\Omega\left(\frac{\Delta L\sigma^2}{\epsilon^4}\right)$ | ✘                       | [YOLH21, Cor 4.1] (NC SS Stoc min)                                                 |
-| NC-SC, Stoc, AS  |         | $\Omega\left(\frac{\Delta L\sigma^2 + \sigma^2}{\epsilon^3}\right)$ | ✔(x)         | [XWLP20, Thm 1] $O\left(\Delta L\sigma^2\kappa_{ky}^3\epsilon^{-3}\right)$ (NC AS Stoc min)                                     |
-| NC-C, Stoc, SS   |         | $\Omega\left(\frac{\Delta L\sigma + \sigma^2}{\epsilon^3}\right)$ | ✘              | [LJJ19, Thm 4.9] [BB20, Thm 3.13] $O\left(\epsilon^{-8}\right)$ (SL, Lip-C) (NC AS Stoc) (IS?)            |
-| WC-SC, Stoc      |         | ?                                       | ?                                       | [YXL+20, Thm 2] $O\left(c^{-4}\right)$                                                             |
-| WC-C, Stoc       |         | ?                                       | ?                                       | [RLLY18, Thm 1] $O\left(\epsilon^{-6}\right)$ (error?)                                                    |
-| WC-C, Stoc       |         | ?                                       | ?                                       | [BB20, Thm 3.13] $O\left(\epsilon^{-8}\right)$ (single loop)                                              |
-
-**Remark:**
-
-1. content
-
+| NC-SC, FS, AS    | Primal Stationarity        | $\Omega\left(\sqrt{n\kappa}\Delta L\epsilon^{-2}\right)$ | $\mathcal{O}\left(\sqrt{n}\kappa^2 L\Delta\epsilon^{-2}\right)$ | [<d-cite key="zhang2021complexity"></d-cite>]  |               |
+| NC-C, FS, IS     | Near-stationarity        | Unknown | $\mathcal{O}\left(n^{3/4}L^2D_y\Delta\epsilon^{-3}\right)$ | [<d-cite key="yang2020catalyst"></d-cite>]                               |
+| NC-SC, Stoc, SS  | Primal Stationarity        | $\Omega\left(\kappa^{1/3}\Delta L\epsilon^{-4}\right)$ | $\mathcal{O}\left(\kappa\Delta L\epsilon^{-4}\right)$ | [<d-cite key="zhang2022sapd+"></d-cite>, <d-cite key="li2021complexity"></d-cite>]                                                 |
+| NC-SC, Stoc, IS  | Primal Stationarity        | Unknown | $\mathcal{O}\left(\kappa^2\Delta L\epsilon^{-3}\right)$ | [<d-cite key="zhang2022sapd+"></d-cite>] 
+| NC-C, Stoc, SS   | Near-stationarity        | Unknown | $\mathcal{O}\left(L^3\epsilon^{-6}\right)$              | [<d-cite key="zhang2022sapd+"></d-cite>]            |
 ---
 
-## To Have a Better Bound
+## What is next?
 The section above summarize the upper and lower bounds of the oracle complexity for finding an $\epsilon$-optimal solution or $\epsilon$-stationary points for minimization and minimax problems. Clearly this is not the end of the story, there are more and more optimization problems arising from various applications like machine learning and operation research<d-cite key="bottou2018optimization"></d-cite>, which come with more involved problem structure and complicated landscape characteristics; also sometimes we find it harder to explain algorithm behavior in practice using existing theory, e.g., <d-cite key="defazio2019ineffectiveness"></d-cite> shows that variance reduction may be ineffective on accelerating the training of deep learning models, which contrast the classical convergence theory. Here we discuss what could be potential interesting next steps. 
 
 ### Richer Problem Structure
@@ -327,7 +292,7 @@ $$
 \min_{x \in \mathcal{X}} \Phi(x) = F(x, y^*(x))  \quad \text{where} \quad y^*(x) = \underset{y \in \mathcal{Y}}{\arg\min} \, G(x, y),
 $$
 
-Bilevel optimization covers minimax optimization as a special case. Over the past seven years, bilevel optimization has become increasingly popular due to its applications in machine learning. In particular, researchers have revisited first-order methods for solving (stochastic) bilevel optimization problems. Starting from [Reference], which investigates double-loop methods for solving bilevel optimization, [Reference] initiated the development of single-loop, single-timescale methods for stochastic bilevel optimization. This line of research leads to a simple single-timescale algorithm [Reference] and multiple variance reduction techniques to achieve single-loop [Reference]. Subsequent developments have focused on avoiding computing Hessian inverse of the lower-level problem [Reference], developing fully first-order methods for solving bilevel optimization [Reference], achieving global optimality [Reference], addressing contextual/multiple lower-level problems [Reference], handling constrained lower-level problems [Reference], and bilevel reinforcement learning [Reference] for model design and reinforcement learning with human feedback.
+Bilevel optimization covers minimax optimization as a special case. Over the past seven years, bilevel optimization has become increasingly popular due to its applications in machine learning. In particular, researchers have revisited first-order methods for solving (stochastic) bilevel optimization problems. Starting from <d-cite key="ghadimi2018approximation"></d-cite>, which investigates double-loop methods for solving bilevel optimization, <d-cite key="hong2020two"></d-cite> initiated the development of single-loop, single-timescale methods for stochastic bilevel optimization. This line of research leads to a simple single-timescale algorithm <d-cite key="chen2021tighter"></d-cite> and multiple variance reduction techniques to achieve single-loop <d-cite key="guo2021randomized"></d-cite><d-cite key="khanduri2021near"></d-cite>. Subsequent developments have focused on developing fully first-order methods for solving bilevel optimization <d-cite key="kwon2023fully"></d-cite>, achieving global optimality <d-cite key="xiao2024unlocking"></d-cite>, addressing contextual/multiple lower-level problems <d-cite key="hu2024contextual"></d-cite><d-cite key="guo2021randomized"></d-cite>, handling constrained lower-level problems <d-cite key="jiang2024barrier"></d-cite>, and bilevel reinforcement learning <d-cite key="chen2022adaptive"></d-cite><d-cite key="chakraborty2024parl"></d-cite><d-cite key="thoma2024contextual"></d-cite> for model design and reinforcement learning with human feedback.
 
 Several questions remain open and are interesting to investigate:
 1. How to handle general lower-level problems with coupling constraints. 
@@ -338,13 +303,21 @@ Also there appeared several other optimization problems with different formulati
 * Compositional Stochastic Optimization<d-cite key="wang2017stochastic"></d-cite>
 
 $$
-\min_{x \in \mathcal{X}} F(x) =\mathbb{E}_{\xi}\left[f\left(\mathbb{E}_{\eta}\left[g(x;\eta)\right];\xi\right)\right],
+\min_{x \in \mathcal{X}} F(x) =\mathbb{E}_{\xi}\left[f\left(\mathbb{E}_{\eta}\left[g(x;\eta)\right];\xi\right)\right].
 $$
+
+* Conditional Stochastic Optimization <d-cite key="hu2020sample"></d-cite>
+
+$$
+\min_{x \in \mathcal{X}} F(x) =\mathbb{E}_{\xi}\left[f\left(\mathbb{E}_{\eta\mid\xi}\left[g(x;\eta,\xi)\right];\xi\right)\right].
+$$
+
+Conditional stochastic optimization differs from composition optimization mainly in the conditional expectation inside $f$. This requires one to sample from the conditional distribution of $\eta$ for any given $\xi$, while compositional optimization can sample from the marginal distribution of $\eta$. 
 
 * Performative Prediction (or Decision-Dependent Stochastic Optimization)<d-cite key="perdomo2020performative"></d-cite><d-cite key="drusvyatskiy2023stochastic"></d-cite>
 
 $$
-\min_{x\in\mathcal{X}}\ f(x)\triangleq\mathbb{E}_{\xi\sim\mathcal{D}(x)}[f(x;\xi)]
+\min_{x\in\mathcal{X}}\ f(x)\triangleq\mathbb{E}_{\xi\sim\mathcal{D}(x)}[f(x;\xi)].
 $$
 
 * Contextual Stochastic Optimization<d-cite key="bertsimas2020predictive"></d-cite><d-cite key="sadana2024survey"></d-cite>
@@ -353,20 +326,34 @@ $$
 \min_{x\in\mathcal{X}}\ f(x;z)\triangleq\mathbb{E}_{\xi\sim\mathcal{D}}[f(x;\xi)~|~Z=z]
 $$
 
+* Distributionally robust optimization<d-cite key="kuhn2024distributionally"></d-cite>
+
+$$
+\min_{x\in\mathcal{X}}\sup_{\mathcal{D}\in U_r(Q)} \triangleq\mathbb{E}_{\xi\sim \mathcal{D}}[f(x;\xi)],
+$$
+where $U_r(Q)$ refers to an uncertainty set that contains a family of distributions around a nominal distribution $Q$ measured by some distance between probability distribution of radious $r$.
+
 ### Landscape Analysis
   
-  Since most deep learning problems are nonconvex, a vast amount of literature focus on finding a (generalized) stationary point of the original optimization problem, but the practice often showed that one could find global optimality for various structured nonconvex problems efficiently. In fact there is a line of research tailored for the global landscape of neural network training<d-cite key="sun2020global"></d-cite>, e.g., the interpolation condition holds for some overparameterized neural networks. 
+  Since most deep learning problems are nonconvex, a vast amount of literature focus on finding a (generalized) stationary point of the original optimization problem, but the practice often showed that one could find global optimality for various structured nonconvex problems efficiently. In fact there is a line of research tailored for the global landscape of structured nonconvex optimization, for example neural network training<d-cite key="sun2020global"></d-cite>, e.g., the interpolation condition holds for some overparameterized neural networks. 
   
-  Regarding such mismatch between theory and practice, one reason may be the coarse assumptions we applied in the theoretical analysis which cannot effectively characterize the landscape of objectives. Here we briefly summarize a few structures arising in recent works, which try to mix the gap between practice and theory:
-
-  - With numerical experiments disclosing uncommon structure in functions, some works proposed new assumptions which drive the algorithm design and corresponding theoretical analysis, which in turn reveals acceleration in empirical findings. For example, <d-cite key="zhang2019gradient"></d-cite> introduced the *relaxed smoothness assumption* (or $(L_0, L_1)$-smoothness) inspired by empirical observations on deep neural networks, and proposed a clipping-based first-order algorithm which enjoys both theoretical and practical outperformance.
+  One potential reason behind such a mismatch between theory and practice, one reason may be the coarse assumptions we applied in the theoretical analysis, which cannot effectively characterize the landscape of objectives. Here we briefly summarize a few structures arising in recent works, which try to mix the gap between practice and theory:
+  - *Hidden convexity* says that the original nonconvex optimization problem might admit a convex reformulation via a variable change. It appears in operations research <d-cite key="chen2024efficient"></d-cite><d-cite key="chen2023network"></d-cite>, reinforcement learning <d-cite key="zhang2020variational"></d-cite>, control <d-cite key="anderson2019system"></d-cite>. Despite that the concrete transformation function is unknown, one could still solve the problem to global optimality efficiently <d-cite key="fatkhullin2023stochastic"></d-cite> with $\mathcal{O}(\epsilon^{-3})$ complexity for hidden convex case and $\mathcal{O}(\epsilon^{-1})$ complexity for hidden strongly convex case. In the hidden convex case, one could further achieve $\mathcal{O}(\epsilon^{-2})$ complexity in the hidden convex case via mirror stochastic gradient <d-cite key="chen2024efficient"></d-cite> or variance reduction <d-cite key="zhang2021convergence"></d-cite>.
+  - Another stream considers *Polyak-Łojasiewicz* (PL) or *Kurdyka-Łojasiewicz* (KL) type of conditions, or other gradient dominance conditions <d-cite key="karimi2016linear"></d-cite>. Such conditions imply that the (generalized) gradient norm could upper bound the optimality gap, implying that any (generalized) stationary point are also global optimal. However, establishing hidden convexity, PL, or KL condition is usually done in a case-by-case manner and could be challenging. See <d-cite key="chen2024landscape"></d-cite> for some examples about KL conditions in finite horizon MDP with general state and action and its applications in operations and control.
+  - With numerical experiments disclosing structures in objective functions, some works proposed new assumptions which drive the algorithm design and corresponding theoretical analysis, which in turn reveals acceleration in empirical findings. For example, <d-cite key="zhang2019gradient"></d-cite> introduced the *relaxed smoothness assumption* (or $(L_0, L_1)$-smoothness) inspired by empirical observations on deep neural networks, and proposed a clipping-based first-order algorithm which enjoys both theoretical and practical outperformance.
   
     Another noteworthy work is <d-cite key="zhang2020adaptive"></d-cite>, which verified the ubiquity of *heavy-tailed noise* in stochastic gradients in neural network training practices, such evidence drove them to revise SGD and incorporate strategies like clipping in the algorithm design, which also outperformed in numerical experiments. The above two works, along with their more practical assumptions, inspired many follow-up works, evidented by their high citations according to Google Scholar<d-cite key="zhang2019citation"></d-cite><d-cite key="zhang2020citation"></d-cite>.
-  - *Hidden convexity* says that the original nonconvex optimization problem might admit a convex reformulation via a variable change. It appears in operations research [Reference], reinforcement learning [reference], control [reference]. Despite that the concrete transformation function is unknown, one could still solve the problem to global optimality efficiently. 
-  - Another stream considers *Polyak-Łojasiewicz* (PL) or *Kurdyka-Łojasiewicz* (KL) type of conditions [Reference]. Such conditions imply that the (generalized) gradient norm could upper bound the optimality gap, implying that any (generalized) stationary point are also global optimal. However, establishing hidden convexity, PL, or KL condition is usually done in a case-by-case manner and could be challenging. See [Reference] for some examples.
+
+### Unified Lower Bounds
+For lower bounds, we adapt the so-called optimization-based lower bounds proved via zero-chain techniques <d-cite key="nesterov2013introductory"></d-cite>. The narrative of such lower bounds admits the following form: For any given accuracy $\epsilon>0$, there exists a hard instance $f:\mathbb{R}^{d_\epsilon}\rightarrow\mathbb{R}$ in the function class $\mathcal{F}$, where the dimension $d_\epsilon$ depends on the accuracy $\epsilon>0$, such that it takes at least $\mathrm{poly}(\epsilon^{-1})$ number of oracles to find an $\epsilon$-optimal solution or $\epsilon$-stationary point. Note that the dimension $d_\epsilon$ depends on the accuracy, particularly $d_\epsilon$ increases as $\epsilon$ decreases. Note that such a lower bound does not hold for a function class with a given dimension $d$, which is independent of the accuracy. In other words, for a $d$-dimension function classes and a given accuracy $\epsilon>0$, the upper bounds on the complexity of first-order methods given in the tables still hold, yet the lower bounds do not, which could lead to a mismatch between upper and lower bounds. This leads to a fundamental question: how to prove lower bounds of first-order methods for any given $d$-dimensional function classes. 
+
+Such a question has been partially addressed for stochastic optimization using the statistical and information theoretic-based lower bounds. For instance, for stochastic convex optimization, \citep{agarwal2009information} shows that  for any given $d$-dimensional Lipschitz continuous convex function class and any $\epsilon>0$, it takes at least $\mathcal{O}(\sqrt{d} \epsilon^{-2})$ number of gradient oracles to find an $\epsilon$-optimal solution. Such information-theoretic lower bounds admits explicit dependence on the problem dimension. In addition, even ignoring dimension dependence, the dependence on the accuracy matches the upper bounds of stochastic gradient descent.  Thus such a lower bound addresses the aforementioned question for stochastic convex optimization. Yet, it raises another interesting observation, i.e., the obtained lower bounds  $\mathcal{O}(d\epsilon^{-2})$~\citep{agarwal2009information} is larger than the upper bounds $\mathcal{O}(\epsilon^{-2})$~\citep{nemirovski2009robust}. This is of course not a conflict as the two papers make different assumptions. Yet, it would be interesting to ask, if first-order methods such as mirror descent are really dimension independent or is it the case that existing optimization literature is treating some dimension dependent parameters as dimension independent ones. 
+
+To summarize, there needs a more precise characterization of lower bounds for given $d$-dimensional function classes and there requires a better understanding on the dimension dependence in the upper bounds of first-order methods. 
+  
 
 ### Beyond Classical Oracle Model
-  Also regarding the oracle complexity model, because it mainly focuses on hard instances in the function class which may be far from practical instances, possibly the derived complexities may be such conservative and vacuous that they may not match the practice well, as the figure below illustrated.
+  Regarding the oracle complexity model, because it mainly focuses on hard instances in the function class which may be far from practical instances, possibly the derived complexities may be such conservative and vacuous that they may not match the practice well, as the figure below illustrated.
 
   {% include figure.liquid path="assets/img/2024-04-28-opt-summary/practice_gap.png" class="img-fluid" %}
 
