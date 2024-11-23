@@ -45,53 +45,53 @@ toc:
 
 ## Introduction
 
-In this blog, we review the convergence rate study in first-order optimization literature. Optimization problems generally are formulated as follows:
+In this blog, we review the convergence rate of (stochastic) first-order methods in optimization. 
+
+Regarding the **problem structure**, we specifically consider *minimization* problems above and *minimax* optimization problems of the following forms.
 
 $$
 \min_{x\in\mathcal{X}}\ f(x).
 $$
 
-Regarding the **problem structure**, we specifically consider *minimization* problems above and *minimax* optimization problems:
-
 $$
 \min_{x\in\mathcal{X}}\ \left[f(x)\triangleq \max_{y\in\mathcal{Y}}\ g(x,y)\right].
 $$
 
-Also based on the **stochasticity structure**, we divide our discussion into three cases:
+Based on the **stochasticity**, we divide our discussions into three cases:
 
 - Deterministic (General) Optimization,
 
 $$
-\min_{x\in\mathcal{X}}\ f(x)
+\min_{x\in\mathcal{X}}\ f(x).
 $$
 
 - Finite-Sum Optimization
 
 $$
-\min_{x\in\mathcal{X}}\ f(x)\triangleq\frac{1}{n}\sum_{i=1}^n f_i(x)
+\min_{x\in\mathcal{X}}\ f(x)\triangleq\frac{1}{n}\sum_{i=1}^n f_i(x).
 $$
 
 - (Purely) Stochastic Optimization
 
 $$
-\min_{x\in\mathcal{X}}\ f(x)\triangleq\mathbb{E}_{\xi\sim\mathcal{D}}[f(x;\xi)]
+\min_{x\in\mathcal{X}}\ f(x)\triangleq\mathbb{E}_{\xi\sim\mathcal{D}}[f(x;\xi)].
 $$
 
-A subtle while important difference between finite-sum and stochastic optimization problems lies in the ability to access to the whole function $f(x)$, 
-so generally the classical SVRG algorithm<d-cite key="johnson2013accelerating"></d-cite> is unable to be applied in the purely stochastic case.
+A subtle while important difference between finite-sum and stochastic optimization problems lies in the ability to access to the overall objective function $f(x)$, i.e., stochastic optimization usually does not have access to $f(x)$ while the finite-sum problem has. As a result, algorithms that require access to $f(x)$, such as the classical stochastic variance reduced gradient (SVRG) algorithm<d-cite key="johnson2013accelerating"></d-cite>, are not directly applicable in the purely stochastic setting.
 
-Following the **function structure** of the objective, we will divide the discussion into various cases, including strongly-convex, convex and nonconvex cases;
-also for minimax problems, the discussion will be more complicated based on the convexity of each component, we will specify the settings later.
+Based on the **convexity** of the objective, we will divide our discussions into various cases, including strongly-convex (SC), convex (C) and nonconvex cases (NC).
+For minimax problems, based on convexity of $g(\cdot,y)$ for a given $y$ and the concavity of $g(x,\cdot)$ for a given $x$, we review results for strongly convex strongly concave (SC-SC), convex-concave (C-C),nonconvex strongly concave (NC-SC) and other combinations. 
 
 ### Literature
 
-This notes aims to review SOTA first-order optimization algorithms convergence results. In fact there already appeared several great works for comprehensive review of optimization algorithm from different perspectives. Besides many well-known textbook and course materials like the one from Stephen Boyd<d-cite key="boyd2024text"></d-cite><d-cite key="boyd2024video"></d-cite>, maybe one of the most impressive works is the blog post by Ruder<d-cite key="ruder2016overview"></d-cite>, which received more than 10k citations according to Google Scholar, this post reviewed algorithm design of gradient descent (GD), stochastic gradient descent (SGD) and their variants, especially those commonly used in machine learning community like AdaGrad<d-cite key="duchi2011adaptive"></d-cite> and Adam<d-cite key="kingma2014adam"></d-cite>. There are also several monographs which reviewed optimization algorithm in various settings, e.g., <d-cite key="bubeck2015convex"></d-cite>, <d-cite key="bottou2018optimization"></d-cite>, <d-cite key="sun2019survey"></d-cite>, <d-cite key="dvurechensky2021first"></d-cite> and <d-cite key="garrigos2023handbook"></d-cite>; the page by Ju Sun<d-cite key="sun2021list"></d-cite> was a popular repository tracking research effort on nonconvex optimization<d-footnote>Which unfortunately discontinued the update since 2022.</d-footnote>. The review by Ruoyu Sun<d-cite key="sun2019optimization"></d-cite> further specified the survey of optimization algorithm study in the context of deep learning. A recent survey by Danilova et al.,<d-cite key="danilova2022recent"></d-cite> revisited algorithm design and complexity analysis specifically in nonconvex optimization, which to some extent is the most close one matching the desire of our blog post.
+This notes aims to review SOTA first-order optimization algorithms convergence results. In fact, there are several great works for comprehensive review of optimization algorithm from different perspectives. Besides many well-known textbook and course materials like the one from Stephen Boyd<d-cite key="boyd2024text"></d-cite><d-cite key="boyd2024video"></d-cite>, maybe one of the most impressive works is the blog post by Ruder<d-cite key="ruder2016overview"></d-cite>, which received more than 10k citations according to Google Scholar. This post reviewed algorithm design of gradient descent (GD), stochastic gradient descent (SGD) and their variants, especially those commonly used in machine learning community like AdaGrad<d-cite key="duchi2011adaptive"></d-cite> and Adam<d-cite key="kingma2014adam"></d-cite>. Several monographs reviewed optimization algorithms in various settings, e.g., <d-cite key="bubeck2015convex"></d-cite>, <d-cite key="bottou2018optimization"></d-cite>, <d-cite key="sun2019survey"></d-cite>, <d-cite key="dvurechensky2021first"></d-cite> and <d-cite key="garrigos2023handbook"></d-cite>; the page by Ju Sun<d-cite key="sun2021list"></d-cite> was a popular repository tracking research effort on achieving global optimality for nonconvex optimization<d-footnote>Latest update: Dec 11 2021.</d-footnote>. The review by Ruoyu Sun<d-cite key="sun2019optimization"></d-cite> further specified the survey of optimization algorithm study in the context of deep learning. A recent survey by Danilova et al.,<d-cite key="danilova2022recent"></d-cite> revisited algorithm design and complexity analysis specifically in nonconvex optimization, which to some extent is the closest one to our blog post. Our blog aims to serve as an easy accessible tool for optimizers to check  the SOTA theoretical convergence rate from both upper and lower bounds perspectives and for poor b t lovelygraduate students to understand the field in an easier manner. 
 
 ---
 
 ## Framework: Oracle Complexity Model
 
-Now we formally recall the definition of complexity. Here we stick to the classical **oracle complexity model**<d-cite key='nemirovskij1983problem'></d-cite>. 
+We formally recall the definition of complexity. In particular, we stick to the classical **oracle complexity model**<d-cite key='nemirovskij1983problem'></d-cite>, where oracle basically means some
+.orsuggested by acle complexity lia.e.,o cw hicehl cclaassr oo fe nfou nction ypeob nepvle iaim to optigmi noitzaem,r osufch ast   snoitagaoporpkcab aivno yb nevig noitaitmrofni fo eceieip eno eht sa sdrager eb dluoc rotmaitse tneidarg a gnitupmoc ,ecnatscnat,ecnatni roF .noitamrofni edi edeivorp dluoc taht yraenihcam
 As the figure below suggest, generally this framework consists of the following components:
 - *Fucntion class* $\mathcal{F}$, e.g., convex Lipschitz continuous function, and (nonconvex) Lipschitz smooth function.
 - *Oracle class* $\mathbb{O}$, e.g., zeroth-order oracle (function value), first-order oracle (function gradient or subdifferential).
@@ -375,9 +375,9 @@ $$
 
   Recently there appeared some works which go beyond the classical oracle model on evaluating the optimization algorithm efficiency. For example, <d-cite key="pedregosa2020acceleration"></d-cite> and <d-cite key="paquette2021sgd"></d-cite> considered *average-case complexity*, which is well established in theoretical computer science, in optimization theory, such pattern further specified the objective formulation and data distribution, which results in a more refined complexity than the common worst-case complexity, while at the expense of more complicated analysis and more restricted scope.
 
-  On the other hand, with the development of higher-order algorithms, some recent works<d-cite key="doikov2023second"></d-cite> further considered the *arithmetic complexity* in optimization by incorporating the computational cost of each oracle into accout; also in distributed optimization (or federated learning) literature, the communication cost is one of the main bottlenecks compared to computation<d-cite key="konevcny2016federated"></d-cite><d-cite key="mcmahan2017communication"></d-cite><d-cite key="karimireddy2020scaffold"></d-cite><d-cite key="kairouz2021advances"></d-cite>, so many works modified the oracle framework a bit turn to study the complexity bound in terms of *communication cost/oracle*, which also motivates the fruitful study of local algorithms, which tries to skip unnecessary communications while still attain the convergence guarantees<d-cite key="stich2019local"></d-cite><d-cite key="mishchenko2022proxskip"></d-cite>.
-
-  * Large stepsize
+  On the other hand, with the development of higher-order algorithms, some recent works<d-cite key="doikov2023second"></d-cite> further considered the *arithmetic complexity* in optimization by incorporating the computational cost of each oracle into accout; also in distributed optimization (or federated learning) literature, the communication cost is one of the main bottlenecks compared to computation<d-cite key="konevcny2016federated"></d-cite><d-cite key="mcmahan2017communication"></d-cite><d-cite key="karimireddy2020scaffold"></d-cite><d-cite key="kairouz2021advances"></d-cite>, so many works modified the oracle framework a bit turn to study the complexity bound in terms of *communication cost/oracle*, which also motivates the fruitful study of local algorithms, which tries to skip unnecessary communications while still attain the convergence guarantees<d-cite key="stich2019local"></d-cite><d-cite key="mishchenko2022proxskip"></d-cite>. 
+  
+  Recently another series of recent works<d-cite key="grimmer2024provably"></d-cite><d-cite key="altschuler2023acceleration1"></d-cite><d-cite key="altschuler2023acceleration2"></d-cite> consider "longer" stepsize by incorporating a craft stepsize schedule into first-order methods and achieve a faster convergence rate, which is quite counterintuitive. At the same time, as indicated in <d-cite key="kornowski2024open"></d-cite><d-cite key="altschuler2023acceleration1"></d-cite>, such theoretical outperformance generally only works for some specific iteration numbers, while in lack of guarantees of *anytime convergence*, also the extension of the study beyond the deterministic and convex case is still an open problem. 
 
 ---
 
