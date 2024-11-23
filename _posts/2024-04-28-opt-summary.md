@@ -269,7 +269,7 @@ As mentioned above, we categorize the discussion based on the problem, stochasti
 
 | Type             | Measure | LB                                      | UB                                      | Reference (UB & LB)                                                                 |
 |------------------|---------|-----------------------------------------|-----------------------------------------|------------------------------------------------------------------------------------|
-| NC-SC, FS, AS    | Primal Stationarity        | $\Omega\left(\sqrt{n\kappa}\Delta L\epsilon^{-2}\right)$ | $\mathcal{O}\left(\sqrt{n}\kappa^2 L\Delta\epsilon^{-2}\right)$ | [<d-cite key="zhang2021complexity"></d-cite>]  |               |
+| NC-SC, FS, AS    | Primal Stationarity        | $\Omega\left(\sqrt{n\kappa}\Delta L\epsilon^{-2}\right)$ | $\mathcal{O}\left(\sqrt{n}\kappa^2 L\Delta\epsilon^{-2}\right)$ | [<d-cite key="zhang2021complexity"></d-cite>]  |             
 | NC-C, FS, IS     | Near-stationarity        | Unknown | $\mathcal{O}\left(n^{3/4}L^2D_y\Delta\epsilon^{-3}\right)$ | [<d-cite key="yang2020catalyst"></d-cite>]                               |
 | NC-SC, Stoc, SS  | Primal Stationarity        | $\Omega\left(\kappa^{1/3}\Delta L\epsilon^{-4}\right)$ | $\mathcal{O}\left(\kappa\Delta L\epsilon^{-4}\right)$ | [<d-cite key="zhang2022sapd+"></d-cite>, <d-cite key="li2021complexity"></d-cite>]                                                 |
 | NC-SC, Stoc, IS  | Primal Stationarity        | Unknown | $\mathcal{O}\left(\kappa^2\Delta L\epsilon^{-3}\right)$ | [<d-cite key="zhang2022sapd+"></d-cite>] 
