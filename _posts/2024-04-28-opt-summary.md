@@ -316,9 +316,10 @@ Also for **Minimax Problems**, based on the convexity combination of each compon
 ## To Have a Better Bound (New Trends)
 The section above summarize the upper and lower bounds of the oracle complexity for finding an $\epsilon$-optimal solution or $\epsilon$-stationary points for minimization and minimax problems. Clearly this is not the end of the story, there are more and more optimization problems arising from various applications like machine learning and operation research<d-cite key="bottou2018optimization"></d-cite>, which come with more involved problem structure and complicated landscape characteristics; also sometimes we find it harder to explain algorithm behavior in practice using existing theory, e.g., <d-cite key="defazio2019ineffectiveness"></d-cite> shows that variance reduction may be ineffective on accelerating the training of deep learning models, which contrast the classical convergence theory. Here we discuss what could be potential interesting next steps. 
 
-* More Problem Structure
+* Richer Problem Structure
+
 In this notes, we only discussed minimization and minimax problems, while there are also many other important optimization problems with different structure, for example:
-  * bilevel optimization 
+  * Bilevel Optimization 
   
   $$
   \min_{x \in \mathcal{X}} \Phi(x) = F(x, y^*(x))  \quad \text{where} \quad y^*(x) = \underset{y \in \mathcal{Y}}{\arg\min} \, G(x, y),
@@ -332,24 +333,39 @@ In this notes, we only discussed minimization and minimax problems, while there 
   3. How to establish non-asymptotic convergence guarantees for bilevel problems with convex lower levels.
 
   Also there appeared several other optimization problems with different formulations arising from practice, e.g.,  
-  * Compositional optimization<d-cite key="wang2017stochastic"></d-cite>
+  * Compositional Stochastic Optimization<d-cite key="wang2017stochastic"></d-cite>
 
   $$
   \min_{x \in \mathcal{X}} F(x) = f(g(x)),
   $$
 
-  * (Another one)
-   
+  * Performative Prediction (or Decision-Dependent Stochastic Optimization)
+  
+  $$
+  \min_{x\in\mathcal{X}}\ f(x)\triangleq\mathbb{E}_{\xi\sim\mathcal{D}(x)}[f(x;\xi)]
+  $$
+
+  * Contextual Stochastic Optimization<d-cite key="bertsimas2020predictive"></d-cite><d-cite key="sadana2024survey"></d-cite>
+  
+  $$
+  \min_{x\in\mathcal{X}}\ f(x;z)\triangleq\mathbb{E}_{\xi\sim\mathcal{D}}[f(x;\xi)~|~Z=z]
+  $$
+
 * Landscape Analysis
+  
+  Since most deep learning problems are nonconvex, a vast amount of literature focus on finding a (generalized) stationary point of the original optimization problem. But the practice often showed that one could find global optimality for various structured nonconvex problems efficiently<d-cite key="sun2020global"></d-cite>. One possible reason may be the coarse assumptions we applied in the theoretical analysis which cannot effectively characterize the landscape of the objectives; also regarding the oracle complexity model, because it mainly focuses on hard instances in the function class which may be far from practical instances, possibly the derived complexities may be a bit too conservative and they may not match the practice well, as the figure below illustrated.
+
+  {% include figure.liquid path="assets/img/2024-04-28-opt-summary/practice_gap.png" class="img-fluid" %}
+
+  <div class="caption">
+      Gap Between General Worst-Case Complexity and Instance-Level Complexity Analysis (adapted from [<d-cite key="zhang2022beyond"></d-cite>, Cor 2.1] )
+  </div>
+  
+  Here we briefly summarize a few structures arising in recent works, which try to mix the gap between practice and theory:
+  1. Hidden convexity says that the original nonconvex optimization problem might admit a convex reformulation via a variable change. It appears in operations research [Reference], reinforcement learning [reference], control [reference]. Despite that the concrete transformation function is unknown, one could still solve the problem to global optimality efficiently. 
+  2. The other stream considers Polyak-Łojasiewicz (PL) or Kurdyka-Łojasiewicz (KL) type of conditions [Reference]. Such conditions imply that the (generalized) gradient norm could upper bound the optimality gap, implying that any (generalized) stationary point are also global optimal. However, establishing hidden convexity, PL, or KL condition is usually done in a case-by-case manner and could be challenging. See [Reference] for some examples.
 
 - large stepsize
-
-- Application-driven: Mix the gap between practice and theory
-{% include figure.liquid path="assets/img/2024-04-28-opt-summary/practice_gap.png" class="img-fluid" %}
-
-<div class="caption">
-    Gap Between General Worst-Case Complexity and Instance-Level Complexity Analysis (adapted from [<d-cite key="zhang2022beyond"></d-cite>, Cor 2.1] )
-</div>
 
 (Random matrix)
 
