@@ -364,7 +364,7 @@ $$
   - *Hidden convexity* says that the original nonconvex optimization problem might admit a convex reformulation via a variable change. It appears in operations research [Reference], reinforcement learning [reference], control [reference]. Despite that the concrete transformation function is unknown, one could still solve the problem to global optimality efficiently. 
   - Another stream considers *Polyak-Łojasiewicz* (PL) or *Kurdyka-Łojasiewicz* (KL) type of conditions [Reference]. Such conditions imply that the (generalized) gradient norm could upper bound the optimality gap, implying that any (generalized) stationary point are also global optimal. However, establishing hidden convexity, PL, or KL condition is usually done in a case-by-case manner and could be challenging. See [Reference] for some examples.
 
-### Beyond oracle model
+### Beyond Classical Oracle Model
   Also regarding the oracle complexity model, because it mainly focuses on hard instances in the function class which may be far from practical instances, possibly the derived complexities may be such conservative and vacuous that they may not match the practice well, as the figure below illustrated.
 
   {% include figure.liquid path="assets/img/2024-04-28-opt-summary/practice_gap.png" class="img-fluid" %}
@@ -373,15 +373,14 @@ $$
       Gap Between General Worst-Case Complexity and Instance-Level Complexity Analysis (adapted from <d-cite key="zhang2022beyond"></d-cite>)
   </div>
 
-  Here we introduce some recent efforts which go beyond the classical oracle model on evaluating the optimization algorithm efficiency.
+  Recently there appeared some works which go beyond the classical oracle model on evaluating the optimization algorithm efficiency. For example, <d-cite key="pedregosa2020acceleration"></d-cite> and <d-cite key="paquette2021sgd"></d-cite> considered *average-case complexity*, which is well established in theoretical computer science, in optimization theory, such pattern further specified the objective formulation and data distribution, which results in a more refined complexity than the common worst-case complexity, while at the expense of more complicated analysis and more restricted scope.
 
-  * Average complexity
-  * Time complexity
+  On the other hand, with the development of higher-order algorithms, some recent works<d-cite key="doikov2023second"></d-cite> further considered the *arithmetic complexity* in optimization by incorporating the computational cost of each oracle into accout; also in distributed optimization (or federated learning) literature, the communication cost is one of the main bottlenecks compared to computation<d-cite key="konevcny2016federated"></d-cite><d-cite key="mcmahan2017communication"></d-cite><d-cite key="karimireddy2020scaffold"></d-cite><d-cite key="kairouz2021advances"></d-cite>, so many works modified the oracle framework a bit turn to study the complexity bound in terms of *communication cost/oracle*, which also motivates the fruitful study of local algorithms, which tries to skip unnecessary communications while still guarantees the convergence<d-cite key="stich2019local"></d-cite><d-cite key="mishchenko2022proxskip"></d-cite>.
+
   * Large stepsize
-  * Communication complexity
 
 ---
 
 ## Conclusion
 
-In this post, we review the SOTA complexity upper and lower bounds of first-order algorithms in optimization tailored for minimization and minimax regimes with various settings, the summary identified gaps in existing research, which shed light on the open questions in regarding accelerated algorithm design and performance limit investigation. Also regarding the rapid development and interdisciplinary applications in areas like machine learning and operation research, we revisited several recent works which go beyond the classical research flow in optimization community, which advocates a paradigm shift in research: besides an elegantly unified theory trying to cover all cases, we should also try to avoid the "Maslow's hammer", we need to focus on the detailed applications first, identify their unique structure, and correspondently design algorithms tailored for these problems, which in turn will benefit the practice, such pattern may largely help us to devise theory fitting the practice better.
+In this post, we review the SOTA complexity upper and lower bounds of first-order algorithms in optimization tailored for minimization and minimax regimes with various settings, the summary identified gaps in existing research, which shed light on the open questions in regarding accelerated algorithm design and performance limit investigation. Also regarding the rapid development and interdisciplinary applications in areas like machine learning and operation research, we revisited several recent works which go beyond the classical research flow in optimization community, which advocates a paradigm shift in research: besides an elegant and unified theory trying to cover all cases, sometimes we should also try to avoid the "Maslow's hammer", focus on the detailed applications first, identify their unique structure, and correspondently design algorithms tailored for these problems, which in turn will benefit the practice. Although the scope may be narrower in general, we believe such instance-driven pattern may largely help us to devise theory fitting the practice better.
