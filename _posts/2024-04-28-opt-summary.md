@@ -316,11 +316,34 @@ Also for **Minimax Problems**, based on the convexity combination of each compon
 ## To Have a Better Bound (New Trends)
 The section above summarize the upper and lower bounds of the oracle complexity for finding an $\epsilon$-optimal solution or $\epsilon$-stationary points for minimization and minimax problems. Clearly this is not the end of the story, there are more and more optimization problems arising from various applications like machine learning and operation research<d-cite key="bottou2018optimization"></d-cite>, which come with more involved problem structure and complicated landscape characteristics; also sometimes we find it harder to explain algorithm behavior in practice using existing theory, e.g., <d-cite key="defazio2019ineffectiveness"></d-cite> shows that variance reduction may be ineffective on accelerating the training of deep learning models, which contrast the classical convergence theory. Here we discuss what could be potential interesting next steps. 
 
-- More involved problem structure
-- Last-iterate?
+* More Problem Structure
+In this notes, we only discussed minimization and minimax problems, while there are also many other important optimization problems with different structure, for example:
+  * bilevel optimization 
+  
+  $$
+  \min_{x \in \mathcal{X}} \Phi(x) = F(x, y^*(x))  \quad \text{where} \quad y^*(x) = \underset{y \in \mathcal{Y}}{\arg\min} \, G(x, y),
+  $$
+
+  Bilevel optimization covers minimax optimization as a special case. Over the past seven years, bilevel optimization has become increasingly popular due to its applications in machine learning. In particular, researchers have revisited first-order methods for solving (stochastic) bilevel optimization problems. Starting from [Reference A], which investigates double-loop methods for solving bilevel optimization, [Reference B] initiated the development of single-loop, single-timescale methods for stochastic bilevel optimization. This line of research leads to a simple single-timescale algorithm [Reference C] and multiple variance reduction techniques to achieve single-loop [Reference D]. Subsequent developments have focused on avoiding computing Hessian inverse of the lower-level problem [Reference E], developing fully first-order methods for solving bilevel optimization [Reference F], achieving global optimality [Reference G], addressing contextual/multiple lower-level problems [Reference H], handling constrained lower-level problems [Reference I], and bilevel reinforcement learning [Reference J] for model design and reinforcement learning with human feedback.
+
+  Several questions remain open and are interesting to investigate:
+  1. How to handle general lower-level problems with coupling constraints. 
+  2. How to accelerate fully first-order methods to match the optimal complexity bounds.
+  3. How to establish non-asymptotic convergence guarantees for bilevel problems with convex lower levels.
+
+  Also there appeared several other optimization problems with different formulations arising from practice, e.g.,  
+  * Compositional optimization<d-cite key="wang2017stochastic"></d-cite>
+
+  $$
+  \min_{x \in \mathcal{X}} F(x) = f(g(x)),
+  $$
+
+  * (Another one)
+   
+* Landscape Analysis
+
 - large stepsize
-- Markovian noise
-- DRO
+
 - Application-driven: Mix the gap between practice and theory
 {% include figure.liquid path="assets/img/2024-04-28-opt-summary/practice_gap.png" class="img-fluid" %}
 
@@ -332,7 +355,8 @@ The section above summarize the upper and lower bounds of the oracle complexity 
 
 - Interpolation condition in over-parametrized NN
 * Beyond oracle model
- * Time complexity
+  * Time complexity
+  * Communication complexity
 
 ---
 
