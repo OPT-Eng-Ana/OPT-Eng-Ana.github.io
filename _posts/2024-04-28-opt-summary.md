@@ -170,8 +170,8 @@ For convenience, we summarize some of the notations commonly used in tables belo
 - PL: Polyak-Łojasiewicz Condition
 - Optimality gap: the function value gap $f(x) - f^\star$.
 - Stationarity: the function gradient norm $\| \nabla f(x) \|$.
-- NWhat is next?e key="davis2018stochastic"></d-cite>: the gradient norm $\| \nabla f_\lambda(x) \|$, where $f_\lambda$ is the Moreau envelope of the original function $f$.
-- Duality Gap (for minimax optimization): the primal-dual gap of a given point $(x', y')$, defined as $\mathrm{gap}_f(x', y')\triangleq \max_{y\in\mathcal{Y}}f(x',y)-\min_{x\in\mathcal{X}}f(x,y')$.
+- Near-stationarity: the gradient norm $\|\| \nabla f_\lambda(x) \|\|$, where $f_\lambda$ is the Moreau envelope of the original function $f$.
+- Duality Gap (for minimax optimization): the primal-dual gap of a given point $(\hat{x},\hat{y})$, defined as $G_f(\hat{x},\hat{y})\triangleq\max_y f(\hat{x},y)-\min_x f(x,\hat{y})$
 
 - Primal Stationarity (for minimax optimization): the primal function gradient norm $\| \nabla \Phi(x) \|$, where $\Phi(x)\triangleq\max_{y\in\mathcal{Y}}f(x,y)$ is the primal function. It is different from the function stationarity in terms of the original objective function $f$.
 
@@ -193,8 +193,6 @@ As mentioned above, we categorize the discussion based on the problem, stochasti
 
 ### Case 1-1: Deterministic Minimization
 
-<div class="l-page" markdown="1">
-
 | Problem Type               | Measure                   | Lower Bound            | Upper Bound      | Reference (LB-UB)<d-footnote>Note that here possibly we may not choose the most original work which proposed the results, rather we may select the literature which we are more familiar with, also with a clearer presentation. Readers are encouraged to check the reference therein for the original works.</d-footnote>                                |
 |----------------------------|---------------------------|------------------------|-------------|--------------------------------|
 | $L$-Smooth Convex          | Optimality gap           | $\Omega \left( \sqrt{L \epsilon^{-1}} \right)$                | $\checkmark$ | [<d-cite key="nesterov2018lectures"></d-cite>, Theorem 2.1.7; Theorem 2.2.2]       |
@@ -206,11 +204,7 @@ As mentioned above, we categorize the discussion based on the problem, stochasti
 | NS $L$-Lip Cont. $\rho$-WC    | Near-stationarity        | Unknown                                                       | $\mathcal{O}(\epsilon^{-4})$      | [<d-cite key="davis2018stochastic"></d-cite>, Theorem 2.1 implied]                  |
 | $L$-Smooth $\mu$-PL     | Optimality gap        | $\Omega \left( \kappa \log \frac{1}{\epsilon} \right)$ | $\checkmark$      | [<d-cite key="yue2023lower"></d-cite>, Theorem 3; <d-cite key="karimi2016linear"></d-cite>]                  |
 
-</div>
-
 ### Case 1-2: Finite-sum and Stochastic Optimization (double check)
-
-<div class="l-page" markdown="1">
 
 | Problem Type            | Measure | Lower Bound                                                | Upper Bound                               | Reference (LB-UB)                                       |
 |-------------------------|---------|---------------------------------------------------|----------------------------------|-----------------------------------------------------------|
@@ -230,8 +224,6 @@ As mentioned above, we categorize the discussion based on the problem, stochasti
 | Stoc L-SS NC   | Stationarity        | $\Omega \left( \Delta \sigma_x \epsilon^{-4} \right)$         | $\checkmark$                     | [<d-cite key="arjevani2023lower"></d-cite>, Theorem 1], [<d-cite key="ghadimi2013stochastic"></d-cite>, Cor 2.2]                                           |
 | Stoc L-AS NC            | Stationarity        | $\Omega \left( \Delta \sigma_x^2 + 3 \sigma_x \epsilon^{-2} \right)$ | $\checkmark$                     | [<d-cite key="arjevani2023lower"></d-cite>, Theorem 2], [<d-cite key="fang2018spider"></d-cite>, Theorem 1]                          |
 | NS $L$-Lip $\rho$-WC    | Near-stationarity        | Unknown     | $\mathcal{O} (\epsilon^{-4})$ | [<d-cite key="davis2018stochastic"></d-cite>, Thm 2.1]              |
-
-</div>
 
 ### Case 2-1: SC-SC/SC-C/C-C Deterministic Minimax Optimization
 
@@ -279,11 +271,12 @@ As mentioned above, we categorize the discussion based on the problem, stochasti
 
 | Type             | Measure | LB                                      | UB                                      | Reference (UB & LB)                                                                 |
 |------------------|---------|-----------------------------------------|-----------------------------------------|------------------------------------------------------------------------------------|
-| NC-SC, FS, AS    | Primal Stationarity        | $\Omega\left(\sqrt{n\kappa}\Delta L\epsilon^{-2}\right)$ | $\mathcal{O}\left(\sqrt{n}\kappa^2 L\Delta\epsilon^{-2}\right)$ | [<d-cite key="zhang2021complexity"></d-cite>]  |             
-| NC-C, FS, IS     | Near-stationarity        | Unknown | $\mathcal{O}\left(n^{3/4}L^2D_y\Delta\epsilon^{-3}\right)$ | [<d-cite key="yang2020catalyst"></d-cite>]                               |
+| NC-SC, FS, AS    | Primal Stationarity        | $\Omega\left(\sqrt{n\kappa}\Delta L\epsilon^{-2}\right)$ | $\mathcal{O}\left(\sqrt{n}\kappa^2 L\Delta\epsilon^{-2}\right)$ | [<d-cite key="zhang2021complexity"></d-cite>]  |          
+| NC-C, FS, IS     | Near-stationarity        | Unknown | $\mathcal{O}\left(n^{3/4}L^2D\Delta\epsilon^{-3}\right)$ | [<d-cite key="yang2020catalyst"></d-cite>]                               |
 | NC-SC, Stoc, SS  | Primal Stationarity        | $\Omega\left(\kappa^{1/3}\Delta L\epsilon^{-4}\right)$ | $\mathcal{O}\left(\kappa\Delta L\epsilon^{-4}\right)$ | [<d-cite key="zhang2022sapd+"></d-cite>, <d-cite key="li2021complexity"></d-cite>]                                                 |
-| NC-SC, Stoc, IS  | Primal Stationarity        | Unknown | $\mathcal{O}\left(\kappa^2\Delta L\epsilon^{-3}\right)$ | [<d-cite key="zhang2022sapd+"></d-cite>] 
+| NC-SC, Stoc, IS  | Primal Stationarity        | Unknown | $\mathcal{O}\left(\kappa^2\Delta L\epsilon^{-3}\right)$ | [<d-cite key="zhang2022sapd+"></d-cite>] |
 | NC-C, Stoc, SS   | Near-stationarity        | Unknown | $\mathcal{O}\left(L^3\epsilon^{-6}\right)$              | [<d-cite key="zhang2022sapd+"></d-cite>]            |
+
 ---
 
 ## What is next?
