@@ -233,6 +233,8 @@ As mentioned above, we categorize the discussion based on the problem, stochasti
 
 ### Case 2-1: SC-SC/SC-C/C-C Deterministic Minimax Optimization
 
+<div class="m-page" markdown="1"> 
+
 | Problem Type          | Measure | Lower Bound                                             | Upper Bound                           | Reference (LB-UB)                                      |
 |-----------------------|---------|-------------------------------------------------|------------------------------|----------------------------------------------------------|
 | C-C, bilinear, NS     | Duality Gap        | $\Omega(L / \epsilon)$                          | $\checkmark$                 | [<d-cite key="ouyang2021lower"></d-cite>, Thm 9], [<d-cite key="chambolle2011first"></d-cite>, Thm 1]                                            |
@@ -246,7 +248,11 @@ As mentioned above, we categorize the discussion based on the problem, stochasti
 | PL-PL                 | Duality Gap        | Unknown                                            | $\mathcal{O}(\kappa^3\log \frac{1}{\epsilon})$ | [<d-cite key="yang2020global"></d-cite>] |
 |                       |         |                                                 |                              |                                                          |
 
+</div>
+
 ### Case 2-2: SC-SC/SC-C/C-C Finite-sum and Stochastic Minimax Optimization
+
+<div class="m-page" markdown="1"> 
 
 | Problem Type         | Measure | LB                                         | UB                            | Reference-LB      | Reference-UB                                   |
 |----------------------|---------|---------------------------------------------|-------------------------------|-------------------|------------------------------------------|
@@ -259,6 +265,8 @@ As mentioned above, we categorize the discussion based on the problem, stochasti
 | SC-SC, Stoc, NS      | Duality Gap | $\Omega(\epsilon^{-1})$                    | $\checkmark$                  | (Stoc SC NS min)                                            | [<d-cite key="yan2020optimal"></d-cite>]       |
 | PL-PL, Stoc      | Duality Gap | Unknown                    | $\mathcal{O}(\kappa^5\epsilon^{-1})$                  | (Stoc SC NS min)                                            | [<d-cite key="yang2020global"></d-cite>]       |
 |                      |         |                                             |                               |                                                             |
+
+</div>
 
 ### Case 2-3: NC-SC/NC-C Deterministic Minimax Optimization
 
