@@ -252,7 +252,7 @@ As mentioned above, we categorize the discussion based on the problem, stochasti
 
 ### Case 2-2: SC-SC/SC-C/C-C Finite-sum and Stochastic Minimax Optimization
 
-<div class="m-page" markdown="1"> 
+<div class="s-page" markdown="1"> 
 
 | Problem Type         | Measure | LB                                         | UB                            | Reference-LB      | Reference-UB                                   |
 |----------------------|---------|---------------------------------------------|-------------------------------|-------------------|------------------------------------------|
@@ -270,6 +270,8 @@ As mentioned above, we categorize the discussion based on the problem, stochasti
 
 ### Case 2-3: NC-SC/NC-C Deterministic Minimax Optimization
 
+<div class="l-page" markdown="1"> 
+
 | Type               | Measure | LB                                          | UB                               | Reference-LB      | Reference-UB                                   |
 |--------------------|---------|---------------------------------------------|----------------------------------|-------------------|------------------------------------------------|
 | NC-SC, Deter       | Primal Stationarity | $\Omega(\sqrt{\kappa}\Delta \mathcal{L} \epsilon^{-2})$  | $\checkmark$ | [<d-cite key="zhang2021complexity"></d-cite>, Theorem 3.1] | [<d-cite key="zhang2021complexity"></d-cite>, Theorem 4.1] |
@@ -277,11 +279,15 @@ As mentioned above, we categorize the discussion based on the problem, stochasti
 | WC-C, Deter        | Near-Stationarity | Unknown | $\mathcal{O}(\epsilon^{-6})$                       |         | [<d-cite key="boct2023alternating"></d-cite>, Thm 3.7]         |
 | NC-PL, Deter       | Primal Stationarity | Unknown | $\Omega(\kappa^2\epsilon^{-4})$                   |         | [<d-cite key="yang2022faster"></d-cite>]         |
 
+</div>
+
 **Remark:**
 
 1. Some other works also studied the above problems in terms of the fucnction stationarity (i.e., the gradient norm of $f$, rather than it primal), e.g., <d-cite key="lin2020near"></d-cite><d-cite key="xu2023unified"></d-cite>. As discussed in <d-cite key="yang2022faster"></d-cite>, it has been shown that function stationarity and primal stationarity are transferable with a mild efforts, here we do not present the results specifically.
 
 ### Case 2-4: NC-SC/NC-C Finite-sum and Stochastic Minimax Optimization
+
+<div class="l-page" markdown="1"> 
 
 | Type             | Measure | LB                                      | UB                                      | Reference (UB & LB)                                                                 |
 |------------------|---------|-----------------------------------------|-----------------------------------------|------------------------------------------------------------------------------------|
@@ -290,6 +296,8 @@ As mentioned above, we categorize the discussion based on the problem, stochasti
 | NC-SC, Stoc, SS  | Primal Stationarity        | $\Omega\left(\kappa^{1/3}\Delta L\epsilon^{-4}\right)$ | $\mathcal{O}\left(\kappa\Delta L\epsilon^{-4}\right)$ | [<d-cite key="zhang2022sapd+"></d-cite>, <d-cite key="li2021complexity"></d-cite>]                                                 |
 | NC-SC, Stoc, IS  | Primal Stationarity        | Unknown | $\mathcal{O}\left(\kappa^2\Delta L\epsilon^{-3}\right)$ | [<d-cite key="zhang2022sapd+"></d-cite>] |
 | NC-C, Stoc, SS   | Near-stationarity        | Unknown | $\mathcal{O}\left(L^3\epsilon^{-6}\right)$              | [<d-cite key="zhang2022sapd+"></d-cite>]            |
+
+</div>
 
 ---
 
