@@ -137,8 +137,6 @@ $$
 
 {% include figure.liquid path="assets/img/2024-04-28-opt-summary/upper_lower.png" class="img-fluid" %}
 
-{% include figure.html path="assets/img/2025-04-28-localization/hist_iti.png" title="Info*Truth Scores" class="img-fluid" %}
-
 <div class="caption">
     Illustration of Upper and Lower Complexity Bounds
 </div>
