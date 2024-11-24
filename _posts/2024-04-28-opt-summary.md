@@ -191,6 +191,8 @@ As mentioned above, we categorize the discussion based on the problem, stochasti
 
 ### Case 1-1: Deterministic Minimization
 
+<div class="l-page" markdown="1">
+
 | Problem Type               | Measure                   | Lower Bound            | Upper Bound      | Reference (LB-UB)<d-footnote>Note that here possibly we may not choose the most original work which proposed the results, rather we may select the literature which we are more familiar with, also with a clearer presentation. Readers are encouraged to check the reference therein for the original works.</d-footnote>                                |
 |----------------------------|---------------------------|------------------------|-------------|--------------------------------|
 | $L$-Smooth Convex          | Optimality gap           | $\Omega \left( \sqrt{L \epsilon^{-1}} \right)$                | $\checkmark$ | [<d-cite key="nesterov2018lectures"></d-cite>, Theorem 2.1.7; Theorem 2.2.2]       |
@@ -202,7 +204,11 @@ As mentioned above, we categorize the discussion based on the problem, stochasti
 | NS $L$-Lip Cont. $\rho$-WC    | Near-stationarity        | Unknown                                                       | $\mathcal{O}(\epsilon^{-4})$      | [<d-cite key="davis2018stochastic"></d-cite>, Theorem 2.1 implied]                  |
 | $L$-Smooth $\mu$-PL     | Optimality gap        | $\Omega \left( \kappa \log \frac{1}{\epsilon} \right)$ | $\checkmark$      | [<d-cite key="yue2023lower"></d-cite>, Theorem 3; <d-cite key="karimi2016linear"></d-cite>]                  |
 
+</div>
+
 ### Case 1-2: Finite-sum and Stochastic Optimization (double check)
+
+<div class="l-page" markdown="1"> 
 
 | Problem Type            | Measure | Lower Bound                                                | Upper Bound                               | Reference (LB-UB)                                       |
 |-------------------------|---------|---------------------------------------------------|----------------------------------|-----------------------------------------------------------|
@@ -222,6 +228,8 @@ As mentioned above, we categorize the discussion based on the problem, stochasti
 | Stoc L-SS NC   | Stationarity        | $\Omega \left( \Delta \sigma_x \epsilon^{-4} \right)$         | $\checkmark$                     | [<d-cite key="arjevani2023lower"></d-cite>, Theorem 1], [<d-cite key="ghadimi2013stochastic"></d-cite>, Cor 2.2]                                           |
 | Stoc L-AS NC            | Stationarity        | $\Omega \left( \Delta \sigma_x^2 + 3 \sigma_x \epsilon^{-2} \right)$ | $\checkmark$                     | [<d-cite key="arjevani2023lower"></d-cite>, Theorem 2], [<d-cite key="fang2018spider"></d-cite>, Theorem 1]                          |
 | NS $L$-Lip $\rho$-WC    | Near-stationarity        | Unknown     | $\mathcal{O} (\epsilon^{-4})$ | [<d-cite key="davis2018stochastic"></d-cite>, Thm 2.1]              |
+
+</div>
 
 ### Case 2-1: SC-SC/SC-C/C-C Deterministic Minimax Optimization
 
