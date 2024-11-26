@@ -201,9 +201,9 @@ Also for **Minimax Problems**, based on the convexity combination of each compon
 
 We present the lower and upper bound results in tables below<d-footnote>Given the extensive body of literature on this topic, it is possible that some relevant references may have been inadvertently overlooked, or some results we cited are not fully correct. We welcome any comments or questions and are happy to discuss.</d-footnote>.
 
-### Case 1-1: Deterministic Minimization
-
 <div class="l-page" markdown="1">
+
+### Case 1-1: Deterministic Minimization
 
 | Problem Type               | Measure                   | Lower Bound            | Upper Bound      | Reference (LB)      | Reference (UB)<d-footnote>Note that here possibly we may not choose the most original work which proposed the results, rather we may select the one which may come with a clearer presentation. Readers are encouraged to check the reference therein for the original works.</d-footnote> |
 |----------------------------|---------------------------|------------------------|-------------|--------------------------------|-----------|
@@ -211,8 +211,8 @@ We present the lower and upper bound results in tables below<d-footnote>Given th
 | $L$-Smooth $\mu$-SC        | Optimality gap           | $\Omega \left( \sqrt{\kappa} \log \frac{1}{\epsilon} \right)$ | $\checkmark$ | <d-cite key="nesterov2018lectures"></d-cite>, Theorem 2.1.13      | <d-cite key="nesterov2018lectures"></d-cite>, Theorem 2.2.2 |
 | NS $L$-Lip Cont. Convex       | Optimality gap           | $\Omega (L^2 \epsilon^{-2})$                               | $\checkmark$ | <d-cite key="nesterov2018lectures"></d-cite>, Theorem 3.2.1       | <d-cite key="nesterov2018lectures"></d-cite>, Theorem 3.2.2 |
 | NS $L$-Lip Cont. $\mu$-SC     | Optimality gap           | $\Omega (L^2 (\mu \epsilon)^{-1})$                         | $\checkmark$ | <d-cite key="nesterov2018lectures"></d-cite>, Theorem 3.2.5       | <d-cite key="bubeck2015convex"></d-cite>, Theorem 3.9<d-footnote>The algorithm design therein requires projection.</d-footnote> |
-| $L$-Smooth Convex (function case)          | Stationarity    | $\Omega \left( \sqrt{\Delta L }\epsilon^{-1} \right)$  | $\checkmark$ | <d-cite key="carmon2021lower"></d-cite>, Theorem 1                | <d-cite key="carmon2021lower"></d-cite>, Appendix A.1 (within logarithmic factors) |
-| $L$-Smooth Convex (point case)          | Stationarity    | $\Omega \left( \sqrt{D L \epsilon^{-1}} \right)$          | $\checkmark$ | <d-cite key="carmon2021lower"></d-cite>, Theorem 1                | <d-cite key="nesterov2012make"></d-cite> (within logarithmic factors) |
+| $L$-Smooth Convex (function case)          | Stationarity    | $\Omega \left( \sqrt{\Delta L }\epsilon^{-1} \right)$  | $\checkmark$ (within logarithmic) | <d-cite key="carmon2021lower"></d-cite>, Theorem 1                | <d-cite key="carmon2021lower"></d-cite>, Appendix A.1 |
+| $L$-Smooth Convex (point case)          | Stationarity    | $\Omega \left( \sqrt{D L \epsilon^{-1}} \right)$          | $\checkmark$ (within logarithmic) | <d-cite key="carmon2021lower"></d-cite>, Theorem 1                | <d-cite key="nesterov2012make"></d-cite> |
 | $L$-Smooth NC              | Stationarity    | $\Omega (\Delta L \epsilon^{-2})$                                      | $\checkmark$ | <d-cite key="carmon2020lower"></d-cite>, Theorem 1                | <d-cite key="carmon2021lower"></d-cite>, Theorem 10.15 |
 | NS $L$-Lip Cont. $\rho$-WC    | Near-stationarity        | Unknown                                                    | $\mathcal{O}(\epsilon^{-4})$  | /                                                | <d-cite key="davis2018stochastic"></d-cite>, Corollary 2.2 |
 | $L$-Smooth $\mu$-PL     | Optimality gap | $\Omega \left( \kappa \log \frac{1}{\epsilon} \right)$                     | $\checkmark$      | <d-cite key="yue2023lower"></d-cite>, Theorem 3              | <d-cite key="karimi2016linear"></d-cite>, Theorem 1 |
@@ -222,9 +222,9 @@ We present the lower and upper bound results in tables below<d-footnote>Given th
 **Remark:**
 
 1. Here we use $\checkmark$ to denote that the upper and lower bounds already match in this setting, otherwise we use $\times$ or directly present existing best result.
-2. For some cases, we denote the LB as "Unknown" if there is not a specific (nontrivial) lower bound built for this case.
-3. $\Delta$ corresponds to the initial function value gap $f(x_0)-f(x^\star)$, and $D$ corresponds to the initial point distance $\|\|x_0-x^\star\|\|$.
-4. In additional to the bounded initial optimality gap case, <d-cite key="carmon2021lower"></d-cite> also studied the $L$-Smooth Convex case under the bounded optimal point norm case, providing an $\Omega \left( \sqrt{D L \epsilon^{-1}} \right)$ lower bound, which nearly match
+2. Here "(within logarithmic)" means the upper bound matches the lower bound within logarithmic factors which depends on $\epsilon$, generally it can be regarded as a neglectable term, so we still denote it as $\checkmark$.
+3. For some cases, we denote the LB as "Unknown" if there is not a specific (nontrivial) lower bound built for this case.
+4. $\Delta$ corresponds to the initial function value gap $f(x_0)-f(x^\star)$, and $D$ corresponds to the initial point distance $\|\|x_0-x^\star\|\|$.
 
 ### Case 1-2: Finite-sum and Stochastic Optimization
 
