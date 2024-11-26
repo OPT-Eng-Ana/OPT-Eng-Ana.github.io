@@ -202,87 +202,96 @@ We present the lower and upper bound results in tables below<d-footnote>Given th
 
 | Problem Type               | Measure                   | Lower Bound            | Upper Bound      | Reference (LB-UB)<d-footnote>Note that here possibly we may not choose the most original work which proposed the results, rather we may select the literature which we are more familiar with, also with a clearer presentation. Readers are encouraged to check the reference therein for the original works.</d-footnote>                                |
 |----------------------------|---------------------------|------------------------|-------------|--------------------------------|
-| $L$-Smooth Convex          | Optimality gap           | $\Omega \left( \sqrt{L \epsilon^{-1}} \right)$                | $\checkmark$ | <d-cite key="nesterov2018lectures"></d-cite>, Theorem 2.1.7; Theorem 2.2.2       |
-| $L$-Smooth $\mu$-SC        | Optimality gap           | $\Omega \left( \sqrt{\kappa} \log \frac{1}{\epsilon} \right)$ | $\checkmark$ | [<d-cite key="nesterov2018lectures"></d-cite>, Theorem 2.1.13]                     |
-| NS $L$-Lip Cont. Convex       | Optimality gap           | $\Omega (L^2 \epsilon^{-2})$                                  | $\checkmark$ | <d-cite key="bubeck2015convex"></d-cite>, Theorem 3.8                        |
-| NS $L$-Lip Cont. $\mu$-SC     | Optimality gap           | $\Omega (L^2 (\mu \epsilon)^{-1})$                            | $\checkmark$ | [<d-cite key="bubeck2015convex"></d-cite>, Theorem 3.8]                        |
-| $L$-Smooth Convex          | Stationarity    | $\Omega \left( \sqrt{\Delta L \epsilon^{-1}} \right)$     | $\checkmark$ | [<d-cite key="carmon2021lower"></d-cite>, Theorem 1 & Appendix A.1]              |
-| $L$-Smooth NC              | Stationarity    | $\Omega (\Delta L \epsilon^{-2})$                             | $\checkmark$ | [<d-cite key="carmon2020lower"></d-cite>, Theorem 1]      |
-| NS $L$-Lip Cont. $\rho$-WC    | Near-stationarity        | Unknown                                                       | $\mathcal{O}(\epsilon^{-4})$      | [<d-cite key="davis2018stochastic"></d-cite>, Theorem 2.1 implied]                  |
-| $L$-Smooth $\mu$-PL     | Optimality gap        | $\Omega \left( \kappa \log \frac{1}{\epsilon} \right)$ | $\checkmark$      | [<d-cite key="yue2023lower"></d-cite>, Theorem 3; <d-cite key="karimi2016linear"></d-cite>]                  |
+| $L$-Smooth Convex          | Optimality gap           | $\Omega \left( \sqrt{L \epsilon^{-1}} \right)$                | $\checkmark$ | [<d-cite key="nesterov2018lectures"></d-cite>, Thm 2.1.7; Thm 2.2.2]       |
+| $L$-Smooth $\mu$-SC        | Optimality gap           | $\Omega \left( \sqrt{\kappa} \log \frac{1}{\epsilon} \right)$ | $\checkmark$ | [<d-cite key="nesterov2018lectures"></d-cite>, Thm 2.1.13]                     |
+| NS $L$-Lip Cont. Convex       | Optimality gap           | $\Omega (L^2 \epsilon^{-2})$                                  | $\checkmark$ | <d-cite key="bubeck2015convex"></d-cite>, Thm 3.8                        |
+| NS $L$-Lip Cont. $\mu$-SC     | Optimality gap           | $\Omega (L^2 (\mu \epsilon)^{-1})$                            | $\checkmark$ | [<d-cite key="bubeck2015convex"></d-cite>, Thm 3.8]                        |
+| $L$-Smooth Convex          | Stationarity    | $\Omega \left( \sqrt{\Delta L \epsilon^{-1}} \right)$     | $\checkmark$ | [<d-cite key="carmon2021lower"></d-cite>, Thm 1 & Appendix A.1]              |
+| $L$-Smooth NC              | Stationarity    | $\Omega (\Delta L \epsilon^{-2})$                             | $\checkmark$ | [<d-cite key="carmon2020lower"></d-cite>, Thm 1]      |
+| NS $L$-Lip Cont. $\rho$-WC    | Near-stationarity        | Unknown                                                       | $\mathcal{O}(\epsilon^{-4})$      | [<d-cite key="davis2018stochastic"></d-cite>, Thm 2.1 implied]                  |
+| $L$-Smooth $\mu$-PL     | Optimality gap        | $\Omega \left( \kappa \log \frac{1}{\epsilon} \right)$ | $\checkmark$      | [<d-cite key="yue2023lower"></d-cite>, Thm 3; <d-cite key="karimi2016linear"></d-cite>]                  |
 
 </div>
 
+**Remark:**
+
+1. Here we use $\checkmark$ to denote that the upper and lower bounds match in this setting, otherwise we use $\times$ or directly present existing best result.
+2. For some cases, we denote the LB as "Unknown" if there is not a specific (nontrivial) lower bound built for this case.
+3. $\Delta$ corresponds to the initial function value gap $f(x_0)-f(x^\star)$, and $D$ corresponds to the initial point distance $\|\|x_0-x^*\|\|$.
 ### Case 1-2: Finite-sum and Stochastic Optimization (double check)
 
 <div class="l-page" markdown="1"> 
 
 | Problem Type            | Measure | Lower Bound                                                | Upper Bound                               | Reference (LB-UB)                                       |
 |-------------------------|---------|---------------------------------------------------|----------------------------------|-----------------------------------------------------------|
-| FS $L$-IS $\mu$-SC      | Optimality gap        | $\Omega \left( n + \sqrt{\kappa n} \log \frac{1}{\epsilon} \right)$ | $\times$          | [<d-cite key="woodworth2016tight"></d-cite>, Theorem 8] [<d-cite key="defazio2016simple"></d-cite>, Cor 6], [<d-cite key="allen2018katyusha"></d-cite>, Cor 2.1]                          |
-| FS $L$-IS C             | Optimality gap        | $\Omega \left( n + D \sqrt{n L \epsilon^{-1}} \right)$         | $\times$          | [<d-cite key="woodworth2016tight"></d-cite>, Theorem 7] [<d-cite key="allen2018katyusha"></d-cite>, Cor 3.7] |
-| FS $L$-AS $\mu$-SC      | Optimality gap        | $\Omega \left( n + n^{\frac{3}{4}} \sqrt{\kappa} \log \frac{\Delta}{\epsilon} \right)$ | $\checkmark$                     | [<d-cite key="xie2019general"></d-cite>, Theorem 3.5], [<d-cite key="allen2018katyusha"></d-cite>, Sec 5]                                 |
-| FS $L$-AS C             | Optimality gap        | $\Omega \left( n + n^{\frac{3}{4}} D \sqrt{L \epsilon^{-1}} \right)$ | $\checkmark$                     | [<d-cite key="zhou2019lower"></d-cite>, Theorem 4.2], [<d-cite key="allen2018katyusha"></d-cite>, Sec 5]                                 |
-| FS $L$-IS NC            | Stationarity        | $\Omega \left( \Delta L \epsilon^{-2} \right)$               | $\times$                          | [<d-cite key="zhou2019lower"></d-cite>, Theorem 4.7], [<d-cite key="wang2019spiderboost"></d-cite>, Thm 1] |
-| FS $L$-AS NC            | Stationarity       | $\Omega \left( \sqrt{n \Delta L \epsilon^{-2}} \right)$       | $\checkmark$                     | [<d-cite key="zhou2019lower"></d-cite>, Theorem 4.5], [<d-cite key="fang2018spider"></d-cite>, Thm 2, 3]|
+| FS $L$-IS $\mu$-SC      | Optimality gap        | $\Omega \left( n + \sqrt{\kappa n} \log \frac{1}{\epsilon} \right)$ | $\times$          | [<d-cite key="woodworth2016tight"></d-cite>, Thm 8] [<d-cite key="defazio2016simple"></d-cite>, Cor 6], [<d-cite key="allen2018katyusha"></d-cite>, Cor 2.1]                          |
+| FS $L$-IS C             | Optimality gap        | $\Omega \left( n + D \sqrt{n L \epsilon^{-1}} \right)$         | $\times$          | [<d-cite key="woodworth2016tight"></d-cite>, Thm 7] [<d-cite key="allen2018katyusha"></d-cite>, Cor 3.7] |
+| FS $L$-AS $\mu$-SC      | Optimality gap        | $\Omega \left( n + n^{\frac{3}{4}} \sqrt{\kappa} \log \frac{\Delta}{\epsilon} \right)$ | $\checkmark$                     | [<d-cite key="xie2019general"></d-cite>, Thm 3.5], [<d-cite key="allen2018katyusha"></d-cite>, Sec 5]                                 |
+| FS $L$-AS C             | Optimality gap        | $\Omega \left( n + n^{\frac{3}{4}} D \sqrt{L \epsilon^{-1}} \right)$ | $\checkmark$                     | [<d-cite key="zhou2019lower"></d-cite>, Thm 4.2], [<d-cite key="allen2018katyusha"></d-cite>, Sec 5]                                 |
+| FS $L$-IS NC            | Stationarity        | $\Omega \left( \Delta L \epsilon^{-2} \right)$               | $\times$                          | [<d-cite key="zhou2019lower"></d-cite>, Thm 4.7], [<d-cite key="wang2019spiderboost"></d-cite>, Thm 1] |
+| FS $L$-AS NC            | Stationarity       | $\Omega \left( \sqrt{n \Delta L \epsilon^{-2}} \right)$       | $\checkmark$                     | [<d-cite key="zhou2019lower"></d-cite>, Thm 4.5], [<d-cite key="fang2018spider"></d-cite>, Thm 2, 3]|
 |                         |         |                                                     |                                  |                                                           |
-| Stoc $L$-$S$ $\mu$-SC   | Stationarity        | $\Omega (\epsilon^{-1})$                            | $\checkmark$                     | [<d-cite key="rakhlin2012making"></d-cite>, Thm 2] (?), [<d-cite key="ghadimi2012optimal"></d-cite>, Prop 9]                        |
-| Stoc $L$-$S$ C          | Stationarity        | $\Omega (\epsilon^{-2})$                            | $\checkmark$                     | [<d-cite key="woodworth2018graph"></d-cite>, Thm 1] (?), [<d-cite key="lan2012optimal"></d-cite>, Thm 1]          |
+| Stoc $L$-$S$ $\mu$-SC   | Stationarity        | $\Omega (\epsilon^{-1})$                            | $\checkmark$                     | [<d-cite key="rakhlin2012making"></d-cite>, Thm 2], [<d-cite key="ghadimi2012optimal"></d-cite>, Prop 9]                        |
+| Stoc $L$-$S$ C          | Stationarity        | $\Omega (\epsilon^{-2})$                            | $\checkmark$                     | [<d-cite key="woodworth2018graph"></d-cite>, Thm 1], [<d-cite key="lan2012optimal"></d-cite>, Thm 1]          |
 | Stoc NS $\mu$-SC        | Stationarity        | $\Omega (\epsilon^{-2})$                            | $\checkmark$                     | [<d-cite key="agarwal2009information"></d-cite>, Thm 2], [<d-cite key="nemirovski2009robust"></d-cite>, Sec 2.1]                          |
 | Stoc NS C               | Stationarity        | $\Omega (\epsilon^{-2})$                            | $\checkmark$                     | [<d-cite key="agarwal2009information"></d-cite>, Thm 1], [<d-cite key="nemirovski2009robust"></d-cite>, Sec 2.2]                        |
-| Stoc $L$-$S$ $\mu$-SC   | Stationarity        | Unknown                  | $\mathcal{O} \left( \sqrt{\frac{LD}{\epsilon}} \log k + \frac{\sigma_x^2}{\epsilon^2} \log^3 k \right)$                     | [<d-cite key="foster2019complexity"></d-cite>, Theorem 1] |
-| Stoc $L$-$S$ C   | Stationarity        | $\Omega \left( \frac{LD}{\epsilon} + \frac{\sigma_x^2}{\epsilon^2} \log \frac{LD}{\epsilon} \right)$ | $\mathcal{O} \left( \sqrt{\frac{LD}{\epsilon}} \log k + \frac{\sigma_x^2}{\epsilon^2} \log^3 k \right)$       | [<d-cite key="foster2019complexity"></d-cite>, Theorem 1, Corollary 1] |
-| Stoc L-SS NC   | Stationarity        | $\Omega \left( \Delta \sigma_x \epsilon^{-4} \right)$         | $\checkmark$                     | [<d-cite key="arjevani2023lower"></d-cite>, Theorem 1], [<d-cite key="ghadimi2013stochastic"></d-cite>, Cor 2.2]                                           |
-| Stoc L-AS NC            | Stationarity        | $\Omega \left( \Delta \sigma_x^2 + 3 \sigma_x \epsilon^{-2} \right)$ | $\checkmark$                     | [<d-cite key="arjevani2023lower"></d-cite>, Theorem 2], [<d-cite key="fang2018spider"></d-cite>, Theorem 1]                          |
+| Stoc $L$-$S$ $\mu$-SC   | Stationarity        | Unknown                  | $\mathcal{O} \left( \sqrt{\frac{LD}{\epsilon}} \log k + \frac{\sigma^2}{\epsilon^2} \log^3 k \right)$                     | [<d-cite key="foster2019complexity"></d-cite>, Thm 1] |
+| Stoc $L$-$S$ C   | Stationarity        | $\Omega \left( \frac{LD}{\epsilon} + \frac{\sigma^2}{\epsilon^2} \log \frac{LD}{\epsilon} \right)$ | $\mathcal{O} \left( \sqrt{\frac{LD}{\epsilon}} \log k + \frac{\sigma^2}{\epsilon^2} \log^3 k \right)$       | [<d-cite key="foster2019complexity"></d-cite>, Thm 1, Cor 1] |
+| Stoc L-SS NC   | Stationarity        | $\Omega \left( \Delta \sigma \epsilon^{-4} \right)$         | $\checkmark$                     | [<d-cite key="arjevani2023lower"></d-cite>, Thm 1], [<d-cite key="ghadimi2013stochastic"></d-cite>, Cor 2.2]                                           |
+| Stoc L-AS NC            | Stationarity        | $\Omega \left( \Delta \sigma^2 + 3 \sigma \epsilon^{-2} \right)$ | $\checkmark$                     | [<d-cite key="arjevani2023lower"></d-cite>, Thm 2], [<d-cite key="fang2018spider"></d-cite>, Thm 1]                          |
 | NS $L$-Lip $\rho$-WC    | Near-stationarity        | Unknown     | $\mathcal{O} (\epsilon^{-4})$ | [<d-cite key="davis2018stochastic"></d-cite>, Thm 2.1]              |
 
 </div>
 
 **Remark:**
 
-1. Shuffling
+1. Here $n$ corresponds to the number of component functions $f_i$, and $\kappa\triangleq L/\mu$ is the condition number, $\sigma^2$ corresponds to the variance of gradient estimator.
+2. "Thm" and "Cor" stand for "Theorem" and "Corollary" respectively.
+3. Shuffling...
 
 ### Case 2-1: SC-SC/SC-C/C-C Deterministic Minimax Optimization
 
-<div class="m-page" markdown="1"> 
+<div class="l-page" markdown="1"> 
 
 | Problem Type          | Measure | Lower Bound                                             | Upper Bound                           | Reference (LB-UB)                                      |
 |-----------------------|---------|-------------------------------------------------|------------------------------|----------------------------------------------------------|
 | C-C, bilinear, NS     | Duality Gap        | $\Omega(L / \epsilon)$                          | $\checkmark$                 | [<d-cite key="ouyang2021lower"></d-cite>, Thm 9], [<d-cite key="chambolle2011first"></d-cite>, Thm 1]                                            |
-| C-C, general          | Duality Gap        | $\Omega(L D_X D_Y / \epsilon)$                  | $\checkmark$                 | [<d-cite key="xie2020lower"></d-cite>, Thm 3], [<d-cite key="nemirovski2004prox"></d-cite>, Thm 4.1]  |
+| C-C, general          | Duality Gap        | $\Omega(L D^2 / \epsilon)$                  | $\checkmark$                 | [<d-cite key="xie2020lower"></d-cite>, Thm 3], [<d-cite key="nemirovski2004prox"></d-cite>, Thm 4.1]  |
 | SC-C, bilinear, NS    | Duality Gap        | $\Omega(\sqrt{\kappa_x} / \epsilon)$            | $\mathcal{O}(\kappa_x^2 / \sqrt{\epsilon})$      | [<d-cite key="ouyang2021lower"></d-cite>, Thm 10], [<d-cite key="chambolle2011first"></d-cite>, Thm 2]  |
-| SC-C, general         | Duality Gap        | $\Omega(D_Y \sqrt{L \kappa_x} / \epsilon)$      | $\tilde{\mathcal{O}}(D \sqrt{L \kappa_x} / \epsilon)$      | [<d-cite key="xie2020lower"></d-cite>, Thm 2 imply], [<d-cite key="yang2020catalyst"></d-cite>, Sec 3.2]  |
-| C-SC, bilinear        | Duality Gap        | ?                                               | $\mathcal{O}(\log \frac{1}{\epsilon})$ | [<d-cite key="du2019linear"></d-cite>, Thm 3.1] |
-| C-SC, general         | Duality Gap        | $\Omega(L D_X / \sqrt{\mu_y \epsilon})$         | ?                            | [<d-cite key="xie2020lower"></d-cite>, Thm 2 imply]   |
+| SC-C, general         | Duality Gap        | $\Omega(D \sqrt{L \kappa_x} / \epsilon)$      | $\tilde{\mathcal{O}}(D \sqrt{L \kappa_x} / \epsilon)$      | [<d-cite key="xie2020lower"></d-cite>, Thm 2], [<d-cite key="yang2020catalyst"></d-cite>, Sec 3.2]  |
+| C-SC, bilinear        | Duality Gap        | Unknown                                               | $\mathcal{O}(\log \frac{1}{\epsilon})$ | [<d-cite key="du2019linear"></d-cite>, Thm 3.1] |
 | SC-SC, bilinear       | Duality Gap        | $\Omega(\sqrt{\kappa_x \kappa_y} \log \frac{1}{\epsilon})$ | $\checkmark$               | [<d-cite key="zhang2022lower"></d-cite>, Thm 3.5], [<d-cite key="chambolle2016ergodic"></d-cite>, Thm 5]                                      |
 | SC-SC, general        | Duality Gap        | $\Omega(\sqrt{\kappa_x \kappa_y} \log \frac{1}{\epsilon})$ | $\times$    | [<d-cite key="zhang2022lower"></d-cite>, Thm 4.5], [<d-cite key="wang2020improved"></d-cite>, Thm 3]                                            |
 | PL-PL                 | Duality Gap        | Unknown                                            | $\mathcal{O}(\kappa^3\log \frac{1}{\epsilon})$ | [<d-cite key="yang2020global"></d-cite>] |
-|                       |         |                                                 |                              |                                                          |
+
+</div>
+
+**Remark:**
+
+1. Here $\kappa_x$ and $\kappa_y$ corresponds to condition numbers on $x$ and $y$ components, respectively.
+2. LB SC-SC bilinear: [<d-cite key="ibrahim2020linear"></d-cite>, Cor 4] and extension to SCLI framework<d-cite key="arjevani2016lower"></d-cite>...
+
+### Case 2-2: SC-SC/SC-C/C-C Finite-sum and Stochastic Minimax Optimization
+
+<div class="l-page" markdown="1"> 
+
+| Problem Type         | Measure | LB                                         | UB                            | Reference-LB      | Reference-UB                                   |
+|----------------------|---------|---------------------------------------------|-------------------------------|-------------------|------------------------------------------|
+| C-C, FS         | Duality Gap | $\Omega(n + L / \epsilon)$                 | $\mathcal{O}(\sqrt{n}/\epsilon)$                      | [<d-cite key="xie2020lower"></d-cite>, Thm 3]     | [<d-cite key="yazdandoost2023stochastic"></d-cite>, Cor 2.1]        |
+| C-C, Stoc, SS        | Duality Gap | $\Omega(\epsilon^{-2})$                    | $\checkmark$                  | /                                             | [<d-cite key="juditsky2011solving"></d-cite>, Cor 1]      |
+| C-C, Stoc, NS        | Duality Gap | $\Omega(\epsilon^{-2})$                    | $\checkmark$                  | /                                             | [<d-cite key="nemirovski2009robust"></d-cite>, Lemma 3.1]      |
+| SC-C, FS        | Duality Gap | $\Omega\left(n + \sqrt{n L / \epsilon}\right)$ | $\tilde{\mathcal{O}}(\sqrt{n L / \epsilon})$   | /                                                  | [<d-cite key="yang2020catalyst"></d-cite>, Sec 3.2]      |
+| SC-SC, FS       | Duality Gap | $\Omega\left((n + \kappa) \log \frac{1}{\epsilon}\right)$ | $\checkmark$ | [<d-cite key="xie2020lower"></d-cite>, Thm 1]      | [<d-cite key="palaniappan2016stochastic"></d-cite>, Thm 1]      |
+| SC-SC, Stoc, SS      | Duality Gap | $\Omega(\epsilon^{-1})$                    | $\checkmark$                  | /                                            | [<d-cite key="hsieh2019convergence"></d-cite>, Thm 5]       |
+| SC-SC, Stoc, NS      | Duality Gap | $\Omega(\epsilon^{-1})$                    | $\checkmark$                  | /                                            | [<d-cite key="yan2020optimal"></d-cite>]       |
+| PL-PL, Stoc      | Duality Gap | Unknown                    | $\mathcal{O}(\kappa^5\epsilon^{-1})$                  | /                                            | [<d-cite key="yang2020global"></d-cite>]       |
 
 </div>
 
 **Remark:**
 
 1. content
-2. LB SC-SC bilinear: [<d-cite key="ibrahim2020linear"></d-cite>, Cor 4] and extension to SCLI framework<d-cite key="arjevani2016lower"></d-cite>
-
-### Case 2-2: SC-SC/SC-C/C-C Finite-sum and Stochastic Minimax Optimization
-
-<div class="s-page" markdown="1"> 
-
-| Problem Type         | Measure | LB                                         | UB                            | Reference-LB      | Reference-UB                                   |
-|----------------------|---------|---------------------------------------------|-------------------------------|-------------------|------------------------------------------|
-| C-C, FS         | Duality Gap | $\Omega(n + L / \epsilon)$                 | $\mathcal{O}(\sqrt{n}/\epsilon)$                      | [<d-cite key="xie2020lower"></d-cite>, Theorem 3]     | [<d-cite key="yazdandoost2023stochastic"></d-cite>, Cor 2.1]        |
-| C-C, Stoc, SS        | Duality Gap | $\Omega(\epsilon^{-2})$                    | $\checkmark$                  | (Stoc C SS min)                                             | [<d-cite key="juditsky2011solving"></d-cite>, Cor 1]      |
-| C-C, Stoc, NS        | Duality Gap | $\Omega(\epsilon^{-2})$                    | $\checkmark$                  | (Stoc C NS min)                                             | [<d-cite key="nemirovski2009robust"></d-cite>, Lemma 3.1]      |
-| SC-C, FS        | Duality Gap | $\Omega\left(n + \sqrt{n L / \epsilon}\right)$ | $\tilde{\mathcal{O}}(\sqrt{n L / \epsilon})$   | (FS C min)                                                  | [<d-cite key="yang2020catalyst"></d-cite>, Sec 3.2]      |
-| SC-SC, FS       | Duality Gap | $\Omega\left((n + \kappa) \log \frac{1}{\epsilon}\right)$ | $\checkmark$ | [<d-cite key="xie2020lower"></d-cite>, Thm 1]      | [<d-cite key="palaniappan2016stochastic"></d-cite>, Thm 1]      |
-| SC-SC, Stoc, SS      | Duality Gap | $\Omega(\epsilon^{-1})$                    | $\checkmark$                  | (Stoc SC SS min)                                            | [<d-cite key="hsieh2019convergence"></d-cite>, Thm 5]       |
-| SC-SC, Stoc, NS      | Duality Gap | $\Omega(\epsilon^{-1})$                    | $\checkmark$                  | (Stoc SC NS min)                                            | [<d-cite key="yan2020optimal"></d-cite>]       |
-| PL-PL, Stoc      | Duality Gap | Unknown                    | $\mathcal{O}(\kappa^5\epsilon^{-1})$                  | (Stoc SC NS min)                                            | [<d-cite key="yang2020global"></d-cite>]       |
-|                      |         |                                             |                               |                                                             |
-
-</div>
+2. UB SC-SC general: [<d-cite key="luo2019stochastic"></d-cite>], [<d-cite key="chavdarova2019reducing"></d-cite>, (cocoercive?)]
 
 ### Case 2-3: NC-SC/NC-C Deterministic Minimax Optimization
 
@@ -290,12 +299,17 @@ We present the lower and upper bound results in tables below<d-footnote>Given th
 
 | Type               | Measure | LB                                          | UB                               | Reference-LB      | Reference-UB                                   |
 |--------------------|---------|---------------------------------------------|----------------------------------|-------------------|------------------------------------------------|
-| NC-SC, Deter       | Primal Stationarity | $\Omega(\sqrt{\kappa}\Delta \mathcal{L} \epsilon^{-2})$  | $\checkmark$ | [<d-cite key="zhang2021complexity"></d-cite>, Theorem 3.1] | [<d-cite key="zhang2021complexity"></d-cite>, Theorem 4.1] |
-| NC-C, Deter        | Near-Stationarity | Unknown  | $\mathcal{O}(\Delta L^2 \epsilon^{-3} \log^2 \frac{1}{\epsilon})$               |         | [<d-cite key="lin2020near"></d-cite>, Cor A.8] |
-| WC-C, Deter        | Near-Stationarity | Unknown | $\mathcal{O}(\epsilon^{-6})$                       |         | [<d-cite key="boct2023alternating"></d-cite>, Thm 3.7]         |
-| NC-PL, Deter       | Primal Stationarity | Unknown | $\Omega(\kappa^2\epsilon^{-4})$                   |         | [<d-cite key="yang2022faster"></d-cite>]         |
+| NC-SC, Deter       | Primal Stationarity | $\Omega(\sqrt{\kappa}\Delta \mathcal{L} \epsilon^{-2})$  | $\checkmark$ | [<d-cite key="zhang2021complexity"></d-cite>, Thm 3.1] | [<d-cite key="zhang2021complexity"></d-cite>, Thm 4.1] |
+| NC-C, Deter        | Near-Stationarity | Unknown  | $\mathcal{O}(\Delta L^2 \epsilon^{-3} \log^2 \frac{1}{\epsilon})$               |   /      | [<d-cite key="lin2020near"></d-cite>, Cor A.8] |
+| WC-C, Deter        | Near-Stationarity | Unknown | $\mathcal{O}(\epsilon^{-6})$                       |  /       | [<d-cite key="boct2023alternating"></d-cite>, Thm 3.7]         |
+| NC-PL, Deter       | Primal Stationarity | Unknown | $\Omega(\kappa^2\epsilon^{-4})$                   | /        | [<d-cite key="yang2022faster"></d-cite>]         |
 
 </div>
+
+**Remark:**
+
+1. content
+2. [ZXSL20, Thm 3.8] $\mathcal{O}(\epsilon^{-2})$ (unclear dependence)
 
 **Remark:**
 
@@ -312,6 +326,13 @@ We present the lower and upper bound results in tables below<d-footnote>Given th
 | NC-SC, Stoc, SS  | Primal Stationarity        | $\Omega\left(\kappa^{1/3}\Delta L\epsilon^{-4}\right)$ | $\mathcal{O}\left(\kappa\Delta L\epsilon^{-4}\right)$ | [<d-cite key="zhang2022sapd+"></d-cite>, <d-cite key="li2021complexity"></d-cite>]                                                 |
 | NC-SC, Stoc, IS  | Primal Stationarity        | Unknown | $\mathcal{O}\left(\kappa^2\Delta L\epsilon^{-3}\right)$ | [<d-cite key="zhang2022sapd+"></d-cite>] |
 | NC-C, Stoc, SS   | Near-stationarity        | Unknown | $\mathcal{O}\left(L^3\epsilon^{-6}\right)$              | [<d-cite key="zhang2022sapd+"></d-cite>]            |
+| WC-SC, Stoc      |         | ?                                       | ?                                       | [YXL+20, Thm 2] $O\left(c^{-4}\right)$                                                             |
+| WC-C, Stoc       |         | ?                                       | ?                                       | [RLLY18, Thm 1] $O\left(\epsilon^{-6}\right)$ (error?)                                                    |
+| WC-C, Stoc       |         | ?                                       | ?                                       | [BB20, Thm 3.13] $O\left(\epsilon^{-8}\right)$ (single loop)                                              |
+
+**Remark:**
+
+1. content
 
 </div>
 
