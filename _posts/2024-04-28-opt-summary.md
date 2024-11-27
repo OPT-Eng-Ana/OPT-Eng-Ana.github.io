@@ -222,11 +222,9 @@ We present the lower and upper bound results in tables below<d-footnote>Given th
 | NS $L$-Lip Cont. $\rho$-WC    | Near-stationarity        | Unknown                                                    | $\mathcal{O}(\epsilon^{-4})$  | /                                                | <d-cite key="davis2018stochastic"></d-cite>, Corollary 2.2 |
 | $L$-Smooth $\mu$-PL     | Optimality gap | $\Omega \left( \kappa \log \frac{1}{\epsilon} \right)$                     | $\checkmark$      | <d-cite key="yue2023lower"></d-cite>, Theorem 3              | <d-cite key="karimi2016linear"></d-cite>, Theorem 1 |
 
-</div>
+**Remark:**
 
-
-
-<div class="l-page" markdown="1"> 
+1. PL condition is a 
 
 ### Case 1-2: Finite-sum and Stochastic Optimization
 
@@ -249,15 +247,11 @@ We present the lower and upper bound results in tables below<d-footnote>Given th
 | Stoc L-AS NC            | Stationarity        | $\Omega \left( \Delta \sigma^2 + 3 \sigma \epsilon^{-2} \right)$ | $\checkmark$                     | [<d-cite key="arjevani2023lower"></d-cite>, Theorem 2], [<d-cite key="fang2018spider"></d-cite>, Theorem 1] |? |
 | NS $L$-Lip Cont. $\rho$-WC    | Near-stationarity        | Unknown     | $\mathcal{O} (\epsilon^{-4})$ | [<d-cite key="davis2018stochastic"></d-cite>, Theorem 2.1]              |? |
 
-</div>
-
 **Remark:**
 
 1. Here $n$ corresponds to the number of component functions $f_i$, and $\kappa\triangleq L/\mu$ is the condition number, $\sigma^2$ corresponds to the variance of gradient estimator.
 2. Shuffling...
 3. Relative smooth, Bregman divergence, non-Euclidean...
-
-<div class="l-page" markdown="1"> 
 
 ### Case 2-1: SC-SC/SC-C/C-C Deterministic Minimax Optimization
 
@@ -272,14 +266,10 @@ We present the lower and upper bound results in tables below<d-footnote>Given th
 | SC-SC, general        | Duality Gap        | $\Omega(\sqrt{\kappa_x \kappa_y} \log \frac{1}{\epsilon})$ | $\times$    | [<d-cite key="zhang2022lower"></d-cite>, Theorem 4.5], [<d-cite key="wang2020improved"></d-cite>, Theorem 3] |? |
 | PL-PL                 | Duality Gap        | Unknown                                            | $\mathcal{O}(\kappa^3\log \frac{1}{\epsilon})$ | [<d-cite key="yang2020global"></d-cite>] |? |
 
-</div>
-
 **Remark:**
 
 1. Here $\kappa_x$ and $\kappa_y$ corresponds to condition numbers on $x$ and $y$ components, respectively.
 2. LB SC-SC bilinear: [<d-cite key="ibrahim2020linear"></d-cite>, Corollary 4] and extension to SCLI framework<d-cite key="arjevani2016lower"></d-cite>...
-
-<div class="l-page" markdown="1"> 
 
 ### Case 2-2: SC-SC/SC-C/C-C Finite-sum and Stochastic Minimax Optimization
 
@@ -294,14 +284,10 @@ We present the lower and upper bound results in tables below<d-footnote>Given th
 | SC-SC, Stoc, NS      | Duality Gap | $\Omega(\epsilon^{-1})$                    | $\checkmark$                  | /                                            | [<d-cite key="yan2020optimal"></d-cite>]       |
 | PL-PL, Stoc      | Duality Gap | Unknown                    | $\mathcal{O}(\kappa^5\epsilon^{-1})$                  | /                                            | [<d-cite key="yang2020global"></d-cite>]       |
 
-</div>
-
 **Remark:**
 
 1. content
 2. UB SC-SC general: [<d-cite key="luo2019stochastic"></d-cite>], [<d-cite key="chavdarova2019reducing"></d-cite>, (cocoercive?)]
-
-<div class="l-page" markdown="1"> 
 
 ### Case 2-3: NC-SC/NC-C Deterministic Minimax Optimization
 
@@ -312,18 +298,11 @@ We present the lower and upper bound results in tables below<d-footnote>Given th
 | WC-C, Deter        | Near-Stationarity | Unknown | $\mathcal{O}(\epsilon^{-6})$                       |  /       | [<d-cite key="boct2023alternating"></d-cite>, Theorem 3.7]         |
 | NC-PL, Deter       | Primal Stationarity | Unknown | $\Omega(\kappa^2\epsilon^{-4})$                   | /        | [<d-cite key="yang2022faster"></d-cite>]         |
 
-</div>
-
 **Remark:**
 
 1. For general NC-NC problems, <d-cite key="daskalakis2021complexity"></d-cite> has shown the computation of approximate first-order locally optimal solutions is intractable.
 2. [ZXSL20, Theorem 3.8] $\mathcal{O}(\epsilon^{-2})$ (unclear dependence)
-
-**Remark:**
-
-1. Some other works also studied the above problems in terms of the fucnction stationarity (i.e., the gradient norm of $f$, rather than it primal), e.g., <d-cite key="lin2020near"></d-cite><d-cite key="xu2023unified"></d-cite>. As discussed in <d-cite key="yang2022faster"></d-cite>, it has been shown that function stationarity and primal stationarity are transferable with a mild efforts, here we do not present the results specifically.
-
-<div class="l-page" markdown="1"> 
+3. Some other works also studied the above problems in terms of the fucnction stationarity (i.e., the gradient norm of $f$, rather than it primal), e.g., <d-cite key="lin2020near"></d-cite><d-cite key="xu2023unified"></d-cite>. As discussed in <d-cite key="yang2022faster"></d-cite>, it has been shown that function stationarity and primal stationarity are transferable with a mild efforts, here we do not present the results specifically.
 
 ### Case 2-4: NC-SC/NC-C Finite-sum and Stochastic Minimax Optimization
 
@@ -445,11 +424,9 @@ Regarding the rapid development and interdisciplinary applications in areas like
 
 ---
 
-```
-Update:
+
+## Update:
 
 The knowledge of the notes above is up-to-date until the submission deadline (Nov. 2024). However, given the rapid advancements in optimization and related fields, we aim to include updates to keep the discussion relevant and accurate. In the future, we intend to enhance the post, adopting a dynamic approach similar to tools like Geekbench or 3DMark, which continuously update for benchmarking and performance comparisons.
 
 - Nov. 27, 2024: There appeared a new work on arXiv<d-cite key="zhang2024anytime"></d-cite>, which claimed to solve the anytime convergence issue mentioned in <d-cite key="kornowski2024open"></d-cite>, while the work has not been peer-reviewed, we list it here for reader's reference.* 
-
-```
