@@ -176,7 +176,7 @@ For convenience, we summarize some of the notations commonly used in tables belo
 - NS: Nonsmooth
 - PL: Polyak-Łojasiewicz Condition
 - $\mathcal{O},\tilde{\mathcal{O}},\Omega$: For nonnegative functions $f(x)$ and $g(x)$, we say $f=\mathcal{O}(g)$ if $f(x)\leq cg(x)$ for some $c>0$, and further write $f=\tilde{\mathcal{O}}(g)$ to omit poly-logarithmic terms on some constants, and $f=\Omega(g)$ if $f(x)\geq cg(x)$.
-- $\Delta$, $D$: The initial function value gap $\Delta\triangleq(x_0)-f(x^\star)$, and the initial point distance $D\triangleq\|\|x_0-x^\star\|\|$.
+- $\Delta$, $D$: The initial function value gap $\Delta\triangleq f(x_0)-f(x^\star)$, and the initial point distance $D\triangleq\|\|x_0-x^\star\|\|$.
 - Optimality gap: the function value gap $f(x) - f^\star$.
 - Stationarity: the function gradient norm $\|\| \nabla f(x) \|\|$.
 - Near-stationarity: the gradient norm $\|\| \nabla f_\lambda(x) \|\|$, where $f_\lambda$ is the Moreau envelope of the original function $f$.
@@ -214,8 +214,8 @@ We present the lower and upper bound results in tables below<d-footnote>Given th
 |----------------------------|---------------------------|------------------------|-------------|--------------------------------|-----------|
 | $L$-Smooth Convex          | Optimality gap           | $\Omega \left( \sqrt{L \epsilon^{-1}} \right)$                | $\checkmark$ | <d-cite key="nesterov2018lectures"></d-cite>, Theorem 2.1.7       | <d-cite key="nesterov2018lectures"></d-cite>, Theorem 2.2.2 |
 | $L$-Smooth $\mu$-SC        | Optimality gap           | $\Omega \left( \sqrt{\kappa} \log \frac{1}{\epsilon} \right)$ | $\checkmark$ | <d-cite key="nesterov2018lectures"></d-cite>, Theorem 2.1.13      | <d-cite key="nesterov2018lectures"></d-cite>, Theorem 2.2.2 |
-| NS $L$-Lip Cont. Convex       | Optimality gap           | $\Omega (L^2 \epsilon^{-2})$                               | $\checkmark$ | <d-cite key="nesterov2018lectures"></d-cite>, Theorem 3.2.1       | <d-cite key="nesterov2018lectures"></d-cite>, Theorem 3.2.2 |
-| NS $L$-Lip Cont. $\mu$-SC     | Optimality gap           | $\Omega (L^2 (\mu \epsilon)^{-1})$                         | $\checkmark$ | <d-cite key="nesterov2018lectures"></d-cite>, Theorem 3.2.5       | <d-cite key="bubeck2015convex"></d-cite>, Theorem 3.9<d-footnote>The algorithm design therein requires projection.</d-footnote> |
+| NS $L$-Lip Cont. Convex    | Optimality gap           | $\Omega (L^2 \epsilon^{-2})$                                  | $\checkmark$ | <d-cite key="nesterov2018lectures"></d-cite>, Theorem 3.2.1       | <d-cite key="nesterov2018lectures"></d-cite>, Theorem 3.2.2 |
+| NS $L$-Lip Cont. $\mu$-SC  | Optimality gap           | $\Omega (L^2 (\mu \epsilon)^{-1})$                            | $\checkmark$ | <d-cite key="nesterov2018lectures"></d-cite>, Theorem 3.2.5       | <d-cite key="bubeck2015convex"></d-cite>, Theorem 3.9<d-footnote>The algorithm design therein requires projection.</d-footnote> |
 | $L$-Smooth Convex (function case)          | Stationarity    | $\Omega \left( \sqrt{\Delta L }\epsilon^{-1} \right)$  | $\checkmark$ (within logarithmic) | <d-cite key="carmon2021lower"></d-cite>, Theorem 1                | <d-cite key="carmon2021lower"></d-cite>, Appendix A.1 |
 | $L$-Smooth Convex (point case)          | Stationarity    | $\Omega \left( \sqrt{D L \epsilon^{-1}} \right)$          | $\checkmark$ (within logarithmic) | <d-cite key="carmon2021lower"></d-cite>, Theorem 1                | <d-cite key="nesterov2012make"></d-cite> |
 | $L$-Smooth NC              | Stationarity    | $\Omega (\Delta L \epsilon^{-2})$                                      | $\checkmark$ | <d-cite key="carmon2020lower"></d-cite>, Theorem 1                | <d-cite key="carmon2021lower"></d-cite>, Theorem 10.15 |
@@ -224,7 +224,9 @@ We present the lower and upper bound results in tables below<d-footnote>Given th
 
 **Remark:**
 
-1. PL condition is a 
+1. $\kappa\triangleq L/\mu\geq 1$ is called the condition number, which can be very large in many applications, e.g., the optimal regularization parameter choice in statistical learning can be as large as $\Omega(\sqrt{n})$ where $n$ is the sample size<d-cite key="shalev2014understanding"></d-cite>.
+2. PL condition is a popular assumption in noncovex optimization which can be implied by the strong convexity condition. Based on the summary above, we can find that both smooth strongly convex and smooth PL condition optimization problems have established the optimal complexities (i.e., UB matches LB), and the LB in the PL case is strictly larger than that of the SC case, so in terms of the worst-case complexity, we can say that the PL case is strictly "harder" than the strongly convex case.
+3. The $L$-Smooth Convex setting comes with two cases, one assumed the initial optimality gap is bounded $f(x_0)-f(x^\star)\leq \Delta$, the other assumed bounded initialization $\|\|x_0-x^\star\|\|\leq D$.
 
 ### Case 1-2: Finite-sum and Stochastic Optimization
 
@@ -249,7 +251,7 @@ We present the lower and upper bound results in tables below<d-footnote>Given th
 
 **Remark:**
 
-1. Here $n$ corresponds to the number of component functions $f_i$, and $\kappa\triangleq L/\mu$ is the condition number, $\sigma^2$ corresponds to the variance of gradient estimator.
+1. Here $n$ corresponds to the number of component functions $f_i$, $\sigma^2$ corresponds to the variance of gradient estimator.
 2. Shuffling...
 3. Relative smooth, Bregman divergence, non-Euclidean...
 
@@ -427,6 +429,6 @@ Regarding the rapid development and interdisciplinary applications in areas like
 
 ## Update:
 
-The knowledge of the notes above is up-to-date until the submission deadline (Nov. 2024). However, given the rapid advancements in optimization and related fields, we aim to include updates to keep the discussion relevant and accurate. In the future, we intend to enhance the post, adopting a dynamic approach similar to tools like Geekbench or 3DMark, which continuously update for benchmarking and performance comparisons.
+The knowledge of the notes above is up-to-date until the submission deadline (Nov. 2024). However, given the rapid advancements in optimization and related fields, we aim to include updates to keep the discussion relevant and accurate. In the future, we intend to further enhance the post, adopting a dynamic approach similar to tools like Geekbench or 3DMark for CPU/GPU benchmark, which continuously update for benchmarking and performance comparisons.
 
 - Nov. 27, 2024: There appeared a new work on arXiv<d-cite key="zhang2024anytime"></d-cite>, which claimed to solve the anytime convergence issue mentioned in <d-cite key="kornowski2024open"></d-cite>, while the work has not been peer-reviewed, we list it here for reader's reference.* 
