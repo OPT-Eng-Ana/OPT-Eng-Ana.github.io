@@ -442,3 +442,14 @@ Such a question has been partially addressed for stochastic optimization using *
 In this post, we review SOTA complexity upper and lower bounds of first-order algorithms in optimization tailored for minimization and minimax regimes with various settings, the summary identified gaps in existing research, which shed light on the open questions regarding accelerated algorithm design and performance limit investigation. Under the oracle framework, people should be careful when claiming one algorithm is better than the others, and double check whether the comparison is fair, in terms of the settings like function class, oracle information and algorithm class definition.
 
 Regarding the rapid development and interdisciplinary applications in areas like machine learning and operation research, we revisited several recent works which go beyond the classical research flow in optimization community, these works advocate a paradigm shift in research: besides an elegant and unified theory trying to cover all cases, sometimes we should also try to avoid the "Maslow's hammer", focus on the detailed applications first, identify their unique structure, and correspondently design algorithms tailored for these problems, which in turn will benefit the practice. Such instance-driven pattern may help the optimization community to devise theory that fits the practice better. Given the extensive body of literature in this field, there is a possibility that some relevant references may have been inadvertently overlooked. We welcome any comments or questions and are happy to discuss.
+
+---
+
+```
+Update:
+
+The knowledge of the notes above is up-to-date until the submission deadline (Nov. 2024). However, given the rapid advancements in optimization and related fields, we aim to include updates to keep the discussion relevant and accurate. In the future, we intend to enhance the post, adopting a dynamic approach similar to tools like Geekbench or 3DMark, which continuously update for benchmarking and performance comparisons.
+
+- Nov. 27, 2024: There appeared a new work on arXiv<d-cite key="zhang2024anytime"></d-cite>, which claimed to solve the anytime convergence issue mentioned in <d-cite key="kornowski2024open"></d-cite>, while the work has not been peer-reviewed, we list it here for reader's reference.* 
+
+```
