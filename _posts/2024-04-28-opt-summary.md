@@ -171,7 +171,7 @@ For convenience, we summarize some of the notations commonly used in tables belo
 - FS: finite-sum optimization.
 - Stoc: stochastic optimization
 - $L$-S: The objective function is $L$-Lipschitz smooth (or jointly Lipschitz smooth in minimax optimization).
-- $L$-Lip Cont.: $L$-Lipschitz continuous.
+- $M$-Lip Cont.: $L$-Lipschitz continuous.
 - $L$-IS / AS / SS<d-footnote>For clarification, $L$-IS means in finite-sum problems, each component function $f_i$ itself is $L$-smooth, for the definition of $L$-AS, please refer to the definition of "mean-squared smoothness" in <d-cite key="arjevani2023lower"></d-cite>, and $L$-SS means the summation $f$ is $L$-smooth while each component $f_i$ may not be Lipschitz smooth. Clearly IS is stronger than AS, AS is stronger than SS.</d-footnote>: $L$-Lipschitz individual / averaged / summation smoothness.
 - NS: Nonsmooth
 - PL: Polyak-Łojasiewicz Condition
@@ -214,19 +214,19 @@ We present the lower and upper bound results in tables below<d-footnote>Given th
 |----------------------------|---------------------------|------------------------|-------------|--------------------------------|-----------|
 | $L$-Smooth Convex          | Optimality gap           | $\Omega \left( \sqrt{L \epsilon^{-1}} \right)$                | $\checkmark$ | <d-cite key="nesterov2018lectures"></d-cite>, Theorem 2.1.7       | <d-cite key="nesterov2018lectures"></d-cite>, Theorem 2.2.2 |
 | $L$-Smooth $\mu$-SC        | Optimality gap           | $\Omega \left( \sqrt{\kappa} \log \frac{1}{\epsilon} \right)$ | $\checkmark$ | <d-cite key="nesterov2018lectures"></d-cite>, Theorem 2.1.13      | <d-cite key="nesterov2018lectures"></d-cite>, Theorem 2.2.2 |
-| NS $L$-Lip Cont. Convex    | Optimality gap           | $\Omega (L^2 \epsilon^{-2})$                                  | $\checkmark$ | <d-cite key="nesterov2018lectures"></d-cite>, Theorem 3.2.1       | <d-cite key="nesterov2018lectures"></d-cite>, Theorem 3.2.2 |
-| NS $L$-Lip Cont. $\mu$-SC  | Optimality gap           | $\Omega (L^2 (\mu \epsilon)^{-1})$                            | $\checkmark$ | <d-cite key="nesterov2018lectures"></d-cite>, Theorem 3.2.5       | <d-cite key="bubeck2015convex"></d-cite>, Theorem 3.9<d-footnote>The algorithm design therein requires projection.</d-footnote> |
+| NS $M$-Lip Cont. Convex    | Optimality gap           | $\Omega (M^2 \epsilon^{-2})$                                  | $\checkmark$ | <d-cite key="nesterov2018lectures"></d-cite>, Theorem 3.2.1       | <d-cite key="nesterov2018lectures"></d-cite>, Theorem 3.2.2 |
+| NS $M$-Lip Cont. $\mu$-SC  | Optimality gap           | $\Omega (M^2 (\mu \epsilon)^{-1})$                            | $\checkmark$ | <d-cite key="nesterov2018lectures"></d-cite>, Theorem 3.2.5       | <d-cite key="bubeck2015convex"></d-cite>, Theorem 3.9<d-footnote>The algorithm design therein requires projection.</d-footnote> |
 | $L$-Smooth Convex (function case)          | Stationarity    | $\Omega \left( \sqrt{\Delta L }\epsilon^{-1} \right)$  | $\checkmark$ (within logarithmic) | <d-cite key="carmon2021lower"></d-cite>, Theorem 1                | <d-cite key="carmon2021lower"></d-cite>, Appendix A.1 |
 | $L$-Smooth Convex (point case)          | Stationarity    | $\Omega \left( \sqrt{D L \epsilon^{-1}} \right)$          | $\checkmark$ (within logarithmic) | <d-cite key="carmon2021lower"></d-cite>, Theorem 1                | <d-cite key="nesterov2012make"></d-cite> |
 | $L$-Smooth NC              | Stationarity    | $\Omega (\Delta L \epsilon^{-2})$                                      | $\checkmark$ | <d-cite key="carmon2020lower"></d-cite>, Theorem 1                | <d-cite key="carmon2021lower"></d-cite>, Theorem 10.15 |
-| NS $L$-Lip Cont. $\rho$-WC    | Near-stationarity        | Unknown                                                    | $\mathcal{O}(\epsilon^{-4})$  | /                                                | <d-cite key="davis2018stochastic"></d-cite>, Corollary 2.2 |
+| NS $M$-Lip Cont. $\rho$-WC    | Near-stationarity        | Unknown                                                    | $\mathcal{O}(\epsilon^{-4})$  | /                                                | <d-cite key="davis2018stochastic"></d-cite>, Corollary 2.2 |
 | $L$-Smooth $\mu$-PL     | Optimality gap | $\Omega \left( \kappa \log \frac{1}{\epsilon} \right)$                     | $\checkmark$      | <d-cite key="yue2023lower"></d-cite>, Theorem 3              | <d-cite key="karimi2016linear"></d-cite>, Theorem 1 |
 
 **Remark:**
 
 1. $\kappa\triangleq L/\mu\geq 1$ is called the condition number, which can be very large in many applications, e.g., the optimal regularization parameter choice in statistical learning can be as large as $\Omega(\sqrt{n})$ where $n$ is the sample size<d-cite key="shalev2014understanding"></d-cite>.
 2. PL condition is a popular assumption in noncovex optimization which can be implied by the strong convexity condition. Based on the summary above, we can find that both smooth strongly convex and smooth PL condition optimization problems have established the optimal complexities (i.e., UB matches LB), and the LB in the PL case is strictly larger than that of the SC case, so in terms of the worst-case complexity, we can say that the PL case is strictly "harder" than the strongly convex case.
-3. The $L$-Smooth Convex setting comes with two cases, one assumed the initial optimality gap is bounded $f(x_0)-f(x^\star)\leq \Delta$, the other assumed bounded initialization $\|\|x_0-x^\star\|\|\leq D$.
+3. The $L$-Smooth Convex setting comes with two cases, the "function case" assumed the initial optimality gap is bounded $f(x_0)-f(x^\star)\leq \Delta$, and the other assumed bounded initialization $\|\|x_0-x^\star\|\|\leq D$.
 
 ### Case 1-2: Finite-sum and Stochastic Optimization
 
@@ -431,4 +431,4 @@ Regarding the rapid development and interdisciplinary applications in areas like
 
 The knowledge of the notes above is up-to-date until the submission deadline (Nov. 2024). However, given the rapid advancements in optimization and related fields, we aim to include updates to keep the discussion relevant and accurate. In the future, we intend to further enhance the post, adopting a dynamic approach similar to tools like Geekbench or 3DMark for CPU/GPU benchmark, which continuously update for benchmarking and performance comparisons.
 
-- Nov. 27, 2024: There appeared a new work on arXiv<d-cite key="zhang2024anytime"></d-cite>, which claimed to solve the anytime convergence issue mentioned in <d-cite key="kornowski2024open"></d-cite>, while the work has not been peer-reviewed, we list it here for reader's reference.* 
+- Nov. 27, 2024: A new work on arXiv<d-cite key="zhang2024anytime"></d-cite> claims to solve the anytime convergence issue mentioned in a COLT Open Problem<d-cite key="kornowski2024open"></d-cite>, while the work has not been peer-reviewed, we list it here for reader's reference.* 
