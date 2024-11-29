@@ -226,8 +226,8 @@ We present the lower and upper bound results in tables below<d-footnote>Given th
 
 **Remark:**
 
-1. $\kappa\triangleq L/\mu\geq 1$ is called the condition number, which can be very large in many applications, e.g., the optimal regularization parameter choice in statistical learning can be as large as $\Omega(\sqrt{n})$ where $n$ is the sample size<d-cite key="shalev2014understanding"></d-cite>.
-2. PL condition is a popular assumption in noncovex optimization which can be implied by the strong convexity condition. Based on the summary above, we can find that both smooth strongly convex and smooth PL condition optimization problems have established the optimal complexities (i.e., UB matches LB), and the LB in the PL case is strictly larger than that of the SC case, so in terms of the worst-case complexity, we can say that the PL case is strictly "harder" than the strongly convex case.
+1. $\kappa\triangleq L/\mu\geq 1$ is called the condition number, which can be very large in many applications, e.g., the optimal regularization parameter choice in statistical learning can lead to $\kappa=\Omega(\sqrt{n})$ where $n$ is the sample size<d-cite key="shalev2014understanding"></d-cite>.
+2. PL condition is a popular assumption in noncovex optimization which can be implied by the strong convexity condition. Based on the summary above, we can find that both smooth strongly convex and smooth PL condition optimization problems have established the optimal complexities (i.e., UB matches LB), and the LB in the PL case is strictly larger than that of the SC case, so in terms of the worst-case complexity, we can say that the PL case is "strictly harder" than the strongly convex case.
 3. The $L$-Smooth Convex setting comes with two cases, the "function case" assumed the initial optimality gap is bounded $f(x_0)-f(x^\star)\leq \Delta$, and the other assumed bounded initialization $\|\|x_0-x^\star\|\|\leq D$.
 
 ### Case 1-2: Finite-sum and Stochastic Minimization
@@ -351,6 +351,16 @@ In this notes, we only discussed minimization and minimax problems, while there 
   3. How to establish non-asymptotic convergence guarantees for bilevel problems with convex lower levels.
 
 Also there appeared several other optimization problems with different formulations arising from practice, e.g.,
+
+* Composite Optimization
+
+  $$ \min_{x \in \mathcal{X}} F(x) =f(x)+r(x). $$
+
+  Such problems often appeared in regularized machine learning problems where the regularizer $r$ often encodes certain constraints like sparsity and low rank. Such structure also motivated the design of *proximal gradient method* (and its variants)<d-cite key="parikh2014proximal"></d-cite>:
+
+  $$ x^{t+1}=\text{prox}_{\lambda r}(x^t-\lambda \nabla f(x^t))  \quad \text{where} \quad \text{prox}_{\lambda r}(z)\triangleq\arg\min_x\left\{r(x)+\frac{1}{2\lambda}\|\|x-z\|\|^2\right\}. $$
+
+  To guarantee a closed-form solution of the above operator, generally it requires the function $r(\cdot)$ to be *prox-friendly*. And the above iteration is beyond the scope of the first-order algorithm discussed above because the proximal operator expanded the classical oracle equipment.
 
 * Compositional Stochastic Optimization<d-cite key="wang2017stochastic"></d-cite>
 
