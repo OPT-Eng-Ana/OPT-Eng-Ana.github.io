@@ -112,7 +112,7 @@ $$
   - Point distance $\|\|x-x^\star\|\|$.
   - Function stationarity $\|\|\nabla f(x)\|\|$, which is common in nonconvex optimization. 
 
-{% include figure.html path="assets/img/2025-04-28-opt-summary/complexity_analysis.jpg" class="img-fluid" %}
+{% include figure.liquid path="assets/img/2024-04-28-opt-summary/complexity_analysis.jpg" class="img-fluid" %}
 
 <div class="caption">
     Oracle Complexity Framework (adapted from Prof. Yangyang Xu's Slides<d-cite key="xu2019slides"></d-cite>)
@@ -144,7 +144,7 @@ $$
 	T_{\epsilon}(f,\mathtt{A}),
 $$
 
-{% include figure.html path="assets/img/2025-04-28-opt-summary/upper_lower.png" class="img-fluid" %}
+{% include figure.liquid path="assets/img/2024-04-28-opt-summary/upper_lower.png" class="img-fluid" %}
 
 <div class="caption">
     Illustration of Upper and Lower Complexity Bounds
@@ -409,7 +409,7 @@ Such a question has been partially addressed for stochastic optimization using *
 ### Beyond Classical Oracle Model
   Regarding the oracle complexity model, because it mainly focuses on *worst-case instances* in the function class which may be far from *practical instances*, possibly the derived complexities can be such conservative and vacuous that they may not match the practice well, as the figure below illustrated.
 
-  {% include figure.html path="assets/img/2025-04-28-opt-summary/practice_gap.png" class="img-fluid" %}
+  {% include figure.liquid path="assets/img/2024-04-28-opt-summary/practice_gap.png" class="img-fluid" %}
 
   <div class="caption">
       Gap Between General Worst-Case Complexity and Instance-Level Complexity Analysis (adapted from <d-cite key="zhang2022beyond"></d-cite>)
