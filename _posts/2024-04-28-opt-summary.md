@@ -4,7 +4,7 @@ title: Avoid Overclaims: Summary of Complexity Bounds for Algorithms in Minimiza
 description: In this blog, we revisit the convergence analysis of first-order algorithms in minimization and minimax optimization problems. Within the classical oracle model framework, we review the state-of-the-art upper and lower bound results in various settings, aiming to identify gaps in existing research. With the rapid development of applications like machine learning and operation research, we further identify some recent works that revised the classical settings of optimization algorithms study.
 tags: optimization
 giscus_comments: true
-date: 2024-04-28
+date: 2025-03-28
 featured: true
 
 # Take care the difference compared to the actual template of ICLR Blog
