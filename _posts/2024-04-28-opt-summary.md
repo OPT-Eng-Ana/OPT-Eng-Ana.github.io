@@ -15,7 +15,7 @@ authors:
   - name: Siqi Zhang
     url: https://siqi-z.github.io/
     affiliations:
-      name: SME, Nanjing University
+      name: Nanjing University
   - name: Yifan Hu
     url: https://sites.google.com/view/yifan-hu
     affiliations:
