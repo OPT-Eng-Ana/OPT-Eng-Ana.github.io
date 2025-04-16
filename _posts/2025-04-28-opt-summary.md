@@ -35,7 +35,7 @@ authors:
 #     affiliations:
 #       name: IAS, Princeton
 
-bibliography: 2024-04-28-opt-summary.bib
+bibliography: 2025-04-28-opt-summary.bib
 
 # Add a table of contents to your post.
 #   - make sure that TOC names match the actual section names
