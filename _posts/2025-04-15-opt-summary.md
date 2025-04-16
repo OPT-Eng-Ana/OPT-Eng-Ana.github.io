@@ -15,7 +15,7 @@ authors:
   - name: Siqi Zhang
     url: https://siqi-z.github.io/
     affiliations:
-      name: Nanjing University
+      name: SME, Nanjing University
   - name: Yifan Hu
     url: https://sites.google.com/view/yifan-hu
     affiliations:
@@ -35,7 +35,7 @@ authors:
 #     affiliations:
 #       name: IAS, Princeton
 
-bibliography: 2025-04-28-opt-summary.bib
+bibliography: 2025-04-15-opt-summary.bib
 
 # Add a table of contents to your post.
 #   - make sure that TOC names match the actual section names
@@ -144,7 +144,7 @@ The oracle complexity model consists of the following components:
     - Point distance $\|\|x-x^\star\|\|^2$ (or the norm).
     - Function stationarity $\|\|\nabla f(x)\|\|$, which is common in nonconvex optimization. 
 
-{% include figure.liquid path="assets/img/2024-04-28-opt-summary/complexity_analysis.jpg" class="img-fluid" %}
+{% include figure.liquid path="assets/img/2025-04-15-opt-summary/complexity_analysis.jpg" class="img-fluid" %}
 
 <div class="caption">
     Oracle Complexity Framework (adapted from Prof. Yangyang Xu's Slides<d-cite key="xu2019slides"></d-cite>)
@@ -176,7 +176,7 @@ $$
 	T_{\epsilon}(f,\mathtt{A}),
 $$
 
-{% include figure.liquid path="assets/img/2024-04-28-opt-summary/upper_lower.png" class="img-fluid" %}
+{% include figure.liquid path="assets/img/2025-04-15-opt-summary/upper_lower.png" class="img-fluid" %}
 
 <div class="caption">
     Illustration of Upper and Lower Complexity Bounds
@@ -479,7 +479,7 @@ Such a question has been partially addressed for stochastic optimization using *
 ### Beyond Classical Oracle Model
   The oracle complexity model mainly focuses on **worst-case instances** in the function class which may be far from *practical instances*. It is possible that the derived complexities can be too conservative and vacuous that they may not match the practice well, as the figure below illustrates.
 
-  {% include figure.liquid path="assets/img/2024-04-28-opt-summary/practice_gap.png" class="img-fluid" %}
+  {% include figure.liquid path="assets/img/2025-04-15-opt-summary/practice_gap.png" class="img-fluid" %}
 
   <div class="caption">
       Gap Between General Worst-Case Complexity and Instance-Level Complexity Analysis (adapted from <d-cite key="zhang2022beyond"></d-cite>)
