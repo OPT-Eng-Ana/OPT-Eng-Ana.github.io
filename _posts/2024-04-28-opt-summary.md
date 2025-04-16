@@ -35,7 +35,7 @@ authors:
 #     affiliations:
 #       name: IAS, Princeton
 
-bibliography: 2025-04-15-opt-summary.bib
+bibliography: 2024-04-28-opt-summary.bib
 
 # Add a table of contents to your post.
 #   - make sure that TOC names match the actual section names
@@ -144,7 +144,7 @@ The oracle complexity model consists of the following components:
     - Point distance $\|\|x-x^\star\|\|^2$ (or the norm).
     - Function stationarity $\|\|\nabla f(x)\|\|$, which is common in nonconvex optimization. 
 
-{% include figure.liquid path="assets/img/2025-04-15-opt-summary/complexity_analysis.jpg" class="img-fluid" %}
+{% include figure.liquid path="assets/img/2024-04-28-opt-summary/complexity_analysis.jpg" class="img-fluid" %}
 
 <div class="caption">
     Oracle Complexity Framework (adapted from Prof. Yangyang Xu's Slides<d-cite key="xu2019slides"></d-cite>)
@@ -176,7 +176,7 @@ $$
 	T_{\epsilon}(f,\mathtt{A}),
 $$
 
-{% include figure.liquid path="assets/img/2025-04-15-opt-summary/upper_lower.png" class="img-fluid" %}
+{% include figure.liquid path="assets/img/2024-04-28-opt-summary/upper_lower.png" class="img-fluid" %}
 
 <div class="caption">
     Illustration of Upper and Lower Complexity Bounds
@@ -201,8 +201,6 @@ $$x^{t+1}=\text{prox}_{\lambda f}(x^t)\triangleq\underset{x}{\arg\min}\left\{f(x
 where the proximal operator requires to solve a subproblem exactly. Solving a subproblem could be regarded as a new kind of oracle in algorithm design. Similarly, algorithms like the alternating direction method of multipliers (ADMM)<d-cite key="boyd2011distributed"></d-cite>, which also inherits subproblems to solve, are not discussed.
 
 Also here we do not cover the method like *conditional gradient method* (or Frank–Wolfe algorithm)<d-cite key="braun2022conditional"></d-cite>, which further requires a linear minimization oracle (LMO) in the algorithm design, so that it can avoid potentially expensive projection steps.
-
-Moreover, here the discussion generally does not cover first-order algorithms with *preconditioning*, e.g., Adam<d-cite key="kingma2014adam"></d-cite>, because they violate the definition of linear-span algorithm class.
 
 ---
 
@@ -481,7 +479,7 @@ Such a question has been partially addressed for stochastic optimization using *
 ### Beyond Classical Oracle Model
   The oracle complexity model mainly focuses on **worst-case instances** in the function class which may be far from *practical instances*. It is possible that the derived complexities can be too conservative and vacuous that they may not match the practice well, as the figure below illustrates.
 
-  {% include figure.liquid path="assets/img/2025-04-15-opt-summary/practice_gap.png" class="img-fluid" %}
+  {% include figure.liquid path="assets/img/2024-04-28-opt-summary/practice_gap.png" class="img-fluid" %}
 
   <div class="caption">
       Gap Between General Worst-Case Complexity and Instance-Level Complexity Analysis (adapted from <d-cite key="zhang2022beyond"></d-cite>)
