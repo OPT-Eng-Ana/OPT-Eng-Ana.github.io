@@ -42,30 +42,51 @@ bibliography: 2024-04-28-opt-summary.bib
 #     for hyperlinks within the post to work correctly.
 toc:
   - name: Introduction
-  - name: Framework
+    subsections:
+    - name: Literature
+  - name: Framework - Oracle Complexity Model
+    subsections:
+    - name: Framework Setup
+    - name: What We Do Not Cover
   - name: Notations
   - name: Summary of Results
-  - name: What's next?
+    subsections:
+    - name: Case 1-1 - Deterministic Minimization
+    - name: Case 1-2 - Finite-sum and Stochastic Minimization
+    - name: Case 2-1 - (S)C-(S)C Deterministic Minimax Optimization
+    - name: Case 2-2 - (S)C-(S)C Finite-sum and Stochastic Minimax Optimization
+    - name: Case 2-3 - NC-(S)C Deterministic Minimax Optimization
+    - name: Case 2-4 - NC-(S)C Finite-sum and Stochastic Minimax Optimization
+  - name: What is Next?
+    subsections:
+    - name: Richer Problem Structure
+    - name: Landscape Analysis
+    - name: Unified Lower Bounds
+    - name: Beyond Classical Oracle Model
   - name: Conclusion
 ---
 
 ## Introduction
 
-In this blog, we review the convergence rate of (stochastic) first-order methods in optimization. 
+In this blog, we review the complexity bounds of (stochastic) first-order methods in optimization. 
 
-Regarding the **problem structure**, we specifically consider *minimization* problems above and *minimax* optimization problems of the following forms.
-
-$$
-\min_{x\in\mathcal{X}}\ f(x).
-$$
+Regarding the **problem structure**, we consider **minimization** problems:
 
 $$
-\min_{x\in\mathcal{X}}\ \left[f(x)\triangleq \max_{y\in\mathcal{Y}}\ g(x,y)\right].
+\min_{x\in\mathcal{X}}\ f(x),
 $$
+
+and **minimax optimization** problems of the following forms:
+
+$$
+\min_{x\in\mathcal{X}}\ \left[f(x)\triangleq \max_{y\in\mathcal{Y}}\ g(x,y)\right],
+$$
+
+where $\mathcal{X}$ is a convex set. 
 
 Based on the **stochasticity**, we divide our discussions into three cases:
 
-- Deterministic (General) Optimization,
+- Deterministic (General) Optimization
 
 $$
 \min_{x\in\mathcal{X}}\ f(x).
@@ -83,34 +104,45 @@ $$
 \min_{x\in\mathcal{X}}\ f(x)\triangleq\mathbb{E}_{\xi\sim\mathcal{D}}[f(x;\xi)].
 $$
 
-A subtle while important difference between finite-sum and stochastic optimization problems lies in the ability to access to the overall objective function $f(x)$, i.e., stochastic optimization usually does not have access to $f(x)$ while the finite-sum problem has. As a result, algorithms that require access to $f(x)$, such as the classical stochastic variance reduced gradient (SVRG) algorithm<d-cite key="johnson2013accelerating"></d-cite>, are not directly applicable in the purely stochastic setting.
+Finite-sum and stochastic optimization problems might appear similar, particularly when $n$ is large. Indeed, if $f_i(x) = f(x; \xi_i)$ where $\xi_i$ are independently and identically distributed across all $i$, the finite-sum problem can be seen as an empirical counterpart of the stochastic optimization. In such scenarios, finite-sum problems typically arise in statistics and learning as empirical risk minimization, corresponding to an offline setting, i.e., one can access a dataset of $n$ sample points. In contrast, stochastic optimization often pertains to an online setting, i.e., one could query an oracle to obtain samples from the population distribution $\mathcal{D}$. The primary distinction between methods used to solve these optimization challenges centers on the accessibility to the total objective function $f(x)$. Specifically, access to $f(x)$ is typically unavailable in stochastic optimization, unlike in finite-sum problems. Consequently, algorithms that rely on access to $f(x)$, such as the classical stochastic variance reduced gradient (SVRG) algorithm <d-cite key="johnson2013accelerating"></d-cite>, cannot be directly applied in purely stochastic settings.
 
-Based on the **convexity** of the objective, we will divide our discussions into various cases, including strongly-convex (SC), convex (C) and nonconvex cases (NC).
-For minimax problems, based on convexity of $g(\cdot,y)$ for a given $y$ and the concavity of $g(x,\cdot)$ for a given $x$, we review results for strongly convex strongly concave (SC-SC), convex-concave (C-C),nonconvex strongly concave (NC-SC) and other combinations. 
+Based on the **convexity** of the objective $f(x)$, we categorize our discussions on the minimization problem into strongly convex (SC), convex (C), and nonconvex (NC) cases. For minimax problems, depending on the convexity of $g(\cdot,y)$ for a given $y$ and the concavity of $g(x,\cdot)$ for a given $x$, we review results for combinations such as strongly convex-strongly concave (SC-SC), convex-concave (C-C), nonconvex-strongly concave (NC-SC), and other variations.
+
 
 ### Literature
 
-This notes aims to review state-of-the-art (SOTA) first-order optimization algorithms convergence results. In fact, there are several great works for comprehensive review of optimization algorithm from different perspectives. Besides many well-known textbook and course materials like the one from Stephen Boyd<d-cite key="boyd2024text"></d-cite><d-cite key="boyd2024video"></d-cite>, maybe one of the most impressive works is the blog post by Ruder<d-cite key="ruder2016overview"></d-cite>, which received more than 10k citations according to Google Scholar. This post reviewed algorithm design of gradient descent (GD), stochastic gradient descent (SGD) and their variants, especially those commonly used in machine learning community like AdaGrad<d-cite key="duchi2011adaptive"></d-cite> and Adam<d-cite key="kingma2014adam"></d-cite>. Several monographs reviewed optimization algorithms in various settings, e.g., <d-cite key="bubeck2015convex"></d-cite>, <d-cite key="bottou2018optimization"></d-cite>, <d-cite key="sun2019survey"></d-cite>, <d-cite key="dvurechensky2021first"></d-cite> and <d-cite key="garrigos2023handbook"></d-cite>; the page by Ju Sun<d-cite key="sun2021list"></d-cite> was a popular repository tracking research effort on achieving global optimality for nonconvex optimization<d-footnote>Latest update: Dec 11 2021.</d-footnote>. The review by Ruoyu Sun<d-cite key="sun2019optimization"></d-cite> further specified the survey of optimization algorithm study in the context of deep learning. A recent survey by Danilova et al.,<d-cite key="danilova2022recent"></d-cite> revisited algorithm design and complexity analysis specifically in nonconvex optimization, which to some extent is the closest one to our blog post. Our blog aims to serve as an easy accessible tool for optimizers to check the SOTA theoretical convergence rate from both upper and lower bounds perspectives in an easier manner.
+This blog summarizes complexity results of state-of-the-art (SOTA) first-order optimization algorithms. There are several great works for a comprehensive review of optimization algorithms from different perspectives. Besides many well-known textbooks and course materials like the one from Stephen Boyd<d-cite key="boyd2024text"></d-cite><d-cite key="boyd2024video"></d-cite>, maybe one of the most impressive works is the blog post by Sebastian Ruder<d-cite key="ruder2016overview"></d-cite>, which received more than 10k citations according to Google Scholar. The post reviewed algorithmic design of gradient descent (GD), stochastic gradient descent (SGD), and their variants, especially those commonly used in the machine learning community like AdaGrad<d-cite key="duchi2011adaptive"></d-cite> and Adam<d-cite key="kingma2014adam"></d-cite>. Several monographs reviewed optimization algorithms in various settings, e.g., <d-cite key="bubeck2015convex"></d-cite>, <d-cite key="bottou2018optimization"></d-cite>, <d-cite key="sun2019survey"></d-cite>, <d-cite key="dvurechensky2021first"></d-cite> and <d-cite key="garrigos2023handbook"></d-cite>; the page by Ju Sun<d-cite key="sun2021list"></d-cite> was a popular repository tracking research effort on achieving global optimality for nonconvex optimization<d-footnote>Latest update: Dec 11 2021.</d-footnote>. The review by Ruoyu Sun<d-cite key="sun2019optimization"></d-cite> further specified the survey of optimization algorithm study in the context of deep learning. A recent survey by Danilova et al.,<d-cite key="danilova2022recent"></d-cite> revisited algorithm design and complexity analysis for nonconvex optimization. To some extent, it is the closest one to our blog post. Our blog aims to serve as an easily accessible tool for optimizers to check the SOTA theoretical convergence rate from both upper and lower bounds perspectives.
+
 
 ---
 
 ## Framework: Oracle Complexity Model
 
-We formally recall the definition of complexity. In particular, we stick to the classical **oracle complexity model**<d-cite key='nemirovskij1983problem'></d-cite>.
-As the figure below suggest, generally this framework consists of the following components:
-- *Fucntion class* $\mathcal{F}$, e.g., convex Lipschitz continuous function, and (nonconvex) Lipschitz smooth function.
-- *Oracle class* $\mathbb{O}$, e.g., zeroth-order oracle (function value), first-order oracle (function gradient or subdifferential).
-- *Algorithm class* $\mathcal{A}$, e.g., a common algorithm class studied in optimization literature is the *linear-span algorithm* interacting with an oracle $\mathbb{O}$, which encounters many well-known algorithms. This algorithm class is characterized as that 
-if we let $(x^t)_t$ be the sequence history queries generated by the algorithm, for the next iterate, we have 
+Intuitively, upper complexity bounds mean how many samples/iterations it takes for an algorithm to reach a certain accuracy, such as $\epsilon$-optimality. Thus, upper complexity bounds are algorithm-specific. Lower complexity bounds characterize how many samples/iterations it at least takes for the best algorithm (within some algorithm class) to reach a certain accuracy for the worst-case function within some function class. Thus lower complexity bounds are usually for a class of algorithms and function class. Since computing gradients or generating samples requires some effort, we often use oracle to represent these efforts in optimization.
 
-$$
-x^{t+1}\in\mathrm{Span}\left\{x^0,\cdots,x^t;\mathbb{O}(f,x^0),\cdots,\mathbb{O}(f,x^t)\right\}.
-$$
+To formally characterize complexity, we use the classical **oracle complexity model** framework<d-cite key='nemirovskij1983problem'></d-cite>. Feel free to jump directly to the summary table, as these are just for proper descriptions of lower bounds.
 
-- *Complexity measure* $\mathcal{M}$, e.g., 
-  - Optimality gap $f(x)-f(x^\star)$ where $x^\star$ is the global minimum.
-  - Point distance $\|\|x-x^\star\|\|$.
-  - Function stationarity $\|\|\nabla f(x)\|\|$, which is common in nonconvex optimization. 
+### Framework Setup
+
+The oracle complexity model consists of the following components:
+  - **Fucntion class** $\mathcal{F}$, e.g., convex Lipschitz continuous function class, and (nonconvex) Lipschitz smooth function class.
+  - **Oracle class** $\mathbb{O}$, for any query point $x$, it returns some information about the function $f\in\mathcal{F}$, e.g., zeroth-order oracle returns function value and first-order oracle returns function gradient or subdifferential.
+    - In the deterministic case, we consider the generic *first-order oracle* (FO), which, for each query point $x$, returns the gradient $\nabla f(x)$.
+    - In the finite-sum case $f=\frac{1}{n}\sum_{i=1}^n f_i$, we consider the *incremental first-order oracle* (IFO)<d-cite key='agarwal2015lower'></d-cite>, given the query point $x$ and index $i\in[n]$, it returns $\nabla f_i(x)$.
+    - In the stochastic case, we will consider *stochastic first-order oracle* (SFO)<d-cite key='arjevani2023lower'></d-cite>, given the query point $x$, it returns an unbiased gradient estimator $g(x)$ with a *bounded variance*. Also some works further considers the scenario that the returned estimator is *mean-squared smoothness* (or *averaged smooth*, denoted as AS), or each individual itself is Lipschitz smooth (denoted as IS).
+  - **Algorithm class** $\mathcal{A}$, e.g., a common algorithm class studied in optimization literature is the *linear-span algorithm*, which covers various gradient-based methods. The algorithm interacts with an oracle $\mathbb{O}$ to decide the next query point. Linear-span algorithm says that the next query point is within a linear combination of all past information:
+  
+    $$
+    x^{t+1}\in\mathrm{Span}\left\{x^0,\cdots,x^t;\mathbb{O}(f,x^0),\cdots,\mathbb{O}(f,x^t)\right\}.
+    $$
+   
+    - Recall gradient descent $x^{t+1} = x^t - \alpha \nabla f(x^t)$. Obviously, $x^{t+1}$ is within the linear span of $x^t$ and $\nabla f(x^t)$. In addition, gradient descent uses first-order information; thus, the oracle class is the first-order oracle. 
+    - An important point regarding finite-sum and stochastic optimization is the difference between *deterministic algorithms* and *randomized algorithms*. A randomized algorithm uses internal or external randomness to generate its iterates, which is more general than the deterministic one. Here, for simplicity, we mainly consider the deterministic setting.
+
+  - **Complexity measure** $\mathcal{M}$, e.g., 
+    - Optimality gap $f(x)-f(x^\star)$ where $x^\star$ is the global minimum.
+    - Point distance $\|\|x-x^\star\|\|^2$ (or the norm).
+    - Function stationarity $\|\|\nabla f(x)\|\|$, which is common in nonconvex optimization. 
 
 {% include figure.liquid path="assets/img/2024-04-28-opt-summary/complexity_analysis.jpg" class="img-fluid" %}
 
@@ -118,13 +150,13 @@ $$
     Oracle Complexity Framework (adapted from Prof. Yangyang Xu's Slides<d-cite key="xu2019slides"></d-cite>)
 </div>
 
-The efficiency of algorithms is quantified by the *oracle complexity*: for an algorithm $\mathtt{A}\in\mathcal{A}(\mathbb{O})$ interacting with an oracle $\mathbb{O}$, an instance $f\in\mathcal{F}$, and the corresponding measurement $\mathcal{M}$, we define
+The efficiency of algorithms is quantified by the **oracle complexity**: for an algorithm $\mathtt{A}\in\mathcal{A}(\mathbb{O})$ interacting with an oracle $\mathbb{O}$, an instance $f\in\mathcal{F}$, and the corresponding measurement $\mathcal{M}$, we define
 
 $$
 T_{\epsilon}(f,\mathtt{A})\triangleq\inf\left\{T\in\mathbb{N}~|~\mathcal{M}(x^T)\leq\epsilon\right\}
 $$
 
-as the minimum number of oracle calls $\mathcal{A}$ makes to reach convergence. So given an algorithm $\mathtt{A}$, its upper complexity bound for solving one specific function class $\mathcal{F}$ is defined as
+as the minimum number of oracle calls $\mathcal{A}$ makes to reach convergence. Given an algorithm $\mathtt{A}$, its upper complexity bound for solving one specific function class $\mathcal{F}$ is defined as
 
 $$
 \mathrm{UB}_\epsilon(\mathcal{F};\mathtt{A})
@@ -133,8 +165,8 @@ $$
 	T_{\epsilon}(f,\mathtt{A}),
 $$
 
-One of the mainstreams of optimization study is trying to design algorithms with better upper complexity bounds, corresponding to decreasing $\mathrm{UB}_\epsilon(\mathcal{F};\cdot)$ with their own algorihms.
-On the other hand, another stream of study focuses on the performance limit in terms of the worst-case complexity, i.e., the lower complexity bound (LB) of a class of algorithm under certain settings, which can be written as:
+One of the mainstreams of optimization study is trying to design algorithms with better (smaller) upper complexity bounds, corresponding to decreasing $\mathrm{UB}_\epsilon(\mathcal{F};\cdot)$ with their algorithms for a specific class of functions.
+On the other hand, another stream of study focuses on understanding the performance limit in terms of the worst-case complexity, i.e., the lower complexity bound (LB) of a class of algorithms using the information from a class of oracles on a class of functions under certain settings, which can be written as:
 
 $$
 \mathrm{LB}_\epsilon(\mathcal{F},\mathcal{A},\mathbb{O})
@@ -150,24 +182,25 @@ $$
     Illustration of Upper and Lower Complexity Bounds
 </div>
 
-As the figure above suggests, the optimization community keep facilitating the understanding of algorithm complexity from both upper and lower complexity directions.
-An ultimate goal in optimization algorithm complexity study is to find the *optimal algorithm* $\mathtt{A}^\star$ in a given setting, which means its upper bound matches with the lower bound of the algorithm class under the function setting, 
+As the figure above suggests, a common goal in optimization algorithm complexity studies is to find the *optimal algorithm* $\mathtt{A}^\star$ in a given setting, which means its upper bound matches with the lower bound of the algorithm class for a class of functions using certain oracles, 
 i.e.,
 
 $$
 \mathrm{UB}_\epsilon(\mathcal{F};\mathtt{A}^\star)\asymp\mathrm{LB}_\epsilon(\mathcal{F},\mathcal{A},\mathbb{O}).
 $$
 
-In this notes, we will focus on **first-order algorithms** in various optimization problem settings, trying to summarize the state-of-the-art (SOTA) UB and LB results, aiming to identify the gaps in existing reseach, and develop new trends. 
+In this note, we will focus on **first-order algorithms** in various optimization problem settings, trying to summarize the state-of-the-art (SOTA) UB and LB results to identify the gaps in existing research and discuss new trends. 
 
-**Remark:**
-Here we focus on first-order optimization only, in fact there are also many works on *zeroth-order optimization*<d-cite key="liu2020primer"></d-cite>, and *higher-order optimization*<d-cite key="sun2019survey"></d-cite>, and the key difference just lie in the oracle information. For example second-order methods (e.g., Newton's method) generally are able to access the Hessian information, which first-order methods cannot access, so with such finer information, generally second-order methods attain better complexities compared to their first-order counterparts, which is also characterized in theory as mentioned in <d-cite key="carmon2020lower"></d-cite>. 
+### What We Do Not Cover
+Throughout the blog, we focus on first-order optimization. There are also many works on *zeroth-order optimization*<d-cite key="liu2020primer"></d-cite>, and *higher-order optimization*<d-cite key="sun2019survey"></d-cite>. The key difference lies within the oracle information. For example, second-order methods (e.g., Newton's method) have access to the Hessian information. With such finer information, generally, second-order methods attain better complexities compared to first-order methods, which is characterized in theory as mentioned in <d-cite key="carmon2020lower"></d-cite>. Of course, obtaining higher-order information would be much more costly, and thus, the per-iteration computational complexity is usually higher. 
   
-Also here the discussion does not include some other popular algorithms like *proximal algorithms*<d-cite key="parikh2014proximal"></d-cite>, one prominent example is *proximal point algorithm* (PPA)<d-cite key="rockafellar1976monotone"></d-cite> based on *proximal operator*:
+Some other popular algorithms like *proximal algorithms*<d-cite key="parikh2014proximal"></d-cite> are not discussed. One prominent example is *proximal point algorithm* (PPA)<d-cite key="rockafellar1976monotone"></d-cite> based on *proximal operator*:
 
 $$x^{t+1}=\text{prox}_{\lambda f}(x^t)\triangleq\underset{x}{\arg\min}\left\{f(x)+\frac{1}{2\lambda}\|\|x-x^t\|\|^2\right\},$$
 
-and the proximal operator, which requires to exactly solve a subproblem, introduces new oracle in the algorithm design, and it goes beyond the main scope of the blog. Similarly, algorithms like alternating direction method of multipliers (ADMM)<d-cite key="boyd2011distributed"></d-cite>, which also inherits subproblems to solve, are not applicable to the discussion here.
+where the proximal operator requires to solve a subproblem exactly. Solving a subproblem could be regarded as a new kind of oracle in algorithm design. Similarly, algorithms like the alternating direction method of multipliers (ADMM)<d-cite key="boyd2011distributed"></d-cite>, which also inherits subproblems to solve, are not discussed.
+
+Also here we do not cover the method like *conditional gradient method* (or Frank–Wolfe algorithm)<d-cite key="braun2022conditional"></d-cite>, which further requires a linear minimization oracle (LMO) in the algorithm design, so that it can avoid potentially expensive projection steps.
 
 ---
 
@@ -350,28 +383,31 @@ We present the lower and upper bound results in tables below<d-footnote>. Given 
 
 ---
 
-## What is next?
-The section above summarize the upper and lower bounds of the oracle complexity for finding an $\epsilon$-optimal solution or $\epsilon$-stationary points for minimization and minimax problems. Clearly this is not the end of the story, there are more and more optimization problems arising from various applications like machine learning and operation research<d-cite key="bottou2018optimization"></d-cite>, which come with more involved problem structure and complicated landscape characteristics; also we need to indicate that the above summary corresponds to asymptotic upper and lower bounds in theory, sometimes (or often) we find it harder to explain algorithm behavior in practice using existing theory, e.g., <d-cite key="defazio2019ineffectiveness"></d-cite> shows that variance reduction may be ineffective on accelerating the training of deep learning models, which contrast the classical convergence theory. Here we discuss what could be potential interesting next steps. 
+## What is Next?
+The section above summarizes the upper and lower bounds of the oracle complexity for finding an $\epsilon$-optimal solution or $\epsilon$-stationary points for minimization and minimax problems. Clearly, this is not the end of the story. There are more and more optimization problems arising from various applications like machine learning and operation research<d-cite key="bottou2018optimization"></d-cite>, which come with more involved problem structure and complicated landscape characteristics. We also need to indicate that the above summary corresponds to asymptotic upper and lower bounds in theory. Sometimes (or often), we find it harder to explain algorithm behavior in practice using existing theory, e.g., <d-cite key="defazio2019ineffectiveness"></d-cite> shows that variance reduction may be ineffective in accelerating the training of deep learning models, which contrast the classical convergence theory. Below, we discuss what could be potentially interesting next steps. 
 
 ### Richer Problem Structure
 
-In this notes, we only discussed minimization and minimax problems, while there are also many other important optimization problems with different structure, for example:
+In the aforementioned discussion, we only considered minimization and minimax problems. There are also many other important optimization problems with different structures, for example:
 
-* Bilevel Optimization 
+* Bilevel Optimization<d-cite key="zhang2024introduction"></d-cite>
 
   $$
   \min_{x \in \mathcal{X}} \Phi(x) = F(x, y^\star(x))  \quad \text{where} \quad y^\star(x) = \underset{y \in \mathcal{Y}}{\arg\min} \, G(x, y),
   $$
 
-  Bilevel optimization covers minimax optimization as a special case. Over the past seven years, bilevel optimization has become increasingly popular due to its applications in machine learning. In particular, researchers have revisited first-order methods for solving (stochastic) bilevel optimization problems. Starting from <d-cite key="ghadimi2018approximation"></d-cite>, which investigates double-loop methods for solving bilevel optimization, <d-cite key="hong2020two"></d-cite> initiated the development of single-loop, single-timescale methods for stochastic bilevel optimization. This line of research leads to a simple single-timescale algorithm <d-cite key="chen2021tighter"></d-cite> and multiple variance reduction techniques to achieve single-loop <d-cite key="guo2021randomized"></d-cite><d-cite key="khanduri2021near"></d-cite>. 
+  Bilevel optimization covers minimax optimization as a special case. Over the past seven years, bilevel optimization has become increasingly popular due to its applications in machine learning. Common approaches for solving bilevel optimization problems include:
+
+    - Approximate Implicit Differentiation (AID)
+    - Iterative Differentiation (ITD)
+  
+  Starting from <d-cite key="ghadimi2018approximation"></d-cite>, which investigates double-loop methods for solving bilevel optimization, <d-cite key="hong2020two"></d-cite> initiated the development of single-loop, single-timescale methods for stochastic bilevel optimization. This line of research leads to a simple single-timescale algorithm <d-cite key="chen2021tighter"></d-cite> and multiple variance reduction techniques to achieve single-loop<d-cite key="guo2021randomized"></d-cite><d-cite key="khanduri2021near"></d-cite>. 
   
   Subsequent developments have focused on developing fully first-order methods for solving bilevel optimization <d-cite key="kwon2023fully"></d-cite>, achieving global optimality <d-cite key="xiao2024unlocking"></d-cite>, addressing contextual/multiple lower-level problems <d-cite key="hu2024contextual"></d-cite><d-cite key="guo2021randomized"></d-cite>, handling constrained lower-level problems <d-cite key="jiang2024barrier"></d-cite>, and bilevel reinforcement learning <d-cite key="chen2022adaptive"></d-cite><d-cite key="chakraborty2024parl"></d-cite><d-cite key="thoma2024contextual"></d-cite> for model design and reinforcement learning with human feedback.
   Several questions remain open and are interesting to investigate:
   1. How to handle general lower-level problems with coupling constraints. 
   2. How to accelerate fully first-order methods to match the optimal complexity bounds.
-  3. How to establish non-asymptotic convergence guarantees for bilevel problems with convex lower levels.
-
-Also there appeared several other optimization problems with different formulations arising from practice, e.g.,
+  3. Establishing non-asymptotic convergence guarantees for bilevel problems with convex lower levels.
 
 * Compositional Stochastic Optimization<d-cite key="wang2017stochastic"></d-cite>
 
@@ -383,21 +419,33 @@ $$
 
   $$\min_{x \in \mathcal{X}} F(x) =\mathbb{E}_{\xi}\left[f\left(\mathbb{E}_{\eta\mid\xi}\left[g(x;\eta,\xi)\right];\xi\right)\right].$$
 
-  Conditional stochastic optimization differs from composition stochastic optimization mainly in the conditional expectation inside $f$. This requires one to sample from the conditional distribution of $\eta$ for any given $\xi$, while compositional optimization can sample from the marginal distribution of $\eta$. 
+  Conditional stochastic optimization differs from composition stochastic optimization mainly in the conditional expectation inside $f$. This requires one to sample from the conditional distribution of $\eta$ for any given $\xi$, while compositional optimization can sample from the marginal distribution of $\eta$. It appears widely in machine learning and causality when the randomness admits a two-level hierarchical structure.
 
 * Performative Prediction (or Decision-Dependent Stochastic Optimization)<d-cite key="perdomo2020performative"></d-cite><d-cite key="drusvyatskiy2023stochastic"></d-cite>
 
-$$
-\min_{x\in\mathcal{X}}\ f(x)\triangleq\mathbb{E}_{\xi\sim\mathcal{D}(x)}[f(x;\xi)].
-$$
+  $$
+  \min_{x\in\mathcal{X}}\ F(x)\triangleq\mathbb{E}_{\xi\sim\mathcal{D}(x)}[f(x;\xi)].
+  $$
 
-* Contextual Stochastic Optimization<d-cite key="bertsimas2020predictive"></d-cite><d-cite key="sadana2024survey"></d-cite> (or Decision-Focused Learning)
+  Note that this problem diverges from classical stochastic optimization because the distribution of $\xi$ depends on the decision variable $x$. Such dependency often disrupts the convexity of $F$, even if $f$ is convex with respect to $x$. In practical scenarios where the randomness can be decoupled from the decision variable, as in $\xi = g(x) + \eta$, the problem can be simplified to a classical stochastic optimization framework. This presents a trade-off: One can either impose additional modeling assumptions to revert to a classical approach or tackle the computational complexities inherent in such performative prediction problems. Practically, it is advisable to explore the specific structure of the problem to determine if it can be restructured into classical stochastic optimization.
 
-$$
-\min_{x\in\mathcal{X}}\ f(x;z)\triangleq\mathbb{E}_{\xi\sim\mathcal{D}}[f(x;\xi)~|~Z=z]
-$$
+* Contextual Stochastic Optimization<d-cite key="bertsimas2020predictive"></d-cite><d-cite key="sadana2024survey"></d-cite><d-cite key="mandi2024decision"></d-cite>
 
-* Distributionally robust optimization<d-cite key="kuhn2024distributionally"></d-cite>
+  $$
+  \min_{x\in\mathcal{X}}\ F(x;z)\triangleq\mathbb{E}_{\xi\sim\mathcal{D}}[f(x;\xi)~|~Z=z].
+  $$
+
+  Contextual stochastic optimization aims to leverage side information $Z$ to facilitate decision-making. The goal is to find a policy $\pi$ that maps a context $z$ to a decision $x$. Thus the performance measure is 
+
+  $$\mathbb{E}_z(F(\pi(z);z) - F(\pi^*(z);z))$$ 
+
+  or 
+  
+  $$\mathbb{E}_z\|\pi(z) - \pi^*(z)\|^2.$$
+  
+  The challenges for solving such problems come from the fact that usually the available samples are only $(z,\xi)$ pairs, i.e., one does not have access to multiple samples of $\xi$ from the conditional distribution. As a result, one usually needs to first estimate $F(x;z)$ via nonparametric statistics techniques like $k$-nearest neighbors and kernel regression or via reparametrization tricks and conduct a regression. Both could suffer from the curse of dimensionality as the dimension of $z$ is large. 
+
+* Distributionally Robust Optimization<d-cite key="kuhn2024distributionally"></d-cite>
 
   $$ \min_{x\in\mathcal{X}}\sup_{\mathcal{D}\in U_r(Q)} \triangleq\mathbb{E}_{\xi\sim \mathcal{D}}[f(x;\xi)],$$
 
@@ -405,25 +453,31 @@ $$
 
 ### Landscape Analysis
   
-  Since most deep learning problems are nonconvex, a vast amount of literature focus on finding a (generalized) stationary point of the original optimization problem, but the practice often showed that one could find global optimality for various structured nonconvex problems efficiently. In fact there is a line of research tailored for the global landscape of structured nonconvex optimization, for example in neural network training, the interpolation condition holds for some overparameterized neural networks<d-cite key="sun2020global"></d-cite>. 
+  Since most deep learning problems are nonconvex, a vast amount of literature focuses on finding a (generalized) stationary point of the original optimization problem, but the practice often showed that one could find global optimality for various structured nonconvex problems efficiently. In fact, there is a line of research tailored for the global landscape of structured nonconvex optimization. For example, in neural network training, the interpolation condition holds for some overparameterized neural networks<d-cite key="sun2020global"></d-cite>; also it has been observed that low-rank structures naturally emerge in the weight matrices during training<d-cite key="balzano2025overview"></d-cite>. 
   
   Regarding such a mismatch between theory and practice, one reason may be the coarse assumptions the community applied in the theoretical analysis, which cannot effectively characterize the landscape of objectives. Here we briefly summarize a few structures arising in recent works, which try to mix the gap between practice and theory:
 
-  - *Hidden convexity* says that the original nonconvex optimization problem might admit a convex reformulation via a variable change. It appears in operations research <d-cite key="chen2024efficient"></d-cite><d-cite key="chen2023network"></d-cite>, reinforcement learning <d-cite key="zhang2020variational"></d-cite>, control <d-cite key="anderson2019system"></d-cite>. Despite that the concrete transformation function is unknown, one could still solve the problem to global optimality efficiently <d-cite key="fatkhullin2023stochastic"></d-cite> with $\mathcal{O}(\epsilon^{-3})$ complexity for hidden convex case and $\mathcal{O}(\epsilon^{-1})$ complexity for hidden strongly convex case. In the hidden convex case, one could further achieve $\mathcal{O}(\epsilon^{-2})$ complexity in the hidden convex case via mirror stochastic gradient <d-cite key="chen2024efficient"></d-cite> or variance reduction <d-cite key="zhang2021convergence"></d-cite>.
+  - **Hidden convexity** says that the original nonconvex optimization problem might admit a convex reformulation via a variable change. It appears in operations research <d-cite key="chen2024efficient"></d-cite><d-cite key="chen2023network"></d-cite>, reinforcement learning <d-cite key="zhang2020variational"></d-cite>, control <d-cite key="anderson2019system"></d-cite>. Despite that the concrete transformation function is unknown, one could still solve the problem to global optimality efficiently <d-cite key="fatkhullin2023stochastic"></d-cite> with $\mathcal{O}(\epsilon^{-3})$ complexity for hidden convex case and $\mathcal{O}(\epsilon^{-1})$ complexity for hidden strongly convex case. In the hidden convex case, one could further achieve $\mathcal{O}(\epsilon^{-2})$ complexity in the hidden convex case via mirror stochastic gradient <d-cite key="chen2024efficient"></d-cite> or variance reduction <d-cite key="zhang2021convergence"></d-cite>.
   
-  - Another stream considers *Polyak-Łojasiewicz* (PL) or *Kurdyka-Łojasiewicz* (KL) type of conditions, or other gradient dominance conditions <d-cite key="karimi2016linear"></d-cite>. Such conditions imply that the (generalized) gradient norm dominates the optimality gap, implying that any (generalized) stationary point are also global optimal. However, establishing hidden convexity, PL, or KL condition is usually done in a case-by-case manner and could be challenging. See <d-cite key="chen2024landscape"></d-cite> for some examples about KL conditions in finite horizon MDP with general state and action and its applications in operations and control. See <d-cite key="fatkhullin2022sharp"></d-cite> and reference therein for convergence rate analysis under KL conditions.
+  - Another stream considers **Polyak-Łojasiewicz** (PL) or **Kurdyka-Łojasiewicz** (KL) type of conditions, or other gradient dominance conditions <d-cite key="karimi2016linear"></d-cite>. Such conditions imply that the (generalized) gradient norm dominates the optimality gap, implying that any (generalized) stationary point is also globally optimal. However, establishing hidden convexity, PL, or KL conditions is usually done in a case-by-case manner and could be challenging. See <d-cite key="chen2024landscape"></d-cite> for some examples of KL conditions in finite horizon MDP with general state and action and its applications in operations and control. See <d-cite key="fatkhullin2022sharp"></d-cite> and reference therein for convergence rate analysis under KL conditions.
   
-  - With numerical experiments disclosing structures in objective functions, some works proposed new assumptions which drive the algorithm design and corresponding theoretical analysis, which in turn reveals acceleration in empirical findings. For example, <d-cite key="zhang2019gradient"></d-cite> introduced the *relaxed smoothness assumption* (or $(L_0, L_1)$-smoothness) inspired by empirical observations on deep neural networks, and proposed a clipping-based first-order algorithm which enjoys both theoretical and practical outperformance.
+  - With numerical experiments disclosing structures in objective functions, some works proposed new assumptions that drive the algorithm design and corresponding theoretical analysis, which in turn reveals acceleration in empirical findings. For example, <d-cite key="zhang2019gradient"></d-cite> introduced the **relaxed smoothness assumption** (or $(L_0, L_1)$-smoothness) inspired by empirical observations on deep neural networks, and proposed a clipping-based first-order algorithm which enjoys both theoretical and practical outperformance.
   
-    Another noteworthy work is <d-cite key="zhang2020adaptive"></d-cite>, which verified the ubiquity of *heavy-tailed noise* in stochastic gradients in neural network training practices, such evidence drove them to revise SGD and incorporate strategies like clipping in the algorithm design, which also outperformed in numerical experiments. The above two works, along with their more practical assumptions, inspired many follow-up works, evidented by their high citations according to Google Scholar<d-cite key="zhang2019citation"></d-cite><d-cite key="zhang2020citation"></d-cite>.
+    Another noteworthy work is <d-cite key="zhang2020adaptive"></d-cite>, which verified the ubiquity of **heavy-tailed noise** in stochastic gradients in neural network training practices, such evidence drove them to revise SGD and incorporate strategies like clipping in the algorithm design, which also outperformed in numerical experiments. The above two works, along with their more practical assumptions, inspired many follow-up works, evidenced by their high citations according to Google Scholar<d-cite key="zhang2019citation"></d-cite><d-cite key="zhang2020citation"></d-cite>.
 
 ### Unified Lower Bounds
-For lower bounds, we adapt the so-called optimization-based lower bounds proved via *zero-chain arguments* <d-cite key="nesterov2013introductory"></d-cite>. The narrative of such lower bounds admits the following form: For any given accuracy $\epsilon>0$, there exists a hard instance $f:\mathbb{R}^{d_\epsilon}\rightarrow\mathbb{R}$ in the function class $\mathcal{F}$, where the dimension $d_\epsilon$ depends on the accuracy $\epsilon>0$, such that it takes at least $\mathrm{poly}(\epsilon^{-1})$ number of oracles to find an $\epsilon$-optimal solution or $\epsilon$-stationary point. Note that the dimension $d_\epsilon$ depends on the accuracy, particularly $d_\epsilon$ increases as $\epsilon$ decreases. For a function class with a given dimension $d$, which is independent of the accuracy, the dependence on $\epsilon$ becomes loose especially when $d$ is small. In other words, for a $d$-dimension function classes and a given accuracy $\epsilon>0$, the upper bounds on the complexity of first-order methods given in the tables still hold, yet the lower bounds becomes loose, which could lead to a mismatch between upper and lower bounds. This leads to a fundamental question: how to prove lower bounds of first-order methods for any given $d$-dimensional function classes. 
+For lower bounds, we adapt the so-called optimization-based lower bounds proved via *zero-chain arguments*<d-cite key="nesterov2018lectures"></d-cite><d-cite key="carmon2020lower"></d-cite><d-cite key="fang2018spider"></d-cite>. The narrative of such lower bounds admits the following form: For any given accuracy $\epsilon>0$, there exists a hard instance $f:\mathbb{R}^{d_\epsilon}\rightarrow\mathbb{R}$ in the function class $\mathcal{F}$, where the dimension $d_\epsilon$ depends on the accuracy $\epsilon>0$, such that it takes at least $\mathrm{poly}(\epsilon^{-1})$ number of oracles to find an $\epsilon$-optimal solution or $\epsilon$-stationary point. 
 
-Such a question has been partially addressed for stochastic optimization using *information theoretic-based lower bounds*<d-cite key="agarwal2009information"></d-cite> and for deterministic one-dimensional optimization<d-cite key="chewi2023complexity"></d-cite>. For stochastic convex optimization, <d-cite key="agarwal2009information"></d-cite> shows that  for any given $d$-dimensional Lipschitz continuous convex function class and any $\epsilon>0$, it takes at least $\mathcal{O}(\sqrt{d} \epsilon^{-2})$ number of gradient oracles to find an $\epsilon$-optimal solution. Such information-theoretic lower bounds admits explicit dependence on the problem dimension. In addition, even ignoring dimension dependence, the dependence on the accuracy matches the upper bounds of stochastic gradient descent.  Thus such a lower bound addresses the aforementioned question for stochastic convex optimization. Yet, it raises another interesting observation, i.e., the obtained lower bounds  $\mathcal{O}(d\epsilon^{-2})$<d-cite key="agarwal2009information"></d-cite> is larger than the upper bounds $\mathcal{O}(\epsilon^{-2})$<d-cite key="nemirovski2009robust"></d-cite>. This is of course not a conflict as the two papers make different assumptions. Yet, it would be interesting to ask, if first-order methods such as mirror descent are really dimension independent or is it the case that existing optimization literature is treating some parameters that could be dimension dependent as dimension independent ones.   
+Note that the dimension $d_\epsilon$ depends on the accuracy, particularly $d_\epsilon$ increases as $\epsilon$ decreases. For a function class with a given dimension $d$, which is independent of the accuracy, the dependence on $\epsilon$ becomes loose especially when $d$ is small. In other words, for a $d$-dimension function class and a given accuracy $\epsilon>0$, the upper bounds on the complexity of first-order methods given in the tables still hold, yet the lower bounds become loose, which could lead to a mismatch between upper and lower bounds. This leads to a fundamental question: 
+
+*How to prove lower bounds of first-order methods for any given $d$-dimensional function classes?* 
+
+Such a question has been partially addressed for stochastic optimization using *information theoretic-based lower bounds*<d-cite key="agarwal2009information"></d-cite> and for deterministic one-dimensional optimization<d-cite key="chewi2023complexity"></d-cite>:
+- For stochastic convex optimization, <d-cite key="agarwal2009information"></d-cite> shows that  for any given $d$-dimensional Lipschitz continuous convex function class and any $\epsilon>0$, it takes at least $\mathcal{O}(\sqrt{d} \epsilon^{-2})$ number of gradient oracles to find an $\epsilon$-optimal solution. Such information-theoretic lower bounds admit explicit dependence on the problem dimension. In addition, even ignoring dimension dependence, the dependence on accuracy matches the upper bounds of stochastic gradient descent. Thus such a lower bound addresses the aforementioned question for stochastic convex optimization. 
+- Yet, it raises another interesting observation, i.e., the obtained lower bounds  $\mathcal{O}(d\epsilon^{-2})$<d-cite key="agarwal2009information"></d-cite> is larger than the upper bounds $\mathcal{O}(\epsilon^{-2})$<d-cite key="nemirovski2009robust"></d-cite>. This is, of course, not a conflict, as the two papers make different assumptions. However, it would be interesting to ask if first-order methods such as mirror descent are really dimension-independent or if it is the case that existing optimization literature is treating some parameters that could be dimension-dependent as dimension-independent ones.   
 
 ### Beyond Classical Oracle Model
-  Regarding the oracle complexity model, because it mainly focuses on *worst-case instances* in the function class which may be far from *practical instances*, possibly the derived complexities can be such conservative and vacuous that they may not match the practice well, as the figure below illustrated.
+  The oracle complexity model mainly focuses on **worst-case instances** in the function class which may be far from *practical instances*. It is possible that the derived complexities can be too conservative and vacuous that they may not match the practice well, as the figure below illustrates.
 
   {% include figure.liquid path="assets/img/2024-04-28-opt-summary/practice_gap.png" class="img-fluid" %}
 
@@ -431,17 +485,25 @@ Such a question has been partially addressed for stochastic optimization using *
       Gap Between General Worst-Case Complexity and Instance-Level Complexity Analysis (adapted from <d-cite key="zhang2022beyond"></d-cite>)
   </div>
 
-  Recently there appeared some works which go beyond the classical oracle model on evaluating the optimization algorithm efficiency, for example:
+  Recently, there appeared some works that go beyond the classical oracle model in evaluating the optimization algorithm efficiency, for example:
 
-  - In <d-cite key="pedregosa2020acceleration"></d-cite> and <d-cite key="paquette2021sgd"></d-cite>, they considered *average-case complexity* in optimization algorithm analysis, this topic is well established in theoretical computer science. Such pattern considers the convergence behavior in the average sense rather than the classical worst-case flavor, and it further specified the objective formulation and data distribution, which results in more refined complexity bounds than the common worst-case complexities, while at the expense of more complicated analysis. The study of average-case complexity in the context of optimization algorithms is still less mature and there are still many open questions.
-  - On the other hand, with the development of higher-order algorithms, some recent works<d-cite key="doikov2023second"></d-cite> further considered the *arithmetic complexity* in optimization by incorporating the computational cost of each oracle into accout<d-footnote>In Nesterov's book<d-cite key="nesterov2018lectures"></d-cite>, these two are also called "analytical complexity" and "arithmetical complexity".</d-footnote>
-  - Also in distributed optimization (or federated learning) literature, the communication cost is one of the main bottlenecks compared to computation<d-cite key="konevcny2016federated"></d-cite><d-cite key="mcmahan2017communication"></d-cite><d-cite key="karimireddy2020scaffold"></d-cite><d-cite key="kairouz2021advances"></d-cite>, so many works modified the oracle framework a bit and turn to study the complexity bound in terms of *communication cost* (or communication oracle) rather than the computation efforts, such change also motivated the fruitful study of *local algorithms*<d-cite key="stich2019local"></d-cite><d-cite key="mishchenko2022proxskip"></d-cite>, which try to skip unnecessary communications while still attain the convergence guarantees. 
-  - Recently another series of recent works<d-cite key="grimmer2024provably"></d-cite><d-cite key="altschuler2023acceleration1"></d-cite><d-cite key="altschuler2023acceleration2"></d-cite> consider *long stepsize* by incorporating a craft stepsize schedule into first-order methods and achieve a faster convergence rate, which is quite counterintuitive and may be of interests to the community. At the same time, as indicated in <d-cite key="kornowski2024open"></d-cite><d-cite key="altschuler2023acceleration1"></d-cite>, such theoretical outperformance generally only works for some specific iteration numbers, while in lack of guarantees of *anytime convergence*, also the extension of the study beyond the deterministic and convex case is still an open problem<d-footnote>Update (Nov. 27, 2024): Today there appeared a new work on arXiv<d-cite key="zhang2024anytime"></d-cite>, which claimed to solve the anytime convergence issue mentioned above<d-cite key="kornowski2024open"></d-cite>.</d-footnote>. 
+  - In <d-cite key="pedregosa2020acceleration"></d-cite> and <d-cite key="paquette2021sgd"></d-cite>, they considered **average-case complexity** in optimization algorithm analysis, this topic is well established in theoretical computer science. Such a pattern considers the convergence behavior in the average sense rather than the classical worst-case flavor, and it further specifies the objective formulation and data distribution, which results in more refined complexity bounds than the common worst-case complexities while at the expense of more complicated analysis. The study of average-case complexity in the context of optimization algorithms is still less mature, and there are still many open questions.
+  - On the other hand, with the development of higher-order algorithms, some recent works<d-cite key="doikov2023second"></d-cite> further considered the **arithmetic complexity** in optimization by incorporating the computational cost of each oracle into accout.<d-footnote>In Nesterov's book<d-cite key="nesterov2018lectures"></d-cite>, these two are also called "analytical complexity" and "arithmetical complexity".</d-footnote>
+  - Also in distributed optimization (or federated learning) literature, the communication cost is one of the main bottlenecks compared to computation<d-cite key="konevcny2016federated"></d-cite><d-cite key="mcmahan2017communication"></d-cite><d-cite key="karimireddy2020scaffold"></d-cite><d-cite key="kairouz2021advances"></d-cite>, so many works modified the oracle framework a bit and turn to study the complexity bound in terms of **communication cost** (or communication oracle) rather than the computation efforts, such change also motivated the fruitful study of *local algorithms*<d-cite key="stich2019local"></d-cite><d-cite key="mishchenko2022proxskip"></d-cite>, which try to skip unnecessary communications while still attain the convergence guarantees. 
+  - Recently another series of recent works<d-cite key="grimmer2024provably"></d-cite><d-cite key="altschuler2023acceleration1"></d-cite><d-cite key="altschuler2023acceleration2"></d-cite> consider **long stepsize** by incorporating a craft stepsize schedule into first-order methods and achieve a faster convergence rate, which is quite counterintuitive and may be of interests to the community. At the same time, as indicated in <d-cite key="kornowski2024open"></d-cite><d-cite key="altschuler2023acceleration1"></d-cite>, such theoretical outperformance generally only works for some specific iteration numbers, while in lack of guarantees of *anytime convergence*, also the extension of the study beyond the deterministic and convex case is still an open problem.
+  
+    **Update**: *Regarding the open problem above, after we submitted the draft for review, there appeared a new work on arXiv<d-cite key="zhang2024anytime"></d-cite>, which claimed to solve the anytime convergence issue mentioned above<d-cite key="kornowski2024open"></d-cite>.*
 
 ---
 
 ## Conclusion
 
-In this post, we review SOTA complexity upper and lower bounds of first-order algorithms in optimization tailored for minimization and minimax regimes with various settings, the summary identified gaps in existing research, which shed light on the open questions regarding accelerated algorithm design and performance limit investigation. Under the oracle framework, people should be careful when claiming one algorithm is better than the others, and double check whether the comparison is fair, in terms of the settings like function class, oracle information and algorithm class definition.
+In this post, we review SOTA complexity upper and lower bounds of first-order algorithms in optimization tailored for minimization and minimax regimes with various settings, the summary identified gaps in existing research, which shed light on the open questions regarding accelerated algorithm design and performance limit investigation. Under the oracle framework, people should be careful when claiming one algorithm is better than the others and double-check whether the comparison is fair in terms of the settings like function class, oracle information, and algorithm class definition.
 
-Regarding the rapid development and interdisciplinary applications in areas like machine learning and operation research, we revisited several recent works which go beyond the classical research flow in optimization community, these works advocate a paradigm shift in research: besides an elegant and unified theory trying to cover all cases, sometimes we should also try to avoid the "Maslow's hammer", focus on the detailed applications first, identify their unique structure, and correspondently design algorithms tailored for these problems, which in turn will benefit the practice. Such instance-driven pattern may help the optimization community to devise theory that fits the practice better. Given the extensive body of literature in this field, there is a possibility that some relevant references may have been inadvertently overlooked. We welcome any comments or questions and are happy to discuss.
+Regarding the rapid development and interdisciplinary applications in areas like machine learning and operation research, we revisited several recent works that go beyond the classical research flow in the optimization community. These works advocate a paradigm shift in research: besides an elegant and unified theory trying to cover all cases, sometimes we should also try to avoid the "Maslow's hammer", focus on the detailed applications first, identify their unique structure, and correspondently design algorithms tailored for these problems, which in turn will benefit the practice. Such instance-driven patterns may help the optimization community to devise a theory that fits the practice better.
+
+While we have aimed to provide a thorough and balanced summary of existing complexity results for first-order methods, we acknowledge the possibility of overlooking certain relevant works, subtle technical conditions, or potential inaccuracies in interpreting the literature. Readers who identify those issues are warmly encouraged to send emails to bring them to our attention. Constructive feedback, corrections, and suggestions are highly appreciated.
+
+## Acknowledgement
+We thank the insightful suggestions from two anonymous reviewers and Prof. Benjamin Grimmer.
+
