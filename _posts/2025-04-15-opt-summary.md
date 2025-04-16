@@ -202,6 +202,8 @@ where the proximal operator requires to solve a subproblem exactly. Solving a su
 
 Also here we do not cover the method like *conditional gradient method* (or Frank–Wolfe algorithm)<d-cite key="braun2022conditional"></d-cite>, which further requires a linear minimization oracle (LMO) in the algorithm design, so that it can avoid potentially expensive projection steps.
 
+Moreover, here the discussion generally does not cover first-order algorithms with *preconditioning*, e.g., Adam<d-cite key="kingma2014adam"></d-cite>, because they violate the definition of linear-span algorithm class.
+
 ---
 
 ## Notations
