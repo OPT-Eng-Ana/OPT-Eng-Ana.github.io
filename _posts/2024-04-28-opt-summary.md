@@ -240,7 +240,7 @@ As mentioned above, we categorize the discussion based on the problem, stochasti
 2. Finite-sum and stochastic optimization
 
 **Minimax Problems**, based on the convexity combination of each component, we consider the following cases:
-1. SC-SC/SC-C/C-C deterministic minimax
+1. SC-SC/SC-C/C-C deterministic minimax optimization
 2. SC-SC/SC-C/C-C finite-sum and stochastic minimax optimization
 3. NC-SC/NC-C deterministic minimax optimization
 4. NC-SC/NC-C finite-sum and stochastic minimax optimization
@@ -297,8 +297,8 @@ We present the lower and upper bound results in tables below<d-footnote>. Given 
 | Stoc NS C     | Optimality gap        | $\Omega (\epsilon^{-2})$                            | $\checkmark$                     | <d-cite key="agarwal2009information"></d-cite>, Theorem 1         | <d-cite key="nemirovski2009robust"></d-cite>, Section 2.2                        |
 | Stoc $L$-S $\mu$-SC  | Stationarity        | $\Omega \left(\sqrt{\frac{L}{\epsilon}}+\frac{\sigma^2}{\epsilon^2}\right)$                  | $\checkmark$ (within logarithmic)   | <d-cite key="foster2019complexity"></d-cite>, Equation 10 | <d-cite key="allen2018make"></d-cite>, Theorem 3
 | Stoc $L$-S C   | Stationarity        | $\Omega \left( \frac{\sqrt{L}}{\epsilon} + \frac{\sigma^2}{\epsilon^2} \log \frac{1}{\epsilon} \right)$ | $\checkmark$ (within logarithmic)       | <d-cite key="foster2019complexity"></d-cite>, Theorem 2 | <d-cite key="foster2019complexity"></d-cite>, Corollary 1
-| Stoc $L$-SS NC   | Stationarity        | $\Omega \left( \Delta \sigma \epsilon^{-4} \right)$         | $\checkmark$                     | <d-cite key="arjevani2023lower"></d-cite>, Theorem 1         | <d-cite key="ghadimi2013stochastic"></d-cite>, Corollary 2.2                                           |
-| Stoc $L$-AS NC            | Stationarity        | $\Omega \left( \Delta \sigma^2 + 3 \sigma \epsilon^{-2} \right)$ | $\checkmark$                     | <d-cite key="arjevani2023lower"></d-cite>, Theorem 2         | <d-cite key="fang2018spider"></d-cite>, Theorem 1                          |
+| Stoc $L$-SS NC   | Stationarity        | $\Omega \left( \Delta \sigma^2 L \epsilon^{-4} \right)$         | $\checkmark$                     | <d-cite key="arjevani2023lower"></d-cite>, Theorem 1         | <d-cite key="ghadimi2013stochastic"></d-cite>, Corollary 2.2                                           |
+| Stoc $L$-AS NC            | Stationarity        | $\Omega \left( \Delta L \sigma \epsilon^{-3} + \Delta L \epsilon^2+\sigma^2 \epsilon^2 \right)$ | $\checkmark$                     | <d-cite key="arjevani2023lower"></d-cite>, Theorem 2         | <d-cite key="fang2018spider"></d-cite>, Theorem 1                          |
 | Stoc NS $L$-Lip $\rho$-WC    | Near-stationarity        | Unknown     | $\mathcal{O} (\epsilon^{-4})$ | /      | <d-cite key="davis2018stochastic"></d-cite>, Theorem 2.1              |
 
 **Remark:**
@@ -314,12 +314,12 @@ We present the lower and upper bound results in tables below<d-footnote>. Given 
 |-------------------------|---------|---------------------------------------------------|----------------------------------|-----------------------------------------------------------|------------------------|
 | SC-SC, bilinear     | Duality Gap | $\Omega(\sqrt{\kappa_x \kappa_y} \log \frac{1}{\epsilon})$   | $\checkmark$                                     | <d-cite key="zhang2022lower"></d-cite>, Theorem 3.5        |  <d-cite key="chambolle2016ergodic"></d-cite>, Theorem 5|
 | SC-SC, general      | Duality Gap | $\Omega(\sqrt{\kappa_x \kappa_y} \log \frac{1}{\epsilon})$   | $\checkmark$ (within logarithmic)                       | <d-cite key="zhang2022lower"></d-cite>, Theorem 4.5        |  <d-cite key="wang2020improved"></d-cite>, Theorem 3   |
-| SC-C, bilinear, NS  | Duality Gap | $\Omega(\sqrt{\kappa_x} / \epsilon)$                         | $\mathcal{O}(\kappa_x^2 / \sqrt{\epsilon})$      | <d-cite key="ouyang2021lower"></d-cite>, Theorem 10        |  <d-cite key="chambolle2011first"></d-cite>, Theorem 2 |
-| SC-C, general       | Duality Gap | $\Omega(D \sqrt{L \kappa_x} / \epsilon)$                     | $\tilde{\mathcal{O}}(D \sqrt{L \kappa_x} / \epsilon)$ | <d-cite key="xie2020lower"></d-cite>, Theorem 2        |  <d-cite key="yang2020catalyst"></d-cite>, Section 3.2     |
+| SC-C, bilinear, NS  | Duality Gap | $\Omega(\sqrt{\kappa_x}\epsilon^{-1})$                         | $\mathcal{O}(\kappa_x^2 / \sqrt{\epsilon})$      | <d-cite key="ouyang2021lower"></d-cite>, Theorem 10        |  <d-cite key="chambolle2011first"></d-cite>, Theorem 2 |
+| SC-C, general       | Duality Gap | $\Omega(D \sqrt{L \kappa_x}\epsilon^{-1})$                     | $\tilde{\mathcal{O}}(D \sqrt{L \kappa_x}\epsilon^{-1})$ | <d-cite key="xie2020lower"></d-cite>, Theorem 2        |  <d-cite key="yang2020catalyst"></d-cite>, Section 3.2     |
 | C-SC, bilinear      | Duality Gap | Unknown                                                      | $\mathcal{O}(\log \frac{1}{\epsilon})$           | /      | <d-cite key="du2019linear"></d-cite>, Theorem 3.1                                                        |
-| C-C, bilinear, NS   | Duality Gap | $\Omega(L / \epsilon)$                                       | $\checkmark$                                     | <d-cite key="ouyang2021lower"></d-cite>, Theorem 9        |  <d-cite key="chambolle2011first"></d-cite>, Theorem 1  |
-| C-C, general        | Duality Gap | $\Omega(L D^2 / \epsilon)$                                   | $\checkmark$                                     | <d-cite key="xie2020lower"></d-cite>, Theorem 3        |  <d-cite key="nemirovski2004prox"></d-cite>, Theorem 4.1   |
-| C-C, general        | Stationarity | $\Omega(L D / \epsilon)$                                   | $\checkmark$                                     | <d-cite key="yoon2021accelerated"></d-cite>, Corollary 3        |  <d-cite key="yoon2021accelerated"></d-cite>, Corollary 2   |
+| C-C, bilinear, NS   | Duality Gap | $\Omega(L\epsilon^{-1})$                                       | $\checkmark$                                     | <d-cite key="ouyang2021lower"></d-cite>, Theorem 9        |  <d-cite key="chambolle2011first"></d-cite>, Theorem 1  |
+| C-C, general        | Duality Gap | $\Omega(L D^2\epsilon^{-1})$                                   | $\checkmark$                                     | <d-cite key="xie2020lower"></d-cite>, Theorem 3        |  <d-cite key="nemirovski2004prox"></d-cite>, Theorem 4.1   |
+| C-C, general        | Stationarity | $\Omega(L D\epsilon^{-1})$                                   | $\checkmark$                                     | <d-cite key="yoon2021accelerated"></d-cite>, Corollary 3        |  <d-cite key="yoon2021accelerated"></d-cite>, Corollary 2   |
 | PL-PL               | Duality Gap | Unknown                                                      | $\mathcal{O}(\kappa^3\log \frac{1}{\epsilon})$   | /      | <d-cite key="yang2020global"></d-cite>, Theorem 3.2                                                               |
 
 **Remark:**
@@ -335,8 +335,8 @@ We present the lower and upper bound results in tables below<d-footnote>. Given 
 | SC-SC, Stoc, SS      | Duality Gap | $\Omega(\epsilon^{-1})$                    | $\checkmark$                  | /                                            | <d-cite key="hsieh2019convergence"></d-cite>, Theorem 5       |
 | SC-SC, Stoc, NS      | Duality Gap | $\Omega(\epsilon^{-1})$                    | $\checkmark$                  | /                                            | <d-cite key="yan2020optimal"></d-cite>, Theorem 1       |
 | SC-SC, Stoc      | Stationarity | $\Omega(\sigma^2\epsilon^{-2}+\kappa)$                    | $\checkmark$                  | <d-cite key="chen2024near"></d-cite>, Theorem 6.1    | <d-cite key="chen2024near"></d-cite>, Theorem 4.1       |
-| SC-C, FS        | Duality Gap | $\Omega\left(n + \sqrt{n L / \epsilon}\right)$ | $\tilde{\mathcal{O}}(\sqrt{n L / \epsilon})$   | /                                                  | <d-cite key="yang2020catalyst"></d-cite>, Section 3.2      |
-| C-C, FS         | Duality Gap | $\Omega(n + L / \epsilon)$                 | $\mathcal{O}(\sqrt{n}/\epsilon)$                      | <d-cite key="xie2020lower"></d-cite>, Theorem 3     | <d-cite key="yazdandoost2023stochastic"></d-cite>, Corollary 2.1        |
+| SC-C, FS        | Duality Gap | $\Omega\left(n + \sqrt{n L\epsilon^{-1}}\right)$ | $\tilde{\mathcal{O}}(\sqrt{n L\epsilon^{-1}})$   | /                                                  | <d-cite key="yang2020catalyst"></d-cite>, Section 3.2      |
+| C-C, FS         | Duality Gap | $\Omega(n + L\epsilon^{-1})$                 | $\mathcal{O}(\sqrt{n}\epsilon^{-1})$                      | <d-cite key="xie2020lower"></d-cite>, Theorem 3     | <d-cite key="yazdandoost2023stochastic"></d-cite>, Corollary 2.1        |
 | C-C, Stoc, SS        | Duality Gap | $\Omega(\epsilon^{-2})$                    | $\checkmark$                  | /                                             | <d-cite key="juditsky2011solving"></d-cite>, Corollary 1      |
 | C-C, Stoc, NS        | Duality Gap | $\Omega(\epsilon^{-2})$                    | $\checkmark$                  | /                                             | <d-cite key="nemirovski2009robust"></d-cite>, Lemma 3.1      |
 | C-C, Stoc        | Stationarity | $\Omega(\sigma^2\epsilon^{-2}+LD\epsilon^{-1})$                                   | $\checkmark$         | <d-cite key="chen2024near"></d-cite>, Theorem 6.2       |  <d-cite key="chen2024near"></d-cite>, Theorem 4.2   |
