@@ -216,7 +216,14 @@ For convenience, we summarize some of the notations commonly used in the tables 
 - Stoc: stochastic optimization.
 -  $L$-Lip Cont.: $L$-Lipschitz continuous.
 - $L$-S: The objective function is $L$-Lipschitz smooth (or jointly Lipschitz smooth in minimax optimization). It is equivalent to its gradient being $L$-Lipschitz continuous.
-- $L$-IS / AS / SS<d-footnote>For clarification, $L$-IS means in finite-sum problems, each component function $f_i$ itself is $L$-smooth, for the definition of $L$-AS. Please refer to the definition of "mean-squared smoothness" (or averaged smooth) in <d-cite key="arjevani2023lower"></d-cite>, and $L$-SS means the summation $f$ is $L$-smooth while each component $f_i$ may not be Lipschitz smooth. Clearly, IS is stronger than AS, and AS is stronger than SS.</d-footnote>: $L$-Lipschitz individual / averaged / summation smoothness.
+- $L$-IS / AS / SS: $L$-Lipschitz individual / averaged / summation smoothness.
+    - For clarification, $L$-IS means in finite-sum problems (or stochastic problems), each component function $f_i$ (or gradient estimator $g$) itself is $L$-smooth
+    - For $L$-AS, which is also called "mean-squared smoothness" (or averaged smooth) in <d-cite key="arjevani2023lower"></d-cite>, is defined as follows, for gradient estimator $g(\cdot, z)$ and any feasible $x, y$:
+      $$
+      \mathbb{E}_z ||g(x;z)-g(y;z)||^2\leq L^2||x-y||^2
+      $$
+    - $L$-SS means the summation $f$ is $L$-smooth while each component $f_i$ (or gradient estimator $g$) may not be Lipschitz smooth. 
+    - Clearly, IS is stronger than AS, and AS is stronger than SS.
 - NS: Nonsmooth.
 - PL: Polyak-Łojasiewicz Condition. This is a condition that generalizes strong convexity. Under such a condition, without convexity, optimization algorithms could still globally converge. See e.g. <d-cite key= "karimi2016linear"></d-cite>.
 - $\mathcal{O},\tilde{\mathcal{O}},\Omega$: For nonnegative functions $f(x)$ and $g(x)$, we say $f=\mathcal{O}(g)$ if $f(x)\leq cg(x)$ for some $c>0$, and further write $f=\tilde{\mathcal{O}}(g)$ to omit poly-logarithmic terms on some constants, and $f=\Omega(g)$ if $f(x)\geq cg(x)$.
