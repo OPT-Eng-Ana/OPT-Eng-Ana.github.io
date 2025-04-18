@@ -4,7 +4,7 @@ title: Avoid Overclaims - Summary of Complexity Bounds for Algorithms in Minimiz
 description: In this blog, we revisit the convergence analysis of first-order algorithms in minimization and minimax optimization problems. Within the classical oracle model framework, we review the state-of-the-art upper and lower bound results in various settings, aiming to identify gaps in existing research. With the rapid development of applications like machine learning and operation research, we further identify some recent works that revised the classical settings of optimization algorithms study.
 tags: optimization
 giscus_comments: true
-date: 2024-04-28
+date: 2025-04-16
 featured: true
 
 # Take care the difference compared to the actual template of ICLR Blog
@@ -35,7 +35,7 @@ authors:
 #     affiliations:
 #       name: IAS, Princeton
 
-bibliography: 2024-04-28-opt-summary.bib
+bibliography: 2025-04-16-opt-summary.bib
 
 # Add a table of contents to your post.
 #   - make sure that TOC names match the actual section names
@@ -137,14 +137,14 @@ The oracle complexity model consists of the following components:
     $$
    
     - Recall gradient descent $x^{t+1} = x^t - \alpha \nabla f(x^t)$. Obviously, $x^{t+1}$ is within the linear span of $x^t$ and $\nabla f(x^t)$. In addition, gradient descent uses first-order information; thus, the oracle class is the first-order oracle. 
-    - An important point regarding finite-sum and stochastic optimization is the difference between *deterministic algorithms* and *randomized algorithms*. A randomized algorithm uses internal or external randomness to generate its iterates, which is more general than the deterministic one. Here, for simplicity, we mainly consider the deterministic setting.
+    - An important point regarding finite-sum and stochastic optimization is the difference between *deterministic algorithms* and *randomized algorithms*. A randomized algorithm uses internal or external randomness to generate its iterates, which is more general than the deterministic ones. Here, for simplicity, we mainly consider the deterministic setting.
 
   - **Complexity measure** $\mathcal{M}$, e.g., 
     - Optimality gap $f(x)-f(x^\star)$ where $x^\star$ is the global minimum.
     - Point distance $\|\|x-x^\star\|\|^2$ (or the norm).
     - Function stationarity $\|\|\nabla f(x)\|\|$, which is common in nonconvex optimization. 
 
-{% include figure.liquid path="assets/img/2024-04-28-opt-summary/complexity_analysis.jpg" class="img-fluid" %}
+{% include figure.liquid path="assets/img/2025-04-16-opt-summary/complexity_analysis.jpg" class="img-fluid" %}
 
 <div class="caption">
     Oracle Complexity Framework (adapted from Prof. Yangyang Xu's Slides<d-cite key="xu2019slides"></d-cite>)
@@ -176,7 +176,7 @@ $$
 	T_{\epsilon}(f,\mathtt{A}),
 $$
 
-{% include figure.liquid path="assets/img/2024-04-28-opt-summary/upper_lower.png" class="img-fluid" %}
+{% include figure.liquid path="assets/img/2025-04-16-opt-summary/upper_lower.png" class="img-fluid" %}
 
 <div class="caption">
     Illustration of Upper and Lower Complexity Bounds
@@ -479,7 +479,7 @@ Such a question has been partially addressed for stochastic optimization using *
 ### Beyond Classical Oracle Model
   The oracle complexity model mainly focuses on **worst-case instances** in the function class which may be far from *practical instances*. It is possible that the derived complexities can be too conservative and vacuous that they may not match the practice well, as the figure below illustrates.
 
-  {% include figure.liquid path="assets/img/2024-04-28-opt-summary/practice_gap.png" class="img-fluid" %}
+  {% include figure.liquid path="assets/img/2025-04-16-opt-summary/practice_gap.png" class="img-fluid" %}
 
   <div class="caption">
       Gap Between General Worst-Case Complexity and Instance-Level Complexity Analysis (adapted from <d-cite key="zhang2022beyond"></d-cite>)
