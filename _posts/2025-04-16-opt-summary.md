@@ -347,7 +347,7 @@ We present the lower and upper bound results in tables below<d-footnote>. Given 
 | C-C, Stoc, SS        | Duality Gap | $\Omega(\epsilon^{-2})$                    | $\checkmark$                  | /                                             | <d-cite key="juditsky2011solving"></d-cite>, Corollary 1      |
 | C-C, Stoc, NS        | Duality Gap | $\Omega(\epsilon^{-2})$                    | $\checkmark$                  | /                                             | <d-cite key="nemirovski2009robust"></d-cite>, Lemma 3.1      |
 | C-C, Stoc, SS        | Stationarity | $\tilde{\Omega}(\sigma^2\epsilon^{-2}+LD\epsilon^{-1})$                                   | $\checkmark$         | <d-cite key="chen2024near"></d-cite>, Theorem 6.2       |  <d-cite key="chen2024near"></d-cite>, Theorem 4.2   |
-| PL-PL, FS, IS      | Duality Gap | Unknown                    | $\mathcal{O}((n+n^{2/3}\kappa^3)\log \frac{1}{\epsilon})$                  | /                                            | <d-cite key="yang2020global"></d-cite>, Theorem 4.2       |
+| PL-PL, FS, IS      | Duality Gap | Unknown                    | $\mathcal{O}((n+\min(\kappa^9,n^{2/3}\kappa^3))\log \frac{1}{\epsilon})$                  | /                                            | <d-cite key="yang2020global"></d-cite>, Theorem 4.1 & 4.2       |
 | PL-PL, Stoc, SS      | Duality Gap | Unknown                    | $\mathcal{O}(\kappa^5\epsilon^{-1})$                  | /                                            | <d-cite key="yang2020global"></d-cite>, Theorem 3.3       |
 
 
