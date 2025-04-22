@@ -333,6 +333,7 @@ We present the lower and upper bound results in tables below<d-footnote>. Given 
 
 1. References: <d-cite key="zhang2022lower"></d-cite> <d-cite key="chambolle2016ergodic"></d-cite> <d-cite key="wang2020improved"></d-cite> <d-cite key="ouyang2021lower"></d-cite> <d-cite key="chambolle2011first"></d-cite> <d-cite key="xie2020lower"></d-cite> <d-cite key="yang2020catalyst"></d-cite> <d-cite key="du2019linear"></d-cite> <d-cite key="nemirovski2004prox"></d-cite> <d-cite key="yoon2021accelerated"></d-cite> <d-cite key="yang2020global"></d-cite>
 2. Here $\kappa_x$ and $\kappa_y$ corresponds to condition numbers on $x$ and $y$ components, respectively. A more refined dicussion regarding the different structure between $x$, $y$ and their coupling can be found in <d-cite key="kovalev2024linear"></d-cite> and references therein.
+3. Regarding the inconsistency between "SC-C, bilinear" and "C-SC, bilinear" cases, the difference between the two settings is that the result in <d-cite key="du2019linear"></d-cite> assumed the matrix $A$ (of the bilinear coupling term) has full column rank.
 
 ### Case 2-2: (S)C-(S)C Finite-sum and Stochastic Minimax Optimization
 
@@ -370,7 +371,7 @@ We present the lower and upper bound results in tables below<d-footnote>. Given 
 **Remark:**
 
 1. References: <d-cite key="zhang2021complexity"></d-cite> <d-cite key="lin2020near"></d-cite> <d-cite key="boct2023alternating"></d-cite> <d-cite key="yang2022faster"></d-cite>
-2. Some other works also studied the above problems in terms of the function stationarity (i.e., the gradient norm of $f$, rather than it primal), e.g., <d-cite key="lin2020near"></d-cite><d-cite key="xu2023unified"></d-cite>. As discussed in <d-cite key="yang2022faster"></d-cite>, it has been shown that function stationarity and primal stationarity are transferable with mild efforts. Thus, we do not present the results specifically.
+2. Some other works also studied the above problems in terms of the function stationarity (i.e., the gradient norm of $f$, rather than it primal), e.g., <d-cite key="lin2020near"></d-cite><d-cite key="xu2023unified"></d-cite>. As discussed in <d-cite key="yang2022faster"></d-cite> and <d-cite key="lin2020gradient"></d-cite>, it has been shown that function stationarity and primal stationarity are transferable with mild efforts. Thus, we do not present the results specifically.
 
 ### Case 2-4: NC-(S)C Finite-sum and Stochastic Minimax Optimization
 
@@ -516,5 +517,5 @@ Regarding the rapid development and interdisciplinary applications in areas like
 While we have aimed to provide a thorough and balanced summary of existing complexity results for first-order methods, we acknowledge the possibility of overlooking certain relevant works, subtle technical conditions, or potential inaccuracies in interpreting the literature. Readers who identify those issues are warmly encouraged to send emails to bring them to our attention. Constructive feedback, corrections, and suggestions are highly appreciated.
 
 ## Acknowledgement
-We thank the insightful suggestions from two anonymous reviewers and Prof. Benjamin Grimmer.
+We thank the insightful suggestions from two anonymous reviewers, Prof. Benjamin Grimmer, and Prof. Junchi Yang.
 
