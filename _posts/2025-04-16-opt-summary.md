@@ -66,6 +66,9 @@ toc:
   - name: Conclusion
 ---
 
+**Change Log**: 
+- 2025.07.11: Update some cases: SC-SC, Stoc, SS; 
+
 ## Introduction
 
 In this blog, we review the complexity bounds of (stochastic) first-order methods in optimization. 
@@ -340,7 +343,7 @@ We present the lower and upper bound results in tables below<d-footnote>. Given 
 | Problem Type         | Measure | LB                                         | UB                            | Reference (LB)      | Reference (UB)                                   |
 |----------------------|---------|---------------------------------------------|-------------------------------|-------------------|------------------------------------------|
 | SC-SC, FS           | Duality Gap | $\Omega\left((n + \kappa) \log \frac{1}{\epsilon}\right)$ | $\checkmark$ | <d-cite key="xie2020lower"></d-cite>, Theorem 1      | <d-cite key="palaniappan2016stochastic"></d-cite>, Theorem 1      |
-| SC-SC, Stoc, SS      | Duality Gap | $\Omega(\epsilon^{-1})$                    | $\checkmark$                  | /                                            | <d-cite key="hsieh2019convergence"></d-cite>, Theorem 5       |
+| SC-SC, Stoc, SS      | Duality Gap | $\Omega(\epsilon^{-1})$ | $\mathcal{O}(\kappa\log\frac{1}{\epsilon}+\frac{\sigma^2}{\mu\epsilon})$        |   | <d-cite key="lan2023novel"></d-cite>, Theorem 3.3 
 | SC-SC, Stoc, NS      | Duality Gap | $\Omega(\epsilon^{-1})$                    | $\checkmark$                  | /                                            | <d-cite key="yan2020optimal"></d-cite>, Theorem 1       |
 | SC-SC, Stoc, SS      | Stationarity | $\tilde{\Omega}(\sigma^2\epsilon^{-2}+\kappa)$                    | $\checkmark$                  | <d-cite key="chen2024near"></d-cite>, Theorem 6.1    | <d-cite key="chen2024near"></d-cite>, Theorem 4.1       |
 | SC-C, FS, SS        | Duality Gap | $\Omega\left(n + \sqrt{L\kappa_x\epsilon^{-1}}\right)$ | $\tilde{\mathcal{O}}(n \sqrt{L\epsilon^{-1}})$   | <d-cite key="xie2020lower"></d-cite>, Theorem 2                                                  | <d-cite key="yang2020catalyst"></d-cite>, Section 3.2      |
@@ -517,5 +520,5 @@ Regarding the rapid development and interdisciplinary applications in areas like
 While we have aimed to provide a thorough and balanced summary of existing complexity results for first-order methods, we acknowledge the possibility of overlooking certain relevant works, subtle technical conditions, or potential inaccuracies in interpreting the literature. Readers who identify those issues are warmly encouraged to send emails to bring them to our attention. Constructive feedback, corrections, and suggestions are highly appreciated.
 
 ## Acknowledgement
-We thank the insightful suggestions from two anonymous reviewers, Prof. Benjamin Grimmer, and Prof. Junchi Yang.
+We thank the insightful suggestions from two anonymous reviewers, Prof. Benjamin Grimmer, Prof. George Lan, and Prof. Junchi Yang.
 
