@@ -337,7 +337,7 @@ We present the lower and upper bound results in tables below<d-footnote>. Given 
 
 **Remark:**
 
-1. References: <d-cite key="zhang2022lower"></d-cite> <d-cite key="chambolle2016ergodic"></d-cite> <d-cite key="wang2020improved"></d-cite> <d-cite key="ouyang2021lower"></d-cite> <d-cite key="chambolle2011first"></d-cite> <d-cite key="xie2020lower"></d-cite> <d-cite key="yang2020catalyst"></d-cite> <d-cite key="du2019linear"></d-cite> <d-cite key="nemirovski2004prox"></d-cite> <d-cite key="yoon2021accelerated"></d-cite> <d-cite key="yang2020global"></d-cite>
+1. References: <d-cite key="zhang2022lower"></d-cite> <d-cite key="chambolle2016ergodic"></d-cite> <d-cite key="lan2023novel"></d-cite> <d-cite key="ouyang2021lower"></d-cite> <d-cite key="chambolle2011first"></d-cite> <d-cite key="xie2020lower"></d-cite> <d-cite key="yang2020catalyst"></d-cite> <d-cite key="du2019linear"></d-cite> <d-cite key="nemirovski2004prox"></d-cite> <d-cite key="yoon2021accelerated"></d-cite> <d-cite key="yang2020global"></d-cite>
 2. Here $\kappa_x$ and $\kappa_y$ corresponds to condition numbers on $x$ and $y$ components, respectively. A more refined dicussion regarding the different structure between $x$, $y$ and their coupling can be found in <d-cite key="kovalev2024linear"></d-cite> and references therein.
 3. Regarding the inconsistency between "SC-C, bilinear" and "C-SC, bilinear" cases, the difference between the two settings is that the result in <d-cite key="du2019linear"></d-cite> assumed the matrix $A$ (of the bilinear coupling term) has full column rank.
 4. In the SC-SC cases, <d-cite key="lan2023novel"></d-cite> uses the squared distance between the iterates and the saddle point as the measurement, it is easy to show that it is equivalent to the duality gap, so here we still present it in terms of the duality gap.
@@ -362,7 +362,7 @@ We present the lower and upper bound results in tables below<d-footnote>. Given 
 
 **Remark:**
 
-1. References: <d-cite key="xie2020lower"></d-cite> <d-cite key="yazdandoost2023stochastic"></d-cite> <d-cite key="juditsky2011solving"></d-cite> <d-cite key="nemirovski2009robust"></d-cite> <d-cite key="yang2020catalyst"></d-cite> <d-cite key="palaniappan2016stochastic"></d-cite> <d-cite key="hsieh2019convergence"></d-cite> <d-cite key="yan2020optimal"></d-cite> <d-cite key="yang2020global"></d-cite> <d-cite key="chen2024near"></d-cite>
+1. References: <d-cite key="xie2020lower"></d-cite> <d-cite key="lan2023novel"></d-cite> <d-cite key="yazdandoost2023stochastic"></d-cite> <d-cite key="juditsky2011solving"></d-cite> <d-cite key="nemirovski2009robust"></d-cite> <d-cite key="yang2020catalyst"></d-cite> <d-cite key="palaniappan2016stochastic"></d-cite> <d-cite key="hsieh2019convergence"></d-cite> <d-cite key="yan2020optimal"></d-cite> <d-cite key="yang2020global"></d-cite> <d-cite key="chen2024near"></d-cite>
 2. For lower bound results above without reference, generally they are "copied" from their minimization "counterparts", because minimization can be regarded as a special case of minimax problems, by setting the domain $\mathcal{Y}$ to be a singleton, so we have
     - For the "SC-SC, Stoc, SS" case, we can use the LB result from the "Stoc $L$-S $\mu$-SC" result in Case 1-2, which is $\Omega(\epsilon^{-1})$.
     - But all in all, we leverage the lower bound from the special case, so we expect some of the lower bounds can be further improved in terms of the dependence on other parameters.
