@@ -67,7 +67,9 @@ toc:
 ---
 
 **Change Log**: 
-- 2025.07.11: Update some cases: SC-SC, general; SC-SC, Stoc, SS; add new cases: C-SC, Stoc, SS
+- 2025.07.11: 
+  - Update some cases: SC-SC, general; SC-SC, Stoc, SS
+  - Add new cases: C-SC, Stoc, SS; FS $L$-AS $\mu$-PL
 
 ## Introduction
 
@@ -300,6 +302,7 @@ We present the lower and upper bound results in tables below<d-footnote>. Given 
 | FS $L$-AS C             | Optimality gap        | $\Omega \left( n + n^{\frac{3}{4}} D \sqrt{L \epsilon^{-1}} \right)$ | $\checkmark$                     | <d-cite key="zhou2019lower"></d-cite>, Theorem 4.2         | <d-cite key="allen2018katyusha"></d-cite>, Section 5                                 |
 | FS $L$-IS NC            | Stationarity        | $\Omega \left( \Delta L \epsilon^{-2} \right)$               | $\mathcal{O} \left( \sqrt{n}\Delta L \epsilon^{-2} \right)$                          | <d-cite key="zhou2019lower"></d-cite>, Theorem 4.7         | <d-cite key="wang2019spiderboost"></d-cite>, Theorem 1 |
 | FS $L$-AS NC            | Stationarity       | $\Omega \left( \sqrt{n} \Delta L \epsilon^{-2} \right)$       | $\checkmark$                     | <d-cite key="zhou2019lower"></d-cite>, Theorem 4.5         | <d-cite key="fang2018spider"></d-cite>, Theorem 2, 3|
+| FS $L$-AS $\mu$-PL            | Optimality gap       | $\Omega \left( n+\kappa\sqrt{n} \log \frac{1}{\epsilon} \right)$       | $\mathcal{O}\left( (n+\kappa\sqrt{n}) \log \frac{1}{\epsilon} \right)$                     | <d-cite key="bai2024complexity"></d-cite>, Corollary 3.6  | <d-cite key="li2021page"></d-cite>, Corollary 6|
 |                         |         |                                                     |                                  |                                                           |
 | Stoc $L$-SS $\mu$-SC   | Optimality gap        | $\Omega (\sqrt{\kappa}\log\frac{1}{\epsilon}+\frac{\sigma^2}{\mu\epsilon})$                            | $\mathcal{O} (\sqrt{\frac{L}{\epsilon}}+\frac{\sigma^2}{\mu\epsilon})$                     | <d-cite key="ghadimi2012optimal"></d-cite>, Equation 1.3         | <d-cite key="ghadimi2012optimal"></d-cite>, Proposition 9                        |
 | Stoc $L$-SS C   | Optimality gap        | $\Omega (\sqrt{\frac{L}{\epsilon}}+\frac{\sigma^2}{\epsilon^2})$   | $\checkmark$      | <d-cite key="lan2012optimal"></d-cite>, Equation 6         | <d-cite key="lan2012optimal"></d-cite>, Corollary 1        |
