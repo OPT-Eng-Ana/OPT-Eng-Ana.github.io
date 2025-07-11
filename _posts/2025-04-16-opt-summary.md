@@ -67,7 +67,7 @@ toc:
 ---
 
 **Change Log**: 
-- 2025.07.11: Update some cases: SC-SC, Stoc, SS; 
+- 2025.07.11: Update some cases: SC-SC, general; SC-SC, Stoc, SS; add new cases: C-SC, Stoc, SS
 
 ## Introduction
 
@@ -323,7 +323,7 @@ We present the lower and upper bound results in tables below<d-footnote>. Given 
 | Problem Type            | Measure | Lower Bound                                                | Upper Bound                               | Reference (LB)     | Reference (UB)                         |
 |-------------------------|---------|---------------------------------------------------|----------------------------------|-----------------------------------------------------------|------------------------|
 | SC-SC, bilinear     | Duality Gap | $\Omega(\sqrt{\kappa_x \kappa_y} \log \frac{1}{\epsilon})$   | $\checkmark$                                     | <d-cite key="zhang2022lower"></d-cite>, Theorem 3.5        |  <d-cite key="chambolle2016ergodic"></d-cite>, Theorem 5|
-| SC-SC, general      | Duality Gap | $\Omega(\sqrt{\kappa_x \kappa_y} \log \frac{1}{\epsilon})$   | $\checkmark$ (within logarithmic)                       | <d-cite key="zhang2022lower"></d-cite>, Theorem 4.5        |  <d-cite key="wang2020improved"></d-cite>, Theorem 3   |
+| SC-SC, general      | Duality Gap | $\Omega(\sqrt{\kappa_x \kappa_y} \log \frac{1}{\epsilon})$   | $\checkmark$ | <d-cite key="zhang2022lower"></d-cite>, Theorem 4.5        |  <d-cite key="lan2023novel"></d-cite>, Theorem 3.1   |
 | SC-C, bilinear  | Duality Gap | $\Omega(\sqrt{L\kappa_x\epsilon^{-1}})$                         | $\mathcal{O}(\kappa_x^2 \sqrt{\epsilon^{-1}})$      | <d-cite key="ouyang2021lower"></d-cite>, Theorem 4.2        |  <d-cite key="chambolle2011first"></d-cite>, Theorem 2 |
 | SC-C, general       | Duality Gap | $\Omega(D \sqrt{L \kappa_x\epsilon^{-1}})$                     | $\tilde{\mathcal{O}}(D \sqrt{L \kappa_x\epsilon^{-1}})$ | <d-cite key="xie2020lower"></d-cite>, Theorem 2        |  <d-cite key="yang2020catalyst"></d-cite>, Section 3.2     |
 | C-SC, bilinear      | Point Distance | Unknown                                                      | $\mathcal{O}(\log \frac{1}{\epsilon})$           | /      | <d-cite key="du2019linear"></d-cite>, Theorem 3.1                                                        |
@@ -337,15 +337,17 @@ We present the lower and upper bound results in tables below<d-footnote>. Given 
 1. References: <d-cite key="zhang2022lower"></d-cite> <d-cite key="chambolle2016ergodic"></d-cite> <d-cite key="wang2020improved"></d-cite> <d-cite key="ouyang2021lower"></d-cite> <d-cite key="chambolle2011first"></d-cite> <d-cite key="xie2020lower"></d-cite> <d-cite key="yang2020catalyst"></d-cite> <d-cite key="du2019linear"></d-cite> <d-cite key="nemirovski2004prox"></d-cite> <d-cite key="yoon2021accelerated"></d-cite> <d-cite key="yang2020global"></d-cite>
 2. Here $\kappa_x$ and $\kappa_y$ corresponds to condition numbers on $x$ and $y$ components, respectively. A more refined dicussion regarding the different structure between $x$, $y$ and their coupling can be found in <d-cite key="kovalev2024linear"></d-cite> and references therein.
 3. Regarding the inconsistency between "SC-C, bilinear" and "C-SC, bilinear" cases, the difference between the two settings is that the result in <d-cite key="du2019linear"></d-cite> assumed the matrix $A$ (of the bilinear coupling term) has full column rank.
+4. In the SC-SC cases, <d-cite key="lan2023novel"></d-cite> uses the squared distance between the iterates and the saddle point as the measurement, it is easy to show that it is equivalent to the duality gap, so here we still present it in terms of the duality gap.
 
 ### Case 2-2: (S)C-(S)C Finite-sum and Stochastic Minimax Optimization
 
 | Problem Type         | Measure | LB                                         | UB                            | Reference (LB)      | Reference (UB)                                   |
 |----------------------|---------|---------------------------------------------|-------------------------------|-------------------|------------------------------------------|
 | SC-SC, FS           | Duality Gap | $\Omega\left((n + \kappa) \log \frac{1}{\epsilon}\right)$ | $\checkmark$ | <d-cite key="xie2020lower"></d-cite>, Theorem 1      | <d-cite key="palaniappan2016stochastic"></d-cite>, Theorem 1      |
-| SC-SC, Stoc, SS      | Duality Gap | $\Omega(\epsilon^{-1})$ | $\mathcal{O}(\kappa\log\frac{1}{\epsilon}+\frac{\sigma^2}{\mu\epsilon})$        |   | <d-cite key="lan2023novel"></d-cite>, Theorem 3.3 
+| SC-SC, Stoc, SS      | Duality Gap | $\Omega\left(\epsilon^{-1}\right)$ | $\mathcal{O}\left(\kappa\log\frac{1}{\epsilon}+\frac{\sigma^2}{\mu\epsilon}\right)$   |  ??? | <d-cite key="lan2023novel"></d-cite>, Theorem 3.3 
 | SC-SC, Stoc, NS      | Duality Gap | $\Omega(\epsilon^{-1})$                    | $\checkmark$                  | /                                            | <d-cite key="yan2020optimal"></d-cite>, Theorem 1       |
 | SC-SC, Stoc, SS      | Stationarity | $\tilde{\Omega}(\sigma^2\epsilon^{-2}+\kappa)$                    | $\checkmark$                  | <d-cite key="chen2024near"></d-cite>, Theorem 6.1    | <d-cite key="chen2024near"></d-cite>, Theorem 4.1       |
+| C-SC, Stoc, SS        | Duality Gap | $\Omega \left(\sqrt{\frac{L}{\epsilon}}+\frac{\sigma^2}{\epsilon^2}\right)$ | $\tilde{\mathcal{O}}\left(\frac{L}{\sqrt{\kappa_y\epsilon}}+\frac{\sigma^2}{\epsilon^2}\right)$   | / | <d-cite key="lan2023novel"></d-cite>, Theorem 5.1      |
 | SC-C, FS, SS        | Duality Gap | $\Omega\left(n + \sqrt{L\kappa_x\epsilon^{-1}}\right)$ | $\tilde{\mathcal{O}}(n \sqrt{L\epsilon^{-1}})$   | <d-cite key="xie2020lower"></d-cite>, Theorem 2                                                  | <d-cite key="yang2020catalyst"></d-cite>, Section 3.2      |
 | C-C, FS, SS         | Duality Gap | $\Omega(n + L\epsilon^{-1})$                 | $\mathcal{O}(\sqrt{n}\epsilon^{-1})$                      | <d-cite key="xie2020lower"></d-cite>, Theorem 3     | <d-cite key="yazdandoost2023stochastic"></d-cite>, Corollary 2.1        |
 | C-C, Stoc, SS        | Duality Gap | $\Omega(\epsilon^{-2})$                    | $\checkmark$                  | /                                             | <d-cite key="juditsky2011solving"></d-cite>, Corollary 1      |
