@@ -70,6 +70,10 @@ toc:
 - 2025.07.11: 
   - Update some cases: 1. SC-SC, general; 2. SC-SC, Stoc, SS
   - Add new cases: 1. C-SC, Stoc, SS; 2. FS $L$-AS $\mu$-PL
+- 2025.07.23
+  - Add new cases: NC-KL, NC-C under GS measurement
+- 2026.01.16
+  - Update some cases: 1. PL-PL, general; 2. 
 
 ## Introduction
 
@@ -334,6 +338,7 @@ We present the lower and upper bound results in tables below<d-footnote>. Given 
 | C-C, general        | Duality Gap | $\Omega(L D^2\epsilon^{-1})$                                   | $\checkmark$                                     | <d-cite key="xie2020lower"></d-cite>, Theorem 3        |  <d-cite key="nemirovski2004prox"></d-cite>, Theorem 4.1   |
 | C-C, general        | Stationarity | $\Omega(L D\epsilon^{-1})$                                   | $\checkmark$                                     | <d-cite key="yoon2021accelerated"></d-cite>, Corollary 3        |  <d-cite key="yoon2021accelerated"></d-cite>, Corollary 2   |
 | PL-PL               | Duality Gap | Unknown                                                      | $\mathcal{O}(\kappa^3\log \frac{1}{\epsilon})$   | /      | <d-cite key="yang2020global"></d-cite>, Theorem 3.2                                                               |
+| PL-PL (unique inner max)              | Duality Gap | Unknown                                                      | $\mathcal{O}(\kappa^2\log^2 \frac{1}{\epsilon})$   | /      | <d-cite key="chen2022faster"></d-cite>, Theorem 5.1                                                               |
 
 **Remark:**
 
@@ -341,6 +346,7 @@ We present the lower and upper bound results in tables below<d-footnote>. Given 
 2. Here $\kappa_x$ and $\kappa_y$ corresponds to condition numbers on $x$ and $y$ components, respectively. A more refined dicussion regarding the different structure between $x$, $y$ and their coupling can be found in <d-cite key="kovalev2024linear"></d-cite> and references therein.
 3. Regarding the inconsistency between "SC-C, bilinear" and "C-SC, bilinear" cases, the difference between the two settings is that the result in <d-cite key="du2019linear"></d-cite> assumed the matrix $A$ (of the bilinear coupling term) has full column rank.
 4. In the SC-SC cases, <d-cite key="lan2023novel"></d-cite> uses the squared distance between the iterates and the saddle point as the measurement, it is easy to show that it is equivalent to the duality gap, so here we still present it in terms of the duality gap.
+5. The result in <d-cite key="chen2022faster"></d-cite> further requires that the solution of inner problem is unique.
 
 ### Case 2-2: (S)C-(S)C Finite-sum and Stochastic Minimax Optimization
 
@@ -356,16 +362,17 @@ We present the lower and upper bound results in tables below<d-footnote>. Given 
 | C-C, Stoc, SS        | Duality Gap | $\Omega(\epsilon^{-2})$                    | $\checkmark$                  | /                                             | <d-cite key="juditsky2011solving"></d-cite>, Corollary 1      |
 | C-C, Stoc, NS        | Duality Gap | $\Omega(\epsilon^{-2})$                    | $\checkmark$                  | /                                             | <d-cite key="nemirovski2009robust"></d-cite>, Lemma 3.1      |
 | C-C, Stoc, SS        | Stationarity | $\tilde{\Omega}(\sigma^2\epsilon^{-2}+LD\epsilon^{-1})$                                   | $\checkmark$         | <d-cite key="chen2024near"></d-cite>, Theorem 6.2       |  <d-cite key="chen2024near"></d-cite>, Theorem 4.2   |
-| PL-PL, FS, IS      | Duality Gap | Unknown                    | $\mathcal{O}((n+\min(\kappa^9,n^{2/3}\kappa^3))\log \frac{1}{\epsilon})$                  | /                                            | <d-cite key="yang2020global"></d-cite>, Theorem 4.1 & 4.2       |
+| PL-PL, FS, IS      | Duality Gap | Unknown                    | $\mathcal{O}((n+\sqrt{n}\kappa^3)\log \frac{1}{\epsilon})$                  | /                                            | <d-cite key="chen2022faster"></d-cite>, Theorem 4.1       |
 | PL-PL, Stoc, SS      | Duality Gap | Unknown                    | $\mathcal{O}(\kappa^5\epsilon^{-1})$                  | /                                            | <d-cite key="yang2020global"></d-cite>, Theorem 3.3       |
 
 
 **Remark:**
 
-1. References: <d-cite key="xie2020lower"></d-cite> <d-cite key="lan2023novel"></d-cite> <d-cite key="yazdandoost2023stochastic"></d-cite> <d-cite key="juditsky2011solving"></d-cite> <d-cite key="nemirovski2009robust"></d-cite> <d-cite key="yang2020catalyst"></d-cite> <d-cite key="palaniappan2016stochastic"></d-cite> <d-cite key="hsieh2019convergence"></d-cite> <d-cite key="yan2020optimal"></d-cite> <d-cite key="yang2020global"></d-cite> <d-cite key="chen2024near"></d-cite>
+1. References: <d-cite key="xie2020lower"></d-cite> <d-cite key="lan2023novel"></d-cite> <d-cite key="yazdandoost2023stochastic"></d-cite> <d-cite key="juditsky2011solving"></d-cite> <d-cite key="nemirovski2009robust"></d-cite> <d-cite key="yang2020catalyst"></d-cite> <d-cite key="palaniappan2016stochastic"></d-cite> <d-cite key="hsieh2019convergence"></d-cite> <d-cite key="yan2020optimal"></d-cite> <d-cite key="yang2020global"></d-cite> <d-cite key="chen2024near"></d-cite> <d-cite key="chen2022faster"></d-cite>
 2. For lower bound results above without reference, generally they are "copied" from their minimization "counterparts", because minimization can be regarded as a special case of minimax problems, by setting the domain $\mathcal{Y}$ to be a singleton, so we have
     - For the "SC-SC, Stoc, SS" case, we can use the LB result from the "Stoc $L$-S $\mu$-SC" result in Case 1-2, which is $\Omega(\epsilon^{-1})$.
     - But all in all, we leverage the lower bound from the special case, so we expect some of the lower bounds can be further improved in terms of the dependence on other parameters.
+3. By further assuming the uniqueness of inner maximizer, the [PL-PL, FS, IS] case can be further improved, refer to <d-cite key="chen2022faster"></d-cite> (Theorem 5.1)
 
 ### Case 2-3: NC-(S)C Deterministic Minimax Optimization
 
@@ -374,7 +381,8 @@ We present the lower and upper bound results in tables below<d-footnote>. Given 
 | NC-SC, Deter       | Primal Stationarity | $\Omega(\sqrt{\kappa}\Delta \mathcal{L} \epsilon^{-2})$  | $\checkmark$ | <d-cite key="zhang2021complexity"></d-cite>, Theorem 3.1 | <d-cite key="zhang2021complexity"></d-cite>, Theorem 4.1 |
 | NC-C, Deter        | Near-Stationarity | Unknown  | $\mathcal{O}(\Delta L^2 \epsilon^{-3} \log^2 \frac{1}{\epsilon})$               |   /      | <d-cite key="lin2020near"></d-cite>, Corollary A.8 |
 | WC-C, Deter        | Near-Stationarity | Unknown | $\mathcal{O}(\epsilon^{-6})$                       |  /       | <d-cite key="boct2023alternating"></d-cite>, Theorem 3.7         |
-| NC-PL, Deter       | Primal Stationarity | Unknown | $\mathcal{O}(\kappa\epsilon^{-2})$                   | /        | <d-cite key="yang2022faster"></d-cite>, Corollary 4.1        |
+| NC-PL, Deter       | Primal Stationarity | Unknown | $\mathcal{O}(\kappa L \epsilon^{-2})$                   | /        | <d-cite key="yang2022faster"></d-cite>, Corollary 4.1        |
+| NC-KL, Deter       | Primal Stationarity | Unknown | $\mathcal{O}(\kappa\epsilon^{-2})$                   | /        | <d-cite key="yang2022faster"></d-cite>, Corollary 4.1        |
 
 **Remark:**
 
@@ -387,6 +395,7 @@ We present the lower and upper bound results in tables below<d-footnote>. Given 
 |--------------------|---------|---------------------------------------------|----------------------------------|-------------------|------------------------------------------------|
 | NC-SC, FS, AS    | Primal Stationarity        | $\Omega\left(n+\sqrt{n\kappa}\Delta L\epsilon^{-2}\right)$ | $\mathcal{O}\left((n+n^{3/4}\sqrt{\kappa})\Delta L\epsilon^{-2}\right)$ | <d-cite key="zhang2021complexity"></d-cite>,  Theorem 3.2   |  <d-cite key="zhang2021complexity"></d-cite>, Section 4.2 |          
 | NC-C, FS, IS     | Near-stationarity        | Unknown | $\mathcal{O}\left(n^{3/4}L^2D\Delta\epsilon^{-3}\right)$ |  /        |  <d-cite key="yang2020catalyst"></d-cite>,  Corollary 4.3           |
+| NC-PL, FS, IS     | Near-stationarity        | Unknown | $\mathcal{O}\left(n+\sqrt{n}\kappa^2 L\epsilon^{-2}\right)$ |  /        |  <d-cite key="chen2022faster"></d-cite>,  Corollary 6.1           |
 | NC-SC, Stoc, SS  | Primal Stationarity        | $\Omega\left(\kappa^{1/3}\Delta L\epsilon^{-4}\right)$ | $\mathcal{O}\left(\kappa\Delta L\epsilon^{-4}\right)$ |  <d-cite key="li2021complexity"></d-cite>, Theorem 2   |  <d-cite key="zhang2022sapd+"></d-cite>,  Theorem 3                                     |
 | NC-SC, Stoc, IS  | Primal Stationarity        | Unknown | $\mathcal{O}\left(\kappa^2\Delta L\epsilon^{-3}\right)$ |  /        |  <d-cite key="zhang2022sapd+"></d-cite>, Theorem 4 |
 | NC-C, Stoc, SS   | Near-stationarity        | Unknown | $\mathcal{O}\left(L^3\epsilon^{-6}\right)$              |  /        |  <d-cite key="zhang2022sapd+"></d-cite>, Theorem 6  |
@@ -397,7 +406,8 @@ We present the lower and upper bound results in tables below<d-footnote>. Given 
 
 **Remark:**
 
-1. References: <d-cite key="zhang2021complexity"></d-cite> <d-cite key="yang2020catalyst"></d-cite> <d-cite key="zhang2022sapd+"></d-cite> <d-cite key="li2021complexity"></d-cite> <d-cite key="yang2022faster"></d-cite> <d-cite key="yan2020optimal"></d-cite>
+1. References: <d-cite key="zhang2021complexity"></d-cite> <d-cite key="yang2020catalyst"></d-cite> <d-cite key="zhang2022sapd+"></d-cite> <d-cite key="li2021complexity"></d-cite> <d-cite key="yang2022faster"></d-cite> <d-cite key="yan2020optimal"></d-cite> <d-cite key="chen2022faster"></d-cite>
+2. By further assuming the uniqueness of inner maximizer, the [NC-PL, FS, IS] case can be further improved, refer to <d-cite key="chen2022faster"></d-cite> (Theorem 6.2)
 
 </div>
 
