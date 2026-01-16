@@ -73,7 +73,7 @@ toc:
 - 2025.07.23
   - Add new cases: NC-KL, NC-C under GS measurement
 - 2026.01.16
-  - Update some cases: 1. PL-PL, general; 2. 
+  - Update some cases: 1. PL-PL, general; 2. PL-PL, FS, IS; 3. NC-PL, FS, IS
 
 ## Introduction
 
