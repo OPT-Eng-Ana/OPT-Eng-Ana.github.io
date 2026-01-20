@@ -73,7 +73,7 @@ toc:
 - 2025.07.23
   - Add new cases: NC-KL, NC-C under GS measurement
 - 2026.01.16
-  - Update some cases: 1. PL-PL, general; 2. PL-PL, FS, IS; 3. NC-PL, FS, IS
+  - Update some cases: 1. PL-PL, general; 2. PL-PL, FS, IS; 3. NC-PL, FS, IS; 4. NC-PL, Stoc, IS
 
 ## Introduction
 
@@ -353,16 +353,17 @@ We present the lower and upper bound results in tables below<d-footnote>. Given 
 | Problem Type         | Measure | LB                                         | UB                            | Reference (LB)      | Reference (UB)                                   |
 |----------------------|---------|---------------------------------------------|-------------------------------|-------------------|------------------------------------------|
 | SC-SC, FS           | Duality Gap | $\Omega\left((n + \kappa) \log \frac{1}{\epsilon}\right)$ | $\checkmark$ | <d-cite key="xie2020lower"></d-cite>, Theorem 1      | <d-cite key="palaniappan2016stochastic"></d-cite>, Theorem 1      |
+| SC-C, FS, SS        | Duality Gap | $\Omega\left(n + \sqrt{L\kappa_x\epsilon^{-1}}\right)$ | $\tilde{\mathcal{O}}(n \sqrt{L\epsilon^{-1}})$   | <d-cite key="xie2020lower"></d-cite>, Theorem 2                                                  | <d-cite key="yang2020catalyst"></d-cite>, Section 3.2      |
+| C-C, FS, SS         | Duality Gap | $\Omega(n + L\epsilon^{-1})$                 | $\mathcal{O}(\sqrt{n}\epsilon^{-1})$                      | <d-cite key="xie2020lower"></d-cite>, Theorem 3     | <d-cite key="yazdandoost2023stochastic"></d-cite>, Corollary 2.1        |
+| PL-PL, FS, IS      | Duality Gap | Unknown                    | $\mathcal{O}((n+\sqrt{n}\kappa^3)\log \frac{1}{\epsilon})$                  | /                                            | <d-cite key="chen2022faster"></d-cite>, Theorem 4.1       |
+|                         |         |                                                     |                                  |                                                           |
 | SC-SC, Stoc, SS      | Duality Gap | $\Omega\left(\epsilon^{-1}\right)$ | $\mathcal{O}\left(\kappa\log\frac{1}{\epsilon}+\frac{\sigma^2}{\mu\epsilon}\right)$   |  ??? | <d-cite key="lan2023novel"></d-cite>, Theorem 3.3 
 | SC-SC, Stoc, NS      | Duality Gap | $\Omega(\epsilon^{-1})$                    | $\checkmark$                  | /                                            | <d-cite key="yan2020optimal"></d-cite>, Theorem 1       |
 | SC-SC, Stoc, SS      | Stationarity | $\tilde{\Omega}(\sigma^2\epsilon^{-2}+\kappa)$                    | $\checkmark$                  | <d-cite key="chen2024near"></d-cite>, Theorem 6.1    | <d-cite key="chen2024near"></d-cite>, Theorem 4.1       |
 | C-SC, Stoc, SS        | Duality Gap | $\Omega \left(\sqrt{\frac{L}{\epsilon}}+\frac{\sigma^2}{\epsilon^2}\right)$ | $\tilde{\mathcal{O}}\left(\frac{L}{\sqrt{\kappa_y\epsilon}}+\frac{\sigma^2}{\epsilon^2}\right)$   | / | <d-cite key="lan2023novel"></d-cite>, Theorem 5.1      |
-| SC-C, FS, SS        | Duality Gap | $\Omega\left(n + \sqrt{L\kappa_x\epsilon^{-1}}\right)$ | $\tilde{\mathcal{O}}(n \sqrt{L\epsilon^{-1}})$   | <d-cite key="xie2020lower"></d-cite>, Theorem 2                                                  | <d-cite key="yang2020catalyst"></d-cite>, Section 3.2      |
-| C-C, FS, SS         | Duality Gap | $\Omega(n + L\epsilon^{-1})$                 | $\mathcal{O}(\sqrt{n}\epsilon^{-1})$                      | <d-cite key="xie2020lower"></d-cite>, Theorem 3     | <d-cite key="yazdandoost2023stochastic"></d-cite>, Corollary 2.1        |
 | C-C, Stoc, SS        | Duality Gap | $\Omega(\epsilon^{-2})$                    | $\checkmark$                  | /                                             | <d-cite key="juditsky2011solving"></d-cite>, Corollary 1      |
 | C-C, Stoc, NS        | Duality Gap | $\Omega(\epsilon^{-2})$                    | $\checkmark$                  | /                                             | <d-cite key="nemirovski2009robust"></d-cite>, Lemma 3.1      |
 | C-C, Stoc, SS        | Stationarity | $\tilde{\Omega}(\sigma^2\epsilon^{-2}+LD\epsilon^{-1})$                                   | $\checkmark$         | <d-cite key="chen2024near"></d-cite>, Theorem 6.2       |  <d-cite key="chen2024near"></d-cite>, Theorem 4.2   |
-| PL-PL, FS, IS      | Duality Gap | Unknown                    | $\mathcal{O}((n+\sqrt{n}\kappa^3)\log \frac{1}{\epsilon})$                  | /                                            | <d-cite key="chen2022faster"></d-cite>, Theorem 4.1       |
 | PL-PL, Stoc, SS      | Duality Gap | Unknown                    | $\mathcal{O}(\kappa^5\epsilon^{-1})$                  | /                                            | <d-cite key="yang2020global"></d-cite>, Theorem 3.3       |
 
 
@@ -396,17 +397,19 @@ We present the lower and upper bound results in tables below<d-footnote>. Given 
 | NC-SC, FS, AS    | Primal Stationarity        | $\Omega\left(n+\sqrt{n\kappa}\Delta L\epsilon^{-2}\right)$ | $\mathcal{O}\left((n+n^{3/4}\sqrt{\kappa})\Delta L\epsilon^{-2}\right)$ | <d-cite key="zhang2021complexity"></d-cite>,  Theorem 3.2   |  <d-cite key="zhang2021complexity"></d-cite>, Section 4.2 |          
 | NC-C, FS, IS     | Near-stationarity        | Unknown | $\mathcal{O}\left(n^{3/4}L^2D\Delta\epsilon^{-3}\right)$ |  /        |  <d-cite key="yang2020catalyst"></d-cite>,  Corollary 4.3           |
 | NC-PL, FS, IS     | Near-stationarity        | Unknown | $\mathcal{O}\left(n+\sqrt{n}\kappa^2 L\epsilon^{-2}\right)$ |  /        |  <d-cite key="chen2022faster"></d-cite>,  Corollary 6.1           |
+|                         |         |                                                     |                                  |                                                           |
 | NC-SC, Stoc, SS  | Primal Stationarity        | $\Omega\left(\kappa^{1/3}\Delta L\epsilon^{-4}\right)$ | $\mathcal{O}\left(\kappa\Delta L\epsilon^{-4}\right)$ |  <d-cite key="li2021complexity"></d-cite>, Theorem 2   |  <d-cite key="zhang2022sapd+"></d-cite>,  Theorem 3                                     |
 | NC-SC, Stoc, IS  | Primal Stationarity        | Unknown | $\mathcal{O}\left(\kappa^2\Delta L\epsilon^{-3}\right)$ |  /        |  <d-cite key="zhang2022sapd+"></d-cite>, Theorem 4 |
 | NC-C, Stoc, SS   | Near-stationarity        | Unknown | $\mathcal{O}\left(L^3\epsilon^{-6}\right)$              |  /        |  <d-cite key="zhang2022sapd+"></d-cite>, Theorem 6  |
 | NC-PL, Stoc, SS       | Primal Stationarity | Unknown | $\mathcal{O}(\kappa^2\epsilon^{-4})$                   | /        | <d-cite key="yang2022faster"></d-cite>, Corollary 4.1         |
+| NC-PL, Stoc, IS       | Primal Stationarity | Unknown | $\tilde{\mathcal{O}}(\epsilon^{-3})$                   | /        | <d-cite key="huang2025enhanced"></d-cite>, Theorem 1         |
 | WC-SC, Stoc, NS       | Near-Stationarity | Unknown | $\mathcal{O}(\epsilon^{-4})$                   | /        | <d-cite key="yan2020optimal"></d-cite>, Theorem 2         |
 
 
 
 **Remark:**
 
-1. References: <d-cite key="zhang2021complexity"></d-cite> <d-cite key="yang2020catalyst"></d-cite> <d-cite key="zhang2022sapd+"></d-cite> <d-cite key="li2021complexity"></d-cite> <d-cite key="yang2022faster"></d-cite> <d-cite key="yan2020optimal"></d-cite> <d-cite key="chen2022faster"></d-cite>
+1. References: <d-cite key="zhang2021complexity"></d-cite> <d-cite key="yang2020catalyst"></d-cite> <d-cite key="zhang2022sapd+"></d-cite> <d-cite key="li2021complexity"></d-cite> <d-cite key="yang2022faster"></d-cite> <d-cite key="yan2020optimal"></d-cite> <d-cite key="chen2022faster"></d-cite> <d-cite key="huang2025enhanced"></d-cite>
 2. By further assuming the uniqueness of inner maximizer, the [NC-PL, FS, IS] case can be further improved, refer to <d-cite key="chen2022faster"></d-cite> (Theorem 6.2)
 
 </div>
