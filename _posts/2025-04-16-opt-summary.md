@@ -35,6 +35,9 @@ authors:
 #     affiliations:
 #       name: IAS, Princeton
 
+# To-do:
+# https://arxiv.org/pdf/2608.03246
+
 bibliography: 2025-04-16-opt-summary.bib
 
 # Add a table of contents to your post.
@@ -74,6 +77,8 @@ toc:
   - Add new cases: NC-KL, NC-C under GS measurement
 - 2026.01.16
   - Update some cases: 1. PL-PL, general; 2. PL-PL, FS, IS; 3. NC-PL, FS, IS; 4. NC-PL, Stoc, IS
+- 2026.04.03
+  - Update some cases: 1. WC-C, general
 
 ## Introduction
 
@@ -357,7 +362,7 @@ We present the lower and upper bound results in tables below<d-footnote>. Given 
 | C-C, FS, SS         | Duality Gap | $\Omega(n + L\epsilon^{-1})$                 | $\mathcal{O}(\sqrt{n}\epsilon^{-1})$                      | <d-cite key="xie2020lower"></d-cite>, Theorem 3     | <d-cite key="yazdandoost2023stochastic"></d-cite>, Corollary 2.1        |
 | PL-PL, FS, IS      | Duality Gap | Unknown                    | $\mathcal{O}((n+\sqrt{n}\kappa^3)\log \frac{1}{\epsilon})$                  | /                                            | <d-cite key="chen2022faster"></d-cite>, Theorem 4.1       |
 |                         |         |                                                     |                                  |                                                           |
-| SC-SC, Stoc, SS      | Duality Gap | $\Omega\left(\epsilon^{-1}\right)$ | $\mathcal{O}\left(\kappa\log\frac{1}{\epsilon}+\frac{\sigma^2}{\mu\epsilon}\right)$   |  ??? | <d-cite key="lan2023novel"></d-cite>, Theorem 3.3 
+| SC-SC, Stoc, SS      | Duality Gap | $\Omega\left(\epsilon^{-1}\right)$ | $\mathcal{O}\left(\kappa\log\frac{1}{\epsilon}+\frac{\sigma^2}{\mu\epsilon}\right)$   |  / | <d-cite key="lan2023novel"></d-cite>, Theorem 3.3 
 | SC-SC, Stoc, NS      | Duality Gap | $\Omega(\epsilon^{-1})$                    | $\checkmark$                  | /                                            | <d-cite key="yan2020optimal"></d-cite>, Theorem 1       |
 | SC-SC, Stoc, SS      | Stationarity | $\tilde{\Omega}(\sigma^2\epsilon^{-2}+\kappa)$                    | $\checkmark$                  | <d-cite key="chen2024near"></d-cite>, Theorem 6.1    | <d-cite key="chen2024near"></d-cite>, Theorem 4.1       |
 | C-SC, Stoc, SS        | Duality Gap | $\Omega \left(\sqrt{\frac{L}{\epsilon}}+\frac{\sigma^2}{\epsilon^2}\right)$ | $\tilde{\mathcal{O}}\left(\frac{L}{\sqrt{\kappa_y\epsilon}}+\frac{\sigma^2}{\epsilon^2}\right)$   | / | <d-cite key="lan2023novel"></d-cite>, Theorem 5.1      |
@@ -380,6 +385,7 @@ We present the lower and upper bound results in tables below<d-footnote>. Given 
 | Type               | Measure | LB                                          | UB                               | Reference (LB)      | Reference (UB)                                 |
 |--------------------|---------|---------------------------------------------|----------------------------------|-------------------|------------------------------------------------|
 | NC-SC, Deter       | Primal Stationarity | $\Omega(\sqrt{\kappa}\Delta \mathcal{L} \epsilon^{-2})$  | $\checkmark$ | <d-cite key="zhang2021complexity"></d-cite>, Theorem 3.1 | <d-cite key="zhang2021complexity"></d-cite>, Theorem 4.1 |
+| WC-SC, Deter       | Primal Stationarity | Unknown  | $\mathcal{O}(\epsilon^{-2})$ | / | <d-cite key="guido2026convergence"></d-cite>, Theorem 3.2 |
 | NC-C, Deter        | Near-Stationarity | Unknown  | $\mathcal{O}(\Delta L^2 \epsilon^{-3} \log^2 \frac{1}{\epsilon})$               |   /      | <d-cite key="lin2020near"></d-cite>, Corollary A.8 |
 | WC-C, Deter        | Near-Stationarity | Unknown | $\mathcal{O}(\epsilon^{-6})$                       |  /       | <d-cite key="boct2023alternating"></d-cite>, Theorem 3.7         |
 | NC-PL, Deter       | Primal Stationarity | Unknown | $\mathcal{O}(\kappa L \epsilon^{-2})$                   | /        | <d-cite key="yang2022faster"></d-cite>, Corollary 4.1        |
