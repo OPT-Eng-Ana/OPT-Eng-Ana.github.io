@@ -35,9 +35,6 @@ authors:
 #     affiliations:
 #       name: IAS, Princeton
 
-# To-do:
-# https://arxiv.org/pdf/2608.03246
-
 bibliography: 2025-04-16-opt-summary.bib
 
 # Add a table of contents to your post.
@@ -79,6 +76,9 @@ toc:
   - Update some cases: 1. PL-PL, general; 2. PL-PL, FS, IS; 3. NC-PL, FS, IS; 4. NC-PL, Stoc, IS
 - 2026.04.03
   - Update some cases: 1. WC-C, general
+- 2026.11.25
+  - Update bounds for weakly convex minimization, nonconvex and PL finite sums, and deterministic, finite-sum, and stochastic minimax problems.
+  - Add progress on long stepsize schedules and fully first-order bilevel optimization.
 
 ## Introduction
 
@@ -286,12 +286,12 @@ We present the lower and upper bound results in tables below<d-footnote>. Given 
 | $L$-Smooth Convex (function case)          | Stationarity    | $\Omega \left( \sqrt{\Delta L }\epsilon^{-1} \right)$  | $\checkmark$ (within logarithmic) | <d-cite key="carmon2021lower"></d-cite>, Theorem 1                | <d-cite key="carmon2021lower"></d-cite>, Appendix A.1 |
 | $L$-Smooth Convex (domain case)          | Stationarity    | $\Omega \left( \sqrt{D L}\epsilon^{-\frac{1}{2}} \right)$          | $\checkmark$ | <d-cite key="carmon2021lower"></d-cite>, Theorem 1                | <d-cite key="kim2021optimizing"></d-cite> Section 6.5 |
 | $L$-Smooth NC              | Stationarity    | $\Omega (\Delta L \epsilon^{-2})$                                      | $\checkmark$ | <d-cite key="carmon2020lower"></d-cite>, Theorem 1                | <d-cite key="beck2017first"></d-cite>, Theorem 10.15 |
-| NS $G$-Lip Cont. $\rho$-WC    | Near-stationarity        | Unknown                                                    | $\mathcal{O}(\epsilon^{-4})$  | /                                                | <d-cite key="davis2018stochastic"></d-cite>, Corollary 2.2 |
+| NS $G$-Lip Cont. $\rho$-WC | Near-stationarity | $\Omega(\rho G^2\Delta\epsilon^{-4})$ | $\checkmark$ | <d-cite key="li2026weaklyconvex"></d-cite>, Theorem 2 | <d-cite key="davis2018stochastic"></d-cite>, Corollary 2.2 |
 | $L$-Smooth $\mu$-PL     | Optimality gap | $\Omega \left( \kappa \log \frac{1}{\epsilon} \right)$                     | $\checkmark$      | <d-cite key="yue2023lower"></d-cite>, Theorem 3              | <d-cite key="karimi2016linear"></d-cite>, Theorem 1 |
 
 **Remark:**
 
-1. References: <d-cite key="nesterov2018lectures"></d-cite> <d-cite key="bubeck2015convex"></d-cite> <d-cite key="carmon2021lower"></d-cite> <d-cite key="carmon2020lower"></d-cite> <d-cite key="kim2021optimizing"></d-cite> <d-cite key="beck2017first"></d-cite> <d-cite key="davis2018stochastic"></d-cite> <d-cite key="yue2023lower"></d-cite> <d-cite key="karimi2016linear"></d-cite>
+1. References: <d-cite key="nesterov2018lectures"></d-cite> <d-cite key="bubeck2015convex"></d-cite> <d-cite key="carmon2021lower"></d-cite> <d-cite key="carmon2020lower"></d-cite> <d-cite key="kim2021optimizing"></d-cite> <d-cite key="beck2017first"></d-cite> <d-cite key="davis2018stochastic"></d-cite> <d-cite key="yue2023lower"></d-cite> <d-cite key="karimi2016linear"></d-cite> <d-cite key="li2026weaklyconvex"></d-cite>
 2. $\kappa\triangleq L/\mu\geq 1$ is called the condition number, which can be very large in many applications, e.g., the optimal regularization parameter choice in statistical learning can lead to $\kappa=\Omega(\sqrt{n})$ where $n$ is the sample size<d-cite key="shalev2014understanding"></d-cite>.
 3. The PL condition is a popular assumption in nonconvex optimization, generalizing the strong convexity condition. Based on the summary above, we can find that both smooth strongly convex and smooth PL condition optimization problems have established the optimal complexities (i.e., UB matches LB). However, the LB in the PL case is strictly larger than that of the SC case. Thus, regarding the worst-case complexity, we can say that the PL case is "strictly harder" than the strongly convex case.
 4. The $L$-Smooth convex setting with stationarity measurement is divided into two cases: the "function case" assumes the initial optimality gap is bounded $f(x_0)-f(x^\star)\leq \Delta$, and the "domain case" assumed bounded initialization $\|\|x_0-x^\star\|\|\leq D$.
@@ -300,6 +300,7 @@ We present the lower and upper bound results in tables below<d-footnote>. Given 
 7. **Exact Matching**: In fact, for some settings, some works have further refined the bounds and shown that the lower and upper bounds are **exactly** the same, i.e., the two bounds are the same in both orders and constants, so big-O notations are unnecessary in these cases. In details:
    - In the smooth convex case, <d-cite key="drori2017exact"></d-cite>(Corollary 4) derived the minimax risk, which exactly matches the upper bound derived in <d-cite key="kim2016optimized"></d-cite> (Theorem 2).
    - In the nonsmooth convex case, as discussed in <d-cite key="zamani2023exact"></d-cite>, the best upper bound already exactly matches the lower bound derived in <d-cite key="drori2016optimal"></d-cite> (Theorem 2).
+8. The nonsmooth weakly convex bounds concern unconstrained, globally $G$-Lipschitz objectives and near-stationarity measured with Moreau parameter $1/(2\rho)$. For sufficiently small $\epsilon$, the lower bound holds even with exact function values and full subdifferentials. The upper bound follows from the deterministic subgradient specialization of Corollary 2.2.
 
 ### Case 1-2: Finite-sum and Stochastic Minimization
 
@@ -309,9 +310,9 @@ We present the lower and upper bound results in tables below<d-footnote>. Given 
 | FS $L$-AS $\mu$-SC      | Optimality gap        | $\Omega \left( n + n^{\frac{3}{4}} \sqrt{\kappa} \log \frac{\Delta}{\epsilon} \right)$ | $\checkmark$   | <d-cite key="xie2019general"></d-cite>, Theorem 3.5         | <d-cite key="allen2018katyusha"></d-cite>, Section 5                                 |
 | FS $L$-IS C             | Optimality gap        | $\Omega \left( n + D \sqrt{n L \epsilon^{-1}} \right)$         | $\checkmark$ (within logarithmic)          | <d-cite key="woodworth2016tight"></d-cite>, Theorem 7<d-footnote>The lower bound analysis extended the oracle class with additional proximal oracle.</d-footnote>          | <d-cite key="allen2018katyusha"></d-cite>, Corollary 3.7 |
 | FS $L$-AS C             | Optimality gap        | $\Omega \left( n + n^{\frac{3}{4}} D \sqrt{L \epsilon^{-1}} \right)$ | $\checkmark$                     | <d-cite key="zhou2019lower"></d-cite>, Theorem 4.2         | <d-cite key="allen2018katyusha"></d-cite>, Section 5                                 |
-| FS $L$-IS NC            | Stationarity        | $\Omega \left( \Delta L \epsilon^{-2} \right)$               | $\mathcal{O} \left( \sqrt{n}\Delta L \epsilon^{-2} \right)$                          | <d-cite key="zhou2019lower"></d-cite>, Theorem 4.7         | <d-cite key="wang2019spiderboost"></d-cite>, Theorem 1 |
+| FS $L$-IS NC | Stationarity | $\Omega(n+\sqrt{n}\Delta L\epsilon^{-2})$ | $\checkmark$ | <d-cite key="peng2026densehiding"></d-cite>, Theorem 3.1 | <d-cite key="peng2026densehiding"></d-cite>, Corollary 3.2 |
 | FS $L$-AS NC            | Stationarity       | $\Omega \left( \sqrt{n} \Delta L \epsilon^{-2} \right)$       | $\checkmark$                     | <d-cite key="zhou2019lower"></d-cite>, Theorem 4.5         | <d-cite key="fang2018spider"></d-cite>, Theorem 2, 3|
-| FS $L$-AS $\mu$-PL            | Optimality gap       | $\Omega \left( n+\kappa\sqrt{n} \log \frac{1}{\epsilon} \right)$       | $\mathcal{O}\left( (n+\kappa\sqrt{n}) \log \frac{1}{\epsilon} \right)$                     | <d-cite key="bai2024complexity"></d-cite>, Corollary 3.6  | <d-cite key="li2021page"></d-cite>, Corollary 6|
+| FS $L$-AS $\mu$-PL | Optimality gap | $\Omega(R_{\mathrm{PL}})$ | $\checkmark$ | <d-cite key="peng2026densehiding"></d-cite>, Theorem 3.3 | <d-cite key="peng2026densehiding"></d-cite>, Theorem 3.3 |
 |                         |         |                                                     |                                  |                                                           |
 | Stoc $L$-SS $\mu$-SC   | Optimality gap        | $\Omega (\sqrt{\kappa}\log\frac{1}{\epsilon}+\frac{\sigma^2}{\mu\epsilon})$                            | $\mathcal{O} (\sqrt{\frac{L}{\epsilon}}+\frac{\sigma^2}{\mu\epsilon})$                     | <d-cite key="ghadimi2012optimal"></d-cite>, Equation 1.3         | <d-cite key="ghadimi2012optimal"></d-cite>, Proposition 9                        |
 | Stoc $L$-SS C   | Optimality gap        | $\Omega (\sqrt{\frac{L}{\epsilon}}+\frac{\sigma^2}{\epsilon^2})$   | $\checkmark$      | <d-cite key="lan2012optimal"></d-cite>, Equation 6         | <d-cite key="lan2012optimal"></d-cite>, Corollary 1        |
@@ -325,11 +326,13 @@ We present the lower and upper bound results in tables below<d-footnote>. Given 
 
 **Remark:**
 
-1. References: <d-cite key="lan2018optimal"></d-cite> <d-cite key="xie2019general"></d-cite> <d-cite key="allen2018katyusha"></d-cite> <d-cite key="woodworth2016tight"></d-cite> <d-cite key="zhou2019lower"></d-cite> <d-cite key="wang2019spiderboost"></d-cite> <d-cite key="fang2018spider"></d-cite> <d-cite key="bai2024complexity"></d-cite> <d-cite key="li2021page"></d-cite> <d-cite key="ghadimi2012optimal"></d-cite> <d-cite key="lan2012optimal"></d-cite> <d-cite key="agarwal2009information"></d-cite> <d-cite key="nemirovski2009robust"></d-cite> <d-cite key="foster2019complexity"></d-cite> <d-cite key="allen2018make"></d-cite> <d-cite key="arjevani2023lower"></d-cite> <d-cite key="ghadimi2013stochastic"></d-cite> <d-cite key="davis2018stochastic"></d-cite>
+1. References: <d-cite key="lan2018optimal"></d-cite> <d-cite key="xie2019general"></d-cite> <d-cite key="allen2018katyusha"></d-cite> <d-cite key="woodworth2016tight"></d-cite> <d-cite key="zhou2019lower"></d-cite> <d-cite key="wang2019spiderboost"></d-cite> <d-cite key="fang2018spider"></d-cite> <d-cite key="bai2024complexity"></d-cite> <d-cite key="li2021page"></d-cite> <d-cite key="ghadimi2012optimal"></d-cite> <d-cite key="lan2012optimal"></d-cite> <d-cite key="agarwal2009information"></d-cite> <d-cite key="nemirovski2009robust"></d-cite> <d-cite key="foster2019complexity"></d-cite> <d-cite key="allen2018make"></d-cite> <d-cite key="arjevani2023lower"></d-cite> <d-cite key="ghadimi2013stochastic"></d-cite> <d-cite key="davis2018stochastic"></d-cite> <d-cite key="peng2026densehiding"></d-cite>
 2. Here $n$ corresponds to the number of component functions $f_i$, and $\kappa\triangleq L/\mu$ is the condition number, $\sigma^2$ corresponds to the variance of gradient estimator.
 3. For the finite-sum $L$-IS $\mu$-SC case, <d-cite key="woodworth2016tight"></d-cite> considered more general randomized algorithm and oracle class settings, and derived $\Omega \left( n + \sqrt{\kappa n} \log \frac{1}{\epsilon} \right)$ lower bound. A matching upper bound is proposed in <d-cite key="defazio2016simple"></d-cite>.
 4. For IFO/SFO-based algorithms, here we only consider the case that all oracles are *independent*, so *shuffling-based algorithm* analysis is not directly applicable here, regarding their without-replacement sampling<d-cite key="cho2023sgda"></d-cite>.
- 
+5. The two updated finite-sum minimization rows use randomized IFO complexity with fixed success probability, for $n$ at least a universal constant. The NC result applies for $\epsilon^2\leq cL\Delta$ with a universal $c>0$.
+6. In the PL row, let $q=\log(\Delta/\epsilon)$ and take $L$ to be the averaged smoothness constant. For $3\leq\kappa\leq\sqrt n$, $R_{\mathrm{PL}}=n+nq/(1+\log(\sqrt n/\kappa))$. For $\kappa\geq\sqrt n$, $R_{\mathrm{PL}}=n+\kappa\sqrt n\,q$. The matching bounds hold for $0<\epsilon\leq c\Delta$ with a universal $c>0$.
+
 ### Case 2-1: (S)C-(S)C Deterministic Minimax Optimization
 
 | Problem Type            | Measure | Lower Bound                                                | Upper Bound                               | Reference (LB)     | Reference (UB)                         |
@@ -386,27 +389,29 @@ We present the lower and upper bound results in tables below<d-footnote>. Given 
 |--------------------|---------|---------------------------------------------|----------------------------------|-------------------|------------------------------------------------|
 | NC-SC, Deter       | Primal Stationarity | $\Omega(\sqrt{\kappa}\Delta \mathcal{L} \epsilon^{-2})$  | $\checkmark$ | <d-cite key="zhang2021complexity"></d-cite>, Theorem 3.1 | <d-cite key="zhang2021complexity"></d-cite>, Theorem 4.1 |
 | WC-SC, Deter       | Primal Stationarity | Unknown  | $\mathcal{O}(\epsilon^{-2})$ | / | <d-cite key="guido2026convergence"></d-cite>, Theorem 3.2 |
-| NC-C, Deter        | Near-Stationarity | Unknown  | $\mathcal{O}(\Delta L^2 \epsilon^{-3} \log^2 \frac{1}{\epsilon})$               |   /      | <d-cite key="lin2020near"></d-cite>, Corollary A.8 |
+| NC-C, Deter | Near-stationarity | $\Omega\left(\frac{L\Delta}{\epsilon^2}\left(1+\frac{LD_Y}{\epsilon}\right)\right)$ | $\checkmark$ | <d-cite key="pan2026deterministicncc"></d-cite>, Theorem 1 | <d-cite key="pan2026deterministicncc"></d-cite>, Theorem 3 |
 | WC-C, Deter        | Near-Stationarity | Unknown | $\mathcal{O}(\epsilon^{-6})$                       |  /       | <d-cite key="boct2023alternating"></d-cite>, Theorem 3.7         |
-| NC-PL, Deter       | Primal Stationarity | Unknown | $\mathcal{O}(\kappa L \epsilon^{-2})$                   | /        | <d-cite key="yang2022faster"></d-cite>, Corollary 4.1        |
+| NC-PL, Deter | Primal Stationarity | $\Omega(\kappa L\Delta\epsilon^{-2})$ | $\checkmark$ | <d-cite key="pan2026ncpl"></d-cite>, Theorem 2 | <d-cite key="yang2022faster"></d-cite>, Corollary 4.1 |
 | NC-KL, Deter       | Primal Stationarity | Unknown | $\mathcal{O}(\kappa\epsilon^{-2})$                   | /        | <d-cite key="yang2022faster"></d-cite>, Corollary 4.1        |
 
 **Remark:**
 
-1. References: <d-cite key="zhang2021complexity"></d-cite> <d-cite key="lin2020near"></d-cite> <d-cite key="boct2023alternating"></d-cite> <d-cite key="yang2022faster"></d-cite>
+1. References: <d-cite key="zhang2021complexity"></d-cite> <d-cite key="lin2020near"></d-cite> <d-cite key="boct2023alternating"></d-cite> <d-cite key="yang2022faster"></d-cite> <d-cite key="pan2026deterministicncc"></d-cite> <d-cite key="pan2026ncpl"></d-cite> <d-cite key="zhang2026singleloopncc"></d-cite>
 2. Some other works also studied the above problems in terms of the function stationarity (i.e., the gradient norm of $f$, rather than it primal), e.g., <d-cite key="lin2020near"></d-cite><d-cite key="xu2023unified"></d-cite>. As discussed in <d-cite key="yang2022faster"></d-cite> and <d-cite key="lin2020gradient"></d-cite>, it has been shown that function stationarity and primal stationarity are transferable with mild efforts. Thus, we do not present the results specifically.
+3. In the NC-C row, $D_Y$ bounds the diameter of the compact convex dual domain and $\Delta$ bounds the initial primal value gap. Near-stationarity uses the Moreau envelope of the constrained value function with parameter $1/(2L)$. The displayed result holds for $0<\epsilon<\sqrt{8L\Delta/3}$ and applies to arbitrary deterministic first-order methods. A single-loop projected method attains the same leading near-stationarity complexity in the small-error regime with an expected squared Moreau-gradient guarantee<d-cite key="zhang2026singleloopncc"></d-cite>.
+4. The NC-PL result concerns the gradient norm of the value function in the unconstrained primal and dual setting. The lower bound assumes $\kappa$ is above a universal constant and $\epsilon^2\leq cL\Delta$ for a universal $c>0$.
 
 ### Case 2-4: NC-(S)C Finite-sum and Stochastic Minimax Optimization
 
 | Type               | Measure | LB                                          | UB                               | Reference (LB)      | Reference (UB)                           |
 |--------------------|---------|---------------------------------------------|----------------------------------|-------------------|------------------------------------------------|
-| NC-SC, FS, AS    | Primal Stationarity        | $\Omega\left(n+\sqrt{n\kappa}\Delta L\epsilon^{-2}\right)$ | $\mathcal{O}\left((n+n^{3/4}\sqrt{\kappa})\Delta L\epsilon^{-2}\right)$ | <d-cite key="zhang2021complexity"></d-cite>,  Theorem 3.2   |  <d-cite key="zhang2021complexity"></d-cite>, Section 4.2 |          
-| NC-C, FS, IS     | Near-stationarity        | Unknown | $\mathcal{O}\left(n^{3/4}L^2D\Delta\epsilon^{-3}\right)$ |  /        |  <d-cite key="yang2020catalyst"></d-cite>,  Corollary 4.3           |
+| NC-SC, FS, AS | Primal Stationarity | $\Omega(R_{\mathrm{SC}})$ | $\mathcal{O}(R_{\mathrm{SC}}\log^2(2+\kappa))$ | <d-cite key="peng2026finiteprox"></d-cite>, Theorem 1 | <d-cite key="peng2026finiteprox"></d-cite>, Theorem 2 |
+| NC-C, FS, IS | Near-stationarity | $\Omega(R_{\mathrm{C}})$ | $\mathcal{O}(R_{\mathrm{C}})$ if $B\leq n^{1/4}$ and $\mathcal{O}(R_{\mathrm{C}}\log(2+n+A+B))$ otherwise | <d-cite key="wu2026finitebounds"></d-cite>, Theorem 3.1 | <d-cite key="wu2026finitebounds"></d-cite>, Theorem 3.1 |
 | NC-PL, FS, IS     | Near-stationarity        | Unknown | $\mathcal{O}\left(n+\sqrt{n}\kappa^2 L\epsilon^{-2}\right)$ |  /        |  <d-cite key="chen2022faster"></d-cite>,  Corollary 6.1           |
 |                         |         |                                                     |                                  |                                                           |
 | NC-SC, Stoc, SS  | Primal Stationarity        | $\Omega\left(\kappa\Delta L\epsilon^{-4}\right)$ | $\mathcal{O}\left(\kappa\Delta L\epsilon^{-4}\right)$ |  <d-cite key="zhang2026tightlowerboundsstochastic"></d-cite>, Theorem 4.1   |  <d-cite key="zhang2022sapd+"></d-cite>,  Theorem 3                                     |
 | NC-SC, Stoc, IS  | Primal Stationarity        | Unknown | $\mathcal{O}\left(\kappa^2\Delta L\epsilon^{-3}\right)$ |  /        |  <d-cite key="zhang2022sapd+"></d-cite>, Theorem 4 |
-| NC-C, Stoc, SS   | Near-stationarity        | Unknown | $\mathcal{O}\left(L^3\epsilon^{-6}\right)$              |  /        |  <d-cite key="zhang2022sapd+"></d-cite>, Theorem 6  |
+| NC-C, Stoc, SS | Near-stationarity | $\Omega(L^2D_Y\Delta\epsilon^{-3}+L^3D_Y^2\Delta\sigma^2\epsilon^{-6})$ | $\mathcal{O}(L^3\epsilon^{-6})$ | <d-cite key="wu2026nccbounds"></d-cite>, Theorem 5.5 | <d-cite key="zhang2022sapd+"></d-cite>, Theorem 6 |
 | NC-PL, Stoc, SS       | Primal Stationarity | Unknown | $\mathcal{O}(\kappa^2\epsilon^{-4})$                   | /        | <d-cite key="yang2022faster"></d-cite>, Corollary 4.1         |
 | NC-PL, Stoc, IS       | Primal Stationarity | Unknown | $\tilde{\mathcal{O}}(\epsilon^{-3})$                   | /        | <d-cite key="huang2025enhanced"></d-cite>, Theorem 1         |
 | WC-SC, Stoc, NS       | Near-Stationarity | Unknown | $\mathcal{O}(\epsilon^{-4})$                   | /        | <d-cite key="yan2020optimal"></d-cite>, Theorem 2         |
@@ -415,9 +420,11 @@ We present the lower and upper bound results in tables below<d-footnote>. Given 
 
 **Remark:**
 
-1. References: <d-cite key="zhang2021complexity"></d-cite> <d-cite key="yang2020catalyst"></d-cite> <d-cite key="zhang2022sapd+"></d-cite> <d-cite key="li2021complexity"></d-cite> <d-cite key="yang2022faster"></d-cite> <d-cite key="yan2020optimal"></d-cite> <d-cite key="chen2022faster"></d-cite> <d-cite key="huang2025enhanced"></d-cite><d-cite key="zhang2026tightlowerboundsstochastic"></d-cite>
+1. References: <d-cite key="zhang2021complexity"></d-cite> <d-cite key="yang2020catalyst"></d-cite> <d-cite key="zhang2022sapd+"></d-cite> <d-cite key="li2021complexity"></d-cite> <d-cite key="yang2022faster"></d-cite> <d-cite key="yan2020optimal"></d-cite> <d-cite key="chen2022faster"></d-cite> <d-cite key="huang2025enhanced"></d-cite><d-cite key="zhang2026tightlowerboundsstochastic"></d-cite> <d-cite key="peng2026finiteprox"></d-cite> <d-cite key="wu2026finitebounds"></d-cite> <d-cite key="wu2026nccbounds"></d-cite>
 2. By further assuming the uniqueness of inner maximizer, the [NC-PL, FS, IS] case can be further improved, refer to <d-cite key="chen2022faster"></d-cite> (Theorem 6.2)
-
+3. For finite-sum NC-SC, $R_{\mathrm{SC}}=n+\min\{\sqrt n\,\kappa,n^{3/4}\sqrt\kappa\}L\Delta\epsilon^{-2}$. These bounds are for $n\geq2$, unconstrained primal and dual variables, $\epsilon^2\leq cL\Delta$ for a universal $c>0$, and a normalized start with primal gap at most $\Delta$ and $\lVert\nabla f(x_0,y_0)\rVert\leq\sqrt{2L\Delta}$. The lower bound covers adaptive randomized methods even with exact component proximal queries. The upper bound counts component gradients, includes initialization and guarantees $\mathbb E\lVert\nabla\Phi(\hat{x})\rVert^2\leq\epsilon^2$.
+4. For finite-sum NC-C, let $A=L\Delta/\epsilon^2$, $B=LD_Y/\epsilon$, $\bar B=\max\{1,B\}$ and $R_{\mathrm{C}}=n+A\min\{\sqrt n\,\bar B+\bar B^4,n^{3/4}\bar B\}$. Here $D_Y$ bounds the dual diameter, the primal variable is unconstrained, and $A$ is above a universal constant. The guarantee uses a fixed component-query budget and success probability at least $2/3$ for the Moreau gradient norm at parameter $1/(2L)$. The lower bound covers randomized queries returning component values and gradients. The upper bound already holds under averaged smoothness.
+5. For stochastic NC-C, the lower bound is for adaptive zero-respecting algorithms using unbiased stochastic gradients with variance at most $\sigma^2$. The criterion is an expected Moreau-gradient norm at most $\epsilon$ with parameter $1/(2L)$, and the displayed bound holds for $\epsilon\leq c\min\{\sqrt{L\Delta},LD_Y\}$ with a universal $c>0$. Here $\Delta$ bounds the initial primal value gap. Corollary 5.6 of the same reference gives the corresponding lower bound in terms of the initial primal-dual gap $\mathcal{G}_0$ used in the comparison with SAPD+.
 
 </div>
 
@@ -446,7 +453,7 @@ In the aforementioned discussion, we only considered minimization and minimax pr
   Subsequent developments have focused on developing fully first-order methods for solving bilevel optimization <d-cite key="kwon2023fully"></d-cite>, achieving global optimality <d-cite key="xiao2024unlocking"></d-cite>, addressing contextual/multiple lower-level problems <d-cite key="hu2024contextual"></d-cite><d-cite key="guo2021randomized"></d-cite>, handling constrained lower-level problems <d-cite key="jiang2024barrier"></d-cite>, and bilevel reinforcement learning <d-cite key="chen2022adaptive"></d-cite><d-cite key="chakraborty2024parl"></d-cite><d-cite key="thoma2024contextual"></d-cite> for model design and reinforcement learning with human feedback.
   Several questions remain open and are interesting to investigate:
   1. How to handle general lower-level problems with coupling constraints. 
-  2. How to accelerate fully first-order methods to match the optimal complexity bounds.
+  2. How to accelerate fully first-order methods to match the optimal complexity bounds. For finite-sum problems with componentwise strong convexity at the lower level, SICBO reaches $\mathbb{E}\lVert\nabla\Phi(x)\rVert^2\leq\epsilon^2$ in $\widetilde{\mathcal{O}}(N+\sqrt N\,\kappa^{7/2}\epsilon^{-2})$ component-gradient calls, where $N$ is the total number of components and $\kappa$ is the normalized lower-level condition number. For fixed $\kappa$, the dependence on $N$ and $\epsilon$ is optimal up to logarithmic factors. The optimal joint dependence on $N$ and $\kappa$ remains open<d-cite key="zhou2026bilevel"></d-cite>.
   3. Establishing non-asymptotic convergence guarantees for bilevel problems with convex lower levels.
 
 * Compositional Stochastic Optimization<d-cite key="wang2017stochastic"></d-cite>
@@ -530,9 +537,9 @@ Such a question has been partially addressed for stochastic optimization using *
   - In <d-cite key="pedregosa2020acceleration"></d-cite> and <d-cite key="paquette2021sgd"></d-cite>, they considered **average-case complexity** in optimization algorithm analysis, this topic is well established in theoretical computer science. Such a pattern considers the convergence behavior in the average sense rather than the classical worst-case flavor, and it further specifies the objective formulation and data distribution, which results in more refined complexity bounds than the common worst-case complexities while at the expense of more complicated analysis. The study of average-case complexity in the context of optimization algorithms is still less mature, and there are still many open questions.
   - On the other hand, with the development of higher-order algorithms, some recent works<d-cite key="doikov2023second"></d-cite> further considered the **arithmetic complexity** in optimization by incorporating the computational cost of each oracle into accout.<d-footnote>In Nesterov's book<d-cite key="nesterov2018lectures"></d-cite>, these two are also called "analytical complexity" and "arithmetical complexity".</d-footnote>
   - Also in distributed optimization (or federated learning) literature, the communication cost is one of the main bottlenecks compared to computation<d-cite key="konevcny2016federated"></d-cite><d-cite key="mcmahan2017communication"></d-cite><d-cite key="karimireddy2020scaffold"></d-cite><d-cite key="kairouz2021advances"></d-cite>, so many works modified the oracle framework a bit and turn to study the complexity bound in terms of **communication cost** (or communication oracle) rather than the computation efforts, such change also motivated the fruitful study of *local algorithms*<d-cite key="stich2019local"></d-cite><d-cite key="mishchenko2022proxskip"></d-cite>, which try to skip unnecessary communications while still attain the convergence guarantees. 
-  - Recently another series of recent works<d-cite key="grimmer2024provably"></d-cite><d-cite key="altschuler2023acceleration1"></d-cite><d-cite key="altschuler2023acceleration2"></d-cite> consider **long stepsize** by incorporating a craft stepsize schedule into first-order methods and achieve a faster convergence rate, which is quite counterintuitive and may be of interests to the community. At the same time, as indicated in <d-cite key="kornowski2024open"></d-cite><d-cite key="altschuler2023acceleration1"></d-cite>, such theoretical outperformance generally only works for some specific iteration numbers, while in lack of guarantees of *anytime convergence*, also the extension of the study beyond the deterministic and convex case is still an open problem.
-  
-    **Update**: *Regarding the open problem above, after we submitted the draft for review, there appeared a new work on arXiv<d-cite key="zhang2024anytime"></d-cite>, which claimed to solve the anytime convergence issue mentioned above<d-cite key="kornowski2024open"></d-cite>.*
+  - **Long stepsize schedules** can accelerate gradient descent on smooth convex functions<d-cite key="grimmer2024provably"></d-cite><d-cite key="altschuler2023acceleration1"></d-cite><d-cite key="altschuler2023acceleration2"></d-cite>. For a fixed horizon $T$, the optimal worst-case normalized final function error over predetermined real stepsizes is $\Theta(T^{-p})$, where $p=\log_2(1+\sqrt 2)$<d-cite key="jeong2026silversharp"></d-cite>.
+
+    An anytime schedule must serve every horizon<d-cite key="kornowski2024open"></d-cite>. For predetermined nonnegative stepsizes, the achievable anytime rate has polynomial exponent $2p/(1+p)\approx1.1195$. The lower bound matches this exponent up to a subpolynomial factor along infinitely many horizons<d-cite key="zhang2024anytime"></d-cite><d-cite key="ye2026silver"></d-cite>. How far comparable guarantees extend to stochastic or nonconvex settings remains a question.
 
 ---
 
