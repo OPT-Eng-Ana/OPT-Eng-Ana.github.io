@@ -79,6 +79,8 @@ toc:
   - Update some cases: 1. PL-PL, general; 2. PL-PL, FS, IS; 3. NC-PL, FS, IS; 4. NC-PL, Stoc, IS
 - 2026.04.03
   - Update some cases: 1. WC-C, general
+- 2026.11.26
+  - Update some cases: 1. WC, general; 2. $(L_0,L_1)$-Smooth Convex; 3. Stoc $(L_0,L_1)$-Smooth NC, $p$-BCM; (To-do: 4. NC-SC, Stoc, AS; 5. NC-C, Stoc, AS)
 
 ## Introduction
 
@@ -286,8 +288,9 @@ We present the lower and upper bound results in tables below<d-footnote>. Given 
 | $L$-Smooth Convex (function case)          | Stationarity    | $\Omega \left( \sqrt{\Delta L }\epsilon^{-1} \right)$  | $\checkmark$ (within logarithmic) | <d-cite key="carmon2021lower"></d-cite>, Theorem 1                | <d-cite key="carmon2021lower"></d-cite>, Appendix A.1 |
 | $L$-Smooth Convex (domain case)          | Stationarity    | $\Omega \left( \sqrt{D L}\epsilon^{-\frac{1}{2}} \right)$          | $\checkmark$ | <d-cite key="carmon2021lower"></d-cite>, Theorem 1                | <d-cite key="kim2021optimizing"></d-cite> Section 6.5 |
 | $L$-Smooth NC              | Stationarity    | $\Omega (\Delta L \epsilon^{-2})$                                      | $\checkmark$ | <d-cite key="carmon2020lower"></d-cite>, Theorem 1                | <d-cite key="beck2017first"></d-cite>, Theorem 10.15 |
-| NS $G$-Lip Cont. $\rho$-WC    | Near-stationarity        | Unknown                                                    | $\mathcal{O}(\epsilon^{-4})$  | /                                                | <d-cite key="davis2018stochastic"></d-cite>, Corollary 2.2 |
+| NS $G$-Lip Cont. $\rho$-WC    | Near-stationarity        | $\Omega(\rho G^2\Delta\epsilon^{-4})$                      | $\mathcal{O}(\epsilon^{-4})$  | <d-cite key="li2026optimal"></d-cite>, Theorem 3.1                                                | <d-cite key="davis2018stochastic"></d-cite>, Corollary 2.2 |
 | $L$-Smooth $\mu$-PL     | Optimality gap | $\Omega \left( \kappa \log \frac{1}{\epsilon} \right)$                     | $\checkmark$      | <d-cite key="yue2023lower"></d-cite>, Theorem 3              | <d-cite key="karimi2016linear"></d-cite>, Theorem 1 |
+| $(L_0,L_1)$-Smooth Convex | Optimality gap | $\Omega\left(\sqrt{\frac{L_0R^2}{\epsilon}}+\frac{L_1R}{\sqrt{\log(2+L_1R)}}\right)$ | $\mathcal{O}\left(\sqrt{\frac{L_0R^2}{\epsilon}}+(1+L_1R)\log(2+L_1R)\right)$ | <d-cite key="rudomanov2026descending"></d-cite>, Theorem 4.10 | <d-cite key="rudomanov2026descending"></d-cite>, Theorem 3.7 |
 
 **Remark:**
 
@@ -300,6 +303,7 @@ We present the lower and upper bound results in tables below<d-footnote>. Given 
 7. **Exact Matching**: In fact, for some settings, some works have further refined the bounds and shown that the lower and upper bounds are **exactly** the same, i.e., the two bounds are the same in both orders and constants, so big-O notations are unnecessary in these cases. In details:
    - In the smooth convex case, <d-cite key="drori2017exact"></d-cite>(Corollary 4) derived the minimax risk, which exactly matches the upper bound derived in <d-cite key="kim2016optimized"></d-cite> (Theorem 2).
    - In the nonsmooth convex case, as discussed in <d-cite key="zamani2023exact"></d-cite>, the best upper bound already exactly matches the lower bound derived in <d-cite key="drori2016optimal"></d-cite> (Theorem 2).
+8. For the $(L_0,L_1)$-Smooth Convex case, the initial point satisfies $\|x^0-x^\ast\|\leq R$, and the lower bound assumes $L_0R^2\geq\epsilon$. The lower and upper bounds match in their dependence on $\epsilon$, but a logarithmic gap remains in the $L_1R$ term. The upper bound uses gradient queries only, whereas the lower bound remains valid even when the oracle returns both function values and gradients.
 
 ### Case 1-2: Finite-sum and Stochastic Minimization
 
@@ -322,6 +326,7 @@ We present the lower and upper bound results in tables below<d-footnote>. Given 
 | Stoc $L$-SS NC   | Stationarity        | $\Omega \left( \Delta \sigma^2 L \epsilon^{-4} \right)$         | $\checkmark$                     | <d-cite key="arjevani2023lower"></d-cite>, Theorem 1         | <d-cite key="ghadimi2013stochastic"></d-cite>, Corollary 2.2                                           |
 | Stoc $L$-AS NC            | Stationarity        | $\Omega \left( \Delta L \sigma \epsilon^{-3} + \Delta L \epsilon^2+\sigma^2 \epsilon^2 \right)$ | $\checkmark$                     | <d-cite key="arjevani2023lower"></d-cite>, Theorem 2         | <d-cite key="fang2018spider"></d-cite>, Theorem 1                          |
 | Stoc NS $L$-Lip $\rho$-WC    | Near-stationarity        | Unknown     | $\mathcal{O} (\epsilon^{-4})$ | /      | <d-cite key="davis2018stochastic"></d-cite>, Theorem 2.1              |
+| Stoc $(L_0,L_1)$-Smooth NC, $p$-BCM | Stationarity | $\Omega\left(\left(1+\left(\frac{\sigma}{\epsilon}\right)^{\frac{p}{p-1}}\right)\left(\frac{L_0\Delta}{\epsilon^2}+\frac{L_1\Delta}{\epsilon}\right)\right)$ | $\checkmark$  | <d-cite key="liang2026complexity"></d-cite>, Corollary 4.6 | <d-cite key="liang2026complexity"></d-cite>, Theorem 5.1 |
 
 **Remark:**
 
