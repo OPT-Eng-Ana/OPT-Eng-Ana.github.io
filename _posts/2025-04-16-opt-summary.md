@@ -286,8 +286,9 @@ We present the lower and upper bound results in tables below<d-footnote>. Given 
 | $L$-Smooth Convex (function case)          | Stationarity    | $\Omega \left( \sqrt{\Delta L }\epsilon^{-1} \right)$  | $\checkmark$ (within logarithmic) | <d-cite key="carmon2021lower"></d-cite>, Theorem 1                | <d-cite key="carmon2021lower"></d-cite>, Appendix A.1 |
 | $L$-Smooth Convex (domain case)          | Stationarity    | $\Omega \left( \sqrt{D L}\epsilon^{-\frac{1}{2}} \right)$          | $\checkmark$ | <d-cite key="carmon2021lower"></d-cite>, Theorem 1                | <d-cite key="kim2021optimizing"></d-cite> Section 6.5 |
 | $L$-Smooth NC              | Stationarity    | $\Omega (\Delta L \epsilon^{-2})$                                      | $\checkmark$ | <d-cite key="carmon2020lower"></d-cite>, Theorem 1                | <d-cite key="beck2017first"></d-cite>, Theorem 10.15 |
-| NS $G$-Lip Cont. $\rho$-WC    | Near-stationarity        | Unknown                                                    | $\mathcal{O}(\epsilon^{-4})$  | /                                                | <d-cite key="davis2018stochastic"></d-cite>, Corollary 2.2 |
+| NS $G$-Lip Cont. $\rho$-WC    | Near-stationarity        | $\Omega(\rho G^2\Delta\epsilon^{-4})$                      | $\mathcal{O}(\epsilon^{-4})$  | <d-cite key="li2026optimal"></d-cite>, Theorem 3.1                                                | <d-cite key="davis2018stochastic"></d-cite>, Corollary 2.2 |
 | $L$-Smooth $\mu$-PL     | Optimality gap | $\Omega \left( \kappa \log \frac{1}{\epsilon} \right)$                     | $\checkmark$      | <d-cite key="yue2023lower"></d-cite>, Theorem 3              | <d-cite key="karimi2016linear"></d-cite>, Theorem 1 |
+| $(L_0,L_1)$-Smooth Convex | Optimality gap | $\Omega\left(\sqrt{\frac{L_0R^2}{\epsilon}}+\frac{L_1R}{\sqrt{\log(2+L_1R)}}\right)$ | $\mathcal{O}\left(\sqrt{\frac{L_0R^2}{\epsilon}}+(1+L_1R)\log(2+L_1R)\right)$ | <d-cite key="rudomanov2026descending"></d-cite>, Theorem 4.10 | <d-cite key="rudomanov2026descending"></d-cite>, Theorem 3.7 |
 
 **Remark:**
 
@@ -300,6 +301,7 @@ We present the lower and upper bound results in tables below<d-footnote>. Given 
 7. **Exact Matching**: In fact, for some settings, some works have further refined the bounds and shown that the lower and upper bounds are **exactly** the same, i.e., the two bounds are the same in both orders and constants, so big-O notations are unnecessary in these cases. In details:
    - In the smooth convex case, <d-cite key="drori2017exact"></d-cite>(Corollary 4) derived the minimax risk, which exactly matches the upper bound derived in <d-cite key="kim2016optimized"></d-cite> (Theorem 2).
    - In the nonsmooth convex case, as discussed in <d-cite key="zamani2023exact"></d-cite>, the best upper bound already exactly matches the lower bound derived in <d-cite key="drori2016optimal"></d-cite> (Theorem 2).
+8. For the $(L_0,L_1)$-Smooth Convex case, the initial point satisfies $\|x^0-x^\ast\|\leq R$, and the lower bound assumes $L_0R^2\geq\epsilon$. The lower and upper bounds match in their dependence on $\epsilon$, but a logarithmic gap remains in the $L_1R$ term. The upper bound uses gradient queries only, whereas the lower bound remains valid even when the oracle returns both function values and gradients.
 
 ### Case 1-2: Finite-sum and Stochastic Minimization
 
@@ -322,6 +324,7 @@ We present the lower and upper bound results in tables below<d-footnote>. Given 
 | Stoc $L$-SS NC   | Stationarity        | $\Omega \left( \Delta \sigma^2 L \epsilon^{-4} \right)$         | $\checkmark$                     | <d-cite key="arjevani2023lower"></d-cite>, Theorem 1         | <d-cite key="ghadimi2013stochastic"></d-cite>, Corollary 2.2                                           |
 | Stoc $L$-AS NC            | Stationarity        | $\Omega \left( \Delta L \sigma \epsilon^{-3} + \Delta L \epsilon^2+\sigma^2 \epsilon^2 \right)$ | $\checkmark$                     | <d-cite key="arjevani2023lower"></d-cite>, Theorem 2         | <d-cite key="fang2018spider"></d-cite>, Theorem 1                          |
 | Stoc NS $L$-Lip $\rho$-WC    | Near-stationarity        | Unknown     | $\mathcal{O} (\epsilon^{-4})$ | /      | <d-cite key="davis2018stochastic"></d-cite>, Theorem 2.1              |
+| Stoc $(L_0,L_1)$-Smooth NC, $p$-BCM | Stationarity | $\Omega\left(\left(1+\left(\frac{\sigma}{\epsilon}\right)^{\frac{p}{p-1}}\right)\left(\frac{L_0\Delta}{\epsilon^2}+\frac{L_1\Delta}{\epsilon}\right)\right)$ | $\checkmark$  | <d-cite key="liang2026complexity"></d-cite>, Corollary 4.6 | <d-cite key="liang2026complexity"></d-cite>, Theorem 5.1 |
 
 **Remark:**
 
@@ -352,6 +355,7 @@ We present the lower and upper bound results in tables below<d-footnote>. Given 
 3. Regarding the inconsistency between "SC-C, bilinear" and "C-SC, bilinear" cases, the difference between the two settings is that the result in <d-cite key="du2019linear"></d-cite> assumed the matrix $A$ (of the bilinear coupling term) has full column rank.
 4. In the SC-SC cases, <d-cite key="lan2023novel"></d-cite> uses the squared distance between the iterates and the saddle point as the measurement, it is easy to show that it is equivalent to the duality gap, so here we still present it in terms of the duality gap.
 5. The result in <d-cite key="chen2022faster"></d-cite> further requires that the solution of inner problem is unique.
+6. For the Stoc $(L_0,L_1)$-Smooth NC case, $p$-BCM denotes the bounded $p$-th central moment condition on the stochastic gradient noise, where $p\in(1,2]$. The output criterion is $\mathbb{E}\|\nabla f(\hat{x})\|\leq\epsilon$. The lower bound holds in the regime $\epsilon\leq c\min\{\sqrt{L_0\Delta},L_1\Delta\}$ for an absolute constant $c>0$, where $\Delta=f(x^0)-f^\ast$.
 
 ### Case 2-2: (S)C-(S)C Finite-sum and Stochastic Minimax Optimization
 
@@ -406,7 +410,9 @@ We present the lower and upper bound results in tables below<d-footnote>. Given 
 |                         |         |                                                     |                                  |                                                           |
 | NC-SC, Stoc, SS  | Primal Stationarity        | $\Omega\left(\kappa\Delta L\epsilon^{-4}\right)$ | $\mathcal{O}\left(\kappa\Delta L\epsilon^{-4}\right)$ |  <d-cite key="zhang2026tightlowerboundsstochastic"></d-cite>, Theorem 4.1   |  <d-cite key="zhang2022sapd+"></d-cite>,  Theorem 3                                     |
 | NC-SC, Stoc, IS  | Primal Stationarity        | Unknown | $\mathcal{O}\left(\kappa^2\Delta L\epsilon^{-3}\right)$ |  /        |  <d-cite key="zhang2022sapd+"></d-cite>, Theorem 4 |
+| NC-SC, Stoc, AS | Moreau-envelope Stationarity | $\Omega\left(\min\left\{\kappa^{3/2}\epsilon^{-3},\kappa\epsilon^{-4}\right\}\right)$ | $\mathcal{O}\left(\kappa^{3/2}\epsilon^{-3}\right)$ | <d-cite key="zhang2026tightlowerboundsstochastic"></d-cite>, Corollary 5.2 | <d-cite key="zhang2026singleloop"></d-cite>, Theorem 6 |
 | NC-C, Stoc, SS   | Near-stationarity        | Unknown | $\mathcal{O}\left(L^3\epsilon^{-6}\right)$              |  /        |  <d-cite key="zhang2022sapd+"></d-cite>, Theorem 6  |
+| NC-C, Stoc, AS | Near-stationarity (OS) | $\Omega\left(L^2D\Delta\epsilon^{-3}+L^3D^2\Delta\sigma^2\epsilon^{-6}\right)$ | $\mathcal{O}\left(\epsilon^{-4}+\chi\epsilon^{-6}\right)$ | <d-cite key="SongXu2026NCCLowerBound"></d-cite>, Theorem 4.8 | <d-cite key="zhang2026singleloop"></d-cite>, Theorem 7 |
 | NC-PL, Stoc, SS       | Primal Stationarity | Unknown | $\mathcal{O}(\kappa^2\epsilon^{-4})$                   | /        | <d-cite key="yang2022faster"></d-cite>, Corollary 4.1         |
 | NC-PL, Stoc, IS       | Primal Stationarity | Unknown | $\tilde{\mathcal{O}}(\epsilon^{-3})$                   | /        | <d-cite key="huang2025enhanced"></d-cite>, Theorem 1         |
 | WC-SC, Stoc, NS       | Near-Stationarity | Unknown | $\mathcal{O}(\epsilon^{-4})$                   | /        | <d-cite key="yan2020optimal"></d-cite>, Theorem 2         |
@@ -417,7 +423,8 @@ We present the lower and upper bound results in tables below<d-footnote>. Given 
 
 1. References: <d-cite key="zhang2021complexity"></d-cite> <d-cite key="yang2020catalyst"></d-cite> <d-cite key="zhang2022sapd+"></d-cite> <d-cite key="li2021complexity"></d-cite> <d-cite key="yang2022faster"></d-cite> <d-cite key="yan2020optimal"></d-cite> <d-cite key="chen2022faster"></d-cite> <d-cite key="huang2025enhanced"></d-cite><d-cite key="zhang2026tightlowerboundsstochastic"></d-cite>
 2. By further assuming the uniqueness of inner maximizer, the [NC-PL, FS, IS] case can be further improved, refer to <d-cite key="chen2022faster"></d-cite> (Theorem 6.2)
-
+3. For the [NC-C, Stoc, AS] case, OS denotes Moreau-envelope optimization stationarity, and $\chi=\ell/L$, where $\ell$ is the mean-square smoothness constant. The lower bound applies to zero-respecting randomized algorithms under $\epsilon\leq c\min\{\sqrt{L\Delta},LD\}$ and $\sigma\leq D\bar{L}/4$. 
+4. For the [NC-SC, Stoc, AS] case, the lower bound applies to zero-respecting algorithms with any fixed finite shared-sample batch size, where $\kappa_{\rm AS}=\bar{L}/\mu$. Corollary 5.2 extends the result to Moreau-envelope stationarity. In the upper bound, $\kappa=L/\mu$ and $\chi=\ell/L$. 
 
 </div>
 
